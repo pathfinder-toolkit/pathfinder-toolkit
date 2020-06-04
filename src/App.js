@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useBackend } from "./utils/FakeBackend";
+import { Router, Route, Switch } from 'react-router-dom';
+import history from "./utils/history";
+import FrontPage from './sites/FrontPage/FrontPage';
 
 function App() {
-  const { getTestValue } = useBackend();
-
-  const [building, setBuilding] = useState(getTestValue);
 
   return (
-    <div>
-      <p>Pathfinder-toolkit</p>
-      <p>{building}</p>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <Route path="/" exact component={FrontPage}></Route>
+      </Switch>
+    </Router>
   );
 }
 
