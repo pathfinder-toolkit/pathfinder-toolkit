@@ -1,10 +1,14 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
+import NavigationBar from '../../components/Navigation/NavigationBar';
 
 const FrontPage = () => {
-    return <Container>
+    return <div>
+        <NavigationBar />
+        <Container>
         <h1>Front Page</h1>
-    </Container>
+        </Container>
+        </div>
 }
 
 export default FrontPage;
