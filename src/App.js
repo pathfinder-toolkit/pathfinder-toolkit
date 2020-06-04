@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import history from "./utils/history";
 import FrontPage from './sites/FrontPage/FrontPage';
 import LoginPage from './sites/LoginPage/LoginPage';
+import RegisterPage from './sites/RegisterPage/RegisterPage';
 import { CssBaseline } from "@material-ui/core";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={FrontPage}></Route>
           <Route path="/login" exact component={LoginPage}></Route>
+          <Route path="/register" exact component={RegisterPage}></Route>
         </Switch>
       </Router>
     </CssBaseline>
