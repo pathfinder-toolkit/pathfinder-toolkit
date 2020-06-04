@@ -14,6 +14,7 @@ const EditorStepper = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
+      minHeight: "100vh",
     },
     button: {
       marginTop: theme.spacing(1),

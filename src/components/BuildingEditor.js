@@ -13,9 +13,9 @@ const BuildingEditor = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.editor}>
-      <Typography align="center">Designer / Area selection here</Typography>
-    </div>
+      <div className={classes.editor}>
+        <Typography align="center">Designer / Area selection here</Typography>
+      </div>
   );
 };
 
