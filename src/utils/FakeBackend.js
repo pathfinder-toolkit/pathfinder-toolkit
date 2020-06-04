@@ -9,13 +9,21 @@ export const BackendProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const fakeLogin = (username) => {
+
+    if (username === null || username === "") {
+        console.log("invalid username")
+        return
+    }
+
     setUser(username);
     setIsLoggedIn(true);
+    console.log("logged in as: " + username);
   };
 
   const fakeLogout = () => {
     setUser(null);
     setIsLoggedIn(false);
+    console.log("logged out");
   };
 
   return (

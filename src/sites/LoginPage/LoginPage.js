@@ -6,10 +6,19 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 const LoginPage = () => {
-  const { getUser } = useBackend();
-  const [user] = useState(getUser);
+  const { user, isLoggedIn, fakeLogin } = useBackend();
+  const [usernameInput, setUsernameInput] = useState("");
+
+  const _handleUsernameChange = (e) => {
+    setUsernameInput(e.target.value);
+  };
+
+  const _handleSubmit = () => {
+    fakeLogin(usernameInput);
+  };
 
   return (
     <React.Fragment>
@@ -22,6 +31,16 @@ const LoginPage = () => {
           minHeight="100vh"
         >
           <div>
+            {isLoggedIn ? (
+              <Typography align="center" variant="h5" component="h5">
+                Logged in as {user}.
+              </Typography>
+            ) : (
+              <Typography align="center" variant="h5">
+                Logged out.
+              </Typography>
+            )}
+
             <form>
               <TextField
                 variant="outlined"
@@ -29,6 +48,7 @@ const LoginPage = () => {
                 fullWidth
                 label="User"
                 autoFocus
+                onChange={_handleUsernameChange}
               />
               <TextField
                 variant="outlined"
@@ -37,10 +57,10 @@ const LoginPage = () => {
                 label="Password"
               />
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
+                onClick={_handleSubmit}
               >
                 Login
               </Button>
