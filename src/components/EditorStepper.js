@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -7,8 +7,8 @@ import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
+
+import { useEditor } from "../utils/EditorProvider";
 
 const EditorStepper = () => {
   const useStyles = makeStyles((theme) => ({
@@ -28,81 +28,60 @@ const EditorStepper = () => {
     },
   }));
 
-  function getSteps() {
-    return ["Select area", "Enter building details", "Enter more details"];
-  }
+  const {
+    activeStep,
+    setActiveStep,
+    getSteps,
+    getStepContent,
+    nextStep,
+    previousStep,
+    resetSteps,
+  } = useEditor();
 
-  function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return ``;
-      case 1:
-        return "";
-      case 2:
-        return ``;
-      default:
-        return "Unknown step";
-    }
-  }
+  const classes = useStyles();
+  const steps = getSteps();
 
-    const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
-
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleReset = () => {
-      setActiveStep(0);
-    };
-
-    return (
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical">
-          {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <StepContent>
-                <Typography>{getStepContent(index)}</Typography>
-                <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </Button>
-                  </div>
+  return (
+    <div className={classes.root}>
+      <Stepper activeStep={activeStep} orientation="vertical">
+        {steps.map((label, index) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+            <StepContent>
+              <Typography>{getStepContent(index)}</Typography>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={previousStep}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={nextStep}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
                 </div>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-        {activeStep === steps.length && (
-          <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>Completed</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </Paper>
-        )}
-      </div>
-    );
+              </div>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+      {activeStep === steps.length && (
+        <Paper square elevation={0} className={classes.resetContainer}>
+          <Typography>Completed</Typography>
+          <Button onClick={resetSteps} className={classes.button}>
+            Reset
+          </Button>
+        </Paper>
+      )}
+    </div>
+  );
 };
 
 export default EditorStepper;
-
