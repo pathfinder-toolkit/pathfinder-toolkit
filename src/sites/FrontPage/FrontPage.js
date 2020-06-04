@@ -3,12 +3,12 @@ import Container from '@material-ui/core/Container';
 import NavigationBar from '../../components/Navigation/NavigationBar';
 
 const FrontPage = () => {
-    return <div>
+    return <React.Fragment>
         <NavigationBar />
         <Container>
-        <h1>Front Page</h1>
+            
         </Container>
-        </div>
+    </React.Fragment>
 }
 
 export default FrontPage;
