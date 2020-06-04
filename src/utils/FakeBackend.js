@@ -5,16 +5,26 @@ export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
 export const BackendProvider = ({ children }) => {
-  const [user, setUser] = useState("User");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const getUser = () => {
-    return user;
+  const fakeLogin = (username) => {
+    setUser(username);
+    setIsLoggedIn(true);
+  };
+
+  const fakeLogout = () => {
+    setUser(null);
+    setIsLoggedIn(false);
   };
 
   return (
     <BackendContext.Provider
       value={{
-        getUser
+        isLoggedIn,
+        user,
+        fakeLogin,
+        fakeLogout
       }}
     >
       {children}
