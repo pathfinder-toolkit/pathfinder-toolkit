@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useBackend } from "../../utils/FakeBackend";
 
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import NavigationBar from "../../components/Navigation/NavigationBar";
+import history from "../../utils/history";
 
 const LoginPage = () => {
   const { user, isLoggedIn, fakeLogin } = useBackend();
@@ -19,6 +19,7 @@ const LoginPage = () => {
 
   const _handleSubmit = () => {
     fakeLogin(usernameInput);
+    history.push("/");
   };
 
   return (
