@@ -9,10 +9,9 @@ export const BackendProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const fakeLogin = (username) => {
-
     if (username === null || username === "") {
-        console.log("invalid username")
-        return
+      console.log("invalid username");
+      return;
     }
 
     setUser(username);
@@ -32,7 +31,7 @@ export const BackendProvider = ({ children }) => {
         isLoggedIn,
         user,
         fakeLogin,
-        fakeLogout
+        fakeLogout,
       }}
     >
       {children}

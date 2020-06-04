@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useBackend } from "../../utils/FakeBackend";
 
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import NavigationBar from "../../components/Navigation/NavigationBar";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,7 +35,6 @@ const LoginPage = () => {
 
   return (
     <React.Fragment>
-      <CssBaseline />
       <Container maxWidth="xs">
         <Box
           display="flex"
@@ -45,7 +44,7 @@ const LoginPage = () => {
         >
           <div>
             {isLoggedIn ? (
-              <Typography align="center" variant="h5" component="h5">
+              <Typography align="center" variant="h5">
                 Logged in as {user}.
               </Typography>
             ) : (
