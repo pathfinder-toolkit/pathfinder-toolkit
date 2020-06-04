@@ -4,22 +4,20 @@ export const BackendContext = React.createContext();
 
 export const useBackend = () => useContext(BackendContext);
 
-export const BackendProvider = ( {children }) => {
+export const BackendProvider = ({ children }) => {
+  const [user, setUser] = useState("User");
 
-    const [testValue, setTestvalue] = useState("Building");
+  const getUser = () => {
+    return user;
+  };
 
-    const getTestValue = () => {
-        return testValue;
-    }
-
-
-    return (<BackendContext.Provider
-        value={{
-            testValue,
-            getTestValue
-        }}>
-          {children}
+  return (
+    <BackendContext.Provider
+      value={{
+        getUser
+      }}
+    >
+      {children}
     </BackendContext.Provider>
-        )
-
-}
+  );
+};
