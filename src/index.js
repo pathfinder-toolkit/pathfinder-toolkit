@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { BackendProvider } from "./FakeBackend";
+import { BackendProvider } from "./utils/FakeBackend";
 
 ReactDOM.render(
   <React.StrictMode>
