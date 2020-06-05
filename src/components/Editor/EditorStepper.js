@@ -39,6 +39,7 @@ const EditorStepper = () => {
           </Step>
         ))}
       </Stepper>
+      <Typography>debug: active step {activeStep}</Typography>
     </div>
   );
 };
