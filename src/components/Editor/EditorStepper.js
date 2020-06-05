@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
-import { useEditor } from "../utils/EditorProvider";
+import { useEditor } from "../../utils/EditorProvider";
 
 const EditorStepper = () => {
   const useStyles = makeStyles((theme) => ({

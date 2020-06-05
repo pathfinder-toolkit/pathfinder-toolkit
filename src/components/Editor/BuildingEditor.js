@@ -5,7 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
-import { useEditor } from "../utils/EditorProvider";
+import { useEditor } from "../../utils/EditorProvider";
+import AreaSelection from "./AreaSelection";
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
@@ -15,7 +16,6 @@ const BuildingEditor = () => {
     },
     editorContainer: {
       padding: theme.spacing(0.5),
-      minHeight: "83vh",
     },
     actionsContainer: {},
     button: {
@@ -34,6 +34,7 @@ const BuildingEditor = () => {
         <Paper>
           <Typography align="center">Area selection</Typography>
         </Paper>
+        <AreaSelection />
       </div>
       <div className={classes.actionsContainer}>
         <Grid
