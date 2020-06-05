@@ -21,7 +21,7 @@ const EditorStepper = () => {
   const {
     activeStep,
     getSteps,
-    getStepContent,
+    getStepDescription,
   } = useEditor();
 
   const classes = useStyles();
@@ -34,7 +34,7 @@ const EditorStepper = () => {
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
             <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
+              <Typography>{getStepDescription(index)}</Typography>
             </StepContent>
           </Step>
         ))}

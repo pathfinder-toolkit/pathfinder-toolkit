@@ -6,20 +6,23 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
 import { useEditor } from "../../utils/EditorProvider";
-import AreaSelection from "./AreaSelection";
-import BuildingDetails from "./BuildingDetails";
+
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       background: "#dddce0",
-      maxHeight: "91vh",
+      maxHeight: "100vh",
     },
     editorContainer: {
       padding: theme.spacing(0.5),
-      maxHeight: "91vh",
+      minHeight: "91vh",
     },
-    actionsContainer: {},
+    actionsContainer: {
+      position: "fixed",
+      bottom: 40,
+      left: 40,
+    },
     button: {
       margin: theme.spacing(1),
     },
@@ -27,25 +30,24 @@ const BuildingEditor = () => {
 
   const classes = useStyles();
 
-  const { getSteps, activeStep, nextStep, previousStep, getStepComponent } = useEditor();
+  const {
+    getSteps,
+    activeStep,
+    nextStep,
+    previousStep,
+    getStepComponent,
+  } = useEditor();
   const steps = getSteps();
 
   return (
     <div className={classes.root}>
       <div className={classes.editorContainer}>
-        <Paper>
-          {getStepComponent()}
-        </Paper>
+        <div className={classes.editorComponent}>
+          <Paper>{getStepComponent()}</Paper>
+        </div>
       </div>
       <div className={classes.actionsContainer}>
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          sm={12}
-          md={12}
-          lg={12}
-        >
+        <Grid direction="row" justify="center" sm={12} md={12} lg={12}>
           <Paper>
             <Button
               variant="contained"

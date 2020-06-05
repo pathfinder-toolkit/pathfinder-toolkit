@@ -25,6 +25,10 @@ export const BackendProvider = ({ children }) => {
     console.log("logged out");
   };
 
+  const getMaterials = () => {
+    return ["Wood", "Stone", "Concrete"];
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -32,6 +36,7 @@ export const BackendProvider = ({ children }) => {
         user,
         fakeLogin,
         fakeLogout,
+        getMaterials,
       }}
     >
       {children}
