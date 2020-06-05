@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import frontPageImage from "../../external/images/frontpage_house.jpg"
 import InstructionPanels from "./InstructionPanels"
+import history from "../../utils/history";
 
 const useStyles = makeStyles((theme) => ({
     banner: {
@@ -43,6 +44,10 @@ const FrontPage = () => {
 
     const classes = useStyles();
 
+    const redirectTo = (addr) => {
+      history.push(addr);
+    }
+
     return <React.Fragment>
         <NavigationBar />
 
@@ -74,7 +79,7 @@ const FrontPage = () => {
 
         <InstructionPanels />
 
-        <Button variant="contained" color="primary" className={classes.designButton} href="/design">
+        <Button variant="contained" color="primary" className={classes.designButton} onClick={() => { redirectTo('design') } }>
           <Typography>
               Start designing
           </Typography>
