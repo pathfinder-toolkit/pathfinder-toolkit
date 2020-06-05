@@ -20,7 +20,7 @@ export const EditorProvider = ({ children }) => {
   };
 
   // Can be used later if we'd like to provide short descriptions about steps.
-  const getStepContent = (step) => {
+  const getStepDescription = (step) => {
     return "";
     switch (step) {
       case 0:
@@ -34,6 +34,7 @@ export const EditorProvider = ({ children }) => {
     }
   };
 
+  //Editor components are added here
   const getStepComponent = () => {
     switch (activeStep) {
       case 0:
@@ -63,7 +64,7 @@ export const EditorProvider = ({ children }) => {
       value={{
         activeStep,
         getSteps,
-        getStepContent,
+        getStepDescription,
         nextStep,
         previousStep,
         resetSteps,
