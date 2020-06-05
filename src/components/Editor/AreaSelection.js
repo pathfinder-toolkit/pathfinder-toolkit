@@ -8,11 +8,11 @@ const AreaSelection = () => {
   return (
     <ComposableMap
       width="800"
-      height="350"
+      height="375"
       projection="geoAzimuthalEqualArea"
       projectionConfig={{
         rotate: [-20.0, -60.0, 0],
-        scale: 600,
+        scale: 500,
       }}
     >
       <Geographies geography={geoUrl}>
@@ -23,6 +23,7 @@ const AreaSelection = () => {
               geography={geo}
               fill="#9998A3"
               stroke="#EAEAEC"
+              onClick={() => console.log(geo.properties.NAME)}
               style={{
                 default: {
                   fill: "#D6D6DA",

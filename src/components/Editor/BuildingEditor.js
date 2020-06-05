@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 
 import { useEditor } from "../../utils/EditorProvider";
 import AreaSelection from "./AreaSelection";
+import BuildingDetails from "./BuildingDetails";
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
@@ -26,14 +27,14 @@ const BuildingEditor = () => {
 
   const classes = useStyles();
 
-  const { getSteps, activeStep, nextStep, previousStep } = useEditor();
+  const { getSteps, activeStep, nextStep, previousStep, getStepComponent } = useEditor();
   const steps = getSteps();
 
   return (
     <div className={classes.root}>
       <div className={classes.editorContainer}>
         <Paper>
-          <AreaSelection />
+          {getStepComponent()}
         </Paper>
       </div>
       <div className={classes.actionsContainer}>

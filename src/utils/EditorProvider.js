@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import AreaSelection from "../components/Editor/AreaSelection"
+import BuildingDetails from "../components/Editor/BuildingDetails"
 
 export const EditorContext = React.createContext();
 
@@ -22,15 +24,26 @@ export const EditorProvider = ({ children }) => {
     return "";
     switch (step) {
       case 0:
-        return ``;
+        return "Select area";
       case 1:
-        return "";
+        return "Enter building details";
       case 2:
-        return ``;
+        return "Enter heating details";
       default:
-        return "Unknown step";
+        return "Unknown description";
     }
   };
+
+  const getStepComponent = () => {
+    switch (activeStep) {
+      case 0:
+        return <AreaSelection/>
+      case 1:
+        return <BuildingDetails/>
+      default:
+        return <p>Unknow component</p>
+    }
+  }
   const steps = getSteps();
 
   const nextStep = () => {
@@ -49,12 +62,12 @@ export const EditorProvider = ({ children }) => {
     <EditorContext.Provider
       value={{
         activeStep,
-        setActiveStep,
         getSteps,
         getStepContent,
         nextStep,
         previousStep,
         resetSteps,
+        getStepComponent,
       }}
     >
       {children}
