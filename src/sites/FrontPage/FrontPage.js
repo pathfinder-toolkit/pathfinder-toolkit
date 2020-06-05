@@ -6,10 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import frontPageImage from "../../external/images/frontpage_house.jpg"
+import InstructionPanels from "./InstructionPanels"
 
 const useStyles = makeStyles((theme) => ({
     banner: {
-      height:720,
+      height:660,
       backgroundImage: 'url('+ frontPageImage+')',
       backgroundPosition: 'center bottom',
       backgroundSize: "cover",
@@ -33,20 +34,14 @@ const useStyles = makeStyles((theme) => ({
     },
     designButton: {
       position: "fixed",
-      bottom:20,
-      right:20
+      bottom:26,
+      right:26
     }
   }));
 
 const FrontPage = () => {
 
     const classes = useStyles();
-
-    const [expandedPanel, setExpandedPanel] = useState('panel1');
-
-    const handleChange = ( panel ) => ( event, newExpanded )  => {
-      setExpandedPanel( newExpanded ? panel : false );
-    }
 
     return <React.Fragment>
         <NavigationBar />
@@ -59,43 +54,9 @@ const FrontPage = () => {
           </Grid>
         </Grid>
 
-        <Grid container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={2}>
-        <Grid item xs={12}>
-          <ExpansionPanel expanded={expandedPanel === 'panel1'} onChange={handleChange('panel1')}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography className={classes.panelHeading}>Expansion Panel 1</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                sit amet blandit leo lobortis eget.
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          </Grid>
-          <Grid item xs={12}>
-          <ExpansionPanel expanded={expandedPanel === 'panel2'} onChange={handleChange('panel2')}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2a-content"
-              id="panel2a-header"
-            >
-              <Typography className={classes.panelHeading}>Expansion Panel 2</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                sit amet blandit leo lobortis eget.
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-          </Grid>
-        </Grid>
-        <Button variant="contained" className={classes.designButton}>
+        <InstructionPanels></InstructionPanels>
+
+        <Button variant="contained" color="primary" className={classes.designButton} href="/design">
           <Typography>
               Start designing
           </Typography>
