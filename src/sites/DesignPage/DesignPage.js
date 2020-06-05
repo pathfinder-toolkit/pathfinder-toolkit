@@ -3,8 +3,8 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import { EditorProvider } from "../../utils/EditorProvider";
-import EditorStepper from "../../components/EditorStepper";
-import BuildingEditor from "../../components/BuildingEditor";
+import EditorStepper from "../../components/Editor/EditorStepper";
+import BuildingEditor from "../../components/Editor/BuildingEditor";
 
 const DesignPage = () => {
   return (

@@ -7,22 +7,30 @@ export const useEditor = () => useContext(EditorContext);
 export const EditorProvider = ({ children }) => {
   const [activeStep, setActiveStep] = useState(0);
 
-  function getSteps() {
-    return ["Select area", "Enter building details", "Enter more details"];
-  }
+  const getSteps = () => {
+    return [
+      "Select area",
+      "Building details",
+      "Heating details",
+      "More details",
+      "Summary",
+    ];
+  };
 
-  function getStepContent(step) {
+  // Can be used later if we'd like to provide short descriptions about steps.
+  const getStepContent = (step) => {
+    return "";
     switch (step) {
       case 0:
-        return `1`;
+        return ``;
       case 1:
-        return "2";
+        return "";
       case 2:
-        return `3`;
+        return ``;
       default:
         return "Unknown step";
     }
-  }
+  };
   const steps = getSteps();
 
   const nextStep = () => {
