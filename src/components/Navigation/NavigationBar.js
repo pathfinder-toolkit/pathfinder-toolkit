@@ -11,6 +11,7 @@ import Home from "@material-ui/icons/Home";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useBackend } from "../../utils/FakeBackend";
+import history from "../../utils/history";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+
 
 const NavigationBar = () => {
   const { user, fakeLogout } = useBackend();
@@ -37,14 +39,18 @@ const NavigationBar = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const redirectTo = (addr) => {
+    history.push(addr);
+  }
+
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}></Typography>
-        <IconButton href="/" color="inherit">
+        <IconButton onClick={() => { redirectTo('') }} color="inherit">
           <Home />
         </IconButton>
-        <Button href="/design" color="inherit">
+        <Button onClick={() => { redirectTo('design') }} color="inherit">
           Design
         </Button>
         {user && (
@@ -67,7 +73,7 @@ const NavigationBar = () => {
               onClose={handleProfileMenuClose}
             >
               <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
-              <MenuItem onClick={handleProfileMenuClose}>
+              <MenuItem onClick={() => { redirectTo('buildings') }}>
                 Designed buildings
               </MenuItem>
               <MenuItem onClick={fakeLogout}>Logout</MenuItem>
@@ -75,7 +81,7 @@ const NavigationBar = () => {
           </div>
         )}
         {!user && (
-          <Button href="/login" color="inherit">
+          <Button onClick={() => { redirectTo('login') }} color="inherit">
             Login
           </Button>
         )}
