@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import history from "../../utils/history";
+import NavigationBar from '../../components/Navigation/NavigationBar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +43,8 @@ export default function SignUp() {
   const classes = useStyles();
 
   return (
+    <React.Fragment>
+    <NavigationBar/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -99,12 +102,6 @@ export default function SignUp() {
                 autoComplete="current-password"
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -126,5 +123,6 @@ export default function SignUp() {
         </form>
       </div>
     </Container>
+    </React.Fragment>
   );
 }

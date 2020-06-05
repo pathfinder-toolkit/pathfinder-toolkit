@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Paper } from "@material-ui/core/";
 
 const AreaSelection = () => {
+  const [selectedArea, setSelectedArea] = useState("");
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+
+  const useStyles = makeStyles((theme) => ({
+    selection: {
+      position: "fixed",
+      bottom: 50,
+      left: 275,
+    },
+  }));
+
+  const classes = useStyles();
 
   return (
     <React.Fragment>
@@ -26,7 +38,7 @@ const AreaSelection = () => {
                 geography={geo}
                 fill="#9998A3"
                 stroke="#EAEAEC"
-                onClick={() => console.log(geo.properties.NAME)}
+                onClick={() => setSelectedArea(geo.properties.NAME)}
                 style={{
                   default: {
                     fill: "#D6D6DA",
@@ -46,6 +58,11 @@ const AreaSelection = () => {
           }
         </Geographies>
       </ComposableMap>
+      {selectedArea && (
+        <div className={classes.selection}>
+          <Typography>Selected country: {selectedArea}</Typography>
+        </div>
+      )}
     </React.Fragment>
   );
 };

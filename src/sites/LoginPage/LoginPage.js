@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useBackend } from "../../utils/FakeBackend";
+import NavigationBar from "../../components/Navigation/NavigationBar"
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Container,
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Grid,
+  Link,
+} from "@material-ui/core";
 
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import NavigationBar from "../../components/Navigation/NavigationBar";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
-import { makeStyles } from '@material-ui/core/styles';
 import history from "../../utils/history";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
-  }
+  },
 }));
 
 const LoginPage = () => {
@@ -35,6 +37,7 @@ const LoginPage = () => {
 
   return (
     <React.Fragment>
+      <NavigationBar/>
       <Container maxWidth="xs">
         <Box
           display="flex"
@@ -49,7 +52,7 @@ const LoginPage = () => {
               </Typography>
             ) : (
               <Typography align="center" variant="h5">
-                Logged out.
+                Login
               </Typography>
             )}
 
