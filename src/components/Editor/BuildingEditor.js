@@ -12,10 +12,11 @@ const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       background: "#dddce0",
-      minHeight: "91vh",
+      maxHeight: "91vh",
     },
     editorContainer: {
       padding: theme.spacing(0.5),
+      maxHeight: "91vh",
     },
     actionsContainer: {},
     button: {
@@ -32,9 +33,8 @@ const BuildingEditor = () => {
     <div className={classes.root}>
       <div className={classes.editorContainer}>
         <Paper>
-          <Typography align="center">Area selection</Typography>
+          <AreaSelection />
         </Paper>
-        <AreaSelection />
       </div>
       <div className={classes.actionsContainer}>
         <Grid
