@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import NavigationBar from '../../components/Navigation/NavigationBar';
-import { Typography, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary } from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import frontPageImage from "../../external/images/frontpage_house.jpg"
 import InstructionPanels from "./InstructionPanels"
@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
       textShadow: "-0.03em 0 black, 0 0.03em black, 0.03em 0 black, 0 -0.03em black",
       color: "white"
     },
-    panelContainer: {
-      marginTop:20
+    infoPaper: {
+      height:100,
+      display: "flex",
+      flexDirection: "column"
     },
-    panelHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: '33.33%',
-      flexShrink: 0,
+    infoMessage: {
+      margin:"auto"
     },
     designButton: {
       position: "fixed",
@@ -54,7 +54,25 @@ const FrontPage = () => {
           </Grid>
         </Grid>
 
-        <InstructionPanels></InstructionPanels>
+        <Grid container xs="12" direction="row" alignItems="center" spacing={2} justify="center">
+          <Grid item xs="4">
+            <Paper className={classes.infoPaper}>
+              <Typography className={classes.infoMessage} >Start by inputting your building details</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs="4">
+            <Paper className={classes.infoPaper}>
+              <Typography className={classes.infoMessage} >Pathfinder estimates your energy efficiency</Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs="4">
+            <Paper className={classes.infoPaper}>
+              <Typography className={classes.infoMessage} >Check out our suggestion for improvements</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <InstructionPanels />
 
         <Button variant="contained" color="primary" className={classes.designButton} href="/design">
           <Typography>
