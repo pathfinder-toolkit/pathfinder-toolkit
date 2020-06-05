@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 export const BackendContext = React.createContext();
-
 export const useBackend = () => useContext(BackendContext);
 
 export const BackendProvider = ({ children }) => {

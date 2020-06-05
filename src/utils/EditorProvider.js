@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import AreaSelection from "../components/Editor/AreaSelection"
-import BuildingDetails from "../components/Editor/BuildingDetails"
+import AreaSelection from "../components/Editor/AreaSelection";
+import BuildingDetails from "../components/Editor/BuildingDetails";
 
 export const EditorContext = React.createContext();
-
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
@@ -19,7 +18,7 @@ export const EditorProvider = ({ children }) => {
     ];
   };
 
-  // Can be used later if we'd like to provide short descriptions about steps.
+  // Can be used later if we'd like to provide short description about steps.
   const getStepDescription = (step) => {
     return "";
     switch (step) {
@@ -38,14 +37,13 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = () => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection/>
+        return <AreaSelection />;
       case 1:
-        return <BuildingDetails/>
+        return <BuildingDetails />;
       default:
-        return <p>Unknow component</p>
+        return <p>Unknow component</p>;
     }
-  }
-  const steps = getSteps();
+  };
 
   const nextStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -65,10 +63,10 @@ export const EditorProvider = ({ children }) => {
         activeStep,
         getSteps,
         getStepDescription,
+        getStepComponent,
         nextStep,
         previousStep,
         resetSteps,
-        getStepComponent,
       }}
     >
       {children}

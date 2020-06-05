@@ -1,12 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
+
+import { Grid, Button, Paper, Typography } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
-
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
