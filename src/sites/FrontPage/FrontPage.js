@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import frontPageImage from "../../external/images/frontpage_house.jpg"
 import InstructionPanels from "../../components/Instructions/InstructionPanels"
+
 import history from "../../utils/history";
 
 const useStyles = makeStyles((theme) => ({
