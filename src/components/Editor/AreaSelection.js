@@ -5,7 +5,9 @@ import { useBackend } from "../../utils/FakeBackend";
 import AreaMap from "./AreaMap";
 
 const AreaSelection = () => {
+  const { getCountries } = useBackend();
   const [selectedArea, setSelectedArea] = useState("");
+  const [allowedCountries, setAllowedCountries] = useState(getCountries());
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
@@ -18,20 +20,17 @@ const AreaSelection = () => {
   }));
   const classes = useStyles();
 
-  const { getCountries } = useBackend();
-  const allowedCountries = getCountries();
-
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
   };
 
   return (
     <React.Fragment>
-      <Typography align="center">Select building area</Typography>
       <AreaMap
         allowedCountries={allowedCountries}
         handleSelection={handleSelection}
       />
+
       {selectedArea && (
         <div className={classes.selection}>
           <Typography>Selected country: {selectedArea}</Typography>

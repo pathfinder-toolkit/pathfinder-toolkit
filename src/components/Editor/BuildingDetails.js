@@ -10,13 +10,14 @@ import {
   Grid,
   Button,
   Fade,
+  TextField,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      padding: "1rem",
+    padding: "1rem",
   },
   button: {
     display: "block",
@@ -77,6 +78,7 @@ const BuildingDetails = () => {
               </MenuItem>
             ))}
           </Select>
+          <TextField label="Building name" />
         </FormControl>
       </div>
     </Fade>

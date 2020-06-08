@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { Grid, Button, Paper, Typography } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
+import { useBackend } from "../../utils/FakeBackend";
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
@@ -24,8 +25,13 @@ const BuildingEditor = () => {
       margin: theme.spacing(1),
     },
   }));
-
   const classes = useStyles();
+
+  const { fakeRequest, loading } = useBackend();
+  useEffect(() => {
+    fakeRequest();
+  }, []);
+
 
   const {
     getSteps,
@@ -40,7 +46,7 @@ const BuildingEditor = () => {
     <div className={classes.root}>
       <div className={classes.editorContainer}>
         <div className={classes.editorComponent}>
-          <Paper>{getStepComponent()}</Paper>
+          {!loading && <Paper>{getStepComponent()}</Paper>}
         </div>
       </div>
       <div className={classes.actionsContainer}>
