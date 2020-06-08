@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
+import { useEditor } from "../../utils/EditorProvider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,9 +43,22 @@ const BuildingDetails = () => {
   const { getMaterials } = useBackend();
   const materials = getMaterials();
 
-  const handleChange = (event) => {
+  const { buildingInformation, setSavedName, setSavedMaterial, setNavigationEnabled } = useEditor();
+
+  const handleMaterialChange = (event) => {
     setMaterial(event.target.value);
+    setSavedMaterial(event.target.value);
   };
+
+  const handleNameChange = (event) => {
+    setSavedName(event.target.value);
+  };
+
+  useEffect(() => {
+    if (buildingInformation.details.name && buildingInformation.details.material) {
+      setNavigationEnabled(true);
+    }
+  },[buildingInformation.details]);
 
   const handleClose = () => {
     setOpen(false);
@@ -65,11 +79,12 @@ const BuildingDetails = () => {
           <Select
             labelId="material-test"
             id="material-test"
+            className={classes.required}
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
             value={material}
-            onChange={handleChange}
+            onChange={handleMaterialChange}
           >
             <MenuItem value=""></MenuItem>
             {materials.map((material, index) => (
@@ -78,7 +93,7 @@ const BuildingDetails = () => {
               </MenuItem>
             ))}
           </Select>
-          <TextField label="Building name" />
+          <TextField label="Building name" onChange={handleNameChange}/>
         </FormControl>
       </div>
     </Fade>
