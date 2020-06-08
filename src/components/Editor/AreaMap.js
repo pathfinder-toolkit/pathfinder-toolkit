@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 const AreaMap = (props) => {
@@ -6,34 +6,50 @@ const AreaMap = (props) => {
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
   const allowedCountries = props.allowedCountries;
+  const selectedCountry = props.selectedCountry;
 
-  const validCountryStyle = {
-    default: {
-      fill: "#F53",
-      outline: "none",
+  const styles = {
+    validCountry: {
+      default: {
+        fill: "#949ee3",
+        outline: "none",
+      },
+      hover: {
+        fill: "#7885de",
+        outline: "none",
+      },
+      pressed: {
+        fill: "#5e6edb",
+        outline: "none",
+      },
     },
-    hover: {
-      fill: "#E42",
-      outline: "none",
+    invalidCountry: {
+      default: {
+        fill: "#D6D6DA",
+        outline: "none",
+      },
+      hover: {
+        fill: "#D6D6DA",
+        outline: "none",
+      },
+      pressed: {
+        fill: "#D6D6DA",
+        outline: "none",
+      },
     },
-    pressed: {
-      fill: "#E42",
-      outline: "none",
-    },
-  };
-
-  const invalidCountryStyle = {
-    default: {
-      fill: "#D6D6DA",
-      outline: "none",
-    },
-    hover: {
-      fill: "#D6D6DA",
-      outline: "none",
-    },
-    pressed: {
-      fill: "#D6D6DA",
-      outline: "none",
+    selectedCountry: {
+      default: {
+        fill: "#5e6edb",
+        outline: "none",
+      },
+      hover: {
+        fill: "#5e6edb",
+        outline: "none",
+      },
+      pressed: {
+        fill: "#5e6edb",
+        outline: "none",
+      },
     },
   };
 
@@ -50,7 +66,17 @@ const AreaMap = (props) => {
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
           geographies.map((geo) => {
-            if (allowedCountries.includes(geo.properties.NAME)) {
+            if (selectedCountry === geo.properties.NAME) {
+              return (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill="#9998A3"
+                  stroke="#EAEAEC"
+                  style={styles.selectedCountry}
+                />
+              );
+            } else if (allowedCountries.includes(geo.properties.NAME)) {
               return (
                 <Geography
                   key={geo.rsmKey}
@@ -58,7 +84,7 @@ const AreaMap = (props) => {
                   fill="#9998A3"
                   stroke="#EAEAEC"
                   onClick={() => props.handleSelection(geo.properties.NAME)}
-                  style={validCountryStyle}
+                  style={styles.validCountry}
                 />
               );
             } else {
@@ -68,7 +94,7 @@ const AreaMap = (props) => {
                   geography={geo}
                   fill="#9998A3"
                   stroke="#EAEAEC"
-                  style={invalidCountryStyle}
+                  style={styles.invalidCountry}
                 />
               );
             }

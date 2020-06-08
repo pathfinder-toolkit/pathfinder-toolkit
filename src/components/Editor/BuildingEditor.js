@@ -16,6 +16,10 @@ const BuildingEditor = () => {
       padding: theme.spacing(0.5),
       minHeight: "91vh",
     },
+    editorComponent: {
+      border: "1px solid black",
+      borderRadius: "2px",
+    }
   }));
   const classes = useStyles();
 
@@ -33,7 +37,7 @@ const BuildingEditor = () => {
           {!loading && <Paper>{getStepComponent()}</Paper>}
         </div>
       </div>
-      <NavigationBar />
+      {!loading && <NavigationBar />}
     </div>
   );
 };
