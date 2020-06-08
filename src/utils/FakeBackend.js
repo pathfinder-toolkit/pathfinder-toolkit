@@ -5,7 +5,10 @@ export const useBackend = () => useContext(BackendContext);
 
 export const BackendProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [materials, setMaterials] = useState();
+  const [countries, setCountries] = useState();
 
   const fakeLogin = (username) => {
     if (username === null || username === "") {
@@ -24,12 +27,28 @@ export const BackendProvider = ({ children }) => {
     console.log("logged out");
   };
 
+  const fakeRequest = async () => {
+    const result = await fakeResponse();
+    console.log("result: " + result);
+  };
+
+  const fakeResponse = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setMaterials(["Wood", "Stone", "Concrete"]);
+        setCountries(["Finland", "Sweden", "United Kingdom", "Ireland"]);
+        resolve("resolved");
+        setLoading(false);
+      }, 2000);
+    });
+  };
+
   const getMaterials = () => {
-    return ["Wood", "Stone", "Concrete"];
+    return materials;
   };
 
   const getCountries = () => {
-    return ["Finland", "Sweden", "United Kingdom", "Ireland"];
+    return countries;
   };
 
   const getSavedBuildings = async () => {
@@ -61,8 +80,10 @@ export const BackendProvider = ({ children }) => {
       value={{
         isLoggedIn,
         user,
+        loading,
         fakeLogin,
         fakeLogout,
+        fakeRequest,
         getMaterials,
         getCountries,
         getSavedBuildings

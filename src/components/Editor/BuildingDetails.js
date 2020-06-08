@@ -10,11 +10,15 @@ import {
   Grid,
   Button,
   Fade,
+  TextField,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: "1rem",
+  },
   button: {
     display: "block",
     marginTop: theme.spacing(2),
@@ -31,9 +35,7 @@ const BuildingDetails = () => {
   const [open, setOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    console.log("asdad");
     setLoading(true);
   }, []);
 
@@ -54,8 +56,10 @@ const BuildingDetails = () => {
 
   return (
     <Fade in={loading}>
-      <div>
-        <Typography aling="center">Building details</Typography>
+      <div className={classes.root}>
+        <Typography variant="h5" aling="center">
+          Building details
+        </Typography>
         <FormControl className={classes.formControl}>
           <InputLabel id="material-test">Material</InputLabel>
           <Select
@@ -74,6 +78,7 @@ const BuildingDetails = () => {
               </MenuItem>
             ))}
           </Select>
+          <TextField label="Building name" />
         </FormControl>
       </div>
     </Fade>

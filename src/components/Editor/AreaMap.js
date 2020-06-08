@@ -68,7 +68,6 @@ const AreaMap = (props) => {
                   geography={geo}
                   fill="#9998A3"
                   stroke="#EAEAEC"
-                  onClick={() => props.handleSelection(geo.properties.NAME)}
                   style={invalidCountryStyle}
                 />
               );
