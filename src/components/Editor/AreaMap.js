@@ -71,7 +71,6 @@ const AreaMap = (props) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill="#9998A3"
                   stroke="#EAEAEC"
                   style={styles.selectedCountry}
                 />
@@ -81,7 +80,6 @@ const AreaMap = (props) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill="#9998A3"
                   stroke="#EAEAEC"
                   onClick={() => props.handleSelection(geo.properties.NAME)}
                   style={styles.validCountry}
@@ -92,7 +90,6 @@ const AreaMap = (props) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill="#9998A3"
                   stroke="#EAEAEC"
                   style={styles.invalidCountry}
                 />
