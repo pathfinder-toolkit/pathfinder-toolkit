@@ -74,7 +74,7 @@ const BuildingDetails = () => {
   return (
     <Fade in={loading}>
       <div className={classes.root}>
-        <Typography variant="h5" aling="center">
+        <Typography variant="h5">
           Building details
         </Typography>
         <FormControl className={classes.formControl}>

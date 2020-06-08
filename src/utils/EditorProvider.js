@@ -11,15 +11,20 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [buildingInformation, setBuildingInformation] = useState({
     area: "",
     details: {
       name: "",
-      material: ""
-    }
+      material: "",
+    },
+    structure: {
+      wallMaterial: "",
+      roofType: "",
+      windowCount: "",
+    },
   });
 
   const getSteps = () => {
@@ -52,17 +57,17 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = () => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection  />;
+        return <AreaSelection />;
       case 1:
-        return <BuildingDetails  />;
+        return <BuildingDetails />;
       case 2:
-        return <BuildingStructure  />;
+        return <BuildingStructure />;
       case 3:
         return <BuildingVentilation />;
       case 4:
         return <BuildingHeating />;
       case 5:
-        return <Summary />; 
+        return <Summary />;
       default:
         return <p>Unknow component</p>;
     }
@@ -83,28 +88,55 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedArea = (newArea) => {
-    setBuildingInformation(buildingInformation => ({
+    setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      area: newArea
+      area: newArea,
     }));
-  }
+  };
 
   const setSavedName = (newName) => {
-    setBuildingInformation(buildingInformation => ({
+    setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: {...buildingInformation.details, name: newName}
+      details: { ...buildingInformation.details, name: newName },
     }));
     console.log(buildingInformation);
-  }
+  };
 
   const setSavedMaterial = (newMaterial) => {
     console.log("checking...");
-    setBuildingInformation(buildingInformation => ({
+    setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: {...buildingInformation.details, material: newMaterial}
+      details: { ...buildingInformation.details, material: newMaterial },
     }));
     console.log(buildingInformation);
-  }
+  };
+
+  const setSavedWallMaterial = (newWallMaterial) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, wallMaterial: newWallMaterial },
+    }));
+  };
+
+  const setSavedRoofType = (newRoofType) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, roofType: newRoofType },
+    }));
+  };
+
+  const setSavedWindowCount = (newWindowCount) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, windowCount: newWindowCount },
+    }));
+  };
+
+
+
 
   return (
     <EditorContext.Provider
@@ -121,7 +153,10 @@ export const EditorProvider = ({ children }) => {
         resetSteps,
         setSavedArea,
         setSavedName,
-        setSavedMaterial
+        setSavedMaterial,
+        setSavedWallMaterial,
+        setSavedRoofType,
+        setSavedWindowCount,
       }}
     >
       {children}
