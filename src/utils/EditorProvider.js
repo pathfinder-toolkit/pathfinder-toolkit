@@ -13,6 +13,10 @@ export const useEditor = () => useContext(EditorContext);
 export const EditorProvider = ({ children }) => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const [buildingInformation, setBuildingInformation] = useState({
+    area: ""
+  });
+
   const getSteps = () => {
     return [
       "Select area",
@@ -43,11 +47,11 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = () => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection />;
+        return <AreaSelection  />;
       case 1:
-        return <BuildingDetails />;
+        return <BuildingDetails  />;
       case 2:
-        return <BuildingStructure />;
+        return <BuildingStructure  />;
       case 3:
         return <BuildingVentilation />;
       case 4:
@@ -71,9 +75,17 @@ export const EditorProvider = ({ children }) => {
     setActiveStep(0);
   };
 
+  const setSavedArea = (newArea) => {
+    setBuildingInformation(buildingInformation => ({
+      ...buildingInformation,
+      area: newArea
+    }));
+  }
+
   return (
     <EditorContext.Provider
       value={{
+        buildingInformation,
         activeStep,
         getSteps,
         getStepDescription,
@@ -81,6 +93,7 @@ export const EditorProvider = ({ children }) => {
         nextStep,
         previousStep,
         resetSteps,
+        setSavedArea
       }}
     >
       {children}
