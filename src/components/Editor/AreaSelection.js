@@ -4,8 +4,11 @@ import { Typography, Paper, Fade } from "@material-ui/core/";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
+import { useEditor } from "../../utils/EditorProvider";
 
 const AreaSelection = () => {
+  const { setSavedArea } = useEditor();
+
   const { getCountries } = useBackend();
   const { setNavigationEnabled } = useEditor();
   const [selectedArea, setSelectedArea] = useState("");
@@ -30,6 +33,7 @@ const AreaSelection = () => {
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
     setNavigationEnabled(true);
+    setSavedArea(selectedCountry);
   };
 
   return (
