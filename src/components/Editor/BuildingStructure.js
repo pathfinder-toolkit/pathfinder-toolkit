@@ -57,6 +57,7 @@ const BuildingStructure = () => {
     buildingInformation,
     setSavedWallMaterial,
     setSavedRoofType,
+    setSavedWindowCount,
     setNavigationEnabled,
   } = useEditor();
   const materials = getMaterials();
@@ -72,6 +73,11 @@ const BuildingStructure = () => {
     setSavedRoofType(event.target.value);
   };
 
+  const handleWindowChange = (event) => {
+    setWindowCount(event.target.value);
+    setSavedWindowCount(event.target.value);
+  };
+
   const handleClose = () => {
     setWallOpen(false);
     setRoofOpen(false);
@@ -84,6 +90,16 @@ const BuildingStructure = () => {
   const handleRoofOpen = () => {
     setRoofOpen(true);
   };
+
+  useEffect(() => {
+    if (
+      buildingInformation.structure.wallMaterial &&
+      buildingInformation.structure.roofType &&
+      buildingInformation.structure.windowCount
+    ) {
+      setNavigationEnabled(true);
+    }
+  }, [buildingInformation.structure]);
 
   //Split this into smaller components later, just a quick sketch for now.
   return (
@@ -140,8 +156,8 @@ const BuildingStructure = () => {
         </Paper>
         <Paper className={classes.category}>
           <Typography variant="h6">Windows</Typography>
-          <TextField type="number" onChange={() => console.log("asdasd")}>
-            Number{" "}
+          <TextField type="number" onChange={setSavedWindowCount}>
+            Count
           </TextField>
         </Paper>
       </div>

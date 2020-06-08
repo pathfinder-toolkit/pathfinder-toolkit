@@ -21,15 +21,9 @@ export const EditorProvider = ({ children }) => {
       material: "",
     },
     structure: {
-      walls: {
-        material: "",
-      },
-      roof: {
-        type: "",
-      },
-      windows: {
-        count: "",
-      }
+      wallMaterial: "",
+      roofType: "",
+      windowCount: "",
     },
   });
 
@@ -121,19 +115,26 @@ export const EditorProvider = ({ children }) => {
     console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      structure: { ...buildingInformation.structure, structure: newWallMaterial },
+      structure: { ...buildingInformation.structure, wallMaterial: newWallMaterial },
     }));
-    console.log(buildingInformation);
   };
 
   const setSavedRoofType = (newRoofType) => {
     console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      structure: { ...buildingInformation.structure, structure: newRoofType },
+      structure: { ...buildingInformation.structure, roofType: newRoofType },
     }));
-    console.log(buildingInformation);
   };
+
+  const setSavedWindowCount = (newWindowCount) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, windowCount: newWindowCount },
+    }));
+  };
+
 
 
 
@@ -155,6 +156,7 @@ export const EditorProvider = ({ children }) => {
         setSavedMaterial,
         setSavedWallMaterial,
         setSavedRoofType,
+        setSavedWindowCount,
       }}
     >
       {children}
