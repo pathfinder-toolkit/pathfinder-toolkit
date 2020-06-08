@@ -20,19 +20,19 @@ function createData(name, date, improvements, id ) {
 }
 
 const rows = [
-  createData('Cupcake', "2020-05-22 10:10:03", 12, 1),
-  createData('Donut', "2020-05-24 13:25:01", 3, 2),
-  createData('Eclair', "2020-05-25 12:10:03", 14, 3),
-  createData('Frozen yoghurt', "2020-05-26 15:22:08", 16, 4),
-  createData('Gingerbread', "2020-05-26 19:13:03", 21, 5),
-  createData('Honeycomb', "2020-05-28 15:00:01", 5, 6),
-  createData('Ice cream sandwich', "2020-05-29 09:56:00", 7, 7),
-  createData('Jelly Bean', "2020-05-31 15:12:43", 31, 8),
-  createData('KitKat', "2020-06-02 12:43:25", 35, 9),
-  createData('Lollipop', "2020-06-03 15:18:03", 11, 10),
-  createData('Marshmallow', "2020-06-05 16:32:09", 12, 11),
-  createData('Nougat', "2020-06-07 14:54:32", 16, 12),
-  createData('Oreo', "2020-06-08 08:34:15", 25, 13),
+  createData('Burj Khalifa', "2020-05-22 10:10:03", 12, 1),
+  createData('Shanghai Tower', "2020-05-24 13:25:01", 3, 2),
+  createData('Makkah Royal Clock Tower', "2020-05-25 12:10:03", 14, 3),
+  createData('Ping An Finance Center', "2020-05-26 15:22:08", 16, 4),
+  createData('Lotte World Tower', "2020-05-26 19:13:03", 21, 5),
+  createData('One World Trade Center', "2020-05-28 15:00:01", 5, 6),
+  createData('Guangzhou CTF Finance Centre', "2020-05-29 09:56:00", 7, 7),
+  createData('Tianjin CTF Finance Centre', "2020-05-31 15:12:43", 31, 8),
+  createData('CITIC Tower', "2020-06-02 12:43:25", 35, 9),
+  createData('Shanghai World Financial Center', "2020-06-03 15:18:03", 11, 10),
+  createData('International Commerce Centre', "2020-06-05 16:32:09", 12, 11),
+  createData('Lakhta Center', "2020-06-07 14:54:32", 16, 12),
+  createData('Zifeng Tower', "2020-06-08 08:34:15", 25, 13),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -71,7 +71,9 @@ const headCells = [
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, rowCount, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
+    if (property != 'id') {
+        onRequestSort(event, property);
+    }
   };
 
   return (
@@ -86,18 +88,20 @@ function EnhancedTableHead(props) {
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
+            {headCell.id != 'id' ? (<TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              <Typography>{headCell.label}</Typography>
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
               ) : null}
-            </TableSortLabel>
+            </TableSortLabel>) : (
+                <Typography>{headCell.label}</Typography>
+            )}
           </TableCell>
         ))}
       </TableRow>
@@ -239,7 +243,7 @@ const BuildingsTable = () => {
                       </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right">{row.id}</TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary">{row.id}</Button></TableCell>
                     </TableRow>
                   );
                 })}
