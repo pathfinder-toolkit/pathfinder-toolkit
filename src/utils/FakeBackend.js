@@ -26,7 +26,11 @@ export const BackendProvider = ({ children }) => {
 
   const getMaterials = () => {
     return ["Wood", "Stone", "Concrete"];
-  }
+  };
+
+  const getCountries = () => {
+    return ["Finland", "Sweden", "United Kingdom", "Ireland"];
+  };
 
   return (
     <BackendContext.Provider
@@ -36,6 +40,7 @@ export const BackendProvider = ({ children }) => {
         fakeLogin,
         fakeLogout,
         getMaterials,
+        getCountries,
       }}
     >
       {children}

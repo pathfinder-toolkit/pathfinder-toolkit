@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper } from "@material-ui/core/";
+import { useBackend } from "../../utils/FakeBackend";
 
 const AreaSelection = () => {
   const [selectedArea, setSelectedArea] = useState("");
@@ -15,8 +16,10 @@ const AreaSelection = () => {
       left: 275,
     },
   }));
-
   const classes = useStyles();
+
+  const { getCountries } = useBackend();
+  const allowedCountries = getCountries();
 
   return (
     <React.Fragment>
@@ -32,29 +35,57 @@ const AreaSelection = () => {
       >
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
-            geographies.map((geo) => (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill="#9998A3"
-                stroke="#EAEAEC"
-                onClick={() => setSelectedArea(geo.properties.NAME)}
-                style={{
-                  default: {
-                    fill: "#D6D6DA",
-                    outline: "none",
-                  },
-                  hover: {
-                    fill: "#F53",
-                    outline: "none",
-                  },
-                  pressed: {
-                    fill: "#E42",
-                    outline: "none",
-                  },
-                }}
-              />
-            ))
+            geographies.map((geo) => {
+              if (allowedCountries.includes(geo.properties.NAME)) {
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill="#9998A3"
+                    stroke="#EAEAEC"
+                    onClick={() => setSelectedArea(geo.properties.NAME)}
+                    style={{
+                      default: {
+                        fill: "#F53",
+                        outline: "none",
+                      },
+                      hover: {
+                        fill: "#E42",
+                        outline: "none",
+                      },
+                      pressed: {
+                        fill: "#E42",
+                        outline: "none",
+                      },
+                    }}
+                  />
+                );
+              } else {
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill="#9998A3"
+                    stroke="#EAEAEC"
+                    onClick={() => setSelectedArea(geo.properties.NAME)}
+                    style={{
+                      default: {
+                        fill: "#D6D6DA",
+                        outline: "none",
+                      },
+                      hover: {
+                        fill: "#D6D6DA",
+                        outline: "none",
+                      },
+                      pressed: {
+                        fill: "#D6D6DA",
+                        outline: "none",
+                      },
+                    }}
+                  />
+                );
+              }
+            })
           }
         </Geographies>
       </ComposableMap>
