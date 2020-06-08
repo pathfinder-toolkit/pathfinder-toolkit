@@ -14,7 +14,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Launch from "@material-ui/icons/Launch";
 import { useBackend } from "../../utils/FakeBackend";
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -231,7 +233,7 @@ const BuildingsTable = () => {
                       </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right"><Button variant="contained" color="primary">{row.id}</Button></TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary"><Launch /> {row.id}</Button></TableCell>
                     </TableRow>
                   );
                 })}
