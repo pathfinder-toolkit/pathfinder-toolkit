@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Paper } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
 
 const NavigationBar = () => {
+  const [enabled, setEnabled] = useState(false);
+
   const useStyles = makeStyles((theme) => ({
     actionsContainer: {
       position: "fixed",
@@ -17,7 +19,7 @@ const NavigationBar = () => {
   }));
   const classes = useStyles();
 
-  const { getSteps, activeStep, nextStep, previousStep } = useEditor();
+  const { getSteps, activeStep, nextStep, previousStep, navigationEnabled } = useEditor();
   const steps = getSteps();
 
   return (
@@ -35,6 +37,7 @@ const NavigationBar = () => {
           <Button
             variant="contained"
             color="primary"
+            disabled={!navigationEnabled}
             onClick={nextStep}
             className={classes.button}
           >

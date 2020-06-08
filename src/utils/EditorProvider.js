@@ -12,6 +12,7 @@ export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
   const [activeStep, setActiveStep] = useState(0);
+  const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const getSteps = () => {
     return [
@@ -61,10 +62,12 @@ export const EditorProvider = ({ children }) => {
 
   const nextStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setNavigationEnabled(false);
   };
 
   const previousStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setNavigationEnabled(true);
   };
 
   const resetSteps = () => {
@@ -78,6 +81,8 @@ export const EditorProvider = ({ children }) => {
         getSteps,
         getStepDescription,
         getStepComponent,
+        navigationEnabled,
+        setNavigationEnabled,
         nextStep,
         previousStep,
         resetSteps,

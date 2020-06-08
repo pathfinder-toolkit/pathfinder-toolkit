@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Paper } from "@material-ui/core/";
+import { Typography, Paper, Fade } from "@material-ui/core/";
 import { useBackend } from "../../utils/FakeBackend";
+import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
 
 const AreaSelection = () => {
   const { getCountries } = useBackend();
+  const { setNavigationEnabled } = useEditor();
   const [selectedArea, setSelectedArea] = useState("");
   const [allowedCountries, setAllowedCountries] = useState(getCountries());
   const geoUrl =
@@ -16,12 +18,18 @@ const AreaSelection = () => {
       position: "fixed",
       bottom: 50,
       left: 275,
+      border: "1px solid black",
+      borderRadius: "4px"
+    },
+    selectionText: {
+      padding: "0.5rem",
     },
   }));
   const classes = useStyles();
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
+    setNavigationEnabled(true);
   };
 
   return (
@@ -32,9 +40,13 @@ const AreaSelection = () => {
       />
 
       {selectedArea && (
+        <Fade in={selectedArea}>
         <div className={classes.selection}>
-          <Typography>Selected country: {selectedArea}</Typography>
+          <Typography className={classes.selectionText}>
+            Selected country: {selectedArea}
+          </Typography>
         </div>
+        </Fade>
       )}
     </React.Fragment>
   );

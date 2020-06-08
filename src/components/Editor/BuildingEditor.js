@@ -33,7 +33,7 @@ const BuildingEditor = () => {
           {!loading && <Paper>{getStepComponent()}</Paper>}
         </div>
       </div>
-      <NavigationBar />
+      {!loading && <NavigationBar />}
     </div>
   );
 };
