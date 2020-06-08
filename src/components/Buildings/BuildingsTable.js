@@ -173,9 +173,12 @@ const BuildingsTable = () => {
   const {getSavedBuildings} = useBackend();
   const [rows, setRows] = useState([]);
 
-  useEffect(async () => {
-    let data = await getSavedBuildings();
-    setRows(data);
+  useEffect(() => {
+    async function fetchData() {
+        const data = await getSavedBuildings();
+        setRows(data);
+    }
+    fetchData();
   },[]);
 
   const handleRequestSort = (event, property) => {
