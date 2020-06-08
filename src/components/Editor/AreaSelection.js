@@ -20,7 +20,7 @@ const AreaSelection = () => {
 
   const useStyles = makeStyles((theme) => ({
     selection: {
-      position: "fixed",
+      position: "absolute",
       bottom: 50,
       left: 275,
       border: "1px solid black",
@@ -44,17 +44,7 @@ const AreaSelection = () => {
         allowedCountries={allowedCountries}
         selectedCountry={selectedArea}
         handleSelection={handleSelection}
-      />
-
-      {selectedArea && (
-        <Fade in={selectedArea}>
-          <div className={classes.selection}>
-            <Typography className={classes.selectionText}>
-              Selected country: {selectedArea}
-            </Typography>
-          </div>
-        </Fade>
-      )}
+      ></AreaMap>
     </React.Fragment>
   );
 };
