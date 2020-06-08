@@ -6,7 +6,7 @@ import BuildingsTable from "../../components/Buildings/BuildingsTable";
 const BuildingsPage = () => {
     return <React.Fragment>
         <NavigationBar />
-        <Container maxWidth="sm">
+        <Container maxWidth="lg">
             <BuildingsTable />
         </Container>
     </React.Fragment>
