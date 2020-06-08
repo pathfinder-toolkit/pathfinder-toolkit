@@ -166,8 +166,8 @@ const BuildingsTable = () => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('date');
   const [page, setPage] = useState(0);
-  const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const {getSavedBuildings} = useBackend();
   const [rows, setRows] = useState([]);
 
@@ -201,7 +201,7 @@ const BuildingsTable = () => {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={'medium'}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -236,7 +236,7 @@ const BuildingsTable = () => {
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                <TableRow style={{ height: 53 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
@@ -244,14 +244,14 @@ const BuildingsTable = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />)}
+        />
       </Paper>
     </div>
   );
