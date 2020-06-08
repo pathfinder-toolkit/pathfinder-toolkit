@@ -15,7 +15,11 @@ export const EditorProvider = ({ children }) => {
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [buildingInformation, setBuildingInformation] = useState({
-    area: ""
+    area: "",
+    details: {
+      name: "",
+      material: ""
+    }
   });
 
   const getSteps = () => {
@@ -85,6 +89,23 @@ export const EditorProvider = ({ children }) => {
     }));
   }
 
+  const setSavedName = (newName) => {
+    setBuildingInformation(buildingInformation => ({
+      ...buildingInformation,
+      details: {...buildingInformation.details, name: newName}
+    }));
+    console.log(buildingInformation);
+  }
+
+  const setSavedMaterial = (newMaterial) => {
+    console.log("checking...");
+    setBuildingInformation(buildingInformation => ({
+      ...buildingInformation,
+      details: {...buildingInformation.details, material: newMaterial}
+    }));
+    console.log(buildingInformation);
+  }
+
   return (
     <EditorContext.Provider
       value={{
@@ -98,7 +119,9 @@ export const EditorProvider = ({ children }) => {
         nextStep,
         previousStep,
         resetSteps,
-        setSavedArea
+        setSavedArea,
+        setSavedName,
+        setSavedMaterial
       }}
     >
       {children}
