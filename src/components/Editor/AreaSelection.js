@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Paper } from "@material-ui/core/";
+import { Typography, Paper, Fade } from "@material-ui/core/";
 import { useBackend } from "../../utils/FakeBackend";
-import AreaMap from "./AreaMap";
 import { useEditor } from "../../utils/EditorProvider";
+import AreaMap from "./AreaMap";
 
 const AreaSelection = () => {
-  const { setSavedArea } = useEditor();
+  const {
+    buildingInformation,
+    setSavedArea,
+    setNavigationEnabled,
+  } = useEditor();
 
   const { getCountries } = useBackend();
-  const [selectedArea, setSelectedArea] = useState("");
-  const [allowedCountries, setAllowedCountries] = useState(getCountries());
+  const [selectedArea, setSelectedArea] = useState(buildingInformation.area);
+  const [allowedCountries] = useState(getCountries());
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
@@ -19,6 +23,11 @@ const AreaSelection = () => {
       position: "fixed",
       bottom: 50,
       left: 275,
+      border: "1px solid black",
+      borderRadius: "4px",
+    },
+    selectionText: {
+      padding: "0.5rem",
     },
   }));
   const classes = useStyles();
@@ -26,19 +35,25 @@ const AreaSelection = () => {
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
     setSavedArea(selectedCountry);
+    setNavigationEnabled(true);
   };
 
   return (
     <React.Fragment>
       <AreaMap
         allowedCountries={allowedCountries}
+        selectedCountry={selectedArea}
         handleSelection={handleSelection}
       />
 
       {selectedArea && (
-        <div className={classes.selection}>
-          <Typography>Selected country: {selectedArea}</Typography>
-        </div>
+        <Fade in={selectedArea}>
+          <div className={classes.selection}>
+            <Typography className={classes.selectionText}>
+              Selected country: {selectedArea}
+            </Typography>
+          </div>
+        </Fade>
       )}
     </React.Fragment>
   );
