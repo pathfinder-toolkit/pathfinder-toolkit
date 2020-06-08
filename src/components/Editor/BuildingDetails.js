@@ -43,7 +43,7 @@ const BuildingDetails = () => {
   const { getMaterials } = useBackend();
   const materials = getMaterials();
 
-  const { setSavedName, setSavedMaterial } = useEditor();
+  const { buildingInformation, setSavedName, setSavedMaterial, setNavigationEnabled } = useEditor();
 
   const handleMaterialChange = (event) => {
     setMaterial(event.target.value);
@@ -53,6 +53,12 @@ const BuildingDetails = () => {
   const handleNameChange = (event) => {
     setSavedName(event.target.value);
   };
+
+  useEffect(() => {
+    if (buildingInformation.details.name && buildingInformation.details.material) {
+      setNavigationEnabled(true);
+    }
+  },[buildingInformation.details]);
 
   const handleClose = () => {
     setOpen(false);

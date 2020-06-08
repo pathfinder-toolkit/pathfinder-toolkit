@@ -94,13 +94,16 @@ export const EditorProvider = ({ children }) => {
       ...buildingInformation,
       details: {...buildingInformation.details, name: newName}
     }));
+    console.log(buildingInformation);
   }
 
   const setSavedMaterial = (newMaterial) => {
+    console.log("checking...");
     setBuildingInformation(buildingInformation => ({
       ...buildingInformation,
       details: {...buildingInformation.details, material: newMaterial}
     }));
+    console.log(buildingInformation);
   }
 
   return (
