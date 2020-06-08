@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Paper, Fade } from "@material-ui/core/";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
-import { useEditor } from "../../utils/EditorProvider";
 
 const AreaSelection = () => {
-  const { setSavedArea } = useEditor();
+  const { buildingInformation, setSavedArea, setNavigationEnabled } = useEditor();
 
   const { getCountries } = useBackend();
-  const { setNavigationEnabled } = useEditor();
-  const [selectedArea, setSelectedArea] = useState("");
+  const [selectedArea, setSelectedArea] = useState(buildingInformation.area);
   const [allowedCountries, setAllowedCountries] = useState(getCountries());
   const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -32,14 +30,21 @@ const AreaSelection = () => {
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
-    setNavigationEnabled(true);
     setSavedArea(selectedCountry);
+    setNavigationEnabled(true);
   };
+
+  useEffect(() => {
+    console.log("selected area: " + selectedArea);
+  }, []);
+
+
 
   return (
     <React.Fragment>
       <AreaMap
         allowedCountries={allowedCountries}
+        seletedCountry={selectedArea}
         handleSelection={handleSelection}
       />
 
