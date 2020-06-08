@@ -1,5 +1,5 @@
 import React from "react";
-import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
 
 const AreaMap = (props) => {
   const geoUrl =
@@ -7,6 +7,7 @@ const AreaMap = (props) => {
 
   const allowedCountries = props.allowedCountries;
   const selectedCountry = props.selectedCountry;
+
 
   const styles = {
     validCountry: {
@@ -101,6 +102,17 @@ const AreaMap = (props) => {
           })
         }
       </Geographies>
+      {selectedCountry && (<Annotation
+        connectorProps={null}
+        subject={[-35, 52]}
+        dx={0}
+        dy={0}
+      >
+        <rect x="-115" y="-25" rx="15" width="230" height="44" fill="none" stroke="#000000" strokeWidth="2"></rect>
+         <text textAnchor="middle">
+          Selected country: {selectedCountry}
+        </text>
+      </Annotation>)}
     </ComposableMap>
   );
 };
