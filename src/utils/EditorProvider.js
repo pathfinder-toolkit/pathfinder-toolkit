@@ -13,6 +13,8 @@ export const useEditor = () => useContext(EditorContext);
 export const EditorProvider = ({ children }) => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const [buildingInformation, setBuildingInformation] = useState[{}];
+
   const getSteps = () => {
     return [
       "Select area",
@@ -43,17 +45,17 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = () => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection />;
+        return <AreaSelection  building={buildingInformation}/>;
       case 1:
-        return <BuildingDetails />;
+        return <BuildingDetails building={buildingInformation}/>;
       case 2:
-        return <BuildingStructure />;
+        return <BuildingStructure building={buildingInformation}/>;
       case 3:
-        return <BuildingVentilation />;
+        return <BuildingVentilation building={buildingInformation}/>;
       case 4:
-        return <BuildingHeating />;
+        return <BuildingHeating building={buildingInformation}/>;
       case 5:
-        return <Summary />; 
+        return <Summary building={buildingInformation}/>; 
       default:
         return <p>Unknow component</p>;
     }
