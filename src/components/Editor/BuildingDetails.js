@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120
+    minWidth: 120,
   },
 }));
 
@@ -73,6 +73,7 @@ const BuildingDetails = () => {
           <Select
             labelId="material-test"
             id="material-test"
+            className={classes.required}
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
