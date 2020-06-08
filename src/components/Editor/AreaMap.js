@@ -40,7 +40,7 @@ const AreaMap = (props) => {
   return (
     <ComposableMap
       width="800"
-      height="375"
+      height="410"
       projection="geoAzimuthalEqualArea"
       projectionConfig={{
         rotate: [-20.0, -60.0, 0],
