@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -14,26 +14,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-
-function createData(name, date, improvements, id ) {
-  return { name, date, improvements, id };
-}
-
-const rows = [
-  createData('Burj Khalifa', "2020-05-22 10:10:03", 12, 1),
-  createData('Shanghai Tower', "2020-05-24 13:25:01", 3, 2),
-  createData('Makkah Royal Clock Tower', "2020-05-25 12:10:03", 14, 3),
-  createData('Ping An Finance Center', "2020-05-26 15:22:08", 16, 4),
-  createData('Lotte World Tower', "2020-05-26 19:13:03", 21, 5),
-  createData('One World Trade Center', "2020-05-28 15:00:01", 5, 6),
-  createData('Guangzhou CTF Finance Centre', "2020-05-29 09:56:00", 7, 7),
-  createData('Tianjin CTF Finance Centre', "2020-05-31 15:12:43", 31, 8),
-  createData('CITIC Tower', "2020-06-02 12:43:25", 35, 9),
-  createData('Shanghai World Financial Center', "2020-06-03 15:18:03", 11, 10),
-  createData('International Commerce Centre', "2020-06-05 16:32:09", 12, 11),
-  createData('Lakhta Center', "2020-06-07 14:54:32", 16, 12),
-  createData('Zifeng Tower', "2020-06-08 08:34:15", 25, 13),
-];
+import { useBackend } from "../../utils/FakeBackend";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -182,11 +163,18 @@ const useStyles = makeStyles((theme) => ({
 
 const BuildingsTable = () => {
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('date');
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const {getSavedBuildings} = useBackend();
+  const [rows, setRows] = useState([]);
+
+  useEffect(async () => {
+    let data = await getSavedBuildings();
+    setRows(data);
+  },[]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -263,7 +251,7 @@ const BuildingsTable = () => {
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        />)}
       </Paper>
     </div>
   );
