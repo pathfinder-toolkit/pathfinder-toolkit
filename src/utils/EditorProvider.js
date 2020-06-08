@@ -1,19 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
+
 import AreaSelection from "../components/Editor/AreaSelection";
 import BuildingDetails from "../components/Editor/BuildingDetails";
+import BuildingStructure from "../components/Editor/BuildingStructure";
+import BuildingVentilation from "../components/Editor/BuildingVentilation";
+import BuildingHeating from "../components/Editor/BuildingHeating";
+import Summary from "../components/Editor/Summary";
 
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
 
   const getSteps = () => {
     return [
       "Select area",
-      "Building details",
-      "Heating details",
-      "More details",
+      "General information",
+      "Structure",
+      "Ventilation",
+      "Heating",
       "Summary",
     ];
   };
@@ -40,6 +46,14 @@ export const EditorProvider = ({ children }) => {
         return <AreaSelection />;
       case 1:
         return <BuildingDetails />;
+      case 2:
+        return <BuildingStructure />;
+      case 3:
+        return <BuildingVentilation />;
+      case 4:
+        return <BuildingHeating />;
+      case 5:
+        return <Summary />; 
       default:
         return <p>Unknow component</p>;
     }
