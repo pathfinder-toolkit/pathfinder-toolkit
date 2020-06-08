@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { Grid, Button, Paper, Typography } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import NavigationBar from "./NavigationBar";
 
 import { useEditor } from "../../utils/EditorProvider";
+import { useBackend } from "../../utils/FakeBackend";
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
@@ -15,56 +16,28 @@ const BuildingEditor = () => {
       padding: theme.spacing(0.5),
       minHeight: "91vh",
     },
-    actionsContainer: {
-      position: "fixed",
-      bottom: 40,
-      left: 40,
-    },
-    button: {
-      margin: theme.spacing(1),
-    },
+    editorComponent: {
+      border: "1px solid black",
+      borderRadius: "2px",
+    }
   }));
-
   const classes = useStyles();
 
-  const {
-    getSteps,
-    activeStep,
-    nextStep,
-    previousStep,
-    getStepComponent,
-  } = useEditor();
-  const steps = getSteps();
+  const { fakeRequest, loading } = useBackend();
+  useEffect(() => {
+    fakeRequest();
+  }, []);
+
+  const { getStepComponent } = useEditor();
 
   return (
     <div className={classes.root}>
       <div className={classes.editorContainer}>
         <div className={classes.editorComponent}>
-          <Paper>{getStepComponent()}</Paper>
+          {!loading && <Paper>{getStepComponent()}</Paper>}
         </div>
       </div>
-      <div className={classes.actionsContainer}>
-        <Grid direction="row" justify="center" sm={12} md={12} lg={12}>
-          <Paper>
-            <Button
-              variant="contained"
-              disabled={activeStep === 0}
-              onClick={previousStep}
-              className={classes.button}
-            >
-              Back
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={nextStep}
-              className={classes.button}
-            >
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Paper>
-        </Grid>
-      </div>
+      {!loading && <NavigationBar />}
     </div>
   );
 };

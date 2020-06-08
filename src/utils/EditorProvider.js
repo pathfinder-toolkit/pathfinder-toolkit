@@ -1,19 +1,39 @@
 import React, { useContext, useState, useEffect } from "react";
+
 import AreaSelection from "../components/Editor/AreaSelection";
 import BuildingDetails from "../components/Editor/BuildingDetails";
+import BuildingStructure from "../components/Editor/BuildingStructure";
+import BuildingVentilation from "../components/Editor/BuildingVentilation";
+import BuildingHeating from "../components/Editor/BuildingHeating";
+import Summary from "../components/Editor/Summary";
 
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
+  const [navigationEnabled, setNavigationEnabled] = useState(false);
+
+  const [buildingInformation, setBuildingInformation] = useState({
+    area: "",
+    details: {
+      name: "",
+      material: "",
+    },
+    structure: {
+      wallMaterial: "",
+      roofType: "",
+      windowCount: "",
+    },
+  });
 
   const getSteps = () => {
     return [
       "Select area",
-      "Building details",
-      "Heating details",
-      "More details",
+      "General information",
+      "Structure",
+      "Ventilation",
+      "Heating",
       "Summary",
     ];
   };
@@ -40,6 +60,14 @@ export const EditorProvider = ({ children }) => {
         return <AreaSelection />;
       case 1:
         return <BuildingDetails />;
+      case 2:
+        return <BuildingStructure />;
+      case 3:
+        return <BuildingVentilation />;
+      case 4:
+        return <BuildingHeating />;
+      case 5:
+        return <Summary />;
       default:
         return <p>Unknow component</p>;
     }
@@ -47,26 +75,88 @@ export const EditorProvider = ({ children }) => {
 
   const nextStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setNavigationEnabled(false);
   };
 
   const previousStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setNavigationEnabled(true);
   };
 
   const resetSteps = () => {
     setActiveStep(0);
   };
 
+  const setSavedArea = (newArea) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      area: newArea,
+    }));
+  };
+
+  const setSavedName = (newName) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: { ...buildingInformation.details, name: newName },
+    }));
+    console.log(buildingInformation);
+  };
+
+  const setSavedMaterial = (newMaterial) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: { ...buildingInformation.details, material: newMaterial },
+    }));
+    console.log(buildingInformation);
+  };
+
+  const setSavedWallMaterial = (newWallMaterial) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, wallMaterial: newWallMaterial },
+    }));
+  };
+
+  const setSavedRoofType = (newRoofType) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, roofType: newRoofType },
+    }));
+  };
+
+  const setSavedWindowCount = (newWindowCount) => {
+    console.log("checking...");
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      structure: { ...buildingInformation.structure, windowCount: newWindowCount },
+    }));
+  };
+
+
+
+
   return (
     <EditorContext.Provider
       value={{
+        buildingInformation,
         activeStep,
         getSteps,
         getStepDescription,
         getStepComponent,
+        navigationEnabled,
+        setNavigationEnabled,
         nextStep,
         previousStep,
         resetSteps,
+        setSavedArea,
+        setSavedName,
+        setSavedMaterial,
+        setSavedWallMaterial,
+        setSavedRoofType,
+        setSavedWindowCount,
       }}
     >
       {children}
