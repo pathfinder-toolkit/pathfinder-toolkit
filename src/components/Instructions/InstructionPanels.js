@@ -25,7 +25,7 @@ const InstructionPanels = () => {
       setExpandedPanel( newExpanded ? panel : false );
     }
 
-    return <Grid xs={12} container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={2}>
+    return <Grid container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={2}>
     <Grid item xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
