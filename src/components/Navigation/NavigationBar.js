@@ -14,8 +14,10 @@ import { useBackend } from "../../utils/FakeBackend";
 import history from "../../utils/history";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+  navButton: {
+    "&:hover": {
+      backgroundColor: "#354497",
+    }
   },
   title: {
     flexGrow: 1,
@@ -47,15 +49,16 @@ const NavigationBar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}></Typography>
-        <IconButton onClick={() => { redirectTo('') }} color="inherit">
+        <IconButton onClick={() => { redirectTo('') }} color="inherit" className={classes.navButton} >
           <Home />
         </IconButton>
-        <Button onClick={() => { redirectTo('design') }} color="inherit">
+        <Button onClick={() => { redirectTo('design') }} color="inherit" className={classes.navButton}>
           Design
         </Button>
         {user && (
           <div>
             <IconButton
+              className={classes.navButton}
               edge="end"
               aria-label="account of current user"
               aria-controls="primary-search-account-menu"
@@ -81,7 +84,7 @@ const NavigationBar = () => {
           </div>
         )}
         {!user && (
-          <Button onClick={() => { redirectTo('login') }} color="inherit">
+          <Button className={classes.navButton} onClick={() => { redirectTo('login') }} color="inherit">
             Login
           </Button>
         )}
