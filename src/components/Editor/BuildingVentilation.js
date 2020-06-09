@@ -84,7 +84,7 @@ const BuildingVentilation = () => {
         </Typography>
 
         <Paper className={classes.category}>
-          <Typography variant="h6">System</Typography>
+          <Typography variant="h6">General</Typography>
           <FormControl className={classes.formControl}>
             <InputLabel>Type</InputLabel>
             <Select
