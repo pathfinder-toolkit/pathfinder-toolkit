@@ -72,7 +72,7 @@ const FrontPage = () => {
         <Grid container justify="center">
           <Grid item xs={12} className={classes.banner}>
             <Typography align="center" className = {classes.bannerHeader}  variant="h1">
-              Pathfinder
+              EnergyPathfinder
             </Typography>
           </Grid>
         </Grid>
