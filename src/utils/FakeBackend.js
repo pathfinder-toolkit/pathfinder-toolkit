@@ -10,6 +10,8 @@ export const BackendProvider = ({ children }) => {
   const [materials, setMaterials] = useState();
   const [countries, setCountries] = useState();
   const [roofTypes, setRoofTypes] = useState();
+  const [heatingTypes, setHeatingTypes] = useState();
+  const [ventilationTypes, setVentilationTypes] = useState();
 
   const fakeLogin = (username) => {
     if (username === null || username === "") {
@@ -39,6 +41,8 @@ export const BackendProvider = ({ children }) => {
         setMaterials(["Wood", "Stone", "Concrete"]);
         setCountries(["Finland", "Sweden", "United Kingdom", "Ireland"]);
         setRoofTypes(["Roof 1", "Roof 2", "Roof 3"]);
+        setVentilationTypes(["Gravity based" , "Machine based", "Mixed type"]);
+        setHeatingTypes(["Heating 1", "Heating 2" , "Heating 3"]);
         resolve("resolved");
         setLoading(false);
       }, 2000);
@@ -51,6 +55,14 @@ export const BackendProvider = ({ children }) => {
 
   const getRoofTypes = () => {
     return roofTypes;
+  }
+
+  const getVentilationTypes = () => {
+    return ventilationTypes;
+  }
+
+  const getHeatingTypes = () => {
+    return heatingTypes;
   }
 
   const getCountries = () => {
@@ -102,6 +114,8 @@ export const BackendProvider = ({ children }) => {
         fakeRequest,
         getMaterials,
         getRoofTypes,
+        getVentilationTypes,
+        getHeatingTypes,
         getCountries,
         getSavedBuildings,
       }}

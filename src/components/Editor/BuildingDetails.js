@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   InputLabel,
@@ -11,29 +10,23 @@ import {
   Button,
   Fade,
   TextField,
+  Paper,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "1rem",
-  },
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
+const BuildingDetails = (props) => {
+  const {
+    buildingInformation,
+    setSavedName,
+    setSavedMaterial,
+    setNavigationEnabled,
+  } = useEditor();
 
-const BuildingDetails = () => {
-  const { buildingInformation, setSavedName, setSavedMaterial, setNavigationEnabled } = useEditor();
-  const classes = useStyles();
-  const [materialValue, setMaterialValue] = useState(buildingInformation.details.material);
+  const [materialValue, setMaterialValue] = useState(
+    buildingInformation.details.material
+  );
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
   const [open, setOpen] = useState(false);
 
@@ -44,8 +37,6 @@ const BuildingDetails = () => {
 
   const { getMaterials } = useBackend();
   const materials = getMaterials();
-
-  
 
   const handleMaterialChange = (event) => {
     setMaterialValue(event.target.value);
@@ -58,10 +49,13 @@ const BuildingDetails = () => {
   };
 
   useEffect(() => {
-    if (buildingInformation.details.name && buildingInformation.details.material) {
+    if (
+      buildingInformation.details.name &&
+      buildingInformation.details.material
+    ) {
       setNavigationEnabled(true);
     }
-  },[buildingInformation.details]);
+  }, [buildingInformation.details]);
 
   const handleClose = () => {
     setOpen(false);
@@ -73,31 +67,33 @@ const BuildingDetails = () => {
 
   return (
     <Fade in={loading}>
-      <div className={classes.root}>
-        <Typography variant="h5">
+      <div className={props.style.root}>
+        <Typography className={props.style.header} variant="h5">
           Building details
         </Typography>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="material-test">Material</InputLabel>
-          <Select
-            labelId="material-test"
-            id="material-test"
-            className={classes.required}
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={materialValue}
-            onChange={handleMaterialChange}
-          >
-            <MenuItem value=""></MenuItem>
-            {materials.map((material, index) => (
-              <MenuItem key={index} value={material}>
-                {material}
-              </MenuItem>
-            ))}
-          </Select>
-          <TextField label="Building name" value={nameValue} onChange={handleNameChange}/>
-        </FormControl>
+        <Paper className={props.style.category}>
+          <FormControl className={props.style.formControl}>
+            <InputLabel id="material-test">Material</InputLabel>
+            <Select
+              labelId="material-test"
+              id="material-test"
+              className={props.style.required}
+              open={open}
+              onClose={handleClose}
+              onOpen={handleOpen}
+              value={materialValue}
+              onChange={handleMaterialChange}
+            >
+              <MenuItem value=""></MenuItem>
+              {materials.map((material, index) => (
+                <MenuItem key={index} value={material}>
+                  {material}
+                </MenuItem>
+              ))}
+            </Select>
+            <TextField label="Building name" value={nameValue} onChange={handleNameChange} />
+          </FormControl>
+        </Paper>
       </div>
     </Fade>
   );

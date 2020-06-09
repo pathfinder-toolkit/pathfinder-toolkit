@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop:20
     },
     panelHeading: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(18),
       flexBasis: '33.33%',
       flexShrink: 0,
     }
@@ -26,14 +26,14 @@ const InstructionPanels = () => {
     }
 
     return <Grid xs={12} container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={2}>
-    <Grid item xs={6}>
+    <Grid item xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.panelHeading}>Expansion Panel 1</Typography>
+          <Typography className={classes.panelHeading}>Start designing</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -44,14 +44,14 @@ const InstructionPanels = () => {
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel2'} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.panelHeading}>Expansion Panel 2</Typography>
+          <Typography className={classes.panelHeading}>Area Selection, General information & Structure</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -62,14 +62,32 @@ const InstructionPanels = () => {
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel3'} onChange={handleChange('panel3')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
-          <Typography className={classes.panelHeading}>Expansion Panel 3</Typography>
+          <Typography className={classes.panelHeading}>Ventilation & Heating</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      </Grid>
+      <Grid item xs={8}>
+      <ExpansionPanel expanded={expandedPanel === 'panel4'} onChange={handleChange('panel4')}>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel4a-content"
+          id="panel4a-header"
+        >
+          <Typography className={classes.panelHeading}>Check out your results</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   InputLabel,
   MenuItem,
   FormControl,
   Select,
-  Box,
-  Grid,
-  Button,
   Fade,
   Paper,
   TextField,
@@ -17,29 +13,7 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "1rem",
-  },
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  header: {
-    marginBottom: theme.spacing(1),
-  },
-  category: {
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(0.5),
-  },
-}));
-
-const BuildingStructure = () => {
-  const classes = useStyles();
+const BuildingStructure = (props) => {
   const [wallOpen, setWallOpen] = useState(false);
   const [roofOpen, setRoofOpen] = useState(false);
   const [wallMaterial, setWallMaterial] = useState("");
@@ -74,6 +48,9 @@ const BuildingStructure = () => {
   };
 
   const handleWindowChange = (event) => {
+    if (event.target.value < 0 || isNaN(event.target.value)) {
+      return
+    }
     setWindowCount(event.target.value);
     setSavedWindowCount(event.target.value);
   };
@@ -101,21 +78,21 @@ const BuildingStructure = () => {
     }
   }, [buildingInformation.structure]);
 
-  //Split this into smaller components later, just a quick sketch for now.
+  //Just a quick sketch, will be split into smaller components/remade later
   return (
     <Fade in={loading}>
-      <div className={classes.root}>
-        <Typography className={classes.header} variant="h5">
+      <div className={props.style.root}>
+        <Typography className={props.style.header} variant="h5">
           Structure details
         </Typography>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Walls</Typography>
-          <FormControl className={classes.formControl}>
+          <FormControl className={props.style.formControl}>
             <InputLabel id="material-test">Material</InputLabel>
             <Select
               labelId="material-test"
               id="material-test"
-              className={classes.required}
+              className={props.style.required}
               open={wallOpen}
               onClose={handleClose}
               onOpen={handleWallOpen}
@@ -131,14 +108,14 @@ const BuildingStructure = () => {
             </Select>
           </FormControl>
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Roof</Typography>
-          <FormControl className={classes.formControl}>
+          <FormControl className={props.style.formControl}>
             <InputLabel id="material-test">Type</InputLabel>
             <Select
               labelId="material-test"
               id="material-test"
-              className={classes.required}
+              className={props.style.required}
               open={roofOpen}
               onClose={handleClose}
               onOpen={handleRoofOpen}
@@ -154,9 +131,9 @@ const BuildingStructure = () => {
             </Select>
           </FormControl>
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Windows</Typography>
-          <TextField type="number" onChange={setSavedWindowCount}>
+          <TextField size="small" variant="filled" value={windowCount} type="number" onChange={handleWindowChange}>
             Count
           </TextField>
         </Paper>
