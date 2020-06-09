@@ -66,29 +66,29 @@ const FrontPage = () => {
       history.push(addr);
     }
 
-    return <Container maxWidth="disabled" className={classes.root}>
+    return <Container maxWidth={false} className={classes.root}>
         <NavigationBar />
 
         <Grid container justify="center">
-          <Grid xs="12" className={classes.banner}>
+          <Grid item xs={12} className={classes.banner}>
             <Typography align="center" className = {classes.bannerHeader}  variant="h1">
               Pathfinder
             </Typography>
           </Grid>
         </Grid>
 
-        <Grid container xs="12" direction="row" alignItems="center" spacing={2} >
-          <Grid item xs="4">
+        <Grid container direction="row" alignItems="center" spacing={2} >
+          <Grid item xs={4}>
             <Paper className={classes.infoPaper}>
               <Typography className={classes.infoMessage} >Start by inputting your building details</Typography>
             </Paper>
           </Grid>
-          <Grid item xs="4">
+          <Grid item xs={4}>
             <Paper className={classes.infoPaper}>
               <Typography className={classes.infoMessage} >Pathfinder estimates your energy efficiency</Typography>
             </Paper>
           </Grid>
-          <Grid item xs="4">
+          <Grid item xs={4}>
             <Paper className={classes.infoPaper}>
               <Typography className={classes.infoMessage} >Check out our suggestion for improvements</Typography>
             </Paper>
