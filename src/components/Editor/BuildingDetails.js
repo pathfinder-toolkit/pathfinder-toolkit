@@ -46,7 +46,6 @@ const BuildingDetails = () => {
     setNavigationEnabled,
   } = useEditor();
   const classes = useStyles();
-  const [material, setMaterial] = useState("");
   const [materialValue, setMaterialValue] = useState(
     buildingInformation.details.material
   );
@@ -104,7 +103,7 @@ const BuildingDetails = () => {
               open={open}
               onClose={handleClose}
               onOpen={handleOpen}
-              value={material}
+              value={materialValue}
               onChange={handleMaterialChange}
             >
               <MenuItem value=""></MenuItem>
@@ -114,7 +113,7 @@ const BuildingDetails = () => {
                 </MenuItem>
               ))}
             </Select>
-            <TextField label="Building name" onChange={handleNameChange} />
+            <TextField label="Building name" value={nameValue} onChange={handleNameChange} />
           </FormControl>
         </Paper>
       </div>
