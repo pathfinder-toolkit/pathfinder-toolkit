@@ -10,29 +10,42 @@ import Summary from "../components/Editor/Summary";
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
-export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(5);
-  const [navigationEnabled, setNavigationEnabled] = useState(false);
+const useStateWithSessionStorage = sessionStorageKey => {
+  const [value, setValue] = useState(
+    JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
+      area: "",
+      details: {
+        name: "",
+        material: "",
+      },
+      structure: {
+        wallMaterial: "",
+        roofType: "",
+        windowCount: "",
+      },
+      ventilation: {
+        system: "",
+        airTightness: "",
+      },
+      heating: {
+        system: "",
+      },
+    }
+  );
+ 
+ useEffect(() => {
+    sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
+  }, [value]);
+ 
+  return [value, setValue];
+};
 
-  const [buildingInformation, setBuildingInformation] = useState({
-    area: "",
-    details: {
-      name: "",
-      material: "",
-    },
-    structure: {
-      wallMaterial: "",
-      roofType: "",
-      windowCount: "",
-    },
-    ventilation: {
-      system: "",
-      airTightness: "",
-    },
-    heating: {
-      system: "",
-    },
-  });
+
+export const EditorProvider = ({ children }) => {
+  
+  const [buildingInformation, setBuildingInformation] = useStateWithSessionStorage("SavedBuildingDataInStorage");
+  const [activeStep, setActiveStep] = useState(0);
+  const [navigationEnabled, setNavigationEnabled] = useState(buildingInformation.area ? true : false);
 
   const getSteps = () => {
     return [

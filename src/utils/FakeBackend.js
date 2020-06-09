@@ -1,12 +1,28 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
+
+const useStateWithSessionStorage = sessionStorageKey => {
+  const [value, setValue] = useState(
+    sessionStorage.getItem(sessionStorageKey) || ''
+  );
+ 
+ useEffect(() => {
+    sessionStorage.setItem(sessionStorageKey, value);
+  }, [value]);
+ 
+  return [value, setValue];
+};
+
 export const BackendProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const [user, setUser] = useStateWithSessionStorage("userName");
+  const [isLoggedIn, setIsLoggedIn] = useState(user || false);
+
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [materials, setMaterials] = useState();
   const [countries, setCountries] = useState();
   const [roofTypes, setRoofTypes] = useState();
