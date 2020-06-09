@@ -16,6 +16,7 @@ const EditorStepper = () => {
     root: {
       width: "100%",
       maxHeight: "100vh",
+      backgroundColor: "#EE",
     },
   }));
 

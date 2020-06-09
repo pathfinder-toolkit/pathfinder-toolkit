@@ -70,6 +70,12 @@ const BuildingHeating = () => {
     setHeatingTypeOpen(true);
   };
 
+  useEffect(() => {
+    if (buildingInformation.heating.system) {
+      setNavigationEnabled(true);
+    }
+  }, [buildingInformation.heating]);
+
   return (
     <Fade in={loading}>
       <div className={classes.root}>
