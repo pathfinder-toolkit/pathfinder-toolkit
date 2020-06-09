@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   InputLabel,
   MenuItem,
   FormControl,
   Select,
-  Box,
-  Grid,
-  Button,
   Fade,
   Paper,
 } from "@material-ui/core";
@@ -16,29 +12,7 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "1rem",
-  },
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  header: {
-    marginBottom: theme.spacing(1),
-  },
-  category: {
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(0.5),
-  },
-}));
-
-const BuildingHeating = () => {
-  const classes = useStyles();
+const BuildingHeating = (props) => {
   const [heatingTypeOpen, setHeatingTypeOpen] = useState(false);
   const [heatingType, setHeatingType] = useState("");
 
@@ -72,16 +46,16 @@ const BuildingHeating = () => {
 
   return (
     <Fade in={loading}>
-      <div className={classes.root}>
-        <Typography className={classes.header} variant="h5">
+      <div className={props.style.root}>
+        <Typography className={props.style.header} variant="h5">
           Heating details
         </Typography>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">General</Typography>
-          <FormControl className={classes.formControl}>
+          <FormControl className={props.style.formControl}>
             <InputLabel>Type</InputLabel>
             <Select
-              className={classes.required}
+              className={props.style.required}
               open={heatingTypeOpen}
               onClose={handleClose}
               onOpen={handleHeatingTypeOpen}
@@ -97,13 +71,13 @@ const BuildingHeating = () => {
             </Select>
           </FormControl>
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Energy source</Typography>
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Heat distribution</Typography>
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Automation</Typography>
         </Paper>
       </div>
