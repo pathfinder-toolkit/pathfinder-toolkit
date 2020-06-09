@@ -108,6 +108,10 @@ const BuildingVentilation = () => {
           <Typography variant="h6">Airtightness</Typography>
         
         </Paper>
+        <Paper className={classes.category}>
+          <Typography variant="h6">Air vents</Typography>
+        
+        </Paper>
       </div>
     </Fade>
   );
