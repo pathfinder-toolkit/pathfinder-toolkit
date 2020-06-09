@@ -86,7 +86,7 @@ export const BackendProvider = ({ children }) => {
   };
 
   const getSavedBuildings = async () => {
-    let createData = (name, date, improvements, id) => {
+    const createData = (name, date, improvements, id) => {
       return { name, date, improvements, id };
     };
 
