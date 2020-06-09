@@ -2,12 +2,13 @@ import React from 'react';
 import NavigationBar from '../../components/Navigation/NavigationBar';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import frontPageImage from "../../external/images/frontpage_house.jpg"
 import InstructionPanels from "../../components/Instructions/InstructionPanels"
+import Create from "@material-ui/icons/Create";
 
 import history from "../../utils/history";
 
@@ -47,7 +48,13 @@ const useStyles = makeStyles((theme) => ({
     designButton: {
       position: "fixed",
       bottom:26,
-      right:26
+      right:26,
+      backgroundColor: "#4054b4",
+      color: "white",
+      "&:hover": {
+        backgroundColor: "#283371",
+        color: "#efe0b3",
+      }
     }
   }));
 
@@ -90,11 +97,10 @@ const FrontPage = () => {
 
         <InstructionPanels />
 
-        <Button variant="contained" color="primary" className={classes.designButton} onClick={() => { redirectTo('design') } }>
-          <Typography>
-              Start designing
-          </Typography>
-        </Button>
+        <Fab className={classes.designButton} onClick={() => { redirectTo('design') } }>
+          <Create fontSize="large" />
+        </Fab>
+
     </Container>
 }
 
