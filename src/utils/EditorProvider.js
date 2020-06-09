@@ -11,7 +11,7 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(4);
+  const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [buildingInformation, setBuildingInformation] = useState({

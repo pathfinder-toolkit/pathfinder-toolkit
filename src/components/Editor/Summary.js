@@ -10,9 +10,11 @@ import {
   Grid,
   Button,
   Fade,
+  Paper,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
+import { useEditor } from "../../utils/EditorProvider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+  },
+  header: {
+    marginBottom: theme.spacing(1),
+  },
+  category: {
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(0.5),
   },
 }));
 
@@ -39,9 +48,21 @@ const Summary = () => {
   return (
     <Fade in={loading}>
       <div className={classes.root}>
-        <Typography variant="h5" aling="center">
+        <Typography className={classes.header} variant="h5">
           Summary
         </Typography>
+        <Grid>
+          <Paper className={classes.category}>
+            <Typography variant="h6">General</Typography>
+            <Typography variant="subtitle1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              cursus tortor metus, egestas bibendum velit tempor eu. Mauris diam
+              leo, vehicula ac dui ut, condimentum pellentesque urna. Duis
+              maximus magna nibh, in varius libero fringilla vel. Pellentesque
+              nunc urna, dapibus ac pulvinar sed, rutrum ac ligula.
+            </Typography>
+          </Paper>
+        </Grid>
       </div>
     </Fade>
   );
