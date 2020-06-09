@@ -21,10 +21,10 @@ const DesignPage = () => {
       <NavigationBar />
       <EditorProvider>
         <Grid container>
-          <Grid className={classes.sidebar} sm={2} md={2} lg={2}>
+          <Grid item className={classes.sidebar} sm={2} md={2} lg={2}>
             <EditorStepper />
           </Grid>
-          <Grid sm={10} md={10} lg={10}>
+          <Grid item sm={10} md={10} lg={10}>
             <BuildingEditor />
           </Grid>
         </Grid>

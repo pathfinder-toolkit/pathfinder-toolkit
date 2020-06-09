@@ -10,10 +10,20 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Home from "@material-ui/icons/Home";
 import { makeStyles } from "@material-ui/core/styles";
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import { useBackend } from "../../utils/FakeBackend";
 import history from "../../utils/history";
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const useStyles = makeStyles((theme) => ({
+  navbar: {
+    boxShadow: "0px 1px 5px #999",
+  },
   navButton: {
     "&:hover": {
       backgroundColor: "#354497",
@@ -25,12 +35,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
   const { user, fakeLogout } = useBackend();
 
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [logoutAlert, setLogoutAlert] = useState(false);
 
   const handleProfileMenuClose = (event) => {
     console.log(anchorEl);
@@ -45,9 +56,18 @@ const NavigationBar = () => {
     history.push(addr);
   }
 
+  const _logout = () => {
+    setLogoutAlert(true);
+    fakeLogout();
+  }
+
+  const _logoutAlertClose = () => {
+    setLogoutAlert(false);
+  }
+
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className={classes.navbar}>
         <Typography variant="h6" className={classes.title}></Typography>
         <IconButton onClick={() => { redirectTo('') }} color="inherit" className={classes.navButton} >
           <Home />
@@ -79,7 +99,7 @@ const NavigationBar = () => {
               <MenuItem onClick={() => { redirectTo('buildings') }}>
                 Designed buildings
               </MenuItem>
-              <MenuItem onClick={fakeLogout}>Logout</MenuItem>
+              <MenuItem onClick={_logout}>Logout</MenuItem>
             </Menu>
           </div>
         )}
@@ -88,7 +108,20 @@ const NavigationBar = () => {
             Login
           </Button>
         )}
+
       </Toolbar>
+
+      <Snackbar 
+        open={logoutAlert}
+        autoHideDuration={6000}
+        onClose={_logoutAlertClose}
+        anchorOrigin={ {horizontal: 'center', vertical: 'top' } }
+      >
+        <Alert onClose={_logoutAlertClose} severity="info">
+          Successfully logged out.
+        </Alert>
+      </Snackbar>
+
     </AppBar>
   );
 };
