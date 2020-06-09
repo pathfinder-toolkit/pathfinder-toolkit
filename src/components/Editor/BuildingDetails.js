@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   InputLabel,
@@ -17,35 +16,14 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "1rem",
-  },
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  header: {
-    marginBottom: theme.spacing(1),
-  },
-  category: {
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(0.5),
-  },
-}));
-
-const BuildingDetails = () => {
+const BuildingDetails = (props) => {
   const {
     buildingInformation,
     setSavedName,
     setSavedMaterial,
     setNavigationEnabled,
   } = useEditor();
-  const classes = useStyles();
+
   const [materialValue, setMaterialValue] = useState(
     buildingInformation.details.material
   );
@@ -89,17 +67,17 @@ const BuildingDetails = () => {
 
   return (
     <Fade in={loading}>
-      <div className={classes.root}>
-        <Typography className={classes.header} variant="h5">
+      <div className={props.style.root}>
+        <Typography className={props.style.header} variant="h5">
           Building details
         </Typography>
-        <Paper className={classes.category}>
-          <FormControl className={classes.formControl}>
+        <Paper className={props.style.category}>
+          <FormControl className={props.style.formControl}>
             <InputLabel id="material-test">Material</InputLabel>
             <Select
               labelId="material-test"
               id="material-test"
-              className={classes.required}
+              className={props.style.required}
               open={open}
               onClose={handleClose}
               onOpen={handleOpen}

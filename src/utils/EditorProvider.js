@@ -61,20 +61,20 @@ export const EditorProvider = ({ children }) => {
   };
 
   //Editor components are added here
-  const getStepComponent = () => {
+  const getStepComponent = (style) => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection />;
+        return <AreaSelection style={style} />;
       case 1:
-        return <BuildingDetails />;
+        return <BuildingDetails style={style}/>;
       case 2:
-        return <BuildingStructure />;
+        return <BuildingStructure style={style}/>;
       case 3:
-        return <BuildingVentilation />;
+        return <BuildingVentilation style={style}/>;
       case 4:
-        return <BuildingHeating />;
+        return <BuildingHeating style={style}/>;
       case 5:
-        return <Summary />;
+        return <Summary style={style}/>;
       default:
         return <p>Unknow component</p>;
     }
