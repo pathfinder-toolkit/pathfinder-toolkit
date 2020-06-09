@@ -21,6 +21,9 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  navbar: {
+    boxShadow: "0px 1px 5px #999",
+  },
   navButton: {
     "&:hover": {
       backgroundColor: "#354497",
@@ -64,7 +67,7 @@ const NavigationBar = (props) => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar className={classes.navbar}>
         <Typography variant="h6" className={classes.title}></Typography>
         <IconButton onClick={() => { redirectTo('') }} color="inherit" className={classes.navButton} >
           <Home />
