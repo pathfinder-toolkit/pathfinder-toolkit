@@ -74,6 +74,9 @@ const BuildingStructure = () => {
   };
 
   const handleWindowChange = (event) => {
+    if (event.target.value < 0 || isNaN(event.target.value)) {
+      return
+    }
     setWindowCount(event.target.value);
     setSavedWindowCount(event.target.value);
   };
@@ -101,7 +104,7 @@ const BuildingStructure = () => {
     }
   }, [buildingInformation.structure]);
 
-  //Split this into smaller components later, just a quick sketch for now.
+  //Just a quick sketch, will be split into smaller components/remade later
   return (
     <Fade in={loading}>
       <div className={classes.root}>
@@ -156,7 +159,7 @@ const BuildingStructure = () => {
         </Paper>
         <Paper className={classes.category}>
           <Typography variant="h6">Windows</Typography>
-          <TextField type="number" onChange={setSavedWindowCount}>
+          <TextField size="small" variant="filled" value={windowCount} type="number" onChange={handleWindowChange}>
             Count
           </TextField>
         </Paper>

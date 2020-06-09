@@ -11,7 +11,7 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(3);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [buildingInformation, setBuildingInformation] = useState({
@@ -25,6 +25,10 @@ export const EditorProvider = ({ children }) => {
       roofType: "",
       windowCount: "",
     },
+    ventilation: {
+      system: "",
+      airTightness: "",
+    }
   });
 
   const getSteps = () => {
@@ -120,7 +124,6 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedRoofType = (newRoofType) => {
-    console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       structure: { ...buildingInformation.structure, roofType: newRoofType },
@@ -128,12 +131,21 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedWindowCount = (newWindowCount) => {
-    console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       structure: { ...buildingInformation.structure, windowCount: newWindowCount },
     }));
   };
+
+  const setSavedVentilationType = (newVentilationType) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      ventilation: { ...buildingInformation.ventilation, system: newVentilationType },
+    }));
+  };
+
+
+
 
 
 
@@ -157,6 +169,7 @@ export const EditorProvider = ({ children }) => {
         setSavedWallMaterial,
         setSavedRoofType,
         setSavedWindowCount,
+        setSavedVentilationType,
       }}
     >
       {children}
