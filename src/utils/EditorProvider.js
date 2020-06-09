@@ -11,7 +11,7 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(4);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [buildingInformation, setBuildingInformation] = useState({
@@ -24,6 +24,13 @@ export const EditorProvider = ({ children }) => {
       wallMaterial: "",
       roofType: "",
       windowCount: "",
+    },
+    ventilation: {
+      system: "",
+      airTightness: "",
+    },
+    heating: {
+      system: "",
     },
   });
 
@@ -103,24 +110,23 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedMaterial = (newMaterial) => {
-    console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       details: { ...buildingInformation.details, material: newMaterial },
     }));
-    console.log(buildingInformation);
   };
 
   const setSavedWallMaterial = (newWallMaterial) => {
-    console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      structure: { ...buildingInformation.structure, wallMaterial: newWallMaterial },
+      structure: {
+        ...buildingInformation.structure,
+        wallMaterial: newWallMaterial,
+      },
     }));
   };
 
   const setSavedRoofType = (newRoofType) => {
-    console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       structure: { ...buildingInformation.structure, roofType: newRoofType },
@@ -128,15 +134,31 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedWindowCount = (newWindowCount) => {
-    console.log("checking...");
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      structure: { ...buildingInformation.structure, windowCount: newWindowCount },
+      structure: {
+        ...buildingInformation.structure,
+        windowCount: newWindowCount,
+      },
     }));
   };
 
+  const setSavedVentilationType = (newVentilationType) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      ventilation: {
+        ...buildingInformation.ventilation,
+        system: newVentilationType,
+      },
+    }));
+  };
 
-
+  const setSavedHeatingType = (newHeatingType) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      heating: { ...buildingInformation.heating, system: newHeatingType },
+    }));
+  };
 
   return (
     <EditorContext.Provider
@@ -157,6 +179,8 @@ export const EditorProvider = ({ children }) => {
         setSavedWallMaterial,
         setSavedRoofType,
         setSavedWindowCount,
+        setSavedVentilationType,
+        setSavedHeatingType,
       }}
     >
       {children}
