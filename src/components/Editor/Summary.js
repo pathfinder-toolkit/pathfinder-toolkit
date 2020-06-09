@@ -79,6 +79,19 @@ const Summary = () => {
               <Tips />
             </Paper>
           </Grid>
+          <Grid item sm={10} md={10} lg={10}>
+            <Paper className={classes.category}>
+              <Typography variant="h6">General</Typography>
+              <Typography variant="subtitle1">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                cursus tortor metus, egestas bibendum velit tempor eu. Mauris
+                diam leo, vehicula ac dui ut, condimentum pellentesque urna.
+                Duis maximus magna nibh, in varius libero fringilla vel.
+                Pellentesque nunc urna, dapibus ac pulvinar sed, rutrum ac
+                ligula.
+              </Typography>
+            </Paper>
+          </Grid>
         </Grid>
       </div>
     </Fade>
