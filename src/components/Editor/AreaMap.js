@@ -8,6 +8,10 @@ const AreaMap = (props) => {
   const allowedCountries = props.allowedCountries;
   const selectedCountry = props.selectedCountry;
 
+  const mapConfig = {
+    rotate: [-20.0, -62.5, 0],
+    scale: 850,
+  }
 
   const styles = {
     validCountry: {
@@ -59,10 +63,7 @@ const AreaMap = (props) => {
       width="800"
       height="410"
       projection="geoAzimuthalEqualArea"
-      projectionConfig={{
-        rotate: [-20.0, -60.0, 0],
-        scale: 500,
-      }}
+      projectionConfig={mapConfig}
     >
       <Geographies geography={geoUrl}>
         {({ geographies }) =>
@@ -101,13 +102,13 @@ const AreaMap = (props) => {
       </Geographies>
       {selectedCountry && (<Annotation
         connectorProps={null}
-        subject={[-35, 52]}
+        subject={[-8, 46]}
         dx={0}
         dy={0}
       >
         <rect x="-115" y="-25" rx="15" width="230" height="44" fill="none" stroke="#000000" strokeWidth="2"></rect>
          <text textAnchor="middle">
-          Selected country: {selectedCountry}
+          Selected area: {selectedCountry}
         </text>
       </Annotation>)}
     </ComposableMap>
