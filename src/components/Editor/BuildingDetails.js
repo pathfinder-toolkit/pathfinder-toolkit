@@ -39,9 +39,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BuildingDetails = () => {
-  const { buildingInformation, setSavedName, setSavedMaterial, setNavigationEnabled } = useEditor();
+  const {
+    buildingInformation,
+    setSavedName,
+    setSavedMaterial,
+    setNavigationEnabled,
+  } = useEditor();
   const classes = useStyles();
-  const [materialValue, setMaterialValue] = useState(buildingInformation.details.material);
+  const [materialValue, setMaterialValue] = useState(
+    buildingInformation.details.material
+  );
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
   const [open, setOpen] = useState(false);
 
@@ -52,15 +59,6 @@ const BuildingDetails = () => {
 
   const { getMaterials } = useBackend();
   const materials = getMaterials();
-
-
-  const {
-    buildingInformation,
-    setSavedName,
-    setSavedMaterial,
-    setNavigationEnabled,
-  } = useEditor();
-
 
   const handleMaterialChange = (event) => {
     setMaterialValue(event.target.value);
@@ -105,7 +103,7 @@ const BuildingDetails = () => {
               open={open}
               onClose={handleClose}
               onOpen={handleOpen}
-              value={material}
+              value={materialValue}
               onChange={handleMaterialChange}
             >
               <MenuItem value=""></MenuItem>
@@ -115,7 +113,7 @@ const BuildingDetails = () => {
                 </MenuItem>
               ))}
             </Select>
-            <TextField label="Building name" onChange={handleNameChange} />
+            <TextField label="Building name" value={nameValue} onChange={handleNameChange} />
           </FormControl>
         </Paper>
       </div>
