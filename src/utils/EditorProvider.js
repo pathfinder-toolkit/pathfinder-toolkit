@@ -42,13 +42,10 @@ const useStateWithSessionStorage = sessionStorageKey => {
 
 
 export const EditorProvider = ({ children }) => {
-
   
   const [buildingInformation, setBuildingInformation] = useStateWithSessionStorage("SavedBuildingDataInStorage");
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(buildingInformation.area ? true : false);
-
-  
 
   const getSteps = () => {
     return [
