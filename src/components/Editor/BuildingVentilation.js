@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
   InputLabel,
   MenuItem,
   FormControl,
   Select,
-  Box,
-  Grid,
-  Button,
   Fade,
   Paper,
 } from "@material-ui/core";
@@ -16,29 +12,7 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: "1rem",
-  },
-  button: {
-    display: "block",
-    marginTop: theme.spacing(2),
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  header: {
-    marginBottom: theme.spacing(1),
-  },
-  category: {
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(0.5),
-  },
-}));
-
-const BuildingVentilation = () => {
-  const classes = useStyles();
+const BuildingVentilation = (props) => {
   const [ventilationTypeOpen, setVentilationTypeOpen] = useState(false);
   const [ventilationType, setVentilationType] = useState("");
 
@@ -78,17 +52,17 @@ const BuildingVentilation = () => {
 
   return (
     <Fade in={loading}>
-      <div className={classes.root}>
-        <Typography className={classes.header} variant="h5">
+      <div className={props.style.root}>
+        <Typography className={props.style.header} variant="h5">
           Ventilation details
         </Typography>
 
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">General</Typography>
-          <FormControl className={classes.formControl}>
+          <FormControl className={props.style.formControl}>
             <InputLabel>Type</InputLabel>
             <Select
-              className={classes.required}
+              className={props.style.required}
               open={ventilationTypeOpen}
               onClose={handleClose}
               onOpen={handleVentilationOpen}
@@ -104,11 +78,11 @@ const BuildingVentilation = () => {
             </Select>
           </FormControl>
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Airtightness</Typography>
         
         </Paper>
-        <Paper className={classes.category}>
+        <Paper className={props.style.category}>
           <Typography variant="h6">Air vents</Typography>
         
         </Paper>
