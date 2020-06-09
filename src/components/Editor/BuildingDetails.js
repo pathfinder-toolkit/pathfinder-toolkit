@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BuildingDetails = () => {
-  const { buildingInformation, setSavedName, setSavedMaterial, setNavigationEnabled } = useEditor();
   const classes = useStyles();
+  const [material, setMaterial] = useState("");
   const [materialValue, setMaterialValue] = useState(buildingInformation.details.material);
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
   const [open, setOpen] = useState(false);
