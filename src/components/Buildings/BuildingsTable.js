@@ -68,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  row: {
+    height:120
+  }
 }));
 
 
@@ -118,6 +121,7 @@ const BuildingsTable = () => {
             aria-label="enhanced table"
           >
             <BuildingsTableHead
+              classes = {classes}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -131,8 +135,8 @@ const BuildingsTable = () => {
 
                   return (
                     <TableRow
+                      className={classes.row}
                       hover
-                      role="checkbox"
                       tabIndex={-1}
                       key={row.name}
                     >

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 
 
 const headCells = [
@@ -16,25 +15,10 @@ const headCells = [
 ];
 
 
-const useStyles = makeStyles((theme) => ({
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}));
 
 
 const BuildingsTableHead = (props) => {
-  const { order, orderBy, onRequestSort } = props;
-
-  const classes = useStyles();
+  const { order, orderBy, onRequestSort, classes } = props;
   
   const createSortHandler = (property) => (event) => {
     if (property != 'id') {
@@ -44,7 +28,7 @@ const BuildingsTableHead = (props) => {
 
   return (
     <TableHead>
-      <TableRow>
+      <TableRow className={classes.row}>
         <TableCell>
         </TableCell>
         {headCells.map((headCell) => (
