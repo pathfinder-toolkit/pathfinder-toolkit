@@ -106,6 +106,34 @@ export const BackendProvider = ({ children }) => {
     return data;
   };
 
+  const getBuildingFromSlug = async () => {
+    const buildingInformation = {
+      area: "Finland",
+      details: {
+        name: "Talo",
+        year: "1900",
+        material: "Stone",
+        floors: "1",
+      },
+      structure: {
+        wallMaterial: "Stone",
+        roofType: "Roof 1",
+        windowCount: "1",
+      },
+      ventilation: {
+        system: "Gravity based",
+        airTightness: "2",
+      },
+      heating: {
+        system: "Heating 1",
+      },
+    }
+
+    return buildingInformation;
+  }
+
+  
+
   return (
     <BackendContext.Provider
       value={{
@@ -121,6 +149,7 @@ export const BackendProvider = ({ children }) => {
         getHeatingTypes,
         getCountries,
         getSavedBuildings,
+        getBuildingFromSlug
       }}
     >
       {children}
