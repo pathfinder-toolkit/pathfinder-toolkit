@@ -17,7 +17,7 @@ const BuildingsTableHead = (props) => {
 
   return (
     <TableHead>
-      <TableRow className={classes.row}>
+      <TableRow className={classes.headerRow}>
         <TableCell>
         </TableCell>
         {headers.map((headCell) => (

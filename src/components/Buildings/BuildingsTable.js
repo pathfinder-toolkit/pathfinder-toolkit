@@ -9,9 +9,13 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Launch from "@material-ui/icons/Launch";
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import { useBackend } from "../../utils/FakeBackend";
+
 import BuildingsTableToolbar from "./BuildingsTableToolbar";
 import BuildingsTableHead from "./BuildingsTableHead";
+import BuildingImageModal from "./BuildingImageModal";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -64,8 +68,21 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  headerRow: {
+    height:75,
+  },
   row: {
-    height:120
+    height:110
+  },
+  card: {
+    maxWidth:90
+  },
+  cardMedia: {
+    height:90,
+    maxWidth:90,
+    "&:hover": {
+      cursor:"pointer"
+    }
   }
 }));
 
@@ -113,6 +130,16 @@ const BuildingsTable = () => {
     { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
   ];
 
+  const [showImageModal, setShowImageModal] = useState(false);
+
+  const _showImageModal = () => {
+    setShowImageModal(true);
+  }
+
+  const _hideImageModal = () => {
+    setShowImageModal(false);
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -150,10 +177,15 @@ const BuildingsTable = () => {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
-                      <TableCell align="left">{row.image}</TableCell>
+                      <TableCell align="left">
+                        <Card raised={true} className={classes.card}>
+                          <CardMedia onClick={ _showImageModal } className={classes.cardMedia} image={row.image} />
+                        </Card>
+                        <BuildingImageModal open={showImageModal} onHide={_hideImageModal} image={row.image} />
+                      </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right"><Button variant="contained" color="primary"><Launch /> {row.id}</Button></TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary"> <Launch /> {row.id}</Button></TableCell>
                     </TableRow>
                   );
                 })}

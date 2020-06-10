@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 const BuildingsPage = () => {
     const classes = useStyles();
-    
+
     return <Container maxWidth={false} className={classes.root}>
         <NavigationBar />
         <Container maxWidth={false}>

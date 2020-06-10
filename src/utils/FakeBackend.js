@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
+import frontPageImage from "../external/images/frontpage_house.jpg"
 
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
+
 
 
 const useStateWithSessionStorage = sessionStorageKey => {
@@ -91,14 +93,14 @@ export const BackendProvider = ({ children }) => {
     };
 
     const data = [
-      createData("Burj Khalifa", "kuva", "2020-05-22 10:10:03", 12, 1),
-      createData("Shanghai Tower", "kuva", "2020-05-24 13:25:01", 3, 2),
-      createData("Makkah Royal Clock Tower", "kuva", "2020-05-25 12:10:03", 14, 3),
-      createData("Ping An Finance Center", "kuva", "2020-05-26 15:22:08", 16, 4),
-      createData("Lotte World Tower", "kuva", "2020-05-26 19:13:03", 21, 5),
-      createData("One World Trade Center", "kuva", "2020-05-28 15:00:01", 5, 6),
-      createData("Guangzhou CTF Finance Centre", "kuva", "2020-05-29 09:56:00", 7, 7),
-      createData("Tianjin CTF Finance Centre", "kuva", "2020-05-31 15:12:43", 31, 8)
+      createData("Burj Khalifa", frontPageImage, "2020-05-22 10:10:03", 12, 1),
+      createData("Shanghai Tower", frontPageImage, "2020-05-24 13:25:01", 3, 2),
+      createData("Makkah Royal Clock Tower", frontPageImage, "2020-05-25 12:10:03", 14, 3),
+      createData("Ping An Finance Center", frontPageImage, "2020-05-26 15:22:08", 16, 4),
+      createData("Lotte World Tower", frontPageImage, "2020-05-26 19:13:03", 21, 5),
+      createData("One World Trade Center", frontPageImage, "2020-05-28 15:00:01", 5, 6),
+      createData("Guangzhou CTF Finance Centre", frontPageImage, "2020-05-29 09:56:00", 7, 7),
+      createData("Tianjin CTF Finance Centre", frontPageImage, "2020-05-31 15:12:43", 31, 8)
     ];
 
     return data;
