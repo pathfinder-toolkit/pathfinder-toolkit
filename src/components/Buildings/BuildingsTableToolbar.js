@@ -38,9 +38,5 @@ const BuildingsTableToolbar = (props) => {
         </Toolbar>
     );
 };
-  
-BuildingsTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-};
 
 export default BuildingsTableToolbar;
