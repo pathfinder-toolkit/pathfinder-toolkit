@@ -48,6 +48,7 @@ const BuildingDetails = (props) => {
 
   const handleYearChange = (event, newValue) => {
     setBuildingYear(newValue);
+    setSavedYear(newValue);
   };
 
   const [loading, setLoading] = useState(false);
@@ -75,7 +76,7 @@ const BuildingDetails = (props) => {
         <Grid container spacing={4} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <Paper className={props.style.category}>
-              <FormControl className={props.style.formControl}>
+              <FormControl  fullWidth className={props.style.formControl}>
                 <Grid item>
                   <DropdownSelect
                     data={materials}
@@ -100,7 +101,7 @@ const BuildingDetails = (props) => {
                     marks
                     valueLabelDisplay="auto"
                     step={10}
-                    defaultValue={1990}
+                    defaultValue={buildingYear ? buildingYear : 1990}
                     marks
                     min={1890}
                     max={2010}
