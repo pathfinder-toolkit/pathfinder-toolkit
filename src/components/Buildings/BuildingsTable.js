@@ -14,7 +14,8 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Launch from "@material-ui/icons/Launch";
 import { useBackend } from "../../utils/FakeBackend";
-import EnhancedTableToolbar from "./EnhancedTableToolbar";
+import BuildingsTableToolbar from "./BuildingsTableToolbar";
+import BuildingsTableHead from "./BuildingsTableHead";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -42,62 +43,6 @@ function stableSort(array, comparator) {
   });
   return stabilizedThis.map((el) => el[0]);
 }
-
-const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name of building' },
-  { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
-  { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
-  { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
-];
-
-function EnhancedTableHead(props) {
-  const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    if (property != 'id') {
-        onRequestSort(event, property);
-    }
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell>
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            {headCell.id != 'id' || 'image' ? (<TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              <Typography>{headCell.label}</Typography>
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>) : (
-                <Typography>{headCell.label}</Typography>
-            )}
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
 
 
 const useStyles = makeStyles((theme) => ({
@@ -164,7 +109,7 @@ const BuildingsTable = () => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar />
+        <BuildingsTableToolbar />
         <TableContainer>
           <Table
             className={classes.table}
@@ -172,8 +117,7 @@ const BuildingsTable = () => {
             size={'medium'}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
-              classes={classes}
+            <BuildingsTableHead
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}

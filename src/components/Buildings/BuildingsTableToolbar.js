@@ -25,7 +25,7 @@ const useToolbarStyles = makeStyles((theme) => ({
     },
   }));
   
-const EnhancedTableToolbar = (props) => {
+const BuildingsTableToolbar = (props) => {
     const classes = useToolbarStyles();
   
     return (
@@ -39,8 +39,8 @@ const EnhancedTableToolbar = (props) => {
     );
 };
   
-EnhancedTableToolbar.propTypes = {
+BuildingsTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,
 };
 
-export default EnhancedTableToolbar;
+export default BuildingsTableToolbar;
