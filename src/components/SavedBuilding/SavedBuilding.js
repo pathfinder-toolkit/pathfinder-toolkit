@@ -36,9 +36,10 @@ const SavedBuilding = (props) => {
         <Grid container className={classes.root}>
             <Grid item sm={9}>
                 <Typography>
-                    Testi
+                    
                 </Typography>
             </Grid>
+
             <Grid item sm={3}>
                 <Paper className ={classes.actions}>
                     <Typography className={classes.actionsText}>
@@ -56,6 +57,7 @@ const SavedBuilding = (props) => {
                     </Button>
                 </Paper>
             </Grid>
+
         </Grid>
     </Paper>
 }
