@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Typography,
-  InputLabel,
-  MenuItem,
   FormControl,
   Select,
   Box,
@@ -11,15 +9,21 @@ import {
   Fade,
   TextField,
   Paper,
+  Slider,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
+import DropdownSelect from "./DropdownSelect";
+import Tip from "./Tip";
+
 const BuildingDetails = (props) => {
   const {
     buildingInformation,
     setSavedName,
+    setSavedYear,
+    setSavedFloors,
     setSavedMaterial,
     setNavigationEnabled,
   } = useEditor();
@@ -28,25 +32,38 @@ const BuildingDetails = (props) => {
     buildingInformation.details.material
   );
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
-  const [open, setOpen] = useState(false);
-
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-  }, []);
+  const [buildingYear, setBuildingYear] = useState(
+    buildingInformation.details.year
+  );
+  const [buildingFloors, setBuildingFloors] = useState();
 
   const { getMaterials } = useBackend();
   const materials = getMaterials();
 
-  const handleMaterialChange = (event) => {
-    setMaterialValue(event.target.value);
-    setSavedMaterial(event.target.value);
+  const handleMaterialChange = (value) => {
+    setMaterialValue(value);
+    setSavedMaterial(value);
   };
 
   const handleNameChange = (event) => {
     setNameValue(event.target.value);
     setSavedName(event.target.value);
   };
+
+  const handleYearChange = (event, newValue) => {
+    setBuildingYear(newValue);
+    setSavedYear(newValue);
+  };
+
+  const handleFloorChange = (event) => {
+    setBuildingFloors(event.target.value);
+    setSavedFloors(event.target.value);
+  };
+
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+  }, []);
 
   useEffect(() => {
     if (
@@ -57,43 +74,65 @@ const BuildingDetails = (props) => {
     }
   }, [buildingInformation.details]);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   return (
     <Fade in={loading}>
       <div className={props.style.root}>
-        <Typography className={props.style.header} variant="h5">
-          Building details
-        </Typography>
-        <Paper className={props.style.category}>
-          <FormControl className={props.style.formControl}>
-            <InputLabel id="material-test">Material</InputLabel>
-            <Select
-              labelId="material-test"
-              id="material-test"
-              className={props.style.required}
-              open={open}
-              onClose={handleClose}
-              onOpen={handleOpen}
-              value={materialValue}
-              onChange={handleMaterialChange}
-            >
-              <MenuItem value=""></MenuItem>
-              {materials.map((material, index) => (
-                <MenuItem key={index} value={material}>
-                  {material}
-                </MenuItem>
-              ))}
-            </Select>
-            <TextField label="Building name" value={nameValue} onChange={handleNameChange} />
-          </FormControl>
-        </Paper>
+        <div className={props.style.header}>
+          <Typography className={props.style.header} variant="h5">
+            Building details
+          </Typography>
+        </div>
+        <Grid container spacing={4} sm={12} md={12} lg={12}>
+          <Grid item sm={8} md={8} lg={8}>
+            <Paper className={props.style.category}>
+              <Grid item>
+                <TextField
+                  label="Building name"
+                  value={nameValue}
+                  onChange={handleNameChange}
+                />
+              </Grid>
+              <Grid item>
+                <DropdownSelect
+                  data={materials}
+                  label="Material"
+                  value={materialValue}
+                  id="test"
+                  handler={handleMaterialChange}
+                />
+              </Grid>
+              <Grid item>
+                <Typography gutterBottom>
+                  Building age {buildingYear}
+                </Typography>
+                <Slider
+                  marks
+                  valueLabelDisplay="auto"
+                  step={10}
+                  defaultValue={buildingYear ? buildingYear : 1990}
+                  marks
+                  min={1890}
+                  max={2010}
+                  onChange={handleYearChange}
+                />
+              </Grid>
+
+              <Typography variant="h6">Floors</Typography>
+              <TextField
+                size="small"
+                value={buildingFloors ? buildingFloors : "0"}
+                type="number"
+                onChange={handleFloorChange}
+              >
+                Count
+              </TextField>
+            </Paper>
+          </Grid>
+          <Grid item sm={4} md={4} lg={4}>
+            <Tip text="Tip text" title="Info" />
+            <Tip text="Tip text" />
+          </Grid>
+        </Grid>
       </div>
     </Fade>
   );

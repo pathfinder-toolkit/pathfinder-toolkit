@@ -16,7 +16,9 @@ const useStateWithSessionStorage = sessionStorageKey => {
       area: "",
       details: {
         name: "",
+        year: "",
         material: "",
+        floors: "",
       },
       structure: {
         wallMaterial: "",
@@ -122,6 +124,22 @@ export const EditorProvider = ({ children }) => {
     console.log(buildingInformation);
   };
 
+  const setSavedYear = (newYear) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: { ...buildingInformation.details, year: newYear },
+    }));
+    console.log(buildingInformation);
+  };
+
+  const setSavedFloors = (newFloors) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: { ...buildingInformation.details, floors: newFloors },
+    }));
+    console.log(buildingInformation);
+  };
+
   const setSavedMaterial = (newMaterial) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
@@ -188,12 +206,14 @@ export const EditorProvider = ({ children }) => {
         resetSteps,
         setSavedArea,
         setSavedName,
+        setSavedYear,
         setSavedMaterial,
         setSavedWallMaterial,
         setSavedRoofType,
         setSavedWindowCount,
         setSavedVentilationType,
         setSavedHeatingType,
+        setSavedFloors,
       }}
     >
       {children}

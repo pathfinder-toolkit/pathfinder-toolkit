@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Launch from "@material-ui/icons/Launch";
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 import { useBackend } from "../../utils/FakeBackend";
+import history from "../../utils/history";
+
+import BuildingsTableToolbar from "./BuildingsTableToolbar";
+import BuildingsTableHead from "./BuildingsTableHead";
+import BuildingImageModal from "./BuildingImageModal";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -44,99 +45,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name of building' },
-  { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
-  { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
-  { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
-];
-
-function EnhancedTableHead(props) {
-  const { classes, order, orderBy, rowCount, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
-    if (property != 'id') {
-        onRequestSort(event, property);
-    }
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell>
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            {headCell.id != 'id' ? (<TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              <Typography>{headCell.label}</Typography>
-              {orderBy === headCell.id ? (
-                <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </span>
-              ) : null}
-            </TableSortLabel>) : (
-                <Typography>{headCell.label}</Typography>
-            )}
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
-        },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const EnhancedTableToolbar = (props) => {
-  const classes = useToolbarStyles();
-
-  return (
-    <Toolbar
-      className={clsx(classes.root)}
-    >
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-            Saved building data
-        </Typography>
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,14 +69,31 @@ const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  headerRow: {
+    height:75,
+  },
+  row: {
+    height:110
+  },
+  card: {
+    maxWidth:90
+  },
+  cardMedia: {
+    height:90,
+    maxWidth:90,
+    "&:hover": {
+      cursor:"pointer"
+    }
+  }
 }));
+
 
 const BuildingsTable = () => {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('date');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const {getSavedBuildings} = useBackend();
   const [rows, setRows] = useState([]);
@@ -192,16 +117,39 @@ const BuildingsTable = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 5));
     setPage(0);
   };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+  const headCells = [
+    { id: 'name', numeric: false, disablePadding: true, label: 'Saved building name' },
+    { id: 'image', numeric: false, disablePadding: false, label: 'Image'},
+    { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
+    { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
+    { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
+  ];
+
+  const [showImageModal, setShowImageModal] = useState(false);
+
+  const _showImageModal = () => {
+    setShowImageModal(true);
+  }
+
+  const _hideImageModal = () => {
+    setShowImageModal(false);
+  }
+
+  const _handleClick = (slug) => {
+    const addr = "/buildings/" + slug;
+    history.push(addr);
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar />
+        <BuildingsTableToolbar />
         <TableContainer>
           <Table
             className={classes.table}
@@ -209,8 +157,9 @@ const BuildingsTable = () => {
             size={'medium'}
             aria-label="enhanced table"
           >
-            <EnhancedTableHead
-              classes={classes}
+            <BuildingsTableHead
+              classes = {classes}
+              headers = {headCells}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -224,8 +173,8 @@ const BuildingsTable = () => {
 
                   return (
                     <TableRow
+                      className={classes.row}
                       hover
-                      role="checkbox"
                       tabIndex={-1}
                       key={row.name}
                     >
@@ -234,14 +183,20 @@ const BuildingsTable = () => {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
+                      <TableCell align="left">
+                        <Card raised={true} className={classes.card}>
+                          <CardMedia onClick={ _showImageModal } className={classes.cardMedia} image={row.image} />
+                        </Card>
+                        <BuildingImageModal open={showImageModal} onHide={_hideImageModal} image={row.image} />
+                      </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right"><Button variant="contained" color="primary"><Launch /> {row.id}</Button></TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.id)}}> <Launch /> </Button></TableCell>
                     </TableRow>
                   );
                 })}
               {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
+                <TableRow style={{ height: 106 * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}
@@ -249,7 +204,7 @@ const BuildingsTable = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10]}
+          rowsPerPageOptions={[5]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

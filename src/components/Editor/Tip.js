@@ -12,6 +12,7 @@ const Tip = (props) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       minWidth: 250,
+      marginBottom: theme.spacing(1),
     },
     header: {
       margin: theme.spacing(-2),
@@ -28,6 +29,7 @@ const Tip = (props) => {
   const classes = useStyles();
 
   const text = props.text;
+  const title = props.title ? props.title : "Tip";
 
   return (
     <Card variant="outlined" className={classes.root}>
@@ -38,7 +40,7 @@ const Tip = (props) => {
             variant="subtitle1"
             component="h2"
           >
-            Recommendation
+            {title}
           </Typography>
         </div>
 
