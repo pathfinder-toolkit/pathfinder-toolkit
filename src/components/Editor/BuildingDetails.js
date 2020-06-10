@@ -23,6 +23,7 @@ const BuildingDetails = (props) => {
     buildingInformation,
     setSavedName,
     setSavedYear,
+    setSavedFloors,
     setSavedMaterial,
     setNavigationEnabled,
   } = useEditor();
@@ -31,7 +32,10 @@ const BuildingDetails = (props) => {
     buildingInformation.details.material
   );
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
-  const [buildingYear, setBuildingYear] = useState(buildingInformation.details.year);
+  const [buildingYear, setBuildingYear] = useState(
+    buildingInformation.details.year
+  );
+  const [buildingFloors, setBuildingFloors] = useState();
 
   const { getMaterials } = useBackend();
   const materials = getMaterials();
@@ -49,6 +53,11 @@ const BuildingDetails = (props) => {
   const handleYearChange = (event, newValue) => {
     setBuildingYear(newValue);
     setSavedYear(newValue);
+  };
+
+  const handleFloorChange = (event) => {
+    setBuildingFloors(event.target.value);
+    setSavedFloors(event.target.value);
   };
 
   const [loading, setLoading] = useState(false);
@@ -76,39 +85,47 @@ const BuildingDetails = (props) => {
         <Grid container spacing={4} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <Paper className={props.style.category}>
-              <FormControl  fullWidth className={props.style.formControl}>
-                <Grid item>
-                  <DropdownSelect
-                    data={materials}
-                    label="Material"
-                    value={materialValue}
-                    id="test"
-                    handler={handleMaterialChange}
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    label="Building name"
-                    value={nameValue}
-                    onChange={handleNameChange}
-                  />
-                </Grid>
-                <Grid item>
-                  <Typography gutterBottom>
-                    Building age {buildingYear}
-                  </Typography>
-                  <Slider
-                    marks
-                    valueLabelDisplay="auto"
-                    step={10}
-                    defaultValue={buildingYear ? buildingYear : 1990}
-                    marks
-                    min={1890}
-                    max={2010}
-                    onChange={handleYearChange}
-                  />
-                </Grid>
-              </FormControl>
+              <Grid item>
+                <TextField
+                  label="Building name"
+                  value={nameValue}
+                  onChange={handleNameChange}
+                />
+              </Grid>
+              <Grid item>
+                <DropdownSelect
+                  data={materials}
+                  label="Material"
+                  value={materialValue}
+                  id="test"
+                  handler={handleMaterialChange}
+                />
+              </Grid>
+              <Grid item>
+                <Typography gutterBottom>
+                  Building age {buildingYear}
+                </Typography>
+                <Slider
+                  marks
+                  valueLabelDisplay="auto"
+                  step={10}
+                  defaultValue={buildingYear ? buildingYear : 1990}
+                  marks
+                  min={1890}
+                  max={2010}
+                  onChange={handleYearChange}
+                />
+              </Grid>
+
+              <Typography variant="h6">Floors</Typography>
+              <TextField
+                size="small"
+                value={buildingFloors ? buildingFloors : "0"}
+                type="number"
+                onChange={handleFloorChange}
+              >
+                Count
+              </TextField>
             </Paper>
           </Grid>
           <Grid item sm={4} md={4} lg={4}>
