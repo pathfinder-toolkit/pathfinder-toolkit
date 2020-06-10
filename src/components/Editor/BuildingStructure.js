@@ -13,9 +13,9 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
+import DropdownSelect from "./DropdownSelect";
+
 const BuildingStructure = (props) => {
-  const [wallOpen, setWallOpen] = useState(false);
-  const [roofOpen, setRoofOpen] = useState(false);
   const [wallMaterial, setWallMaterial] = useState("");
   const [roofType, setRoofType] = useState("");
   const [windowCount, setWindowCount] = useState(0);
@@ -37,35 +37,22 @@ const BuildingStructure = (props) => {
   const materials = getMaterials();
   const roofs = getRoofTypes();
 
-  const handleMaterialChange = (event) => {
-    setWallMaterial(event.target.value);
-    setSavedWallMaterial(event.target.value);
+  const handleMaterialChange = (value) => {
+    setWallMaterial(value);
+    setSavedWallMaterial(value);
   };
 
-  const handleRoofChange = (event) => {
-    setRoofType(event.target.value);
-    setSavedRoofType(event.target.value);
+  const handleRoofChange = (value) => {
+    setRoofType(value);
+    setSavedRoofType(value);
   };
 
   const handleWindowChange = (event) => {
     if (event.target.value < 0 || isNaN(event.target.value)) {
-      return
+      return;
     }
     setWindowCount(event.target.value);
     setSavedWindowCount(event.target.value);
-  };
-
-  const handleClose = () => {
-    setWallOpen(false);
-    setRoofOpen(false);
-  };
-
-  const handleWallOpen = () => {
-    setWallOpen(true);
-  };
-
-  const handleRoofOpen = () => {
-    setRoofOpen(true);
   };
 
   useEffect(() => {
@@ -88,52 +75,36 @@ const BuildingStructure = (props) => {
         <Paper className={props.style.category}>
           <Typography variant="h6">Walls</Typography>
           <FormControl className={props.style.formControl}>
-            <InputLabel id="material-test">Material</InputLabel>
-            <Select
-              labelId="material-test"
-              id="material-test"
-              className={props.style.required}
-              open={wallOpen}
-              onClose={handleClose}
-              onOpen={handleWallOpen}
+            <DropdownSelect
+              data={materials}
+              label="Material"
               value={wallMaterial}
-              onChange={handleMaterialChange}
-            >
-              <MenuItem value=""></MenuItem>
-              {materials.map((material, index) => (
-                <MenuItem key={index} value={material}>
-                  {material}
-                </MenuItem>
-              ))}
-            </Select>
+              id="wall-material"
+              handler={handleMaterialChange}
+            />
           </FormControl>
         </Paper>
         <Paper className={props.style.category}>
           <Typography variant="h6">Roof</Typography>
           <FormControl className={props.style.formControl}>
-            <InputLabel id="material-test">Type</InputLabel>
-            <Select
-              labelId="material-test"
-              id="material-test"
-              className={props.style.required}
-              open={roofOpen}
-              onClose={handleClose}
-              onOpen={handleRoofOpen}
+            <DropdownSelect
+              data={roofs}
+              label="Type"
               value={roofType}
-              onChange={handleRoofChange}
-            >
-              <MenuItem value=""></MenuItem>
-              {roofs.map((roof, index) => (
-                <MenuItem key={index} value={roof}>
-                  {roof}
-                </MenuItem>
-              ))}
-            </Select>
+              id="roof-type"
+              handler={handleRoofChange}
+            />
           </FormControl>
         </Paper>
         <Paper className={props.style.category}>
           <Typography variant="h6">Windows</Typography>
-          <TextField size="small" variant="filled" value={windowCount} type="number" onChange={handleWindowChange}>
+          <TextField
+            size="small"
+            variant="filled"
+            value={windowCount}
+            type="number"
+            onChange={handleWindowChange}
+          >
             Count
           </TextField>
         </Paper>
