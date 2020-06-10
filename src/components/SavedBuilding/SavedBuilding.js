@@ -10,22 +10,6 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
-    },
-    actions: {
-        margin: theme.spacing(2),
-        backgroundColor: "#eceef8",
-        display:"flex",
-        flexDirection:"column",
-    },
-    actionsText: {
-        margin: "auto",
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
-    },
-    actionsButton: {
-        maxWidth: "50%",
-        margin: "auto",
-        marginBottom: theme.spacing(2),
     }
 }));
 
@@ -34,13 +18,13 @@ const SavedBuilding = (props) => {
 
     return <Paper className={classes.root}>
         <Grid container className={classes.root}>
-            <Grid item sm={9}>
+            <Grid item sm={10}>
                 <Typography>
                     
                 </Typography>
             </Grid>
 
-            <Grid item sm={3}>
+            <Grid item sm={2}>
                 <ActionToolbar privacyMode={props.privacyMode} />
             </Grid>
 
