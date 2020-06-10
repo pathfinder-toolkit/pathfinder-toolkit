@@ -16,6 +16,8 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
+import DropdownSelect from "./DropdownSelect";
+
 const BuildingDetails = (props) => {
   const {
     buildingInformation,
@@ -38,9 +40,9 @@ const BuildingDetails = (props) => {
   const { getMaterials } = useBackend();
   const materials = getMaterials();
 
-  const handleMaterialChange = (event) => {
-    setMaterialValue(event.target.value);
-    setSavedMaterial(event.target.value);
+  const handleMaterialChange = (value) => {
+    setMaterialValue(value);
+    setSavedMaterial(value);
   };
 
   const handleNameChange = (event) => {
@@ -73,25 +75,18 @@ const BuildingDetails = (props) => {
         </Typography>
         <Paper className={props.style.category}>
           <FormControl className={props.style.formControl}>
-            <InputLabel id="material-test">Material</InputLabel>
-            <Select
-              labelId="material-test"
-              id="material-test"
-              className={props.style.required}
-              open={open}
-              onClose={handleClose}
-              onOpen={handleOpen}
+            <DropdownSelect
+              data={materials}
+              label="Material"
               value={materialValue}
-              onChange={handleMaterialChange}
-            >
-              <MenuItem value=""></MenuItem>
-              {materials.map((material, index) => (
-                <MenuItem key={index} value={material}>
-                  {material}
-                </MenuItem>
-              ))}
-            </Select>
-            <TextField label="Building name" value={nameValue} onChange={handleNameChange} />
+              id="test"
+              handler={handleMaterialChange}
+            ></DropdownSelect>
+            <TextField
+              label="Building name"
+              value={nameValue}
+              onChange={handleNameChange}
+            />
           </FormControl>
         </Paper>
       </div>
