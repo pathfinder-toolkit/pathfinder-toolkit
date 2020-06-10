@@ -2,8 +2,8 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
+import ActionToolbar from "./ActionToolbar.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,21 +41,7 @@ const SavedBuilding = (props) => {
             </Grid>
 
             <Grid item sm={3}>
-                <Paper className ={classes.actions}>
-                    <Typography className={classes.actionsText}>
-                        This page is currently {props.privacyMode}
-                    </Typography>
-                    <Button variant="contained" color="primary" className={classes.actionsButton}>
-                        <Typography className={classes.text}>
-                            Make {props.privacyMode === 'private' ? 'public' : 'private'}
-                        </Typography>
-                    </Button>
-                    <Button variant="contained" color="primary" className={classes.actionsButton}>
-                        <Typography className={classes.text}>
-                            Edit Building
-                        </Typography>
-                    </Button>
-                </Paper>
+                <ActionToolbar privacyMode={props.privacyMode} />
             </Grid>
 
         </Grid>
