@@ -104,7 +104,7 @@ const NavigationBar = (props) => {
           </div>
         )}
         {!user && (
-          <Button className={classes.navButton} onClick={() => { redirectTo('login') }} color="inherit">
+          <Button className={classes.navButton} onClick={() => { redirectTo('/login') }} color="inherit">
             Login
           </Button>
         )}

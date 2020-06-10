@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -37,10 +36,6 @@ const BuildingsTableToolbar = (props) => {
             </Typography>
         </Toolbar>
     );
-};
-  
-BuildingsTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
 };
 
 export default BuildingsTableToolbar;

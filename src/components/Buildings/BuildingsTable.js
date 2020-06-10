@@ -12,6 +12,7 @@ import Launch from "@material-ui/icons/Launch";
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useBackend } from "../../utils/FakeBackend";
+import history from "../../utils/history";
 
 import BuildingsTableToolbar from "./BuildingsTableToolbar";
 import BuildingsTableHead from "./BuildingsTableHead";
@@ -140,6 +141,11 @@ const BuildingsTable = () => {
     setShowImageModal(false);
   }
 
+  const _handleClick = (slug) => {
+    const addr = "/buildings/" + slug;
+    history.push(addr);
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -185,7 +191,7 @@ const BuildingsTable = () => {
                       </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right"><Button variant="contained" color="primary"> <Launch /> {row.id}</Button></TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.id)}}> <Launch /> </Button></TableCell>
                     </TableRow>
                   );
                 })}
