@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Launch from "@material-ui/icons/Launch";
@@ -109,6 +105,14 @@ const BuildingsTable = () => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+  const headCells = [
+    { id: 'name', numeric: false, disablePadding: true, label: 'Saved building name' },
+    { id: 'image', numeric: false, disablePadding: false, label: 'Image'},
+    { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
+    { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
+    { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
+  ];
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -122,6 +126,7 @@ const BuildingsTable = () => {
           >
             <BuildingsTableHead
               classes = {classes}
+              headers = {headCells}
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
@@ -145,6 +150,7 @@ const BuildingsTable = () => {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.name}
                       </TableCell>
+                      <TableCell align="left">{row.image}</TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
                       <TableCell align="right"><Button variant="contained" color="primary"><Launch /> {row.id}</Button></TableCell>

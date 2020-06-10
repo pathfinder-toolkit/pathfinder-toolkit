@@ -6,19 +6,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
 
-
-const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name of building' },
-  { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
-  { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
-  { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
-];
-
-
-
-
 const BuildingsTableHead = (props) => {
-  const { order, orderBy, onRequestSort, classes } = props;
+  const { order, orderBy, onRequestSort, classes, headers } = props;
   
   const createSortHandler = (property) => (event) => {
     if (property != 'id') {
@@ -31,14 +20,14 @@ const BuildingsTableHead = (props) => {
       <TableRow className={classes.row}>
         <TableCell>
         </TableCell>
-        {headCells.map((headCell) => (
+        {headers.map((headCell) => (
           <TableCell
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            {headCell.id != 'id' || 'image' ? (<TableSortLabel
+            {headCell.id != 'id' && headCell.id != 'image' ? (<TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
