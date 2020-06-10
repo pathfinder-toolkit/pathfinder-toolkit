@@ -6,6 +6,7 @@ const DropdownSelect = (props) => {
   const data = props.data;
   const label = props.label;
   const id = props.id ? props.id : "empty";
+  const style = props.style ? props.style : "";
 
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState(value);
@@ -27,18 +28,17 @@ const DropdownSelect = (props) => {
 
   return (
     <React.Fragment>
-      <InputLabel id={id} />
-      {label}
+      <InputLabel id={id}>{label}</InputLabel>
       <Select
         labelId={id}
         id={id}
         open={open}
+        className={style}
         onClose={handleClose}
         onOpen={handleOpen}
         value={selection}
         onChange={handleChange}
       >
-        <MenuItem value=""></MenuItem>
         {data.map((entry, index) => (
           <MenuItem key={index} value={entry}>
             {entry}

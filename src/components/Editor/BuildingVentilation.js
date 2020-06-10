@@ -12,6 +12,8 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
+import DropdownSelect from "./DropdownSelect";
+
 const BuildingVentilation = (props) => {
   const [ventilationTypeOpen, setVentilationTypeOpen] = useState(false);
   const [ventilationType, setVentilationType] = useState("");
@@ -31,9 +33,9 @@ const BuildingVentilation = (props) => {
 
   const ventilationSystems = getVentilationTypes();
 
-  const handleVentilationTypeChange = (event) => {
-    setVentilationType(event.target.value);
-    setSavedVentilationType(event.target.value);
+  const handleVentilationTypeChange = (value) => {
+    setVentilationType(value);
+    setSavedVentilationType(value);
   };
 
   const handleClose = () => {
@@ -60,31 +62,20 @@ const BuildingVentilation = (props) => {
         <Paper className={props.style.category}>
           <Typography variant="h6">General</Typography>
           <FormControl className={props.style.formControl}>
-            <InputLabel>Type</InputLabel>
-            <Select
-              className={props.style.required}
-              open={ventilationTypeOpen}
-              onClose={handleClose}
-              onOpen={handleVentilationOpen}
+            <DropdownSelect
+              data={ventilationSystems}
+              label="Type"
               value={ventilationType}
-              onChange={handleVentilationTypeChange}
-            >
-              <MenuItem value=""></MenuItem>
-              {ventilationSystems.map((type, index) => (
-                <MenuItem key={index} value={type}>
-                  {type}
-                </MenuItem>
-              ))}
-            </Select>
+              id="ventilation-type"
+              handler={handleVentilationTypeChange}
+            />
           </FormControl>
         </Paper>
         <Paper className={props.style.category}>
           <Typography variant="h6">Airtightness</Typography>
-        
         </Paper>
         <Paper className={props.style.category}>
           <Typography variant="h6">Air vents</Typography>
-        
         </Paper>
       </div>
     </Fade>

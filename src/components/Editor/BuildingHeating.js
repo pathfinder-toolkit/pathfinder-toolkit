@@ -12,6 +12,8 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
+import DropdownSelect from "./DropdownSelect";
+
 const BuildingHeating = (props) => {
   const [heatingTypeOpen, setHeatingTypeOpen] = useState(false);
   const [heatingType, setHeatingType] = useState("");
@@ -31,9 +33,9 @@ const BuildingHeating = (props) => {
 
   const heatingTypes = getHeatingTypes();
 
-  const handleHeatingTypeChange = (event) => {
-    setHeatingType(event.target.value);
-    setSavedHeatingType(event.target.value);
+  const handleHeatingTypeChange = (value) => {
+    setHeatingType(value);
+    setSavedHeatingType(value);
   };
 
   const handleClose = () => {
@@ -50,6 +52,7 @@ const BuildingHeating = (props) => {
     }
   }, [buildingInformation.heating]);
 
+  //className={props.style.required}
   return (
     <Fade in={loading}>
       <div className={props.style.root}>
@@ -59,22 +62,13 @@ const BuildingHeating = (props) => {
         <Paper className={props.style.category}>
           <Typography variant="h6">General</Typography>
           <FormControl className={props.style.formControl}>
-            <InputLabel>Type</InputLabel>
-            <Select
-              className={props.style.required}
-              open={heatingTypeOpen}
-              onClose={handleClose}
-              onOpen={handleHeatingTypeOpen}
+            <DropdownSelect
+              data={heatingTypes}
+              label="Type"
               value={heatingType}
-              onChange={handleHeatingTypeChange}
-            >
-              <MenuItem value=""></MenuItem>
-              {heatingTypes.map((type, index) => (
-                <MenuItem key={index} value={type}>
-                  {type}
-                </MenuItem>
-              ))}
-            </Select>
+              id="heating-type"
+              handler={handleHeatingTypeChange}
+            />
           </FormControl>
         </Paper>
         <Paper className={props.style.category}>
