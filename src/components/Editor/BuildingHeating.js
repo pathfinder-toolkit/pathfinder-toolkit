@@ -15,7 +15,6 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "./DropdownSelect";
 
 const BuildingHeating = (props) => {
-  const [heatingTypeOpen, setHeatingTypeOpen] = useState(false);
   const [heatingType, setHeatingType] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -36,14 +35,6 @@ const BuildingHeating = (props) => {
   const handleHeatingTypeChange = (value) => {
     setHeatingType(value);
     setSavedHeatingType(value);
-  };
-
-  const handleClose = () => {
-    setHeatingTypeOpen(false);
-  };
-
-  const handleHeatingTypeOpen = () => {
-    setHeatingTypeOpen(true);
   };
 
   useEffect(() => {

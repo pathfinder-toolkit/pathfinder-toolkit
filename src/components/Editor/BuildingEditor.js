@@ -19,7 +19,7 @@ const BuildingEditor = () => {
     editorComponent: {
       border: "1px solid black",
       borderRadius: "2px",
-    }
+    },
   }));
   const classes = useStyles();
 
@@ -37,6 +37,7 @@ const BuildingEditor = () => {
     },
     header: {
       marginBottom: theme.spacing(1),
+      
     },
     category: {
       marginBottom: theme.spacing(2),
