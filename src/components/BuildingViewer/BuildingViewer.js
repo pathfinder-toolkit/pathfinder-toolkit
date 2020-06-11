@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import Container from '@material-ui/core/Container';
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing(2),
-      marginTop: theme.spacing(2),
+    categoryRoot: {
+        margin: theme.spacing(2),
+        marginBottom: theme.spacing(4),
     }
   }));
 
@@ -19,12 +17,20 @@ const BuildingViewer = (props) => {
         return Object.keys(props.building).includes(category);
     }
 
-    return <Container maxWidth={false} className={classes.root}>
-
+    return <React.Fragment>
         {containsCategory("details") && (<DetailsCategory
             details={props.building.details}
+            classes={classes}
         />)}
-    </Container>
+        {containsCategory("details") && (<DetailsCategory
+            details={props.building.details}
+            classes={classes}
+        />)}
+        {containsCategory("details") && (<DetailsCategory
+            details={props.building.details}
+            classes={classes}
+        />)}
+    </React.Fragment>
 }
 
 export default BuildingViewer;

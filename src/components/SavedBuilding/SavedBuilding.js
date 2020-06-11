@@ -26,7 +26,7 @@ const SavedBuilding = (props) => {
             <Grid item sm={2}>
                 <ActionToolbar privacyMode={props.privacyMode} />
             </Grid>
-
+            
         </Grid>
     </Paper>
 }
