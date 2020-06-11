@@ -68,7 +68,7 @@ const NavigationBar = (props) => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navbar}>
-        <Typography variant="h6" className={classes.title}></Typography>
+        <Typography variant="h6" className={classes.title}>EnergyPathfinder</Typography>
         <IconButton onClick={() => { redirectTo('') }} color="inherit" className={classes.navButton} >
           <Home />
         </IconButton>
@@ -98,6 +98,9 @@ const NavigationBar = (props) => {
               <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
               <MenuItem onClick={() => { redirectTo('buildings') }}>
                 Designed buildings
+              </MenuItem>
+              <MenuItem onClick={() => { redirectTo('feedback') }}>
+                Give feedback
               </MenuItem>
               <MenuItem onClick={_logout}>Logout</MenuItem>
             </Menu>
