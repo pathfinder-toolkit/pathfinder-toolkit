@@ -13,9 +13,9 @@ export const useEditor = () => useContext(EditorContext);
 const useStateWithSessionStorage = sessionStorageKey => {
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
-      area: "",
       details: {
         name: "",
+        area: "",
         year: "",
         material: "",
         floors: "",
@@ -112,8 +112,9 @@ export const EditorProvider = ({ children }) => {
   const setSavedArea = (newArea) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      area: newArea,
+      details: { ...buildingInformation.details, area: newArea },
     }));
+    console.log(buildingInformation);
   };
 
   const setSavedName = (newName) => {
