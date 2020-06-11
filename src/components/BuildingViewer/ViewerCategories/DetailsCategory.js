@@ -1,7 +1,8 @@
 import React from "react";
 import Paper from '@material-ui/core/Grid';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+
+import CategoryItem from "./CategoryItem.js";
 
 
 const DetailsCategory = (props) => {
@@ -14,14 +15,36 @@ const DetailsCategory = (props) => {
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4">Building details</Typography>
         
-        {containsCategoryItem("name") && (<Grid container>
-                <Grid item xs={6}>
-                    <Typography variant="h6">Name: {props.details.name.value}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                </Grid>
-            </Grid>
-        )}
+        {containsCategoryItem("name") && (
+        <CategoryItem 
+        identifier="Name" 
+        value={props.details.name.value} 
+        />)}
+
+        {containsCategoryItem("area") && (
+        <CategoryItem
+        identifier="Area"
+        value={props.details.area.value}
+        />)}
+
+        {containsCategoryItem("year") && (
+        <CategoryItem
+        identifier="Construction year"
+        value={props.details.year.value}
+        />)}
+
+        {containsCategoryItem("material") && (
+        <CategoryItem
+        identifier="Material"
+        value={props.details.material.value}
+        />)}
+
+        {containsCategoryItem("floors") && (
+        <CategoryItem
+        identifier="Amount of floors"
+        value={props.details.floors.value}
+        />)}
+        
     </Paper>
 }
 
