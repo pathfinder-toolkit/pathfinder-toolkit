@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
@@ -11,7 +11,9 @@ const AreaSelection = () => {
   } = useEditor();
 
   const { getCountries } = useBackend();
-  const [selectedArea, setSelectedArea] = useState()
+  const [selectedArea, setSelectedArea] = useState(
+    buildingInformation.details.area.value
+  );
 
   const [allowedCountries] = useState(getCountries());
 

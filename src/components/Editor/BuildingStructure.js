@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Typography,
-  InputLabel,
-  MenuItem,
   FormControl,
-  Select,
   Fade,
   Paper,
   TextField,
