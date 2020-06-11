@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
+import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,15 +22,19 @@ const BuildingViewer = (props) => {
 
     return <React.Fragment>
         {containsCategory("details") && (<DetailsCategory
-            details={props.building.details}
+            category={props.building.details}
             classes={classes}
         />)}
         {containsCategory("structure") && (<StructureCategory
-            structure={props.building.structure}
+            category={props.building.structure}
             classes={classes}
         />)}
         {containsCategory("heating") && (<HeatingCategory
-            heating={props.building.heating}
+            category={props.building.heating}
+            classes={classes}
+        />)}
+        {containsCategory("ventilation") && (<VentilationCategory
+            category={props.building.ventilation}
             classes={classes}
         />)}
     </React.Fragment>

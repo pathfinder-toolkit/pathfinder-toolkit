@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import CategoryItem from "./CategoryItem.js";
 
 
-const HeatingCategory = (props) => {
+const VentilationCategory = (props) => {
     const classes = props.classes;
 
     const containsCategoryItem = (categoryItem) => {
@@ -13,15 +13,21 @@ const HeatingCategory = (props) => {
     }
 
     return <Paper className={classes.categoryRoot}>
-        <Typography variant="h4">Heating details</Typography>
+        <Typography variant="h4">Ventilation details</Typography>
         
         {containsCategoryItem("system") && (
         <CategoryItem 
-        identifier="Heating system" 
+        identifier="System" 
         value={props.category.system.value} 
         />)}
 
+        {containsCategoryItem("airTightness") && (
+        <CategoryItem
+        identifier="Air tightness"
+        value={props.category.airTightness.value}
+        />)}
+        
     </Paper>
 }
 
-export default HeatingCategory;
+export default VentilationCategory;

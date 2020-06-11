@@ -9,7 +9,7 @@ const DetailsCategory = (props) => {
     const classes = props.classes;
 
     const containsCategoryItem = (categoryItem) => {
-        return Object.keys(props.details).includes(categoryItem);
+        return Object.keys(props.category).includes(categoryItem);
     }
 
     return <Paper className={classes.categoryRoot}>
@@ -18,31 +18,31 @@ const DetailsCategory = (props) => {
         {containsCategoryItem("name") && (
         <CategoryItem 
         identifier="Name" 
-        value={props.details.name.value} 
+        value={props.category.name.value} 
         />)}
 
         {containsCategoryItem("area") && (
         <CategoryItem
         identifier="Area"
-        value={props.details.area.value}
+        value={props.category.area.value}
         />)}
 
         {containsCategoryItem("year") && (
         <CategoryItem
         identifier="Construction year"
-        value={props.details.year.value}
+        value={props.category.year.value}
         />)}
 
         {containsCategoryItem("material") && (
         <CategoryItem
         identifier="Material"
-        value={props.details.material.value}
+        value={props.category.material.value}
         />)}
 
         {containsCategoryItem("floors") && (
         <CategoryItem
         identifier="Amount of floors"
-        value={props.details.floors.value}
+        value={props.category.floors.value}
         />)}
         
     </Paper>
