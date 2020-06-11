@@ -1,9 +1,9 @@
 import React from "react";
-import data from "./mapdata.json"
+import mapData from "../../json/mapdata_test.json"
 import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
 
 const AreaMap = (props) => {
-  const geoUrl = data;
+  const geoUrl = mapData;
 
   const allowedCountries = props.allowedCountries;
   const selectedCountry = props.selectedCountry;
