@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
     },
     actionsButton: {
-        maxWidth: "50%",
+        maxWidth: "75%",
         margin: "auto",
         marginBottom: theme.spacing(2),
     }
