@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
 
+import SuggestionAlert from "./SuggestionAlert.js";
+
 const CategoryItem = (props) => {
     const classes = props.classes;
 
@@ -12,11 +14,8 @@ const CategoryItem = (props) => {
             <Typography variant="h6">{props.identifier}: {props.value}</Typography>
         </Grid>
         <Grid item xs={4}>
-            {props.suggestions && props.suggestions.map((suggestion) => {
-                return <Alert severity="error" icon={false} className={classes.suggestionAlert}>
-                <AlertTitle>High priority suggestion</AlertTitle>
-                {suggestion.suggestionText}
-              </Alert>
+            {props.suggestions && props.suggestions.map((suggestion, key) => {
+                return <SuggestionAlert suggestion={suggestion} classes={classes} key={key} />
             })}
         </Grid>
     </Grid>

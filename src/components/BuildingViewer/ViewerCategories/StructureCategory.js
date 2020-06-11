@@ -12,24 +12,30 @@ const StructureCategory = (props) => {
     }
 
     return <Paper className={classes.categoryRoot}>
-        <Typography variant="h4">Structure details</Typography>
+        <Typography variant="h4" className={classes.categoryHeader}>Structure details</Typography>
         
         {containsCategoryItem("wallMaterial") && (
         <CategoryItem 
         identifier="Wall material" 
         value={props.category.wallMaterial.value} 
+        suggestions={props.category.wallMaterial.suggestions}
+        classes={props.classes}
         />)}
 
         {containsCategoryItem("roofType") && (
         <CategoryItem
         identifier="Roof type"
         value={props.category.roofType.value}
+        suggestions={props.category.roofType.suggestions}
+        classes={props.classes}
         />)}
 
         {containsCategoryItem("windowCount") && (
         <CategoryItem
         identifier="Window count"
         value={props.category.windowCount.value}
+        suggestions={props.category.windowCount.suggestions}
+        classes={props.classes}
         />)}
         
     </Paper>

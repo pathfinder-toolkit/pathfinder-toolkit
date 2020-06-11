@@ -13,7 +13,7 @@ const HeatingCategory = (props) => {
     }
 
     return <Paper className={classes.categoryRoot}>
-        <Typography variant="h4">Heating details</Typography>
+        <Typography variant="h4" className={classes.categoryHeader}>Heating details</Typography>
         
         {containsCategoryItem("system") && (
         <CategoryItem 

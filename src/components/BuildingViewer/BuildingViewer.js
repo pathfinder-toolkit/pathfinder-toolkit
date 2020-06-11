@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(2),
         marginBottom: theme.spacing(4),
     },
+    categoryHeader: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    },
     suggestionAlert: {
         marginBottom:theme.spacing(1),
     }
