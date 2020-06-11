@@ -108,26 +108,70 @@ export const BackendProvider = ({ children }) => {
 
   const getBuildingFromSlug = async () => {
     const buildingInformation = {
-      area: "Finland",
       details: {
-        name: "Talo",
-        year: "1900",
-        material: "Stone",
-        floors: "1",
+        name: {
+          value: "House",
+          suggestions: [],
+          comments: []
+        },
+        area: {
+          value: "Finland",
+          suggestions: [],
+          comments: []
+        },
+        year: {
+          value: "1900",
+          suggestions: [],
+          comments: []
+        },
+        material: {
+          value: "Wood",
+          suggestions: [],
+          comments: []
+        },
+        floors: {
+          value: 1,
+          suggestions: [],
+          comments: []
+        },
       },
       structure: {
-        wallMaterial: "Stone",
-        roofType: "Roof 1",
-        windowCount: "1",
+        wallMaterial: {
+          value: "Stone",
+          suggestions: [],
+          comments: []
+        },
+        roofType: {
+          value: "Roof 1",
+          suggestions: [],
+          comments: []
+        },
+        windowCount: {
+          value: 8,
+          suggestions: [],
+          comments: []
+        },
       },
       ventilation: {
-        system: "Gravity based",
-        airTightness: "2",
+        system: {
+          value: "Machine based",
+          suggestions: [],
+          comments: []
+        },
+        airTightness: {
+          value: 10,
+          suggestions: [],
+          comments: []
+        },
       },
       heating: {
-        system: "Heating 1",
+        system: {
+          value: "Heating 2",
+          suggestions: [],
+          comments: []
+          },
       },
-    }
+    };
 
     return buildingInformation;
   }
