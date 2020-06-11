@@ -96,10 +96,10 @@ const NavigationBar = (props) => {
               onClose={handleProfileMenuClose}
             >
               <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
-              <MenuItem onClick={() => { redirectTo('buildings') }}>
+              <MenuItem onClick={() => { redirectTo('/buildings') }}>
                 Designed buildings
               </MenuItem>
-              <MenuItem onClick={() => { redirectTo('feedback') }}>
+              <MenuItem onClick={() => { redirectTo('/feedback') }}>
                 Give feedback
               </MenuItem>
               <MenuItem onClick={_logout}>Logout</MenuItem>
