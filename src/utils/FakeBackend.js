@@ -188,24 +188,44 @@ export const BackendProvider = ({ children }) => {
       structure: {
         wallMaterial: {
           value: "Stone",
-          suggestions: [],
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 15
+            }
+          ],
           comments: []
         },
         roofType: {
           value: "Roof 1",
-          suggestions: [],
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 5
+            }
+          ],
           comments: []
         },
         windowCount: {
           value: 8,
-          suggestions: [],
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 45
+            }
+          ],
           comments: []
         },
       },
       ventilation: {
         system: {
           value: "Machine based",
-          suggestions: [],
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 0
+            }
+          ],
           comments: []
         },
         airTightness: {
@@ -216,8 +236,13 @@ export const BackendProvider = ({ children }) => {
       },
       heating: {
         system: {
-          value: "Heating 2",
-          suggestions: [],
+          value: "Oil",
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 100
+            }
+          ],
           comments: []
           },
       },

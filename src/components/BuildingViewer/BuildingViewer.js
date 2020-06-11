@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
+import StructureCategory from "./ViewerCategories/StructureCategory.js";
+import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
+import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -7,6 +10,13 @@ const useStyles = makeStyles((theme) => ({
     categoryRoot: {
         margin: theme.spacing(2),
         marginBottom: theme.spacing(4),
+    },
+    categoryHeader: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    },
+    suggestionAlert: {
+        marginBottom:theme.spacing(1),
     }
   }));
 
@@ -19,15 +29,19 @@ const BuildingViewer = (props) => {
 
     return <React.Fragment>
         {containsCategory("details") && (<DetailsCategory
-            details={props.building.details}
+            category={props.building.details}
             classes={classes}
         />)}
-        {containsCategory("details") && (<DetailsCategory
-            details={props.building.details}
+        {containsCategory("structure") && (<StructureCategory
+            category={props.building.structure}
             classes={classes}
         />)}
-        {containsCategory("details") && (<DetailsCategory
-            details={props.building.details}
+        {containsCategory("heating") && (<HeatingCategory
+            category={props.building.heating}
+            classes={classes}
+        />)}
+        {containsCategory("ventilation") && (<VentilationCategory
+            category={props.building.ventilation}
             classes={classes}
         />)}
     </React.Fragment>
