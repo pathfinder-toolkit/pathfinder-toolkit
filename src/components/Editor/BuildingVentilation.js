@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Fade,
-  Paper,
-} from "@material-ui/core";
+import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
@@ -21,7 +13,9 @@ const BuildingVentilation = (props) => {
     setSavedVentilationType,
   } = useEditor();
 
-  const [ventilationType, setVentilationType] = useState(buildingInformation.ventilation.system.value);
+  const [ventilationType, setVentilationType] = useState(
+    buildingInformation.ventilation.system.value
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {

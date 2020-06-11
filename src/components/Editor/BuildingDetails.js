@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Typography,
-  FormControl,
-  Select,
-  Box,
   Grid,
-  Button,
   Fade,
   TextField,
   Paper,
@@ -29,7 +25,7 @@ const BuildingDetails = (props) => {
   } = useEditor();
 
   const [materialValue, setMaterialValue] = useState(
-    buildingInformation.details.material
+    buildingInformation.details.material.value
   );
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
   const [buildingYear, setBuildingYear] = useState(
