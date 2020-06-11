@@ -18,7 +18,9 @@ const HeatingCategory = (props) => {
         {containsCategoryItem("system") && (
         <CategoryItem 
         identifier="Heating system" 
-        value={props.category.system.value} 
+        value={props.category.system.value}
+        suggestions={props.category.system.suggestions}
+        classes={props.classes}
         />)}
 
     </Paper>
