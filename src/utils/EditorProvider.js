@@ -10,44 +10,77 @@ import Summary from "../components/Editor/Summary";
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
-const useStateWithSessionStorage = sessionStorageKey => {
+const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
-      area: "",
       details: {
         name: "",
-        year: "",
-        material: "",
-        floors: "",
+        area: {
+          value: "",
+          suggestions: [],
+        },
+        year: {
+          value: "",
+          suggestions: [],
+        },
+        material: {
+          value: "",
+          suggestions: [],
+        },
+        floors: {
+          value: "",
+          suggestions: [],
+        },
       },
       structure: {
-        wallMaterial: "",
-        roofType: "",
-        windowCount: "",
+        wallMaterial: {
+          value: "",
+          suggestions: [],
+        },
+        roofType: {
+          value: "",
+          suggestions: [],
+        },
+        windowCount: {
+          value: "",
+          suggestions: [],
+        },
       },
       ventilation: {
-        system: "",
-        airTightness: "",
+        system: {
+          value: "",
+          suggestions: [],
+        },
+        airTightness: {
+          value: "",
+          suggestions: [],
+        },
       },
       heating: {
-        system: "",
+        system: {
+          value: "",
+          suggestions: [],
+        },
       },
     }
   );
- 
- useEffect(() => {
+
+  useEffect(() => {
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
   }, [value]);
- 
+
   return [value, setValue];
 };
 
-
 export const EditorProvider = ({ children }) => {
-  
-  const [buildingInformation, setBuildingInformation] = useStateWithSessionStorage("SavedBuildingDataInStorage");
+  const [
+    buildingInformation,
+    setBuildingInformation,
+  ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
   const [activeStep, setActiveStep] = useState(0);
-  const [navigationEnabled, setNavigationEnabled] = useState(buildingInformation.area ? true : false);
+  const [navigationEnabled, setNavigationEnabled] = useState(
+    buildingInformation.area ? true : false
+  );
 
   const getSteps = () => {
     return [
@@ -81,15 +114,15 @@ export const EditorProvider = ({ children }) => {
       case 0:
         return <AreaSelection style={style} />;
       case 1:
-        return <BuildingDetails style={style}/>;
+        return <BuildingDetails style={style} />;
       case 2:
-        return <BuildingStructure style={style}/>;
+        return <BuildingStructure style={style} />;
       case 3:
-        return <BuildingVentilation style={style}/>;
+        return <BuildingVentilation style={style} />;
       case 4:
-        return <BuildingHeating style={style}/>;
+        return <BuildingHeating style={style} />;
       case 5:
-        return <Summary style={style}/>;
+        return <Summary style={style} />;
       default:
         return <p>Unknow component</p>;
     }
@@ -109,13 +142,6 @@ export const EditorProvider = ({ children }) => {
     setActiveStep(0);
   };
 
-  const setSavedArea = (newArea) => {
-    setBuildingInformation((buildingInformation) => ({
-      ...buildingInformation,
-      area: newArea,
-    }));
-  };
-
   const setSavedName = (newName) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
@@ -124,10 +150,24 @@ export const EditorProvider = ({ children }) => {
     console.log(buildingInformation);
   };
 
+  const setSavedArea = (newArea) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: {
+        ...buildingInformation.details,
+        area: { ...buildingInformation.details.area, value: newArea },
+      },
+    }));
+    console.log(buildingInformation);
+  };
+
   const setSavedYear = (newYear) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: { ...buildingInformation.details, year: newYear },
+      details: {
+        ...buildingInformation.details,
+        year: { ...buildingInformation.details.year, value: newYear },
+      },
     }));
     console.log(buildingInformation);
   };
@@ -135,7 +175,10 @@ export const EditorProvider = ({ children }) => {
   const setSavedFloors = (newFloors) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: { ...buildingInformation.details, floors: newFloors },
+      details: {
+        ...buildingInformation.details,
+        floors: { ...buildingInformation.details.floors, value: newFloors },
+      },
     }));
     console.log(buildingInformation);
   };
@@ -143,8 +186,15 @@ export const EditorProvider = ({ children }) => {
   const setSavedMaterial = (newMaterial) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: { ...buildingInformation.details, material: newMaterial },
+      details: {
+        ...buildingInformation.details,
+        material: {
+          ...buildingInformation.details.material,
+          value: newMaterial,
+        },
+      },
     }));
+    console.log(buildingInformation);
   };
 
   const setSavedWallMaterial = (newWallMaterial) => {
@@ -152,16 +202,27 @@ export const EditorProvider = ({ children }) => {
       ...buildingInformation,
       structure: {
         ...buildingInformation.structure,
-        wallMaterial: newWallMaterial,
+        wallMaterial: {
+          ...buildingInformation.structure.wallMaterial,
+          value: newWallMaterial,
+        },
       },
     }));
+    console.log(buildingInformation);
   };
 
   const setSavedRoofType = (newRoofType) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      structure: { ...buildingInformation.structure, roofType: newRoofType },
+      structure: {
+        ...buildingInformation.structure,
+        roofType: {
+          ...buildingInformation.structure.roofType,
+          value: newRoofType,
+        },
+      },
     }));
+    console.log(buildingInformation);
   };
 
   const setSavedWindowCount = (newWindowCount) => {
@@ -169,9 +230,13 @@ export const EditorProvider = ({ children }) => {
       ...buildingInformation,
       structure: {
         ...buildingInformation.structure,
-        windowCount: newWindowCount,
+        windowCount: {
+          ...buildingInformation.structure.windowCount,
+          value: newWindowCount,
+        },
       },
     }));
+    console.log(buildingInformation);
   };
 
   const setSavedVentilationType = (newVentilationType) => {
@@ -179,16 +244,28 @@ export const EditorProvider = ({ children }) => {
       ...buildingInformation,
       ventilation: {
         ...buildingInformation.ventilation,
-        system: newVentilationType,
+        system: {
+          ...buildingInformation.ventilation.system,
+          value: newVentilationType,
+        },
       },
     }));
+    console.log(buildingInformation);
   };
+
 
   const setSavedHeatingType = (newHeatingType) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      heating: { ...buildingInformation.heating, system: newHeatingType },
+      heating: {
+        ...buildingInformation.heating,
+        system: {
+          ...buildingInformation.heating.system,
+          value: newHeatingType,
+        },
+      },
     }));
+    console.log(buildingInformation);
   };
 
   return (
