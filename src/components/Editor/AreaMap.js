@@ -1,5 +1,5 @@
 import React from "react";
-import mapData from "../../json/mapdata_test.json"
+import mapData from "../../json/mapdata.json"
 import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
 
 const AreaMap = (props) => {

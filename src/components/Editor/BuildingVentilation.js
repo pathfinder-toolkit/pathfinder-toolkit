@@ -15,7 +15,6 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "./DropdownSelect";
 
 const BuildingVentilation = (props) => {
-  const [ventilationTypeOpen, setVentilationTypeOpen] = useState(false);
   const [ventilationType, setVentilationType] = useState("");
 
   const [loading, setLoading] = useState(false);
@@ -36,14 +35,6 @@ const BuildingVentilation = (props) => {
   const handleVentilationTypeChange = (value) => {
     setVentilationType(value);
     setSavedVentilationType(value);
-  };
-
-  const handleClose = () => {
-    setVentilationTypeOpen(false);
-  };
-
-  const handleVentilationOpen = () => {
-    setVentilationTypeOpen(true);
   };
 
   useEffect(() => {
