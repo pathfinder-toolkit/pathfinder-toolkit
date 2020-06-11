@@ -58,7 +58,7 @@ export const BackendProvider = ({ children }) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         setMaterials(["Wood", "Stone", "Concrete"]);
-        setCountries(["Finland", "Sweden", "United Kingdom", "Ireland"]);
+        setCountries(["Finland", "Sweden", "United Kingdom", "Ireland", "Faroe Islands"]);
         setRoofTypes(["Roof 1", "Roof 2", "Roof 3"]);
         setVentilationTypes(["Gravity based" , "Machine based", "Mixed type"]);
         setHeatingTypes(["Heating 1", "Heating 2" , "Heating 3"]);
