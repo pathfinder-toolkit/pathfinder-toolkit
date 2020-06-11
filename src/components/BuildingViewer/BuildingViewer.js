@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
+import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -25,6 +26,10 @@ const BuildingViewer = (props) => {
         />)}
         {containsCategory("structure") && (<StructureCategory
             structure={props.building.structure}
+            classes={classes}
+        />)}
+        {containsCategory("heating") && (<HeatingCategory
+            heating={props.building.heating}
             classes={classes}
         />)}
     </React.Fragment>
