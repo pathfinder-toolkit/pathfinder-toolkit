@@ -33,9 +33,11 @@ const BuildingDetails = (props) => {
   );
   const [nameValue, setNameValue] = useState(buildingInformation.details.name);
   const [buildingYear, setBuildingYear] = useState(
-    buildingInformation.details.year
+    buildingInformation.details.year.value
   );
-  const [buildingFloors, setBuildingFloors] = useState();
+  const [buildingFloors, setBuildingFloors] = useState(
+    buildingInformation.details.floors.value
+  );
 
   const { getMaterials } = useBackend();
   const materials = getMaterials();

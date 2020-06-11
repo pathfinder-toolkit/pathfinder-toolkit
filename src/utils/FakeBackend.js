@@ -57,7 +57,8 @@ export const BackendProvider = ({ children }) => {
         setCountries([
           "Southern Finland",
           "Northern Finland",
-          "Sweden",
+          "Southern Sweden",
+          "Northern Sweden",
           "Scotland",
           "Northern Ireland",
           "Ireland",

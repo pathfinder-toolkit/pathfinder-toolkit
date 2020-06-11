@@ -15,7 +15,13 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "./DropdownSelect";
 
 const BuildingVentilation = (props) => {
-  const [ventilationType, setVentilationType] = useState("");
+  const {
+    buildingInformation,
+    setNavigationEnabled,
+    setSavedVentilationType,
+  } = useEditor();
+
+  const [ventilationType, setVentilationType] = useState(buildingInformation.ventilation.system.value);
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -23,12 +29,6 @@ const BuildingVentilation = (props) => {
   }, []);
 
   const { getVentilationTypes } = useBackend();
-
-  const {
-    buildingInformation,
-    setNavigationEnabled,
-    setSavedVentilationType,
-  } = useEditor();
 
   const ventilationSystems = getVentilationTypes();
 
