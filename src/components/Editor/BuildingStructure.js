@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Typography,
-  InputLabel,
-  MenuItem,
   FormControl,
-  Select,
   Fade,
   Paper,
   TextField,
@@ -16,9 +13,22 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "./DropdownSelect";
 
 const BuildingStructure = (props) => {
-  const [wallMaterial, setWallMaterial] = useState("");
-  const [roofType, setRoofType] = useState("");
-  const [windowCount, setWindowCount] = useState(0);
+  const {
+    buildingInformation,
+    setSavedWallMaterial,
+    setSavedRoofType,
+    setSavedWindowCount,
+    setNavigationEnabled,
+  } = useEditor();
+  const [wallMaterial, setWallMaterial] = useState(
+    buildingInformation.structure.wallMaterial.value
+  );
+  const [roofType, setRoofType] = useState(
+    buildingInformation.structure.roofType.value
+  );
+  const [windowCount, setWindowCount] = useState(
+    buildingInformation.structure.windowCount.value
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -27,13 +37,6 @@ const BuildingStructure = (props) => {
 
   const { getMaterials, getRoofTypes } = useBackend();
 
-  const {
-    buildingInformation,
-    setSavedWallMaterial,
-    setSavedRoofType,
-    setSavedWindowCount,
-    setNavigationEnabled,
-  } = useEditor();
   const materials = getMaterials();
   const roofs = getRoofTypes();
 

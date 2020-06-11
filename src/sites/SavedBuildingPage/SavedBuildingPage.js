@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 const SavedBuildingPage = () => {
     const classes = useStyles();
     const { getBuildingFromSlug } = useBackend();
-    const [ building, setBuilding ] = useState({});
+    const [ building, setBuilding ] = useState(null);
 
     useEffect(() => {
         async function fetchData() {

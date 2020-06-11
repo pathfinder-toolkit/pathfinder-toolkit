@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { Paper, CircularProgress } from "@material-ui/core";
 import NavigationBar from "./NavigationBar";
 
 import { useEditor } from "../../utils/EditorProvider";
@@ -19,7 +19,9 @@ const BuildingEditor = () => {
     editorComponent: {
       border: "1px solid black",
       borderRadius: "2px",
-    },
+      height: "90vh",
+      maxHeight: "92vh",
+    }
   }));
   const classes = useStyles();
 
@@ -37,7 +39,6 @@ const BuildingEditor = () => {
     },
     header: {
       marginBottom: theme.spacing(1),
-      
     },
     category: {
       marginBottom: theme.spacing(2),
@@ -58,7 +59,9 @@ const BuildingEditor = () => {
     <div className={classes.root}>
       <div className={classes.editorContainer}>
         <div className={classes.editorComponent}>
-          {!loading && <Paper>{getStepComponent(styleComponent)}</Paper>}
+          <Paper>
+          {!loading && getStepComponent(styleComponent)}
+          </Paper>
         </div>
       </div>
       {!loading && <NavigationBar />}

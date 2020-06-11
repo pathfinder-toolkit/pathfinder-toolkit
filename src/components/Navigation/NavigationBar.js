@@ -68,11 +68,11 @@ const NavigationBar = (props) => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navbar}>
-        <Typography variant="h6" className={classes.title}></Typography>
+        <Typography variant="h6" className={classes.title}>EnergyPathfinder</Typography>
         <IconButton onClick={() => { redirectTo('') }} color="inherit" className={classes.navButton} >
           <Home />
         </IconButton>
-        <Button onClick={() => { redirectTo('design') }} color="inherit" className={classes.navButton}>
+        <Button onClick={() => { redirectTo('/design') }} color="inherit" className={classes.navButton}>
           Design
         </Button>
         {user && (
@@ -96,8 +96,11 @@ const NavigationBar = (props) => {
               onClose={handleProfileMenuClose}
             >
               <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
-              <MenuItem onClick={() => { redirectTo('buildings') }}>
+              <MenuItem onClick={() => { redirectTo('/buildings') }}>
                 Designed buildings
+              </MenuItem>
+              <MenuItem onClick={() => { redirectTo('/feedback') }}>
+                Give feedback
               </MenuItem>
               <MenuItem onClick={_logout}>Logout</MenuItem>
             </Menu>

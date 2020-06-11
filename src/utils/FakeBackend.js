@@ -1,26 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
-import frontPageImage from "../external/images/frontpage_house.jpg"
+import frontPageImage from "../external/images/frontpage_house.jpg";
 
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
-
-
-const useStateWithSessionStorage = sessionStorageKey => {
+const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
-    sessionStorage.getItem(sessionStorageKey) || ''
+    sessionStorage.getItem(sessionStorageKey) || ""
   );
- 
- useEffect(() => {
+
+  useEffect(() => {
     sessionStorage.setItem(sessionStorageKey, value);
   }, [value]);
- 
+
   return [value, setValue];
 };
 
 export const BackendProvider = ({ children }) => {
-
-
   const [user, setUser] = useStateWithSessionStorage("userName");
   const [isLoggedIn, setIsLoggedIn] = useState(user || false);
 
@@ -30,6 +26,7 @@ export const BackendProvider = ({ children }) => {
   const [roofTypes, setRoofTypes] = useState();
   const [heatingTypes, setHeatingTypes] = useState();
   const [ventilationTypes, setVentilationTypes] = useState();
+  const [tips, setTips] = useState();
 
   const fakeLogin = (username) => {
     if (username === null || username === "") {
@@ -57,10 +54,23 @@ export const BackendProvider = ({ children }) => {
     return new Promise((resolve) => {
       setTimeout(() => {
         setMaterials(["Wood", "Stone", "Concrete"]);
-        setCountries(["Finland", "Sweden", "United Kingdom", "Ireland"]);
+        setCountries([
+          "Southern Finland",
+          "Northern Finland",
+          "Southern Sweden",
+          "Northern Sweden",
+          "Scotland",
+          "Northern Ireland",
+          "Ireland",
+          "Faroe Islands",
+        ]);
         setRoofTypes(["Roof 1", "Roof 2", "Roof 3"]);
-        setVentilationTypes(["Gravity based" , "Machine based", "Mixed type"]);
-        setHeatingTypes(["Heating 1", "Heating 2" , "Heating 3"]);
+        setVentilationTypes(["Gravity based", "Machine based", "Mixed type"]);
+        setHeatingTypes(["Heating 1", "Heating 2", "Heating 3"]);
+        setTips(
+          ["Replace heating system", "Remove windows & doors"],
+          "Placeholder tip"
+        );
         resolve("resolved");
         setLoading(false);
       }, 2000);
@@ -73,18 +83,22 @@ export const BackendProvider = ({ children }) => {
 
   const getRoofTypes = () => {
     return roofTypes;
-  }
+  };
 
   const getVentilationTypes = () => {
     return ventilationTypes;
-  }
+  };
 
   const getHeatingTypes = () => {
     return heatingTypes;
-  }
+  };
 
   const getCountries = () => {
     return countries;
+  };
+
+  const getTips = (tag) => {
+    return tips;
   };
 
   const getSavedBuildings = async () => {
@@ -95,12 +109,48 @@ export const BackendProvider = ({ children }) => {
     const data = [
       createData("Burj Khalifa", frontPageImage, "2020-05-22 10:10:03", 12, 1),
       createData("Shanghai Tower", frontPageImage, "2020-05-24 13:25:01", 3, 2),
-      createData("Makkah Royal Clock Tower", frontPageImage, "2020-05-25 12:10:03", 14, 3),
-      createData("Ping An Finance Center", frontPageImage, "2020-05-26 15:22:08", 16, 4),
-      createData("Lotte World Tower", frontPageImage, "2020-05-26 19:13:03", 21, 5),
-      createData("One World Trade Center", frontPageImage, "2020-05-28 15:00:01", 5, 6),
-      createData("Guangzhou CTF Finance Centre", frontPageImage, "2020-05-29 09:56:00", 7, 7),
-      createData("Tianjin CTF Finance Centre", frontPageImage, "2020-05-31 15:12:43", 31, 8)
+      createData(
+        "Makkah Royal Clock Tower",
+        frontPageImage,
+        "2020-05-25 12:10:03",
+        14,
+        3
+      ),
+      createData(
+        "Ping An Finance Center",
+        frontPageImage,
+        "2020-05-26 15:22:08",
+        16,
+        4
+      ),
+      createData(
+        "Lotte World Tower",
+        frontPageImage,
+        "2020-05-26 19:13:03",
+        21,
+        5
+      ),
+      createData(
+        "One World Trade Center",
+        frontPageImage,
+        "2020-05-28 15:00:01",
+        5,
+        6
+      ),
+      createData(
+        "Guangzhou CTF Finance Centre",
+        frontPageImage,
+        "2020-05-29 09:56:00",
+        7,
+        7
+      ),
+      createData(
+        "Tianjin CTF Finance Centre",
+        frontPageImage,
+        "2020-05-31 15:12:43",
+        31,
+        8
+      ),
     ];
 
     return data;
@@ -108,31 +158,98 @@ export const BackendProvider = ({ children }) => {
 
   const getBuildingFromSlug = async () => {
     const buildingInformation = {
-      area: "Finland",
       details: {
-        name: "Talo",
-        year: "1900",
-        material: "Stone",
-        floors: "1",
+        name: {
+          value: "House",
+          suggestions: [],
+          comments: []
+        },
+        area: {
+          value: "Finland",
+          suggestions: [],
+          comments: []
+        },
+        year: {
+          value: "1900",
+          suggestions: [],
+          comments: []
+        },
+        material: {
+          value: "Wood",
+          suggestions: [],
+          comments: []
+        },
+        floors: {
+          value: 1,
+          suggestions: [],
+          comments: []
+        },
       },
       structure: {
-        wallMaterial: "Stone",
-        roofType: "Roof 1",
-        windowCount: "1",
+        wallMaterial: {
+          value: "Stone",
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 15
+            }
+          ],
+          comments: []
+        },
+        roofType: {
+          value: "Roof 1",
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 5
+            }
+          ],
+          comments: []
+        },
+        windowCount: {
+          value: 8,
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 45
+            }
+          ],
+          comments: []
+        },
       },
       ventilation: {
-        system: "Gravity based",
-        airTightness: "2",
+        system: {
+          value: "Machine based",
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 0
+            }
+          ],
+          comments: []
+        },
+        airTightness: {
+          value: 10,
+          suggestions: [],
+          comments: []
+        },
       },
       heating: {
-        system: "Heating 1",
+        system: {
+          value: "Oil",
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 100
+            }
+          ],
+          comments: []
+          },
       },
-    }
+    };
 
     return buildingInformation;
-  }
-
-  
+  };
 
   return (
     <BackendContext.Provider
@@ -149,7 +266,8 @@ export const BackendProvider = ({ children }) => {
         getHeatingTypes,
         getCountries,
         getSavedBuildings,
-        getBuildingFromSlug
+        getTips,
+        getBuildingFromSlug,
       }}
     >
       {children}

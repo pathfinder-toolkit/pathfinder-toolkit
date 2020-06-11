@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
@@ -11,10 +11,11 @@ const AreaSelection = () => {
   } = useEditor();
 
   const { getCountries } = useBackend();
-  const [selectedArea, setSelectedArea] = useState(buildingInformation.area);
+  const [selectedArea, setSelectedArea] = useState(
+    buildingInformation.details.area.value
+  );
+
   const [allowedCountries] = useState(getCountries());
-  const geoUrl =
-    "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);

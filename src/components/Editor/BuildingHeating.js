@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Fade,
-  Paper,
-} from "@material-ui/core";
+import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
@@ -15,7 +7,15 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "./DropdownSelect";
 
 const BuildingHeating = (props) => {
-  const [heatingType, setHeatingType] = useState("");
+  const {
+    buildingInformation,
+    setNavigationEnabled,
+    setSavedHeatingType,
+  } = useEditor();
+
+  const [heatingType, setHeatingType] = useState(
+    buildingInformation.heating.system.value
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -23,12 +23,6 @@ const BuildingHeating = (props) => {
   }, []);
 
   const { getHeatingTypes } = useBackend();
-
-  const {
-    buildingInformation,
-    setNavigationEnabled,
-    setSavedHeatingType,
-  } = useEditor();
 
   const heatingTypes = getHeatingTypes();
 

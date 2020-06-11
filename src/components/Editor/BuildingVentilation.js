@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Fade,
-  Paper,
-} from "@material-ui/core";
+import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
@@ -15,8 +7,15 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "./DropdownSelect";
 
 const BuildingVentilation = (props) => {
-  const [ventilationTypeOpen, setVentilationTypeOpen] = useState(false);
-  const [ventilationType, setVentilationType] = useState("");
+  const {
+    buildingInformation,
+    setNavigationEnabled,
+    setSavedVentilationType,
+  } = useEditor();
+
+  const [ventilationType, setVentilationType] = useState(
+    buildingInformation.ventilation.system.value
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -25,25 +24,11 @@ const BuildingVentilation = (props) => {
 
   const { getVentilationTypes } = useBackend();
 
-  const {
-    buildingInformation,
-    setNavigationEnabled,
-    setSavedVentilationType,
-  } = useEditor();
-
   const ventilationSystems = getVentilationTypes();
 
   const handleVentilationTypeChange = (value) => {
     setVentilationType(value);
     setSavedVentilationType(value);
-  };
-
-  const handleClose = () => {
-    setVentilationTypeOpen(false);
-  };
-
-  const handleVentilationOpen = () => {
-    setVentilationTypeOpen(true);
   };
 
   useEffect(() => {
