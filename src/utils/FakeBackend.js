@@ -200,7 +200,7 @@ export const BackendProvider = ({ children }) => {
           suggestions: [
             {
               suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 5
+              priority: 30
             }
           ],
           comments: []
@@ -229,7 +229,12 @@ export const BackendProvider = ({ children }) => {
         },
         airTightness: {
           value: 10,
-          suggestions: [],
+          suggestions: [
+            {
+              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 1
+            }
+          ],
           comments: []
         },
       },

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     suggestionAlert: {
         marginBottom:theme.spacing(1),
+        border: 2,
     }
   }));
 
@@ -27,7 +28,38 @@ const BuildingViewer = (props) => {
         return Object.keys(props.building).includes(category);
     }
 
+    const [topSuggestions, setTopSuggestions] = useState(null);
+
+
+    useEffect(() => {
+        const findCategoryItemsWithSuggestions = (buildingObject) => {
+            let categoryItemsWithSuggestions = [];
+            for (let category in buildingObject) {
+                for (let categoryItem in buildingObject[category] ) {
+                    if (Object.keys(buildingObject[category][categoryItem]).includes("suggestions")) {
+                        if (buildingObject[category][categoryItem].suggestions.length > 0) {
+                            categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(buildingObject[category][categoryItem]);
+                            console.log(categoryItemsWithSuggestions);
+                        }
+                    }
+                }
+            }
+            return categoryItemsWithSuggestions;
+        }
+
+        const categoryItemComparator = (categoryItem1, categoryItem2) => {
+            return categoryItem2.suggestions[0].priority - categoryItem1.suggestions[0].priority;
+        };
+        
+        const categoryItemsToSort = findCategoryItemsWithSuggestions(props.building);
+        const sortedCategoryItems = categoryItemsToSort.sort(categoryItemComparator);
+        console.log(sortedCategoryItems);
+        
+    },[props.building]);
+
     return <React.Fragment>
+
+
         {containsCategory("details") && (<DetailsCategory
             category={props.building.details}
             classes={classes}
