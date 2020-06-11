@@ -1,9 +1,9 @@
 import React from "react";
+import mapData from "../../json/mapdata_test.json"
 import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
 
 const AreaMap = (props) => {
-  const geoUrl =
-    "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  const geoUrl = mapData;
 
   const allowedCountries = props.allowedCountries;
   const selectedCountry = props.selectedCountry;
@@ -60,8 +60,8 @@ const AreaMap = (props) => {
 
   return (
     <ComposableMap
-      width={800}
-      height={410}
+      width="800"
+      height="410"
       projection="geoAzimuthalEqualArea"
       projectionConfig={mapConfig}
     >
