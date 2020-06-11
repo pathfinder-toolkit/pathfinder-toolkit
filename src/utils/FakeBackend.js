@@ -108,65 +108,65 @@ export const BackendProvider = ({ children }) => {
 
   const getBuildingFromSlug = async () => {
     const buildingInformation = {
-      area: {
-        value: "",
-        suggestions: [],
-        comments: []
-      },
       details: {
         name: {
-          value: "",
+          value: "House",
+          suggestions: [],
+          comments: []
+        },
+        area: {
+          value: "Finland",
           suggestions: [],
           comments: []
         },
         year: {
-          value: "",
+          value: "1900",
           suggestions: [],
           comments: []
         },
         material: {
-          value: "",
+          value: "Wood",
           suggestions: [],
           comments: []
         },
         floors: {
-          value: "",
+          value: 1,
           suggestions: [],
           comments: []
         },
       },
       structure: {
         wallMaterial: {
-          value: "",
+          value: "Stone",
           suggestions: [],
           comments: []
         },
         roofType: {
-          value: "",
+          value: "Roof 1",
           suggestions: [],
           comments: []
         },
         windowCount: {
-          value: "",
+          value: 8,
           suggestions: [],
           comments: []
         },
       },
       ventilation: {
         system: {
-          value: "",
+          value: "Machine based",
           suggestions: [],
           comments: []
         },
         airTightness: {
-          value: "",
+          value: 10,
           suggestions: [],
           comments: []
         },
       },
-        heating: {
-          system: {
-          value: "",
+      heating: {
+        system: {
+          value: "Heating 2",
           suggestions: [],
           comments: []
           },

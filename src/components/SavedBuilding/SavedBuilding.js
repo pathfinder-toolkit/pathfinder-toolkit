@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 import ActionToolbar from "./ActionToolbar.js";
+import BuildingViewer from "../BuildingViewer/BuildingViewer.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,9 +20,7 @@ const SavedBuilding = (props) => {
     return <Paper className={classes.root}>
         <Grid container className={classes.root}>
             <Grid item sm={10}>
-                <Typography>
-                    
-                </Typography>
+                <BuildingViewer building={props.building} />
             </Grid>
 
             <Grid item sm={2}>
