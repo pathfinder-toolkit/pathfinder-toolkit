@@ -19,11 +19,6 @@ const TopSuggestions = (props) => {
                 )
          })}
         
-        {/*<CategoryItem 
-        item={props.category.wallMaterial}
-        classes={props.classes}
-        />*/}
-        
     </Paper>
 }
 
