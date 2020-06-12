@@ -26,6 +26,7 @@ export const BackendProvider = ({ children }) => {
   const [roofTypes, setRoofTypes] = useState();
   const [heatingTypes, setHeatingTypes] = useState();
   const [ventilationTypes, setVentilationTypes] = useState();
+  const [buildingTypes, setBuildingTypes] = useState();
   const [tips, setTips] = useState();
 
   const fakeLogin = (username) => {
@@ -71,6 +72,7 @@ export const BackendProvider = ({ children }) => {
           ["Replace heating system", "Remove windows & doors"],
           "Placeholder tip"
         );
+        setBuildingTypes(["Building 1", "Building 2", "Building 3"]);
         resolve("resolved");
         setLoading(false);
       }, 2000);
@@ -99,6 +101,10 @@ export const BackendProvider = ({ children }) => {
 
   const getTips = (tag) => {
     return tips;
+  };
+
+  const getBuildingTypes = () => {
+    return buildingTypes;
   };
 
   const getSavedBuildings = async () => {
@@ -163,31 +169,31 @@ export const BackendProvider = ({ children }) => {
           propertyName: "Name",
           value: "House",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         area: {
           propertyName: "Area",
           value: "Finland",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         year: {
           propertyName: "Construction year",
           value: "1900",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         material: {
           propertyName: "Material",
           value: "Wood",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         floors: {
           propertyName: "Amount of floors",
           value: 1,
           suggestions: [],
-          comments: []
+          comments: [],
         },
       },
       structure: {
@@ -196,33 +202,36 @@ export const BackendProvider = ({ children }) => {
           value: "Stone",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 15
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 15,
+            },
           ],
-          comments: []
+          comments: [],
         },
         roofType: {
           propertyName: "Roof material",
           value: "Roof 1",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 30
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 30,
+            },
           ],
-          comments: []
+          comments: [],
         },
         windowCount: {
           propertyName: "Amount of windows",
           value: 8,
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 45
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 45,
+            },
           ],
-          comments: []
+          comments: [],
         },
       },
       ventilation: {
@@ -231,22 +240,24 @@ export const BackendProvider = ({ children }) => {
           value: "Machine based",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 0
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 0,
+            },
           ],
-          comments: []
+          comments: [],
         },
         airTightness: {
           propertyName: "Air tightness",
           value: 10,
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 1
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 1,
+            },
           ],
-          comments: []
+          comments: [],
         },
       },
       heating: {
@@ -255,20 +266,22 @@ export const BackendProvider = ({ children }) => {
           value: "Oil",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 100
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 100,
+            },
           ],
           comments: [
             {
               author: "John Doe",
               date: "2020-06-08 11:23:05",
-              commentText: "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
+              commentText: 
+                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
             }
           ]
-          },
-      },
-    };
+        },
+      }
+    }
 
     return buildingInformation;
   };
@@ -289,6 +302,7 @@ export const BackendProvider = ({ children }) => {
         getCountries,
         getSavedBuildings,
         getTips,
+        getBuildingTypes,
         getBuildingFromSlug,
       }}
     >

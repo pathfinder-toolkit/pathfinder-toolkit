@@ -15,8 +15,7 @@ import {
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
-import Tip from "./Tips";
-import Tips from "./Tips";
+import Tip from "./Tip";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,7 +75,6 @@ const Summary = () => {
               <Typography gutterBottom variant="subtitle1">
                 Changes that will improve energy effiency.
               </Typography>
-              <Tips />
             </Paper>
           </Grid>
           <Grid item sm={10} md={10} lg={10}>

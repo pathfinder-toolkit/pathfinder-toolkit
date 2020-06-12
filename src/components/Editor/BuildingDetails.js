@@ -6,13 +6,17 @@ import {
   TextField,
   Paper,
   Slider,
+  InputAdornment,
+  Input,
+  FormControl,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-import DropdownSelect from "./DropdownSelect";
+import DropdownSelect from "../reusable/DropdownSelect";
 import Tip from "./Tip";
+import SuggestionAlert from "../reusable/SuggestionAlert";
 
 const BuildingDetails = (props) => {
   const {
@@ -21,6 +25,7 @@ const BuildingDetails = (props) => {
     setSavedYear,
     setSavedFloors,
     setSavedMaterial,
+    setSavedFloorArea,
     setNavigationEnabled,
   } = useEditor();
 
@@ -31,12 +36,17 @@ const BuildingDetails = (props) => {
   const [buildingYear, setBuildingYear] = useState(
     buildingInformation.details.year.value
   );
+  const [buildingType, setBuildingType] = useState();
+  const [floorArea, setFloorArea] = useState(
+    buildingInformation.details.floorArea.value
+  );
   const [buildingFloors, setBuildingFloors] = useState(
     buildingInformation.details.floors.value
   );
 
-  const { getMaterials } = useBackend();
+  const { getMaterials, getBuildingTypes } = useBackend();
   const materials = getMaterials();
+  const buildingTypes = getBuildingTypes();
 
   const handleMaterialChange = (value) => {
     setMaterialValue(value);
@@ -48,12 +58,24 @@ const BuildingDetails = (props) => {
     setSavedName(event.target.value);
   };
 
+  const handleBuildingTypeChange = (event) => {
+    //setBuildingType(event.target.value);
+  };
+
+  const handleFloorAreaChange = (event) => {
+    setFloorArea(event.target.value);
+    setSavedFloorArea(event.target.value);
+  };
+
   const handleYearChange = (event, newValue) => {
     setBuildingYear(newValue);
     setSavedYear(newValue);
   };
 
   const handleFloorChange = (event) => {
+    if (event.target.value < 0) {
+      return;
+    }
     setBuildingFloors(event.target.value);
     setSavedFloors(event.target.value);
   };
@@ -76,34 +98,57 @@ const BuildingDetails = (props) => {
     <Fade in={loading}>
       <div className={props.style.root}>
         <div className={props.style.header}>
-          <Typography className={props.style.header} variant="h5">
-            Building details
-          </Typography>
+          <Typography variant="h5">Building details</Typography>
         </div>
         <Grid container spacing={4} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
-            <Paper className={props.style.category}>
-              <Grid item>
-                <TextField
-                  label="Building name"
-                  value={nameValue}
-                  onChange={handleNameChange}
-                />
+            <div className={props.style.category}>
+              <Grid container className={props.style.row} spacing={0}>
+                <Grid item>
+                  <TextField
+                    className={props.style.formComponent}
+                    label="Building name"
+                    value={nameValue}
+                    onChange={handleNameChange}
+                  />
+                </Grid>
+                <Grid item sm={2}>
+                  <TextField
+                    label="Floor area"
+                    className={props.style.formComponent}
+                    value={floorArea}
+                    onChange={handleFloorAreaChange}
+                    //InputProps={{
+                    // startAdornment: (
+                    //  <InputAdornment position="end">m2</InputAdornment>
+                    //),
+                    //}}
+                  />
+                </Grid>
+                <Grid item>
+                  <DropdownSelect
+                    className={props.style.formComponent}
+                    data={buildingTypes}
+                    label="Type"
+                    value={buildingType}
+                    id="type-dropdown"
+                    handler={handleBuildingTypeChange}
+                  />
+                </Grid>
+                <Grid item>
+                  <DropdownSelect
+                    className={props.style.formComponent}
+                    data={materials}
+                    label="Material"
+                    value={materialValue}
+                    id="material-dropdown"
+                    handler={handleMaterialChange}
+                  />
+                </Grid>
               </Grid>
-              <Grid item>
-                <DropdownSelect
-                  data={materials}
-                  label="Material"
-                  value={materialValue}
-                  id="test"
-                  handler={handleMaterialChange}
-                />
-              </Grid>
-              <Grid item>
-                <Typography gutterBottom>
-                  Building age {buildingYear}
-                </Typography>
+              <Grid container className={props.style.row} spacing={0}>
                 <Slider
+                  className={props.style.slider}
                   marks
                   valueLabelDisplay="auto"
                   step={10}
@@ -113,6 +158,9 @@ const BuildingDetails = (props) => {
                   max={2010}
                   onChange={handleYearChange}
                 />
+                <Typography variant="subtitle1" gutterBottom>
+                  Construction year {buildingYear}
+                </Typography>
               </Grid>
 
               <Typography variant="h6">Floors</Typography>
@@ -124,11 +172,17 @@ const BuildingDetails = (props) => {
               >
                 Count
               </TextField>
-            </Paper>
+            </div>
           </Grid>
-          <Grid item sm={4} md={4} lg={4}>
-            <Tip text="Tip text" title="Info" />
-            <Tip text="Tip text" />
+          <Grid
+            className={props.style.suggestionContainer}
+            item
+            sm={4}
+            md={4}
+            lg={4}
+          >
+            <Tip text="Text" title="Title"></Tip>
+            <Tip text="Text" title="Title"></Tip>
           </Grid>
         </Grid>
       </div>
