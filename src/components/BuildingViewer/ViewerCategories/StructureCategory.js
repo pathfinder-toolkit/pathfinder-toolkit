@@ -17,27 +17,18 @@ const StructureCategory = (props) => {
         {containsCategoryItem("wallMaterial") && (
         <CategoryItem 
         item={props.category.wallMaterial}
-        identifier="Wall material" 
-        value={props.category.wallMaterial.value} 
-        suggestions={props.category.wallMaterial.suggestions}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("roofType") && (
         <CategoryItem
         item={props.category.roofType}
-        identifier="Roof type"
-        value={props.category.roofType.value}
-        suggestions={props.category.roofType.suggestions}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("windowCount") && (
         <CategoryItem
         item={props.category.windowCount}
-        identifier="Window count"
-        value={props.category.windowCount.value}
-        suggestions={props.category.windowCount.suggestions}
         classes={props.classes}
         />)}
         

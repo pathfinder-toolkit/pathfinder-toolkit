@@ -22,7 +22,7 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    boxShadow: "0px 1px 5px #999",
+    boxShadow: "0px 1px 0px #999",
   },
   navButton: {
     "&:hover": {
