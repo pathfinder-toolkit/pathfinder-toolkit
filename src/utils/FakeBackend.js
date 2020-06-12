@@ -160,26 +160,31 @@ export const BackendProvider = ({ children }) => {
     const buildingInformation = {
       details: {
         name: {
+          propertyName: "Name",
           value: "House",
           suggestions: [],
           comments: []
         },
         area: {
+          propertyName: "Area",
           value: "Finland",
           suggestions: [],
           comments: []
         },
         year: {
+          propertyName: "Construction year",
           value: "1900",
           suggestions: [],
           comments: []
         },
         material: {
+          propertyName: "Material",
           value: "Wood",
           suggestions: [],
           comments: []
         },
         floors: {
+          propertyName: "Amount of floors",
           value: 1,
           suggestions: [],
           comments: []
@@ -187,6 +192,7 @@ export const BackendProvider = ({ children }) => {
       },
       structure: {
         wallMaterial: {
+          propertyName: "Wall material",
           value: "Stone",
           suggestions: [
             {
@@ -197,6 +203,7 @@ export const BackendProvider = ({ children }) => {
           comments: []
         },
         roofType: {
+          propertyName: "Roof material",
           value: "Roof 1",
           suggestions: [
             {
@@ -207,6 +214,7 @@ export const BackendProvider = ({ children }) => {
           comments: []
         },
         windowCount: {
+          propertyName: "Amount of windows",
           value: 8,
           suggestions: [
             {
@@ -219,6 +227,7 @@ export const BackendProvider = ({ children }) => {
       },
       ventilation: {
         system: {
+          propertyName: "Ventilation system",
           value: "Machine based",
           suggestions: [
             {
@@ -229,6 +238,7 @@ export const BackendProvider = ({ children }) => {
           comments: []
         },
         airTightness: {
+          propertyName: "Air tightness",
           value: 10,
           suggestions: [
             {
@@ -241,6 +251,7 @@ export const BackendProvider = ({ children }) => {
       },
       heating: {
         system: {
+          propertyName: "Heating system",
           value: "Oil",
           suggestions: [
             {

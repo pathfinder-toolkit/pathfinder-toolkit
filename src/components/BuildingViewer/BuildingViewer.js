@@ -28,7 +28,7 @@ const BuildingViewer = (props) => {
         return Object.keys(props.building).includes(category);
     }
 
-    const [topSuggestions, setTopSuggestions] = useState(null);
+    const [topSuggestionDataset, setTopSuggestionDataset] = useState(null);
 
 
     useEffect(() => {
@@ -50,15 +50,21 @@ const BuildingViewer = (props) => {
         const categoryItemComparator = (categoryItem1, categoryItem2) => {
             return categoryItem2.suggestions[0].priority - categoryItem1.suggestions[0].priority;
         };
-        
+
         const categoryItemsToSort = findCategoryItemsWithSuggestions(props.building);
         const sortedCategoryItems = categoryItemsToSort.sort(categoryItemComparator);
-        console.log(sortedCategoryItems);
+        const topCategories = sortedCategoryItems.slice(0,5);
+        
+        setTopSuggestionDataset(topCategories);
         
     },[props.building]);
 
     return <React.Fragment>
 
+        {topSuggestionDataset &&  (<DetailsCategory
+            category={props.building.details}
+            classes={classes}
+        />)}
 
         {containsCategory("details") && (<DetailsCategory
             category={props.building.details}
