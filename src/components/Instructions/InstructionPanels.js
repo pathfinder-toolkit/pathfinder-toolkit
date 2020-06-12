@@ -6,7 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     panelContainer: {
-      marginTop:20
+      marginTop:32,
+    },
+    panelItem: {
+      marginBottom:16,
     },
     panelHeading: {
       fontSize: theme.typography.pxToRem(18),
@@ -25,8 +28,8 @@ const InstructionPanels = () => {
       setExpandedPanel( newExpanded ? panel : false );
     }
 
-    return <Grid container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={2}>
-    <Grid item xs={8}>
+    return <Grid container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={0}>
+    <Grid item className={classes.panelItem} xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -44,7 +47,7 @@ const InstructionPanels = () => {
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item className={classes.panelItem} xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel2'} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -62,7 +65,7 @@ const InstructionPanels = () => {
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item className={classes.panelItem} xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel3'} onChange={handleChange('panel3')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -80,7 +83,7 @@ const InstructionPanels = () => {
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item className={classes.panelItem} xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel4'} onChange={handleChange('panel4')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}

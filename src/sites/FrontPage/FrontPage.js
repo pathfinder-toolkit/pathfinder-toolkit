@@ -32,12 +32,19 @@ const useStyles = makeStyles((theme) => ({
       textShadow: "-0.03em 0 black, 0 0.03em black, 0.03em 0 black, 0 -0.03em black",
       color: "white"
     },
+    infoGrid: {
+      display: "flex",
+      padding:0,
+      margin:0,
+      flexWrap:"nowrap"
+    },
     infoPaper: {
       marginLeft: 10,
+      marginRight: 10,
       marginTop: 10,
       height:100,
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column"
     },
     infoMessage: {
       margin:"auto",
@@ -77,7 +84,7 @@ const FrontPage = () => {
           </Grid>
         </Grid>
 
-        <Grid container direction="row" alignItems="center" spacing={2} >
+        <Grid container direction="row" alignItems="center" spacing={0} className={classes.infoGrid} >
           <Grid item xs={4}>
             <Paper className={classes.infoPaper}>
               <Typography className={classes.infoMessage} >Start by inputting your building details</Typography>
@@ -88,12 +95,12 @@ const FrontPage = () => {
               <Typography className={classes.infoMessage} >Pathfinder estimates your energy efficiency</Typography>
             </Paper>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4} >
             <Paper className={classes.infoPaper}>
               <Typography className={classes.infoMessage} >Check out our suggestion for improvements</Typography>
             </Paper>
           </Grid>
-        </Grid>
+    </Grid>
 
         <InstructionPanels />
 
