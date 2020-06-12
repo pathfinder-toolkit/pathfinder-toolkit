@@ -17,7 +17,8 @@ const VentilationCategory = (props) => {
         
         {containsCategoryItem("system") && (
         <CategoryItem 
-        identifier="System" 
+        item={props.category.system}
+        identifier="System"
         value={props.category.system.value} 
         suggestions={props.category.system.suggestions}
         classes={props.classes}
@@ -25,6 +26,7 @@ const VentilationCategory = (props) => {
 
         {containsCategoryItem("airTightness") && (
         <CategoryItem
+        item={props.category.airTightness}
         identifier="Air tightness"
         value={props.category.airTightness.value}
         suggestions={props.category.airTightness.suggestions}

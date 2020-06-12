@@ -3,8 +3,7 @@ import Paper from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CategoryItem from "./CategoryItem.js";
 
-
-const StructureCategory = (props) => {
+const TopSuggestions = (props) => {
     const classes = props.classes;
 
     const containsCategoryItem = (categoryItem) => {
@@ -12,11 +11,10 @@ const StructureCategory = (props) => {
     }
 
     return <Paper className={classes.categoryRoot}>
-        <Typography variant="h4" className={classes.categoryHeader}>Structure details</Typography>
+        <Typography variant="h4" className={classes.categoryHeader}>Top suggestions</Typography>
         
         {containsCategoryItem("wallMaterial") && (
         <CategoryItem 
-        item={props.category.wallMaterial}
         identifier="Wall material" 
         value={props.category.wallMaterial.value} 
         suggestions={props.category.wallMaterial.suggestions}
@@ -25,7 +23,6 @@ const StructureCategory = (props) => {
 
         {containsCategoryItem("roofType") && (
         <CategoryItem
-        item={props.category.roofType}
         identifier="Roof type"
         value={props.category.roofType.value}
         suggestions={props.category.roofType.suggestions}
@@ -34,7 +31,6 @@ const StructureCategory = (props) => {
 
         {containsCategoryItem("windowCount") && (
         <CategoryItem
-        item={props.category.windowCount}
         identifier="Window count"
         value={props.category.windowCount.value}
         suggestions={props.category.windowCount.suggestions}
@@ -44,4 +40,4 @@ const StructureCategory = (props) => {
     </Paper>
 }
 
-export default StructureCategory;
+export default TopSuggestions;
