@@ -13,6 +13,7 @@ import { useEditor } from "../../utils/EditorProvider";
 
 import DropdownSelect from "./DropdownSelect";
 import Tip from "./Tip";
+import SuggestionAlert from "../reusable/SuggestionAlert";
 
 const BuildingDetails = (props) => {
   const {
@@ -82,28 +83,33 @@ const BuildingDetails = (props) => {
         </div>
         <Grid container spacing={4} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
-            <Paper className={props.style.category}>
-              <Grid item>
-                <TextField
-                  label="Building name"
-                  value={nameValue}
-                  onChange={handleNameChange}
-                />
-              </Grid>
-              <Grid item>
-                <DropdownSelect
-                  data={materials}
-                  label="Material"
-                  value={materialValue}
-                  id="test"
-                  handler={handleMaterialChange}
-                />
+            <div className={props.style.category}>
+              <Grid container className={props.style.row} spacing={3}>
+                <Grid item>
+                  <TextField
+                    className={props.style.formComponent}
+                    label="Building name"
+                    value={nameValue}
+                    onChange={handleNameChange}
+                  />
+                </Grid>
+                <Grid item>
+                  <DropdownSelect
+                    className={props.style.formComponent}
+                    data={materials}
+                    label="Material"
+                    value={materialValue}
+                    id="test"
+                    handler={handleMaterialChange}
+                  />
+                </Grid>
               </Grid>
               <Grid item>
                 <Typography gutterBottom>
-                  Building age {buildingYear}
+                  Construction year {buildingYear}
                 </Typography>
                 <Slider
+                  className={props.style.formComponent}
                   marks
                   valueLabelDisplay="auto"
                   step={10}
@@ -124,12 +130,9 @@ const BuildingDetails = (props) => {
               >
                 Count
               </TextField>
-            </Paper>
+            </div>
           </Grid>
-          <Grid item sm={4} md={4} lg={4}>
-            <Tip text="Tip text" title="Info" />
-            <Tip text="Tip text" />
-          </Grid>
+          <Grid item sm={4} md={4} lg={4}></Grid>
         </Grid>
       </div>
     </Fade>

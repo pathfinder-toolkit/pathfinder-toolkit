@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Select, MenuItem, InputLabel, FormControl } from "@material-ui/core";
+import { Select, MenuItem, InputLabel } from "@material-ui/core";
 
 const DropdownSelect = (props) => {
   const value = props.value ? props.value : "";
   const data = props.data;
   const label = props.label;
   const id = props.id ? props.id : "empty";
-  const style = props.style ? props.style : "";
+  const className = props.className ? props.className : "";
 
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState(value);
@@ -33,7 +33,7 @@ const DropdownSelect = (props) => {
         labelId={id}
         id={id}
         open={open}
-        className={style}
+        className={className}
         onClose={handleClose}
         onOpen={handleOpen}
         value={selection}

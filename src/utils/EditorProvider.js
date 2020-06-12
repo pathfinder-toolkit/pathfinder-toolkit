@@ -77,7 +77,7 @@ export const EditorProvider = ({ children }) => {
     buildingInformation,
     setBuildingInformation,
   ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
   const [navigationEnabled, setNavigationEnabled] = useState(
     buildingInformation.area ? true : false
   );
