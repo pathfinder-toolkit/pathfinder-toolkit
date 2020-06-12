@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     suggestionAlert: {
         marginBottom:theme.spacing(4),
         marginRight:theme.spacing(2),
-        border: 2,
+        fontSizeAdjust: 0.6,
+        lineHeight: 1.8
     }
   }));
 

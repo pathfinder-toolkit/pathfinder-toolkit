@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import Comment from "./Comment.js";
 
 const Comments = (props) => {
+    const classes = props.classes;
     
     return <React.Fragment>
         <List>
@@ -12,7 +13,7 @@ const Comments = (props) => {
                     props.comments.map((comment, key) => {
                         return (
                             <React.Fragment>
-                                <Comment comment={comment} key={key} />
+                                <Comment comment={comment} key={key} classes={classes} />
                                 <Divider variant="inset" component="li" />
                             </React.Fragment>
                         )
