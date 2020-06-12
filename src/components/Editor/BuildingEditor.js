@@ -55,7 +55,7 @@ const BuildingEditor = () => {
       marginRight: theme.spacing(4),
     },
     slider: {
-      marginTop: theme.spacing(6),
+      marginTop: theme.spacing(5.5),
     },
     suggestionContainer: {
       marginTop: theme.spacing(0),

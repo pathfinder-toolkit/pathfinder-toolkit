@@ -25,6 +25,7 @@ const BuildingDetails = (props) => {
     setSavedYear,
     setSavedFloors,
     setSavedMaterial,
+    setSavedFloorArea,
     setNavigationEnabled,
   } = useEditor();
 
@@ -35,13 +36,17 @@ const BuildingDetails = (props) => {
   const [buildingYear, setBuildingYear] = useState(
     buildingInformation.details.year.value
   );
-  const [floorArea, setFloorArea] = useState();
+  const [buildingType, setBuildingType] = useState();
+  const [floorArea, setFloorArea] = useState(
+    buildingInformation.details.floorArea.value
+  );
   const [buildingFloors, setBuildingFloors] = useState(
     buildingInformation.details.floors.value
   );
 
-  const { getMaterials } = useBackend();
+  const { getMaterials, getBuildingTypes } = useBackend();
   const materials = getMaterials();
+  const buildingTypes = getBuildingTypes();
 
   const handleMaterialChange = (value) => {
     setMaterialValue(value);
@@ -53,8 +58,13 @@ const BuildingDetails = (props) => {
     setSavedName(event.target.value);
   };
 
+  const handleBuildingTypeChange = (event) => {
+    //setBuildingType(event.target.value);
+  };
+
   const handleFloorAreaChange = (event) => {
     setFloorArea(event.target.value);
+    setSavedFloorArea(event.target.value);
   };
 
   const handleYearChange = (event, newValue) => {
@@ -106,12 +116,23 @@ const BuildingDetails = (props) => {
                   <TextField
                     label="Floor area"
                     className={props.style.formComponent}
+                    value={floorArea}
                     onChange={handleFloorAreaChange}
                     //InputProps={{
-                     // startAdornment: (
-                      //  <InputAdornment position="end">m2</InputAdornment>
-                      //),
+                    // startAdornment: (
+                    //  <InputAdornment position="end">m2</InputAdornment>
+                    //),
                     //}}
+                  />
+                </Grid>
+                <Grid item>
+                  <DropdownSelect
+                    className={props.style.formComponent}
+                    data={buildingTypes}
+                    label="Type"
+                    value={buildingType}
+                    id="type-dropdown"
+                    handler={handleBuildingTypeChange}
                   />
                 </Grid>
                 <Grid item>
@@ -137,7 +158,7 @@ const BuildingDetails = (props) => {
                   max={2010}
                   onChange={handleYearChange}
                 />
-                <Typography gutterBottom>
+                <Typography variant="subtitle1" gutterBottom>
                   Construction year {buildingYear}
                 </Typography>
               </Grid>

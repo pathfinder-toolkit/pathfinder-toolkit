@@ -100,7 +100,6 @@ const BuildingStructure = (props) => {
           <TextField
             className={props.style.formComponent}
             size="small"
-            variant="filled"
             value={windowCount}
             type="number"
             onChange={handleWindowChange}
