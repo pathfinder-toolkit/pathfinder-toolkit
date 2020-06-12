@@ -26,10 +26,11 @@ const useStyles = makeStyles((theme) => ({
     },
     categoryItemText: {
         marginLeft: theme.spacing(1),
+        marginBottom: theme.spacing(1),
     },
     suggestionAlert: {
-        marginBottom:theme.spacing(1),
-        marginRight:theme.spacing(1),
+        marginBottom:theme.spacing(4),
+        marginRight:theme.spacing(2),
         border: 2,
     }
   }));

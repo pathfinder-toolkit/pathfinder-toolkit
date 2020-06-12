@@ -18,7 +18,7 @@ const CategoryItem = (props) => {
             })}
         </Grid>
         <Grid item xs={4}>
-            {props.item.suggestions && props.item.suggestions.length > 0 && <CommentContainer />}
+            {props.item.suggestions && props.item.suggestions.length > 0 && <CommentContainer comments={props.item.comments} />}
         </Grid>
     </Grid>
 }
