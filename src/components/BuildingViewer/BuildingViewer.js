@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Paper from "@material-ui/core/Paper";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
@@ -8,16 +9,27 @@ import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: "#eceef8",
+        margin:theme.spacing(2),
+        padding:theme.spacing(1),
+    },
     categoryRoot: {
+        borderRadius: theme.borderRadius,
+        padding: theme.spacing(1),
         margin: theme.spacing(2),
-        marginBottom: theme.spacing(4),
     },
     categoryHeader: {
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2),
+        marginLeft:theme.spacing(1),
+        marginTop:theme.spacing(2),
+        marginBottom:theme.spacing(2),
+    },
+    categoryItemText: {
+        marginLeft: theme.spacing(1),
     },
     suggestionAlert: {
         marginBottom:theme.spacing(1),
+        marginRight:theme.spacing(1),
         border: 2,
     }
   }));
@@ -60,7 +72,7 @@ const BuildingViewer = (props) => {
         
     },[props.building]);
 
-    return <React.Fragment>
+    return <Paper className={classes.root}>
 
         {topSuggestionDataset &&  (<TopSuggestions
             data={topSuggestionDataset}
@@ -83,7 +95,7 @@ const BuildingViewer = (props) => {
             category={props.building.ventilation}
             classes={classes}
         />)}
-    </React.Fragment>
+    </Paper>
 }
 
 export default BuildingViewer;

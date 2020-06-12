@@ -1,5 +1,5 @@
 import React from "react";
-import Paper from '@material-ui/core/Grid';
+import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 import CategoryItem from "./CategoryItem.js";
 
@@ -29,6 +29,7 @@ const StructureCategory = (props) => {
         {containsCategoryItem("windowCount") && (
         <CategoryItem
         item={props.category.windowCount}
+
         classes={props.classes}
         />)}
         
