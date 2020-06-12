@@ -10,7 +10,7 @@ import {
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-import DropdownSelect from "./DropdownSelect";
+import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingStructure = (props) => {
   const {
@@ -75,33 +75,30 @@ const BuildingStructure = (props) => {
         <Typography className={props.style.header} variant="h5">
           Structure details
         </Typography>
-        <Paper className={props.style.category}>
+        <div className={props.style.category}>
           <Typography variant="h6">Walls</Typography>
-          <FormControl className={props.style.formControl}>
-            <DropdownSelect
-              data={materials}
-              label="Material"
-              value={wallMaterial}
-              id="wall-material"
-              handler={handleMaterialChange}
-            />
-          </FormControl>
-        </Paper>
-        <Paper className={props.style.category}>
+
+          <DropdownSelect
+            className={props.style.formComponent}
+            data={materials}
+            label="Material"
+            value={wallMaterial}
+            id="wall-material"
+            handler={handleMaterialChange}
+          />
           <Typography variant="h6">Roof</Typography>
-          <FormControl className={props.style.formControl}>
-            <DropdownSelect
-              data={roofs}
-              label="Type"
-              value={roofType}
-              id="roof-type"
-              handler={handleRoofChange}
-            />
-          </FormControl>
-        </Paper>
-        <Paper className={props.style.category}>
+          <DropdownSelect
+            className={props.style.formComponent}
+            data={roofs}
+            label="Type"
+            value={roofType}
+            id="roof-type"
+            handler={handleRoofChange}
+          />
+
           <Typography variant="h6">Windows</Typography>
           <TextField
+            className={props.style.formComponent}
             size="small"
             variant="filled"
             value={windowCount}
@@ -110,7 +107,7 @@ const BuildingStructure = (props) => {
           >
             Count
           </TextField>
-        </Paper>
+        </div>
       </div>
     </Fade>
   );

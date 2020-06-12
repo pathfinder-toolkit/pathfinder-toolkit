@@ -38,11 +38,13 @@ const BuildingEditor = () => {
       minWidth: 120,
     },
     header: {
+      borderBottom: "1px solid #E0E0E0",
       marginBottom: theme.spacing(1),
     },
     category: {
       marginBottom: theme.spacing(2),
       padding: theme.spacing(0.5),
+      border: "0px solid black", //debug
     },
     row: {
       borderBottom: "1px solid #E0E0E0",
@@ -50,6 +52,15 @@ const BuildingEditor = () => {
     },
     formComponent: {
       marginBottom: theme.spacing(2),
+      marginRight: theme.spacing(4),
+    },
+    slider: {
+      marginTop: theme.spacing(6),
+    },
+    suggestionContainer: {
+      marginTop: theme.spacing(0),
+      padding: theme.spacing(0.5),
+      border: "px solid black" //debug
     }
   }));
 

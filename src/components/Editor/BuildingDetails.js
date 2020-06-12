@@ -6,12 +6,15 @@ import {
   TextField,
   Paper,
   Slider,
+  InputAdornment,
+  Input,
+  FormControl,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-import DropdownSelect from "./DropdownSelect";
+import DropdownSelect from "../reusable/DropdownSelect";
 import Tip from "./Tip";
 import SuggestionAlert from "../reusable/SuggestionAlert";
 
@@ -32,6 +35,7 @@ const BuildingDetails = (props) => {
   const [buildingYear, setBuildingYear] = useState(
     buildingInformation.details.year.value
   );
+  const [floorArea, setFloorArea] = useState();
   const [buildingFloors, setBuildingFloors] = useState(
     buildingInformation.details.floors.value
   );
@@ -49,12 +53,19 @@ const BuildingDetails = (props) => {
     setSavedName(event.target.value);
   };
 
+  const handleFloorAreaChange = (event) => {
+    setFloorArea(event.target.value);
+  };
+
   const handleYearChange = (event, newValue) => {
     setBuildingYear(newValue);
     setSavedYear(newValue);
   };
 
   const handleFloorChange = (event) => {
+    if (event.target.value < 0) {
+      return;
+    }
     setBuildingFloors(event.target.value);
     setSavedFloors(event.target.value);
   };
@@ -77,14 +88,12 @@ const BuildingDetails = (props) => {
     <Fade in={loading}>
       <div className={props.style.root}>
         <div className={props.style.header}>
-          <Typography className={props.style.header} variant="h5">
-            Building details
-          </Typography>
+          <Typography variant="h5">Building details</Typography>
         </div>
         <Grid container spacing={4} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={props.style.category}>
-              <Grid container className={props.style.row} spacing={3}>
+              <Grid container className={props.style.row} spacing={0}>
                 <Grid item>
                   <TextField
                     className={props.style.formComponent}
@@ -93,23 +102,32 @@ const BuildingDetails = (props) => {
                     onChange={handleNameChange}
                   />
                 </Grid>
+                <Grid item sm={2}>
+                  <TextField
+                    label="Floor area"
+                    className={props.style.formComponent}
+                    onChange={handleFloorAreaChange}
+                    //InputProps={{
+                     // startAdornment: (
+                      //  <InputAdornment position="end">m2</InputAdornment>
+                      //),
+                    //}}
+                  />
+                </Grid>
                 <Grid item>
                   <DropdownSelect
                     className={props.style.formComponent}
                     data={materials}
                     label="Material"
                     value={materialValue}
-                    id="test"
+                    id="material-dropdown"
                     handler={handleMaterialChange}
                   />
                 </Grid>
               </Grid>
-              <Grid item>
-                <Typography gutterBottom>
-                  Construction year {buildingYear}
-                </Typography>
+              <Grid container className={props.style.row} spacing={0}>
                 <Slider
-                  className={props.style.formComponent}
+                  className={props.style.slider}
                   marks
                   valueLabelDisplay="auto"
                   step={10}
@@ -119,6 +137,9 @@ const BuildingDetails = (props) => {
                   max={2010}
                   onChange={handleYearChange}
                 />
+                <Typography gutterBottom>
+                  Construction year {buildingYear}
+                </Typography>
               </Grid>
 
               <Typography variant="h6">Floors</Typography>
@@ -132,7 +153,16 @@ const BuildingDetails = (props) => {
               </TextField>
             </div>
           </Grid>
-          <Grid item sm={4} md={4} lg={4}></Grid>
+          <Grid
+            className={props.style.suggestionContainer}
+            item
+            sm={4}
+            md={4}
+            lg={4}
+          >
+            <Tip text="Text" title="Title"></Tip>
+            <Tip text="Text" title="Title"></Tip>
+          </Grid>
         </Grid>
       </div>
     </Fade>
