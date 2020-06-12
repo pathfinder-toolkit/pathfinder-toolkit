@@ -17,41 +17,31 @@ const DetailsCategory = (props) => {
         
         {containsCategoryItem("name") && (
         <CategoryItem 
-        identifier="Name" 
-        value={props.category.name.value} 
-        suggestions={props.category.name.suggestions}
+        item={props.category.name}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("area") && (
         <CategoryItem
-        identifier="Area"
-        value={props.category.area.value}
-        suggestions={props.category.area.suggestions}
+        item={props.category.area}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("year") && (
         <CategoryItem
-        identifier="Construction year"
-        value={props.category.year.value}
-        suggestions={props.category.year.suggestions}
+        item={props.category.year}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("material") && (
         <CategoryItem
-        identifier="Material"
-        value={props.category.material.value}
-        suggestions={props.category.material.suggestions}
+        item={props.category.material}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("floors") && (
         <CategoryItem
-        identifier="Amount of floors"
-        value={props.category.floors.value}
-        suggestions={props.category.floors.suggestions}
+        item={props.category.floors}
         classes={props.classes}
         />)}
         

@@ -3,6 +3,7 @@ import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
 import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
+import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -54,14 +55,14 @@ const BuildingViewer = (props) => {
         const categoryItemsToSort = findCategoryItemsWithSuggestions(props.building);
         const sortedCategoryItems = categoryItemsToSort.sort(categoryItemComparator);
         const topCategories = sortedCategoryItems.slice(0,5);
-        
+
         setTopSuggestionDataset(topCategories);
         
     },[props.building]);
 
     return <React.Fragment>
 
-        {topSuggestionDataset &&  (<DetailsCategory
+        {topSuggestionDataset &&  (<TopSuggestions
             category={props.building.details}
             classes={classes}
         />)}
