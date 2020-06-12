@@ -279,7 +279,6 @@ export const BackendProvider = ({ children }) => {
                 "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
             },
             {
-              author: "Jane Doe",
               date: "2020-06-09 10:45:06",
               commentText: 
                 "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
