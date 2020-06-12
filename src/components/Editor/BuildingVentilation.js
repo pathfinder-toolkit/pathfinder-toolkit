@@ -4,7 +4,7 @@ import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-import DropdownSelect from "./DropdownSelect";
+import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingVentilation = (props) => {
   const {

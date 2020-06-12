@@ -23,6 +23,10 @@ const useStateWithSessionStorage = (sessionStorageKey) => {
           value: "",
           suggestions: [],
         },
+        floorArea: {
+          value: "",
+          suggestions: [],
+        },
         material: {
           value: "",
           suggestions: [],
@@ -77,7 +81,7 @@ export const EditorProvider = ({ children }) => {
     buildingInformation,
     setBuildingInformation,
   ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
   const [navigationEnabled, setNavigationEnabled] = useState(
     buildingInformation.area ? true : false
   );
@@ -172,6 +176,17 @@ export const EditorProvider = ({ children }) => {
     console.log(buildingInformation);
   };
 
+  const setSavedFloorArea = (newFloorArea) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: {
+        ...buildingInformation.details,
+        floorArea: { ...buildingInformation.details.floorArea, value: newFloorArea },
+      },
+    }));
+    console.log(buildingInformation);
+  };
+
   const setSavedFloors = (newFloors) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
@@ -253,7 +268,6 @@ export const EditorProvider = ({ children }) => {
     console.log(buildingInformation);
   };
 
-
   const setSavedHeatingType = (newHeatingType) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
@@ -291,6 +305,7 @@ export const EditorProvider = ({ children }) => {
         setSavedVentilationType,
         setSavedHeatingType,
         setSavedFloors,
+        setSavedFloorArea,
       }}
     >
       {children}
