@@ -4,13 +4,16 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { makeStyles } from '@material-ui/core/styles';
 
+import Comments from "./CommentComponents/Comments.js";
+
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginRight: theme.spacing(1),
+        marginRight: theme.spacing(2),
+        marginBottom: theme.spacing(4),
     }
   }));
 
-const CommentContainer = () => {
+const CommentContainer = (props) => {
     const classes = useStyles();
     const [tabValue, setTabValue] = useState(0);
     
@@ -30,7 +33,7 @@ const CommentContainer = () => {
             <Tab label="Create comment" />
         </Tabs>
         {tabValue === 0 && (
-            <p>Comments</p>
+            <Comments comments={props.comments} />
         )}
         {tabValue === 1 && (
             <p>Comment Creation Form</p>
