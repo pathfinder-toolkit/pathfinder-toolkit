@@ -14,54 +14,69 @@ const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
       details: {
-        name: "",
+        name: {
+          propertyName: "Name",
+          value: "",
+          suggestions: [],
+        },
         area: {
+          propertyName: "Area",
           value: "",
           suggestions: [],
         },
         year: {
+          propertyName: "Construction year",
           value: "",
           suggestions: [],
         },
         floorArea: {
+          propertyName: "Floor area",
           value: "",
           suggestions: [],
         },
         material: {
+          propertyName: "Material",
           value: "",
           suggestions: [],
         },
         floors: {
+          propertyName: "Amount of floors",
           value: "",
           suggestions: [],
         },
       },
       structure: {
         wallMaterial: {
+          propertyName: "Wall material",
           value: "",
           suggestions: [],
         },
         roofType: {
+          propertyName: "Roof material",
           value: "",
           suggestions: [],
         },
         windowCount: {
+          propertyName: "Amount of windows",
           value: "",
           suggestions: [],
         },
       },
       ventilation: {
         system: {
+          propertyName: "Ventilation system",
           value: "",
           suggestions: [],
         },
         airTightness: {
+          propertyName: "Air tightness",
           value: "",
           suggestions: [],
         },
       },
       heating: {
         system: {
+          propertyName: "Heating system",
           value: "",
           suggestions: [],
         },
@@ -81,7 +96,7 @@ export const EditorProvider = ({ children }) => {
     buildingInformation,
     setBuildingInformation,
   ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(
     buildingInformation.area ? true : false
   );
@@ -149,7 +164,10 @@ export const EditorProvider = ({ children }) => {
   const setSavedName = (newName) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: { ...buildingInformation.details, name: newName },
+      details: {
+        ...buildingInformation.details,
+        name: { ...buildingInformation.details.name, value: newName },
+      },
     }));
     console.log(buildingInformation);
   };
@@ -181,7 +199,10 @@ export const EditorProvider = ({ children }) => {
       ...buildingInformation,
       details: {
         ...buildingInformation.details,
-        floorArea: { ...buildingInformation.details.floorArea, value: newFloorArea },
+        floorArea: {
+          ...buildingInformation.details.floorArea,
+          value: newFloorArea,
+        },
       },
     }));
     console.log(buildingInformation);

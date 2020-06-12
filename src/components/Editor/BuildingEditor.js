@@ -57,11 +57,26 @@ const BuildingEditor = () => {
     slider: {
       marginTop: theme.spacing(5.5),
     },
+    formButton: {
+      maxWidth: "40px",
+      maxHeight: "40px",
+      margin: theme.spacing(1),
+    },
+    valueText: {
+      border: "1px solid #E0E0E0",
+      borderRadius: "4px",
+      padding: theme.spacing(2),
+      width: "50px",
+      height: "40px",
+      textAlign: "center",
+      textJustify: "center",
+      marginTop: theme.spacing(1),
+    },
     suggestionContainer: {
       marginTop: theme.spacing(0),
       padding: theme.spacing(0.5),
-      border: "px solid black" //debug
-    }
+      border: "px solid black", //debug
+    },
   }));
 
   const styleComponent = useStylesForEditorComponent();
