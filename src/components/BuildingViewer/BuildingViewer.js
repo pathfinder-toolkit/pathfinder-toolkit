@@ -63,7 +63,7 @@ const BuildingViewer = (props) => {
     return <React.Fragment>
 
         {topSuggestionDataset &&  (<TopSuggestions
-            category={props.building.details}
+            data={topSuggestionDataset}
             classes={classes}
         />)}
 
