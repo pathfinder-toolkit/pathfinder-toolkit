@@ -271,10 +271,17 @@ export const BackendProvider = ({ children }) => {
               priority: 100,
             },
           ],
-          comments: [],
+          comments: [
+            {
+              author: "John Doe",
+              date: "2020-06-08 11:23:05",
+              commentText: 
+                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
+            }
+          ]
         },
-      },
-    };
+      }
+    }
 
     return buildingInformation;
   };

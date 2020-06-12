@@ -1,5 +1,5 @@
 import React from "react";
-import Paper from '@material-ui/core/Grid';
+import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 import CategoryItem from "./CategoryItem.js";
 
@@ -18,11 +18,6 @@ const TopSuggestions = (props) => {
              />
                 )
          })}
-        
-        {/*<CategoryItem 
-        item={props.category.wallMaterial}
-        classes={props.classes}
-        />*/}
         
     </Paper>
 }
