@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import frontPageImage from "../external/images/frontpage_house.jpg";
 
+import axios from "axios";
+import { useAuth0 } from "./react-auth0-spa";
+
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
@@ -17,6 +20,7 @@ const useStateWithSessionStorage = (sessionStorageKey) => {
 };
 
 export const BackendProvider = ({ children }) => {
+  const { getTokenSilently } = useAuth0();
   const [user, setUser] = useStateWithSessionStorage("userName");
   const [isLoggedIn, setIsLoggedIn] = useState(user || false);
 
@@ -28,6 +32,21 @@ export const BackendProvider = ({ children }) => {
   const [ventilationTypes, setVentilationTypes] = useState();
   const [buildingTypes, setBuildingTypes] = useState();
   const [tips, setTips] = useState();
+
+  const testRequest = async () => {
+    const address = process.env.REACT_APP_API_ROOT + "/buildings";
+    console.log("test: " + address);
+    try {
+      const response = await axios.get(address);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    testRequest();
+  }, []);
 
   const fakeLogin = (username) => {
     if (username === null || username === "") {

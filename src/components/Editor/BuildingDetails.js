@@ -9,6 +9,7 @@ import {
   InputAdornment,
   Input,
   FormControl,
+  Button,
 } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
@@ -32,7 +33,7 @@ const BuildingDetails = (props) => {
   const [materialValue, setMaterialValue] = useState(
     buildingInformation.details.material.value
   );
-  const [nameValue, setNameValue] = useState(buildingInformation.details.name);
+  const [nameValue, setNameValue] = useState(buildingInformation.details.name.value);
   const [buildingYear, setBuildingYear] = useState(
     buildingInformation.details.year.value
   );
@@ -172,6 +173,24 @@ const BuildingDetails = (props) => {
               >
                 Count
               </TextField>
+              <Grid container className={props.style.controls}>
+                <Button
+                  size="large"
+                  className={props.style.formButton}
+                  variant="outlined"
+                >
+                  -
+                </Button>
+
+                <Button
+                  size="large"
+                  className={props.style.formButton}
+                  variant="outlined"
+                >
+                  +
+                </Button>
+                <Typography className={props.style.valueText} align="center" display="block"variant="subtitle1">{buildingFloors}</Typography>
+              </Grid>
             </div>
           </Grid>
           <Grid
