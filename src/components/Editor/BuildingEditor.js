@@ -58,18 +58,17 @@ const BuildingEditor = () => {
       marginTop: theme.spacing(5.5),
     },
     formButton: {
-      maxWidth: "40px",
-      maxHeight: "40px",
       margin: theme.spacing(1),
+    },
+    controls: {
+      display: "flex",
     },
     valueText: {
       border: "1px solid #E0E0E0",
       borderRadius: "4px",
       padding: theme.spacing(2),
       width: "50px",
-      height: "40px",
-      textAlign: "center",
-      textJustify: "center",
+      height: "42px",
       marginTop: theme.spacing(1),
     },
     suggestionContainer: {

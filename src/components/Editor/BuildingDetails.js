@@ -173,7 +173,7 @@ const BuildingDetails = (props) => {
               >
                 Count
               </TextField>
-              <Grid container>
+              <Grid container className={props.style.controls}>
                 <Button
                   size="large"
                   className={props.style.formButton}
@@ -189,7 +189,7 @@ const BuildingDetails = (props) => {
                 >
                   +
                 </Button>
-                <Typography className={props.style.valueText} variant="subtitle1">{buildingFloors}</Typography>
+                <Typography className={props.style.valueText} align="center" display="block"variant="subtitle1">{buildingFloors}</Typography>
               </Grid>
             </div>
           </Grid>

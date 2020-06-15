@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
-import FrontPage from './sites/FrontPage/FrontPage';
-import LoginPage from './sites/LoginPage/LoginPage';
-import DesignPage from './sites/DesignPage/DesignPage'
-import RegisterPage from './sites/RegisterPage/RegisterPage';
-import FeedbackPage from './sites/FeedbackPage/FeedbackPage';
-import BuildingsPage from './sites/BuildingsPage/BuildingsPage';
-import SavedBuildingPage from './sites/SavedBuildingPage/SavedBuildingPage';
+import FrontPage from "./sites/FrontPage/FrontPage";
+import LoginPage from "./sites/LoginPage/LoginPage";
+import DesignPage from "./sites/DesignPage/DesignPage";
+import RegisterPage from "./sites/RegisterPage/RegisterPage";
+import FeedbackPage from "./sites/FeedbackPage/FeedbackPage";
+import BuildingsPage from "./sites/BuildingsPage/BuildingsPage";
+import SavedBuildingPage from "./sites/SavedBuildingPage/SavedBuildingPage";
 import { CssBaseline } from "@material-ui/core";
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-
   return (
     <CssBaseline>
       <Router history={history}>
@@ -23,7 +22,11 @@ function App() {
           <Route path="/register" exact component={RegisterPage}></Route>
           <Route path="/feedback" exact component={FeedbackPage}></Route>
           <Route path="/buildings" exact component={BuildingsPage}></Route>
-          <Route path="/buildings/:slug" exact component={SavedBuildingPage}></Route>
+          <Route
+            path="/buildings/:slug"
+            exact
+            component={SavedBuildingPage}
+          ></Route>
         </Switch>
       </Router>
     </CssBaseline>
