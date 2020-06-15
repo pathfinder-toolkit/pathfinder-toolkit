@@ -10,6 +10,14 @@ const useStyles = makeStyles((theme) => ({
     root: {
         marginRight: theme.spacing(2),
         marginBottom: theme.spacing(4),
+    },
+    commentAuthor: {
+        fontSizeAdjust: 0.6,
+        lineHeight:'180%'
+    },
+    commentText: {
+        fontSizeAdjust: 0.5,
+        lineHeight: 1.2
     }
   }));
 
@@ -33,7 +41,7 @@ const CommentContainer = (props) => {
             <Tab label="Create comment" />
         </Tabs>
         {tabValue === 0 && (
-            <Comments comments={props.comments} />
+            <Comments comments={props.comments} classes={classes} />
         )}
         {tabValue === 1 && (
             <p>Comment Creation Form</p>
