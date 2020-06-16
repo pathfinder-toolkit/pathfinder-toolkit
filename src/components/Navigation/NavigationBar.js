@@ -74,7 +74,6 @@ const NavigationBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           EnergyPathfinder
         </Typography>
-        {//<Button onClick={ () => privateRequest()}> test request</Button>}
         <IconButton
           onClick={() => {
             redirectTo("");
