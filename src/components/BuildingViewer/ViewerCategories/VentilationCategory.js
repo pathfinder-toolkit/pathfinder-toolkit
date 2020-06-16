@@ -1,5 +1,5 @@
 import React from "react";
-import Paper from '@material-ui/core/Grid';
+import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
@@ -17,17 +17,13 @@ const VentilationCategory = (props) => {
         
         {containsCategoryItem("system") && (
         <CategoryItem 
-        identifier="System" 
-        value={props.category.system.value} 
-        suggestions={props.category.system.suggestions}
+        item={props.category.system}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("airTightness") && (
         <CategoryItem
-        identifier="Air tightness"
-        value={props.category.airTightness.value}
-        suggestions={props.category.airTightness.suggestions}
+        item={props.category.airTightness}
         classes={props.classes}
         />)}
         

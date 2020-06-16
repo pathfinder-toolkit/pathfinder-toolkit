@@ -14,50 +14,69 @@ const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
       details: {
-        name: "",
+        name: {
+          propertyName: "Name",
+          value: "",
+          suggestions: [],
+        },
         area: {
+          propertyName: "Area",
           value: "",
           suggestions: [],
         },
         year: {
+          propertyName: "Construction year",
+          value: "",
+          suggestions: [],
+        },
+        floorArea: {
+          propertyName: "Floor area",
           value: "",
           suggestions: [],
         },
         material: {
+          propertyName: "Material",
           value: "",
           suggestions: [],
         },
         floors: {
+          propertyName: "Amount of floors",
           value: "",
           suggestions: [],
         },
       },
       structure: {
         wallMaterial: {
+          propertyName: "Wall material",
           value: "",
           suggestions: [],
         },
         roofType: {
+          propertyName: "Roof material",
           value: "",
           suggestions: [],
         },
         windowCount: {
+          propertyName: "Amount of windows",
           value: "",
           suggestions: [],
         },
       },
       ventilation: {
         system: {
+          propertyName: "Ventilation system",
           value: "",
           suggestions: [],
         },
         airTightness: {
+          propertyName: "Air tightness",
           value: "",
           suggestions: [],
         },
       },
       heating: {
         system: {
+          propertyName: "Heating system",
           value: "",
           suggestions: [],
         },
@@ -145,7 +164,10 @@ export const EditorProvider = ({ children }) => {
   const setSavedName = (newName) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
-      details: { ...buildingInformation.details, name: newName },
+      details: {
+        ...buildingInformation.details,
+        name: { ...buildingInformation.details.name, value: newName },
+      },
     }));
     console.log(buildingInformation);
   };
@@ -167,6 +189,20 @@ export const EditorProvider = ({ children }) => {
       details: {
         ...buildingInformation.details,
         year: { ...buildingInformation.details.year, value: newYear },
+      },
+    }));
+    console.log(buildingInformation);
+  };
+
+  const setSavedFloorArea = (newFloorArea) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      details: {
+        ...buildingInformation.details,
+        floorArea: {
+          ...buildingInformation.details.floorArea,
+          value: newFloorArea,
+        },
       },
     }));
     console.log(buildingInformation);
@@ -253,7 +289,6 @@ export const EditorProvider = ({ children }) => {
     console.log(buildingInformation);
   };
 
-
   const setSavedHeatingType = (newHeatingType) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
@@ -291,6 +326,7 @@ export const EditorProvider = ({ children }) => {
         setSavedVentilationType,
         setSavedHeatingType,
         setSavedFloors,
+        setSavedFloorArea,
       }}
     >
       {children}

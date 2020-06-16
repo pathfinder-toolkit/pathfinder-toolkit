@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import frontPageImage from "../external/images/frontpage_house.jpg";
 
+import axios from "axios";
+import { useAuth0 } from "./react-auth0-spa";
+
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
@@ -17,6 +20,7 @@ const useStateWithSessionStorage = (sessionStorageKey) => {
 };
 
 export const BackendProvider = ({ children }) => {
+  const { getTokenSilently } = useAuth0();
   const [user, setUser] = useStateWithSessionStorage("userName");
   const [isLoggedIn, setIsLoggedIn] = useState(user || false);
 
@@ -26,7 +30,23 @@ export const BackendProvider = ({ children }) => {
   const [roofTypes, setRoofTypes] = useState();
   const [heatingTypes, setHeatingTypes] = useState();
   const [ventilationTypes, setVentilationTypes] = useState();
+  const [buildingTypes, setBuildingTypes] = useState();
   const [tips, setTips] = useState();
+
+  const testRequest = async () => {
+    const address = process.env.REACT_APP_API_ROOT + "/buildings";
+    console.log("test: " + address);
+    try {
+      const response = await axios.get(address);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    testRequest();
+  }, []);
 
   const fakeLogin = (username) => {
     if (username === null || username === "") {
@@ -71,6 +91,7 @@ export const BackendProvider = ({ children }) => {
           ["Replace heating system", "Remove windows & doors"],
           "Placeholder tip"
         );
+        setBuildingTypes(["Building 1", "Building 2", "Building 3"]);
         resolve("resolved");
         setLoading(false);
       }, 2000);
@@ -99,6 +120,10 @@ export const BackendProvider = ({ children }) => {
 
   const getTips = (tag) => {
     return tips;
+  };
+
+  const getBuildingTypes = () => {
+    return buildingTypes;
   };
 
   const getSavedBuildings = async () => {
@@ -160,93 +185,136 @@ export const BackendProvider = ({ children }) => {
     const buildingInformation = {
       details: {
         name: {
+          propertyName: "Name",
           value: "House",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         area: {
+          propertyName: "Area",
           value: "Finland",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         year: {
+          propertyName: "Construction year",
           value: "1900",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         material: {
+          propertyName: "Material",
           value: "Wood",
           suggestions: [],
-          comments: []
+          comments: [],
         },
         floors: {
+          propertyName: "Amount of floors",
           value: 1,
           suggestions: [],
-          comments: []
+          comments: [],
         },
       },
       structure: {
         wallMaterial: {
+          propertyName: "Wall material",
           value: "Stone",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 15
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 15,
+            },
           ],
-          comments: []
+          comments: [],
         },
         roofType: {
+          propertyName: "Roof material",
           value: "Roof 1",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 5
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 30,
+            },
           ],
-          comments: []
+          comments: [],
         },
         windowCount: {
+          propertyName: "Amount of windows",
           value: 8,
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 45
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 45,
+            },
           ],
-          comments: []
+          comments: [],
         },
       },
       ventilation: {
         system: {
+          propertyName: "Ventilation system",
           value: "Machine based",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 0
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 0,
+            },
           ],
-          comments: []
+          comments: [],
         },
         airTightness: {
+          propertyName: "Air tightness",
           value: 10,
-          suggestions: [],
-          comments: []
+          suggestions: [
+            {
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 1,
+            },
+          ],
+          comments: [],
         },
       },
       heating: {
         system: {
+          propertyName: "Heating system",
           value: "Oil",
           suggestions: [
             {
-              suggestionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 100
-            }
+              suggestionText:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
+              priority: 100,
+            },
           ],
-          comments: []
-          },
-      },
-    };
+          comments: [
+            {
+              author: "John Doe",
+              sentiment: "positive",
+              date: "2020-06-08 11:23:05",
+              commentText: 
+                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
+            },
+            {
+              date: "2020-06-09 10:45:06",
+              sentiment: "negative",
+              commentText: 
+                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
+            },
+            {
+              author: "Jane Doe",
+              sentiment: "neutral",
+              date: "2020-06-10 09:22:53",
+              commentText: 
+                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
+            }
+          ]
+        },
+      }
+    }
 
     return buildingInformation;
   };
@@ -267,6 +335,7 @@ export const BackendProvider = ({ children }) => {
         getCountries,
         getSavedBuildings,
         getTips,
+        getBuildingTypes,
         getBuildingFromSlug,
       }}
     >

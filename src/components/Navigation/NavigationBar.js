@@ -16,26 +16,29 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { useBackend } from "../../utils/FakeBackend";
 import history from "../../utils/history";
 
+import { useAuth0 } from "../../utils/react-auth0-spa";
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    boxShadow: "0px 1px 5px #999",
+    boxShadow: "0px 1px 0px #999",
   },
   navButton: {
     "&:hover": {
       backgroundColor: "#354497",
-    }
+    },
   },
   title: {
     flexGrow: 1,
   },
 }));
 
-
 const NavigationBar = (props) => {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
   const { user, fakeLogout } = useBackend();
 
   const classes = useStyles();
@@ -54,28 +57,42 @@ const NavigationBar = (props) => {
 
   const redirectTo = (addr) => {
     history.push(addr);
-  }
+  };
 
   const _logout = () => {
     setLogoutAlert(true);
     fakeLogout();
-  }
+  };
 
   const _logoutAlertClose = () => {
     setLogoutAlert(false);
-  }
+  };
 
   return (
     <AppBar position="static">
       <Toolbar className={classes.navbar}>
-        <Typography variant="h6" className={classes.title}>EnergyPathfinder</Typography>
-        <IconButton onClick={() => { redirectTo('') }} color="inherit" className={classes.navButton} >
+        <Typography variant="h6" className={classes.title}>
+          EnergyPathfinder
+        </Typography>
+        <IconButton
+          onClick={() => {
+            redirectTo("");
+          }}
+          color="inherit"
+          className={classes.navButton}
+        >
           <Home />
         </IconButton>
-        <Button onClick={() => { redirectTo('/design') }} color="inherit" className={classes.navButton}>
+        <Button
+          onClick={() => {
+            redirectTo("/design");
+          }}
+          color="inherit"
+          className={classes.navButton}
+        >
           Design
         </Button>
-        {user && (
+        {isAuthenticated && (
           <div>
             <IconButton
               className={classes.navButton}
@@ -96,35 +113,47 @@ const NavigationBar = (props) => {
               onClose={handleProfileMenuClose}
             >
               <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
-              <MenuItem onClick={() => { redirectTo('/buildings') }}>
+              <MenuItem
+                onClick={() => {
+                  redirectTo("/buildings");
+                }}
+              >
                 Designed buildings
               </MenuItem>
-              <MenuItem onClick={() => { redirectTo('/feedback') }}>
+              <MenuItem
+                onClick={() => {
+                  redirectTo("/feedback");
+                }}
+              >
                 Give feedback
               </MenuItem>
-              <MenuItem onClick={_logout}>Logout</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </div>
         )}
-        {!user && (
-          <Button className={classes.navButton} onClick={() => { redirectTo('/login') }} color="inherit">
+        {!isAuthenticated && (
+          <Button
+            className={classes.navButton}
+            onClick={() => {
+              loginWithRedirect({});
+            }}
+            color="inherit"
+          >
             Login
           </Button>
         )}
-
       </Toolbar>
 
-      <Snackbar 
+      <Snackbar
         open={logoutAlert}
         autoHideDuration={6000}
         onClose={_logoutAlertClose}
-        anchorOrigin={ {horizontal: 'center', vertical: 'top' } }
+        anchorOrigin={{ horizontal: "center", vertical: "top" }}
       >
         <Alert onClose={_logoutAlertClose} severity="info">
           Successfully logged out.
         </Alert>
       </Snackbar>
-
     </AppBar>
   );
 };

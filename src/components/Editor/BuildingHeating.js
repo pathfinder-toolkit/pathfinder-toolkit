@@ -4,7 +4,7 @@ import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
-import DropdownSelect from "./DropdownSelect";
+import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingHeating = (props) => {
   const {
@@ -44,7 +44,7 @@ const BuildingHeating = (props) => {
         <Typography className={props.style.header} variant="h5">
           Heating details
         </Typography>
-        <Paper className={props.style.category}>
+        <div className={props.style.category}>
           <Typography variant="h6">General</Typography>
           <FormControl className={props.style.formControl}>
             <DropdownSelect
@@ -55,16 +55,16 @@ const BuildingHeating = (props) => {
               handler={handleHeatingTypeChange}
             />
           </FormControl>
-        </Paper>
-        <Paper className={props.style.category}>
+        </div>
+        <div className={props.style.category}>
           <Typography variant="h6">Energy source</Typography>
-        </Paper>
-        <Paper className={props.style.category}>
+        </div>  
+        <div className={props.style.category}>
           <Typography variant="h6">Heat distribution</Typography>
-        </Paper>
-        <Paper className={props.style.category}>
+        </div>
+        <div className={props.style.category}>
           <Typography variant="h6">Automation</Typography>
-        </Paper>
+        </div>
       </div>
     </Fade>
   );

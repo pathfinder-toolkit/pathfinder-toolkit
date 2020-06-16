@@ -1,5 +1,5 @@
 import React from "react";
-import Paper from '@material-ui/core/Grid';
+import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 import CategoryItem from "./CategoryItem.js";
 
@@ -16,25 +16,20 @@ const StructureCategory = (props) => {
         
         {containsCategoryItem("wallMaterial") && (
         <CategoryItem 
-        identifier="Wall material" 
-        value={props.category.wallMaterial.value} 
-        suggestions={props.category.wallMaterial.suggestions}
+        item={props.category.wallMaterial}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("roofType") && (
         <CategoryItem
-        identifier="Roof type"
-        value={props.category.roofType.value}
-        suggestions={props.category.roofType.suggestions}
+        item={props.category.roofType}
         classes={props.classes}
         />)}
 
         {containsCategoryItem("windowCount") && (
         <CategoryItem
-        identifier="Window count"
-        value={props.category.windowCount.value}
-        suggestions={props.category.windowCount.suggestions}
+        item={props.category.windowCount}
+
         classes={props.classes}
         />)}
         

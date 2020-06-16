@@ -1,5 +1,5 @@
 import React from "react";
-import Paper from '@material-ui/core/Grid';
+import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
@@ -17,9 +17,7 @@ const HeatingCategory = (props) => {
         
         {containsCategoryItem("system") && (
         <CategoryItem 
-        identifier="Heating system" 
-        value={props.category.system.value}
-        suggestions={props.category.system.suggestions}
+        item={props.category.system}
         classes={props.classes}
         />)}
 
