@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
+import ImageWithModal from "../../reusable/ImageWithModal";
 
 
 const DetailsCategory = (props) => {
@@ -14,6 +15,13 @@ const DetailsCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Building details</Typography>
+
+        {containsCategoryItem("image") && (
+        <ImageWithModal
+        image={props.category.image.value}
+        height={400}
+        width={400}
+        />)}
         
         {containsCategoryItem("name") && (
         <CategoryItem 
@@ -54,12 +62,6 @@ const DetailsCategory = (props) => {
         {containsCategoryItem("description") && (
         <CategoryItem
         item={props.category.description}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("image") && (
-        <CategoryItem
-        item={props.category.image}
         classes={props.classes}
         />)}
         

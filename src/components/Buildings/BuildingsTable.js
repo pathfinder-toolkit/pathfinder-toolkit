@@ -174,7 +174,7 @@ const BuildingsTable = () => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">
-                        <ImageWithModal image={row.image} />
+                        <ImageWithModal image={row.image} width={90} height={90}/>
                       </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
