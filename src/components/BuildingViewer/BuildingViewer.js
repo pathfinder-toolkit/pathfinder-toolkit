@@ -85,12 +85,16 @@ const BuildingViewer = (props) => {
             category={props.building.details}
             classes={classes}
         />)}
-        {containsCategory("structure") && (<StructureCategory
-            category={props.building.structure}
-            classes={classes}
-        />)}
         {containsCategory("heating") && (<HeatingCategory
             category={props.building.heating}
+            classes={classes}
+        />)}
+        {containsCategory("electricity") && (<HeatingCategory
+            category={props.building.heating}
+            classes={classes}
+        />)}
+        {containsCategory("structure") && (<StructureCategory
+            category={props.building.structure}
             classes={classes}
         />)}
         {containsCategory("ventilation") && (<VentilationCategory
