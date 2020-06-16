@@ -20,16 +20,39 @@ const StructureCategory = (props) => {
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("roofType") && (
-        <CategoryItem
-        item={props.category.roofType}
+        {containsCategoryItem("wallThickness") && (
+        <CategoryItem 
+        item={props.category.wallThickness}
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("windowCount") && (
-        <CategoryItem
-        item={props.category.windowCount}
+        {containsCategoryItem("windowAmount") && (
+        <CategoryItem 
+        item={props.category.windowAmount}
+        classes={props.classes}
+        />)}
 
+        {containsCategoryItem("doorMaterial") && (
+        <CategoryItem 
+        item={props.category.doorMaterial}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("doorAmount") && (
+        <CategoryItem 
+        item={props.category.doorAmount}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("roofMaterial") && (
+        <CategoryItem 
+        item={props.category.roofMaterial}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("roofInsulation") && (
+        <CategoryItem 
+        item={props.category.roofInsulation}
         classes={props.classes}
         />)}
         

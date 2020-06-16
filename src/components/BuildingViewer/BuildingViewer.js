@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
-import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
+import ElectricityCategory from "./ViewerCategories/ElectricityCategory.js"
+import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
 import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 
@@ -85,12 +86,16 @@ const BuildingViewer = (props) => {
             category={props.building.details}
             classes={classes}
         />)}
-        {containsCategory("structure") && (<StructureCategory
-            category={props.building.structure}
-            classes={classes}
-        />)}
         {containsCategory("heating") && (<HeatingCategory
             category={props.building.heating}
+            classes={classes}
+        />)}
+        {containsCategory("electricity") && (<ElectricityCategory
+            category={props.building.electricity}
+            classes={classes}
+        />)}
+        {containsCategory("structure") && (<StructureCategory
+            category={props.building.structure}
             classes={classes}
         />)}
         {containsCategory("ventilation") && (<VentilationCategory
