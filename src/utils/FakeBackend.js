@@ -96,61 +96,6 @@ export const BackendProvider = ({ children }) => {
     return buildingTypes;
   };
 
-  const getSavedBuildings = async () => {
-    const createData = (name, image, date, improvements, id) => {
-      return { name, image, date, improvements, id };
-    };
-
-    const data = [
-      createData("Burj Khalifa", frontPageImage, "2020-05-22 10:10:03", 12, 1),
-      createData("Shanghai Tower", frontPageImage, "2020-05-24 13:25:01", 3, 2),
-      createData(
-        "Makkah Royal Clock Tower",
-        frontPageImage,
-        "2020-05-25 12:10:03",
-        14,
-        3
-      ),
-      createData(
-        "Ping An Finance Center",
-        frontPageImage,
-        "2020-05-26 15:22:08",
-        16,
-        4
-      ),
-      createData(
-        "Lotte World Tower",
-        frontPageImage,
-        "2020-05-26 19:13:03",
-        21,
-        5
-      ),
-      createData(
-        "One World Trade Center",
-        frontPageImage,
-        "2020-05-28 15:00:01",
-        5,
-        6
-      ),
-      createData(
-        "Guangzhou CTF Finance Centre",
-        frontPageImage,
-        "2020-05-29 09:56:00",
-        7,
-        7
-      ),
-      createData(
-        "Tianjin CTF Finance Centre",
-        frontPageImage,
-        "2020-05-31 15:12:43",
-        31,
-        8
-      ),
-    ];
-
-    return data;
-  };
-
   const getBuildingFromSlug = async () => {
     const buildingInformation = {
       "details": {
@@ -293,6 +238,32 @@ export const BackendProvider = ({ children }) => {
     return buildingInformation;
   };
 
+  const getStoredBuildings = async () => {
+
+    //const token = await getTokenSilently();
+
+    const address = process.env.REACT_APP_API_ROOT + "/buildings/me/";
+
+    /*let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    axios.get(address, axiosConfig).then((response) => {
+      setUserScore(response.data.score);
+    });*/
+
+    const response = await axios.get(address)
+    console.log(response);
+    if (Object.keys(response).includes("data")) {
+      return response.data;
+    } else {
+      return null;
+    }
+  };
+
   return (
     <BackendContext.Provider
       value={{
@@ -303,7 +274,7 @@ export const BackendProvider = ({ children }) => {
         getVentilationTypes,
         getHeatingTypes,
         getCountries,
-        getSavedBuildings,
+        getStoredBuildings,
         getTips,
         getBuildingTypes,
         getBuildingFromSlug,

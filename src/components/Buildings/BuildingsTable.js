@@ -95,16 +95,18 @@ const BuildingsTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const {getSavedBuildings} = useBackend();
+  const {getStoredBuildings} = useBackend();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-        const data = await getSavedBuildings();
+      const data = await getStoredBuildings();
+      if (data) {
         setRows(data);
+      }
     }
     fetchData();
-  },[getSavedBuildings]);
+  },[]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -126,9 +128,8 @@ const BuildingsTable = () => {
   const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Saved building name' },
     { id: 'image', numeric: false, disablePadding: false, label: 'Image'},
-    { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
-    { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
-    { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
+    { id: 'creationDate', numeric: true, disablePadding: false, label: 'Creation date' },
+    { id: 'slug', numeric: true, disablePadding: false, label: 'Open in detail' },
   ];
 
   const _handleClick = (slug) => {
@@ -176,9 +177,8 @@ const BuildingsTable = () => {
                       <TableCell align="left">
                         <ImageWithModal image={row.image} width={90} height={90}/>
                       </TableCell>
-                      <TableCell align="right">{row.date}</TableCell>
-                      <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.id)}}> <Launch /> </Button></TableCell>
+                      <TableCell align="right">{row.creationDate}</TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.slug)}}> <Launch /> </Button></TableCell>
                     </TableRow>
                   );
                 })}
