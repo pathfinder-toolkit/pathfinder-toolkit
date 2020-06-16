@@ -27,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
     },
     categoryItemText: {
         marginLeft: theme.spacing(1),
-        marginBottom: theme.spacing(1),
+        marginTop: theme.spacing(1.5),
+    },
+    categoryItemLongText: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        boxDecorationBreak: "clone",
+        fontSizeAdjust: 0.7
     },
     suggestionAlert: {
         marginBottom:theme.spacing(4),

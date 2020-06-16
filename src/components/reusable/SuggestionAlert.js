@@ -9,7 +9,7 @@ const SuggestionAlert = (props) => {
 
     const checkPriority = (priority) => {
         let severity, alertTitle;
-        if (priority == 0) {
+        if (priority === 0) {
             severity = "success";
             alertTitle = "No improvement suggestion";
         } else if (priority> 0 && priority < 20) {
