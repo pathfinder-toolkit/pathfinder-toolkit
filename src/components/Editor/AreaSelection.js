@@ -7,12 +7,13 @@ const AreaSelection = () => {
   const {
     buildingInformation,
     setSavedProperty,
+    getSavedProperty,
     setNavigationEnabled,
   } = useEditor();
 
   const { getCountries } = useBackend();
   const [selectedArea, setSelectedArea] = useState(
-    buildingInformation.details.area.value
+    getSavedProperty("details", "area")
   );
 
   const [allowedCountries] = useState(getCountries());

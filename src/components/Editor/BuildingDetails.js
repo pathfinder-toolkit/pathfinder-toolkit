@@ -23,22 +23,23 @@ const BuildingDetails = (props) => {
   const {
     buildingInformation,
     setSavedProperty,
+    getSavedProperty,
     setNavigationEnabled,
   } = useEditor();
 
   const [materialValue, setMaterialValue] = useState();
   const [nameValue, setNameValue] = useState(
-    buildingInformation.details.name.value
+    getSavedProperty("details", "name")
   );
   const [buildingYear, setBuildingYear] = useState(
-    buildingInformation.details.year.value
+    getSavedProperty("details", "year")
   );
   const [buildingType, setBuildingType] = useState();
   const [floorArea, setFloorArea] = useState(
-    buildingInformation.details.floorArea.value
+    getSavedProperty("details", "floorArea")
   );
   const [buildingFloors, setBuildingFloors] = useState(
-    buildingInformation.details.floorsAmount.value
+    getSavedProperty("floorsAmount", "name")
   );
 
   const { getMaterials, getBuildingTypes } = useBackend();
@@ -82,9 +83,7 @@ const BuildingDetails = (props) => {
   }, []);
 
   useEffect(() => {
-    if (
-      buildingInformation.details.name
-    ) {
+    if (buildingInformation.details.name) {
       setNavigationEnabled(true);
     }
   }, [buildingInformation.details]);
