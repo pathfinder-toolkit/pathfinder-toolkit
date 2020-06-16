@@ -10,11 +10,11 @@ const BuildingHeating = (props) => {
   const {
     buildingInformation,
     setNavigationEnabled,
-    setSavedHeatingType,
+    setSavedProperty,
   } = useEditor();
 
   const [heatingType, setHeatingType] = useState(
-    buildingInformation.heating.system.value
+    buildingInformation.heating.heatingSystem.value
   );
 
   const [loading, setLoading] = useState(false);
@@ -28,11 +28,11 @@ const BuildingHeating = (props) => {
 
   const handleHeatingTypeChange = (value) => {
     setHeatingType(value);
-    setSavedHeatingType(value);
+    setSavedProperty("heating", "heatingSystem", value);
   };
 
   useEffect(() => {
-    if (buildingInformation.heating.system) {
+    if (buildingInformation.heating.heatingSystem.value) {
       setNavigationEnabled(true);
     }
   }, [buildingInformation.heating]);
@@ -58,7 +58,7 @@ const BuildingHeating = (props) => {
         </div>
         <div className={props.style.category}>
           <Typography variant="h6">Energy source</Typography>
-        </div>  
+        </div>
         <div className={props.style.category}>
           <Typography variant="h6">Heat distribution</Typography>
         </div>

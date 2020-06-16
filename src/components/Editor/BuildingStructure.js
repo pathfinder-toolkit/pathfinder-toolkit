@@ -15,19 +15,15 @@ import DropdownSelect from "../reusable/DropdownSelect";
 const BuildingStructure = (props) => {
   const {
     buildingInformation,
-    setSavedWallMaterial,
-    setSavedRoofType,
-    setSavedWindowCount,
+    setSavedProperty,
     setNavigationEnabled,
   } = useEditor();
   const [wallMaterial, setWallMaterial] = useState(
     buildingInformation.structure.wallMaterial.value
   );
-  const [roofType, setRoofType] = useState(
-    buildingInformation.structure.roofType.value
-  );
+  const [roofType, setRoofType] = useState();
   const [windowCount, setWindowCount] = useState(
-    buildingInformation.structure.windowCount.value
+    buildingInformation.structure.windowAmount.value
   );
 
   const [loading, setLoading] = useState(false);
@@ -42,12 +38,11 @@ const BuildingStructure = (props) => {
 
   const handleMaterialChange = (value) => {
     setWallMaterial(value);
-    setSavedWallMaterial(value);
+    setSavedProperty("structure", "wallMaterial", value);
   };
 
   const handleRoofChange = (value) => {
     setRoofType(value);
-    setSavedRoofType(value);
   };
 
   const handleWindowChange = (event) => {
@@ -55,14 +50,13 @@ const BuildingStructure = (props) => {
       return;
     }
     setWindowCount(event.target.value);
-    setSavedWindowCount(event.target.value);
+    setSavedProperty("structure", "windowAmount", event.target.value);
   };
 
   useEffect(() => {
     if (
-      buildingInformation.structure.wallMaterial &&
-      buildingInformation.structure.roofType &&
-      buildingInformation.structure.windowCount
+      buildingInformation.structure.wallMaterial.value &&
+      buildingInformation.structure.windowAmount.value
     ) {
       setNavigationEnabled(true);
     }

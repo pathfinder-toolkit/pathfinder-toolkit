@@ -22,18 +22,14 @@ import SuggestionAlert from "../reusable/SuggestionAlert";
 const BuildingDetails = (props) => {
   const {
     buildingInformation,
-    setSavedName,
-    setSavedYear,
-    setSavedFloors,
-    setSavedMaterial,
-    setSavedFloorArea,
+    setSavedProperty,
     setNavigationEnabled,
   } = useEditor();
 
-  const [materialValue, setMaterialValue] = useState(
-    buildingInformation.details.material.value
+  const [materialValue, setMaterialValue] = useState();
+  const [nameValue, setNameValue] = useState(
+    buildingInformation.details.name.value
   );
-  const [nameValue, setNameValue] = useState(buildingInformation.details.name.value);
   const [buildingYear, setBuildingYear] = useState(
     buildingInformation.details.year.value
   );
@@ -42,7 +38,7 @@ const BuildingDetails = (props) => {
     buildingInformation.details.floorArea.value
   );
   const [buildingFloors, setBuildingFloors] = useState(
-    buildingInformation.details.floors.value
+    buildingInformation.details.floorsAmount.value
   );
 
   const { getMaterials, getBuildingTypes } = useBackend();
@@ -51,12 +47,11 @@ const BuildingDetails = (props) => {
 
   const handleMaterialChange = (value) => {
     setMaterialValue(value);
-    setSavedMaterial(value);
   };
 
   const handleNameChange = (event) => {
     setNameValue(event.target.value);
-    setSavedName(event.target.value);
+    setSavedProperty("details", "name", event.target.value);
   };
 
   const handleBuildingTypeChange = (event) => {
@@ -65,12 +60,12 @@ const BuildingDetails = (props) => {
 
   const handleFloorAreaChange = (event) => {
     setFloorArea(event.target.value);
-    setSavedFloorArea(event.target.value);
+    setSavedProperty("details", "floorArea", event.target.value);
   };
 
   const handleYearChange = (event, newValue) => {
     setBuildingYear(newValue);
-    setSavedYear(newValue);
+    setSavedProperty("details", "year", event.target.value);
   };
 
   const handleFloorChange = (event) => {
@@ -78,7 +73,7 @@ const BuildingDetails = (props) => {
       return;
     }
     setBuildingFloors(event.target.value);
-    setSavedFloors(event.target.value);
+    setSavedProperty("details", "floorsAmount", event.target.value);
   };
 
   const [loading, setLoading] = useState(false);
@@ -88,8 +83,7 @@ const BuildingDetails = (props) => {
 
   useEffect(() => {
     if (
-      buildingInformation.details.name &&
-      buildingInformation.details.material
+      buildingInformation.details.name
     ) {
       setNavigationEnabled(true);
     }
@@ -189,7 +183,14 @@ const BuildingDetails = (props) => {
                 >
                   +
                 </Button>
-                <Typography className={props.style.valueText} align="center" display="block"variant="subtitle1">{buildingFloors}</Typography>
+                <Typography
+                  className={props.style.valueText}
+                  align="center"
+                  display="block"
+                  variant="subtitle1"
+                >
+                  {buildingFloors}
+                </Typography>
               </Grid>
             </div>
           </Grid>

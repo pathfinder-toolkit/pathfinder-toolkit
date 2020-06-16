@@ -6,7 +6,7 @@ import AreaMap from "./AreaMap";
 const AreaSelection = () => {
   const {
     buildingInformation,
-    setSavedArea,
+    setSavedProperty,
     setNavigationEnabled,
   } = useEditor();
 
@@ -19,7 +19,7 @@ const AreaSelection = () => {
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
-    setSavedArea(selectedCountry);
+    setSavedProperty("details", "area", selectedCountry);
     setNavigationEnabled(true);
   };
 
