@@ -104,7 +104,7 @@ const BuildingsTable = () => {
         setRows(data);
     }
     fetchData();
-  },[]);
+  },[getSavedBuildings]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
