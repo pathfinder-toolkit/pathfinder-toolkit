@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const NavigationBar = (props) => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-  const { user, fakeLogout } = useBackend();
+  const { user, fakeLogout, privateRequest } = useBackend();
 
   const classes = useStyles();
 
@@ -74,6 +74,7 @@ const NavigationBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           EnergyPathfinder
         </Typography>
+        <Button onClick={ () => privateRequest()}> test request</Button>
         <IconButton
           onClick={() => {
             redirectTo("");
@@ -127,7 +128,7 @@ const NavigationBar = (props) => {
               >
                 Give feedback
               </MenuItem>
-              <MenuItem onClick={logout}>Logout</MenuItem>
+              <MenuItem onClick={() => logout()}>Logout</MenuItem>
             </Menu>
           </div>
         )}
@@ -135,7 +136,7 @@ const NavigationBar = (props) => {
           <Button
             className={classes.navButton}
             onClick={() => {
-              loginWithRedirect({});
+              loginWithRedirect({redirect_uri: process.env.REACT_APP_AUTH_LOGIN_URL});
             }}
             color="inherit"
           >
