@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const NavigationBar = (props) => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-  const { user, fakeLogout } = useBackend();
+  const { user, fakeLogout, privateRequest } = useBackend();
 
   const classes = useStyles();
 
@@ -127,7 +127,13 @@ const NavigationBar = (props) => {
               >
                 Give feedback
               </MenuItem>
-              <MenuItem onClick={logout}>Logout</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL })
+                }
+              >
+                Logout
+              </MenuItem>
             </Menu>
           </div>
         )}

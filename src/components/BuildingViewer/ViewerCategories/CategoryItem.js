@@ -10,7 +10,7 @@ const CategoryItem = (props) => {
 
     return <Grid container>
         <Grid item xs={4}>
-            <Typography className={classes.categoryItemText}variant="h6">{props.item.propertyName}: {props.item.value}</Typography>
+            <Typography className={classes.categoryItemText}variant="h6">{props.item.propertyName}: {typeof props.item.value === "boolean" ? props.item.value.toString() : props.item.value}</Typography>
         </Grid>
         <Grid item xs={4}>
             {props.item.suggestions && props.item.suggestions.map((suggestion, key) => {

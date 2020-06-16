@@ -15,15 +15,9 @@ const VentilationCategory = (props) => {
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Ventilation details</Typography>
         
-        {containsCategoryItem("system") && (
+        {containsCategoryItem("ventilationSystem") && (
         <CategoryItem 
-        item={props.category.system}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("airTightness") && (
-        <CategoryItem
-        item={props.category.airTightness}
+        item={props.category.ventilationSystem}
         classes={props.classes}
         />)}
         

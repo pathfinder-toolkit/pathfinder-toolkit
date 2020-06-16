@@ -10,11 +10,12 @@ const BuildingVentilation = (props) => {
   const {
     buildingInformation,
     setNavigationEnabled,
-    setSavedVentilationType,
+    setSavedProperty,
+    getSavedProperty,
   } = useEditor();
 
   const [ventilationType, setVentilationType] = useState(
-    buildingInformation.ventilation.system.value
+    getSavedProperty("ventilation", "ventilationSystem")
   );
 
   const [loading, setLoading] = useState(false);
@@ -28,14 +29,8 @@ const BuildingVentilation = (props) => {
 
   const handleVentilationTypeChange = (value) => {
     setVentilationType(value);
-    setSavedVentilationType(value);
+    setSavedProperty("ventilation", "ventilationSystem", value);
   };
-
-  useEffect(() => {
-    if (buildingInformation.ventilation.system) {
-      setNavigationEnabled(true);
-    }
-  }, [buildingInformation.ventilation]);
 
   return (
     <Fade in={loading}>

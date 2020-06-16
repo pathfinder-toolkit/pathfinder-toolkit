@@ -27,7 +27,7 @@ const BuildingsTableHead = (props) => {
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            {headCell.id != 'id' && headCell.id != 'image' ? (<TableSortLabel
+            {headCell.id !== 'slug' && headCell.id !== 'image' ? (<TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}

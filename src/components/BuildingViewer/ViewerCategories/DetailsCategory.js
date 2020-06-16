@@ -3,6 +3,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
+import CategoryItemLongText from "./CategoryItemLongText.js";
+import ImageWithModal from "../../reusable/ImageWithModal";
 
 
 const DetailsCategory = (props) => {
@@ -14,6 +16,19 @@ const DetailsCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Building details</Typography>
+
+        {containsCategoryItem("image") && (
+        <ImageWithModal
+        image={props.category.image.value}
+        height={300}
+        width={300}
+        />)}
+
+        {containsCategoryItem("description") && (
+        <CategoryItemLongText
+        item={props.category.description}
+        classes={props.classes}
+        />)}
         
         {containsCategoryItem("name") && (
         <CategoryItem 
@@ -33,17 +48,25 @@ const DetailsCategory = (props) => {
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("material") && (
+        {containsCategoryItem("floorArea") && (
         <CategoryItem
-        item={props.category.material}
+        item={props.category.floorArea}
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("floors") && (
+        {containsCategoryItem("heatedFloorArea") && (
         <CategoryItem
-        item={props.category.floors}
+        item={props.category.heatedFloorArea}
         classes={props.classes}
         />)}
+
+        {containsCategoryItem("floorsAmount") && (
+        <CategoryItem
+        item={props.category.floorsAmount}
+        classes={props.classes}
+        />)}
+
+        
         
     </Paper>
 }

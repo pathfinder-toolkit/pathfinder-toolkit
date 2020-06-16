@@ -16,7 +16,7 @@ import history from "../../utils/history";
 
 import BuildingsTableToolbar from "./BuildingsTableToolbar";
 import BuildingsTableHead from "./BuildingsTableHead";
-import BuildingImageModal from "./BuildingImageModal";
+import ImageWithModal from "../reusable/ImageWithModal";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -95,13 +95,15 @@ const BuildingsTable = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const {getSavedBuildings} = useBackend();
+  const {getStoredBuildings} = useBackend();
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-        const data = await getSavedBuildings();
+      const data = await getStoredBuildings();
+      if (data) {
         setRows(data);
+      }
     }
     fetchData();
   },[]);
@@ -126,20 +128,9 @@ const BuildingsTable = () => {
   const headCells = [
     { id: 'name', numeric: false, disablePadding: true, label: 'Saved building name' },
     { id: 'image', numeric: false, disablePadding: false, label: 'Image'},
-    { id: 'date', numeric: true, disablePadding: false, label: 'Creation date' },
-    { id: 'improvements', numeric: true, disablePadding: false, label: 'Suggested improvements' },
-    { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
+    { id: 'creationDate', numeric: true, disablePadding: false, label: 'Creation date' },
+    { id: 'slug', numeric: true, disablePadding: false, label: 'Open in detail' },
   ];
-
-  const [showImageModal, setShowImageModal] = useState(false);
-
-  const _showImageModal = () => {
-    setShowImageModal(true);
-  }
-
-  const _hideImageModal = () => {
-    setShowImageModal(false);
-  }
 
   const _handleClick = (slug) => {
     const addr = "/buildings/" + slug;
@@ -184,14 +175,10 @@ const BuildingsTable = () => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">
-                        <Card raised={true} className={classes.card}>
-                          <CardMedia onClick={ _showImageModal } className={classes.cardMedia} image={row.image} />
-                        </Card>
-                        <BuildingImageModal open={showImageModal} onHide={_hideImageModal} image={row.image} />
+                        <ImageWithModal image={row.image} width={90} height={90}/>
                       </TableCell>
-                      <TableCell align="right">{row.date}</TableCell>
-                      <TableCell align="right">{row.improvements}</TableCell>
-                      <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.id)}}> <Launch /> </Button></TableCell>
+                      <TableCell align="right">{row.creationDate}</TableCell>
+                      <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.slug)}}> <Launch /> </Button></TableCell>
                     </TableRow>
                   );
                 })}

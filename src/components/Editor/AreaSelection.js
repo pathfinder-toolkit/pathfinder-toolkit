@@ -6,20 +6,21 @@ import AreaMap from "./AreaMap";
 const AreaSelection = () => {
   const {
     buildingInformation,
-    setSavedArea,
+    setSavedProperty,
+    getSavedProperty,
     setNavigationEnabled,
   } = useEditor();
 
   const { getCountries } = useBackend();
   const [selectedArea, setSelectedArea] = useState(
-    buildingInformation.details.area.value
+    getSavedProperty("details", "area")
   );
 
   const [allowedCountries] = useState(getCountries());
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
-    setSavedArea(selectedCountry);
+    setSavedProperty("details", "area", selectedCountry);
     setNavigationEnabled(true);
   };
 
