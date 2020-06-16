@@ -21,6 +21,12 @@ const ElectricityCategory = (props) => {
         classes={props.classes}
         />)}
 
+        {containsCategoryItem("annualCost") && (
+        <CategoryItem 
+        item={props.category.annualCost}
+        classes={props.classes}
+        />)}
+
     </Paper>
 }
 
