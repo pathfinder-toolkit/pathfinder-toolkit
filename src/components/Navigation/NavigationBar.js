@@ -74,6 +74,7 @@ const NavigationBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           EnergyPathfinder
         </Typography>
+        <Button onClick={() => console.log("login: " + "11")}>test</Button>
         <IconButton
           onClick={() => {
             redirectTo("");
@@ -135,7 +136,7 @@ const NavigationBar = (props) => {
           <Button
             className={classes.navButton}
             onClick={() => {
-              loginWithRedirect(process.env.REACT_APP_AUTH_LOGIN_URL);
+              loginWithRedirect({});
             }}
             color="inherit"
           >
