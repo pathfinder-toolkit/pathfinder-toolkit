@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
+import CategoryItemLongText from "./CategoryItemLongText.js";
 import ImageWithModal from "../../reusable/ImageWithModal";
 
 
@@ -19,8 +20,14 @@ const DetailsCategory = (props) => {
         {containsCategoryItem("image") && (
         <ImageWithModal
         image={props.category.image.value}
-        height={400}
-        width={400}
+        height={300}
+        width={300}
+        />)}
+
+        {containsCategoryItem("description") && (
+        <CategoryItemLongText
+        item={props.category.description}
+        classes={props.classes}
         />)}
         
         {containsCategoryItem("name") && (
@@ -59,11 +66,7 @@ const DetailsCategory = (props) => {
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("description") && (
-        <CategoryItem
-        item={props.category.description}
-        classes={props.classes}
-        />)}
+        
         
     </Paper>
 }
