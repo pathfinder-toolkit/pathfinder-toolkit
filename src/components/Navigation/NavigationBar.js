@@ -74,7 +74,6 @@ const NavigationBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           EnergyPathfinder
         </Typography>
-        <Button onClick={() => console.log("login: " + "11")}>test</Button>
         <IconButton
           onClick={() => {
             redirectTo("");
@@ -128,7 +127,13 @@ const NavigationBar = (props) => {
               >
                 Give feedback
               </MenuItem>
-              <MenuItem onClick={() => logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL}) }>Logout</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL })
+                }
+              >
+                Logout
+              </MenuItem>
             </Menu>
           </div>
         )}
