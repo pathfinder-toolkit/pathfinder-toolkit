@@ -54,15 +54,6 @@ const BuildingStructure = (props) => {
     setSavedProperty("structure", "windowAmount", event.target.value);
   };
 
-  useEffect(() => {
-    if (
-      buildingInformation.structure.wallMaterial.value &&
-      buildingInformation.structure.windowAmount.value
-    ) {
-      setNavigationEnabled(true);
-    }
-  }, [buildingInformation.structure]);
-
   //Just a quick sketch, will be split into smaller components/remade later
   return (
     <Fade in={loading}>

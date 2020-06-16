@@ -14,6 +14,10 @@ const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
       details: {},
+      structure: {},
+      heating: {},
+      ventilation: {},
+      electricity: {},
     }
   );
 
@@ -29,7 +33,7 @@ export const EditorProvider = ({ children }) => {
     buildingInformation,
     setBuildingInformation,
   ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
   const [navigationEnabled, setNavigationEnabled] = useState(
     buildingInformation.area ? true : false
   );
@@ -95,6 +99,17 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedProperty = (category, propertyName, newValue) => {
+
+ /*   if (!Object.keys(buildingInformation).includes(category)) {
+      setBuildingInformation((buildingInformation) => ({
+        ...buildingInformation,
+        category: {
+          ...buildingInformation[category],
+          [propertyName]: {
+            ...buildingInformation[category][propertyName],
+            value: newValue,
+    } */
+
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       [category]: {
@@ -105,7 +120,6 @@ export const EditorProvider = ({ children }) => {
         },
       },
     }));
-    console.log(buildingInformation);
   };
 
   const getSavedProperty = (category, subcategory) => {

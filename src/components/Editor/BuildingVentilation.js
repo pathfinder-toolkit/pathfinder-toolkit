@@ -32,12 +32,6 @@ const BuildingVentilation = (props) => {
     setSavedProperty("ventilation", "ventilationSystem", value);
   };
 
-  useEffect(() => {
-    if (buildingInformation.ventilation.ventilationSystem.value) {
-      setNavigationEnabled(true);
-    }
-  }, [buildingInformation.ventilation]);
-
   return (
     <Fade in={loading}>
       <div className={props.style.root}>
