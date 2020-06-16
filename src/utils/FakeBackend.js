@@ -7,22 +7,8 @@ import { useAuth0 } from "./react-auth0-spa";
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
-const useStateWithSessionStorage = (sessionStorageKey) => {
-  const [value, setValue] = useState(
-    sessionStorage.getItem(sessionStorageKey) || ""
-  );
-
-  useEffect(() => {
-    sessionStorage.setItem(sessionStorageKey, value);
-  }, [value]);
-
-  return [value, setValue];
-};
-
 export const BackendProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
-  const [user, setUser] = useStateWithSessionStorage("userName");
-  const [isLoggedIn, setIsLoggedIn] = useState(user || false);
 
   const [loading, setLoading] = useState(true);
   const [materials, setMaterials] = useState();
@@ -48,22 +34,6 @@ export const BackendProvider = ({ children }) => {
     testRequest();
   }, []);
 
-  const fakeLogin = (username) => {
-    if (username === null || username === "") {
-      console.log("invalid username");
-      return;
-    }
-
-    setUser(username);
-    setIsLoggedIn(true);
-    console.log("logged in as: " + username);
-  };
-
-  const fakeLogout = () => {
-    setUser(null);
-    setIsLoggedIn(false);
-    console.log("logged out");
-  };
 
   const fakeRequest = async () => {
     const result = await fakeResponse();
@@ -322,11 +292,7 @@ export const BackendProvider = ({ children }) => {
   return (
     <BackendContext.Provider
       value={{
-        isLoggedIn,
-        user,
         loading,
-        fakeLogin,
-        fakeLogout,
         fakeRequest,
         getMaterials,
         getRoofTypes,
