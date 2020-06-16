@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const BuildingImageModal = (props) => {
+const ImageModal = (props) => {
   const classes = useStyles();
   const {open, onHide, image} = props;
   
@@ -56,4 +56,4 @@ const BuildingImageModal = (props) => {
   );
 }
 
-export default BuildingImageModal;
+export default ImageModal;

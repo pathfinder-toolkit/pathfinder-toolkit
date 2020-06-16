@@ -16,7 +16,7 @@ import history from "../../utils/history";
 
 import BuildingsTableToolbar from "./BuildingsTableToolbar";
 import BuildingsTableHead from "./BuildingsTableHead";
-import BuildingImageModal from "./BuildingImageModal";
+import ImageWithModal from "../reusable/ImageWithModal";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -131,16 +131,6 @@ const BuildingsTable = () => {
     { id: 'id', numeric: true, disablePadding: false, label: 'Open in detail' },
   ];
 
-  const [showImageModal, setShowImageModal] = useState(false);
-
-  const _showImageModal = () => {
-    setShowImageModal(true);
-  }
-
-  const _hideImageModal = () => {
-    setShowImageModal(false);
-  }
-
   const _handleClick = (slug) => {
     const addr = "/buildings/" + slug;
     history.push(addr);
@@ -184,10 +174,7 @@ const BuildingsTable = () => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">
-                        <Card raised={true} className={classes.card}>
-                          <CardMedia onClick={ _showImageModal } className={classes.cardMedia} image={row.image} />
-                        </Card>
-                        <BuildingImageModal open={showImageModal} onHide={_hideImageModal} image={row.image} />
+                        <ImageWithModal image={row.image} />
                       </TableCell>
                       <TableCell align="right">{row.date}</TableCell>
                       <TableCell align="right">{row.improvements}</TableCell>
