@@ -6,6 +6,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import { green } from '@material-ui/core/colors';
+import { yellow } from '@material-ui/core/colors';
 
 
 
@@ -14,7 +16,9 @@ const Comment = (props) => {
 
     return <ListItem alignItems="flex-start">
         <ListItemIcon>
-            <SentimentSatisfiedAltIcon />
+            {props.comment.sentiment === 'positive' && <SentimentSatisfiedAltIcon style={ {fontSize: 26, color: green[500]} } />}
+            {props.comment.sentiment === 'neutral' && <SentimentSatisfiedIcon style={ {fontSize: 26} } />}
+            {props.comment.sentiment === 'negative' && <SentimentVeryDissatisfiedIcon style={ {fontSize: 26} } color="secondary" />}
         </ListItemIcon>
         <ListItemText
           primary= {
