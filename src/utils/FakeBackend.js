@@ -153,136 +153,140 @@ export const BackendProvider = ({ children }) => {
 
   const getBuildingFromSlug = async () => {
     const buildingInformation = {
-      details: {
-        name: {
-          propertyName: "Name",
-          value: "House",
-          suggestions: [],
-          comments: [],
+      "details": {
+        "name": {
+          "propertyName": "Name",
+          "value": "Talo"
         },
-        area: {
-          propertyName: "Area",
-          value: "Finland",
-          suggestions: [],
-          comments: [],
+        "area": {
+          "propertyName": "Area",
+          "value": "Northern Finland"
         },
-        year: {
-          propertyName: "Construction year",
-          value: "1900",
-          suggestions: [],
-          comments: [],
+        "year": {
+          "propertyName": "Construction year",
+          "value": 1900
         },
-        material: {
-          propertyName: "Material",
-          value: "Wood",
-          suggestions: [],
-          comments: [],
+        "floorArea": {
+          "propertyName": "Floor area(in square meters)",
+          "value": 62
         },
-        floors: {
-          propertyName: "Amount of floors",
-          value: 1,
-          suggestions: [],
-          comments: [],
+        "heatedFloorArea": {
+          "propertyName": "Heated floor area(in square meters)",
+          "value": 50
         },
+        "floorsAmount": {
+          "propertyName": "Amount of floors",
+          "value": 2
+        },
+        "description": {
+          "propertyName": "Description of building",
+          "value": "Quisque vulputate enim ligula, sed lobortis metus commodo efficitur. Suspendisse ante lectus, sagittis eu diam a, convallis aliquam eros. Vivamus consequat sagittis nunc in euismod. Vivamus laoreet erat elit. Praesent erat diam, dapibus a purus ac, scelerisque consequat tortor. Aliquam nunc metus, ultricies et lacus a, rutrum feugiat ligula. Proin a enim tortor."
+        },
+        "image": {
+          "propertyName": "Image",
+          "value": frontPageImage
+        }
       },
-      structure: {
-        wallMaterial: {
-          propertyName: "Wall material",
-          value: "Stone",
-          suggestions: [
+      "heating": {
+        "heatingSystem": {
+          "propertyName": "Heating System",
+          "value": "Oil",
+          "suggestions": [
             {
-              suggestionText:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 15,
-            },
+              "suggestionText": "Nulla urna lorem, porttitor vehicula risus vitae, ultrices commodo nisl. Nullam viverra mollis tortor at vestibulum.",
+              "priority": 95
+            }
           ],
-          comments: [],
-        },
-        roofType: {
-          propertyName: "Roof material",
-          value: "Roof 1",
-          suggestions: [
+          "comments": [
             {
-              suggestionText:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 30,
-            },
-          ],
-          comments: [],
-        },
-        windowCount: {
-          propertyName: "Amount of windows",
-          value: 8,
-          suggestions: [
-            {
-              suggestionText:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 45,
-            },
-          ],
-          comments: [],
-        },
-      },
-      ventilation: {
-        system: {
-          propertyName: "Ventilation system",
-          value: "Machine based",
-          suggestions: [
-            {
-              suggestionText:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 0,
-            },
-          ],
-          comments: [],
-        },
-        airTightness: {
-          propertyName: "Air tightness",
-          value: 10,
-          suggestions: [
-            {
-              suggestionText:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 1,
-            },
-          ],
-          comments: [],
-        },
-      },
-      heating: {
-        system: {
-          propertyName: "Heating system",
-          value: "Oil",
-          suggestions: [
-            {
-              suggestionText:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac quam ornare, venenatis enim ut, condimentum magna. Suspendisse in rutrum nisl. Phasellus lacinia dolor eu pulvinar lobortis. ",
-              priority: 100,
-            },
-          ],
-          comments: [
-            {
-              author: "John Doe",
-              sentiment: "positive",
-              date: "2020-06-08 11:23:05",
-              commentText: 
-                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
-            },
-            {
-              date: "2020-06-09 10:45:06",
-              sentiment: "negative",
-              commentText: 
-                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
-            },
-            {
-              author: "Jane Doe",
-              sentiment: "neutral",
-              date: "2020-06-10 09:22:53",
-              commentText: 
-                "Mauris molestie ex varius enim vehicula, eget fringilla nunc dictum. Fusce sed lacinia dui. Phasellus accumsan, sem vel viverra hendrerit, turpis libero lobortis leo, vitae suscipit leo diam nec sem. Sed id laoreet elit, hendrerit suscipit eros. Praesent in viverra est, et auctor nibh."
+              "commentText": "Donec dapibus facilisis nisl vel posuere. Morbi bibendum magna ac lacus vestibulum, eu egestas lacus viverra.",
+              "date": "2020-06-15 12:14:34",
+              "author": "John Doe",
+              "sentiment": "positive"
             }
           ]
         },
+        "heatingSource": {
+          "propertyName": "Heating Source",
+          "value": "Source 1"
+        },
+        "annualCost": {
+          "propertyName": "Annual cost",
+          "value": 300
+        }
+      },
+      "electricity": {
+        "annualUse": {
+          "propertyName": "Annual use",
+          "value": 500
+        },
+        "annualCost": {
+          "propertyName": "Annual cost",
+          "value": 250
+        }
+      },
+      "structure": {
+        "wallMaterial": {
+          "propertyName": "Wall material",
+          "value": "Wood",
+          "suggestions": [
+            {
+              "suggestionText": "Sed sapien turpis, rutrum et semper in, eleifend nec elit. Etiam lobortis, ante quis varius vehicula, magna urna ultricies justo, non interdum est lectus a est.",
+              "priority": 30
+            }
+          ],
+          "comments": [
+            {
+              "commentText": "Quisque et convallis diam, eget interdum sapien. Vivamus felis nulla, condimentum a volutpat vel, luctus id odio. ",
+              "date": "2020-06-15 15:44:23",
+              "sentiment": "negative"
+            }
+          ]
+        },
+        "wallThickness": {
+          "propertyName": "Wall Thickness",
+          "value": 16
+        },
+        "windowAmount": {
+          "propertyName": "Amount of windows",
+          "value": 12
+        },
+        "doorMaterial": {
+          "propertyName": "Door material",
+          "value": "Wood"
+        },
+        "doorAmount": {
+          "propertyName": "Amount of doors",
+          "value": 4
+        },
+        "roofMaterial": {
+          "propertyName": "Roof material",
+          "value": "Roof material 1"
+        },
+        "roofInsulation": {
+          "propertyName": "Roof insulation",
+          "value": true
+        }
+      },
+      "ventilation": {
+        "ventilationSystem": {
+          "propertyName": "Ventilation system",
+          "value": "Ventilation system 1",
+          "suggestions": [
+            {
+              "suggestionText": "Vivamus laoreet erat elit. Praesent erat diam, dapibus a purus ac, scelerisque consequat tortor. Aliquam nunc metus, ultricies et lacus a, rutrum feugiat ligula.",
+              "priority": 1
+            }
+          ],
+          "comments": [
+            {
+              "commentText": "Proin a enim tortor. Cras vestibulum bibendum libero, a pulvinar turpis eleifend fringilla. Suspendisse et nunc hendrerit, lacinia enim eu, tincidunt dolor.",
+              "date": "2020-06-16 11:44:23",
+              "author": "Jane Doe",
+              "sentiment": "neutral"
+            }
+          ]
+        }
       }
     }
 
