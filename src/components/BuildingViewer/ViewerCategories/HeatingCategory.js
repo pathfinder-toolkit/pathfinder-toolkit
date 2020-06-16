@@ -15,9 +15,21 @@ const HeatingCategory = (props) => {
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Heating details</Typography>
         
-        {containsCategoryItem("system") && (
+        {containsCategoryItem("heatingSystem") && (
         <CategoryItem 
-        item={props.category.system}
+        item={props.category.heatingSystem}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("heatingSource") && (
+        <CategoryItem 
+        item={props.category.heatingSource}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("annualCost") && (
+        <CategoryItem 
+        item={props.category.annualCost}
         classes={props.classes}
         />)}
 

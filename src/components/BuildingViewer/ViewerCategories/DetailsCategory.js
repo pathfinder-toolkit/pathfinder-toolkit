@@ -33,15 +33,33 @@ const DetailsCategory = (props) => {
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("material") && (
+        {containsCategoryItem("floorArea") && (
         <CategoryItem
-        item={props.category.material}
+        item={props.category.floorArea}
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("floors") && (
+        {containsCategoryItem("heatedFloorArea") && (
         <CategoryItem
-        item={props.category.floors}
+        item={props.category.heatedFloorArea}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("floorsAmount") && (
+        <CategoryItem
+        item={props.category.floorsAmount}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("description") && (
+        <CategoryItem
+        item={props.category.description}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("image") && (
+        <CategoryItem
+        item={props.category.image}
         classes={props.classes}
         />)}
         
