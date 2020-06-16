@@ -18,6 +18,7 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "../reusable/DropdownSelect";
 import Tip from "./Tip";
 import SuggestionAlert from "../reusable/SuggestionAlert";
+import IncrementValue from "./IncrementValue";
 
 const BuildingDetails = (props) => {
   const {
@@ -66,7 +67,7 @@ const BuildingDetails = (props) => {
 
   const handleYearChange = (event, newValue) => {
     setBuildingYear(newValue);
-    setSavedProperty("details", "year", event.target.value);
+    setSavedProperty("details", "year", newValue);
   };
 
   const handleFloorChange = (event) => {
@@ -167,29 +168,7 @@ const BuildingDetails = (props) => {
                 Count
               </TextField>
               <Grid container className={props.style.controls}>
-                <Button
-                  size="large"
-                  className={props.style.formButton}
-                  variant="outlined"
-                >
-                  -
-                </Button>
-
-                <Button
-                  size="large"
-                  className={props.style.formButton}
-                  variant="outlined"
-                >
-                  +
-                </Button>
-                <Typography
-                  className={props.style.valueText}
-                  align="center"
-                  display="block"
-                  variant="subtitle1"
-                >
-                  {buildingFloors}
-                </Typography>
+                <IncrementValue value={buildingFloors}/>
               </Grid>
             </div>
           </Grid>

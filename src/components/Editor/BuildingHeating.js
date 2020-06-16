@@ -32,12 +32,6 @@ const BuildingHeating = (props) => {
     setSavedProperty("heating", "heatingSystem", value);
   };
 
-  useEffect(() => {
-    if (buildingInformation.heating.heatingSystem.value) {
-      setNavigationEnabled(true);
-    }
-  }, [buildingInformation.heating]);
-
   //className={props.style.required}
   return (
     <Fade in={loading}>
