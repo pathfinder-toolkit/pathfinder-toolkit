@@ -11,10 +11,11 @@ const BuildingVentilation = (props) => {
     buildingInformation,
     setNavigationEnabled,
     setSavedProperty,
+    getSavedProperty,
   } = useEditor();
 
   const [ventilationType, setVentilationType] = useState(
-    buildingInformation.ventilation.ventilationSystem.value
+    getSavedProperty("ventilation", "ventilationSystem")
   );
 
   const [loading, setLoading] = useState(false);

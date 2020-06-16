@@ -11,10 +11,11 @@ const BuildingHeating = (props) => {
     buildingInformation,
     setNavigationEnabled,
     setSavedProperty,
+    getSavedProperty,
   } = useEditor();
 
   const [heatingType, setHeatingType] = useState(
-    buildingInformation.heating.heatingSystem.value
+    getSavedProperty("heating", "heatingSystem")
   );
 
   const [loading, setLoading] = useState(false);

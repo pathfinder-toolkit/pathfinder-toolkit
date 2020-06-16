@@ -13,95 +13,7 @@ export const useEditor = () => useContext(EditorContext);
 const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
-      details: {
-        name: {
-          propertyName: "Name",
-          value: "",
-        },
-        area: {
-          propertyName: "Area",
-          value: "",
-        },
-        year: {
-          propertyName: "Construction year",
-          value: "",
-        },
-        floorArea: {
-          propertyName: "Floor area(in square meters)",
-          value: "",
-        },
-        heatedFloorArea: {
-          propertyName: "Heated floor area(in square meters)",
-          value: "",
-        },
-        floorsAmount: {
-          propertyName: "Amount of floors",
-          value: "",
-        },
-        description: {
-          propertyName: "Description of building",
-          value: "",
-        },
-        image: {
-          propertyName: "Image",
-          value: "",
-        },
-      },
-      heating: {
-        heatingSystem: {
-          propertyName: "Heating System",
-          value: "",
-          suggestions: [],
-        },
-        heatingSource: {
-          propertyName: "Heating source",
-          value: "",
-        },
-        annualCost: {
-          propertyName: "Annual cost",
-          value: "",
-        },
-      },
-      electricity: {
-        annualUse: {
-          propertyName: "Annual use",
-          value: "",
-        },
-        annualCost: {
-          propertyName: "Annual cost",
-          value: "",
-        },
-      },
-      structure: {
-        wallMaterial: {
-          propertyName: "Wall material",
-          value: "",
-          suggestions: [],
-        },
-        wallThickness: {
-          propertyName: "Wall Thickness",
-          value: "",
-        },
-        windowAmount: {
-          propertyName: "Amount of windows",
-          value: "",
-        },
-        doorMaterial: {
-          propertyName: "Amount of doors",
-          value: "",
-        },
-        roofInsulation: {
-          propertyName: "Roof insulation",
-          value: "",
-        },
-      },
-      ventilation: {
-        ventilationSystem: {
-          propertyName: "Ventilation system",
-          value: "",
-          suggestions: [],
-        },
-      },
+      details: {},
     }
   );
 
@@ -187,12 +99,24 @@ export const EditorProvider = ({ children }) => {
       ...buildingInformation,
       [category]: {
         ...buildingInformation[category],
-        [propertyName]: { ...buildingInformation[category][propertyName], value: newValue },
+        [propertyName]: {
+          ...buildingInformation[category][propertyName],
+          value: newValue,
+        },
       },
     }));
     console.log(buildingInformation);
   };
 
+  const getSavedProperty = (category, subcategory) => {
+    if (Object.keys(buildingInformation).includes(category)) {
+      if (Object.keys(buildingInformation[category]).includes(subcategory)) {
+        return buildingInformation[category][subcategory].value;
+      }
+    }
+
+    return "";
+  };
 
   return (
     <EditorContext.Provider
@@ -208,6 +132,7 @@ export const EditorProvider = ({ children }) => {
         previousStep,
         resetSteps,
         setSavedProperty,
+        getSavedProperty,
       }}
     >
       {children}

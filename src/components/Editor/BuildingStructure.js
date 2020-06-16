@@ -16,14 +16,15 @@ const BuildingStructure = (props) => {
   const {
     buildingInformation,
     setSavedProperty,
+    getSavedProperty,
     setNavigationEnabled,
   } = useEditor();
   const [wallMaterial, setWallMaterial] = useState(
-    buildingInformation.structure.wallMaterial.value
+    getSavedProperty("structure", "wallMaterial")
   );
   const [roofType, setRoofType] = useState();
   const [windowCount, setWindowCount] = useState(
-    buildingInformation.structure.windowAmount.value
+    getSavedProperty("structure", "windowAmount")
   );
 
   const [loading, setLoading] = useState(false);
