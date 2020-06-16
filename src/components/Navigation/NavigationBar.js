@@ -128,7 +128,7 @@ const NavigationBar = (props) => {
               >
                 Give feedback
               </MenuItem>
-              <MenuItem onClick={() => logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL }) }>Logout</MenuItem>
+              <MenuItem onClick={() => logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL}) }>Logout</MenuItem>
             </Menu>
           </div>
         )}
