@@ -136,7 +136,7 @@ const NavigationBar = (props) => {
           <Button
             className={classes.navButton}
             onClick={() => {
-              loginWithRedirect({redirect_uri: process.env.REACT_APP_AUTH_LOGIN_URL});
+              loginWithRedirect(process.env.REACT_APP_AUTH_LOGIN_URL);
             }}
             color="inherit"
           >
