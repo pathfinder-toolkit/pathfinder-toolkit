@@ -12,14 +12,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const SavedBuildingPage = () => {
+const SavedBuildingPage = (props) => {
     const classes = useStyles();
     const { getBuildingFromSlug } = useBackend();
     const [ building, setBuilding ] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
-            const data = await getBuildingFromSlug();
+            const data = await getBuildingFromSlug(props.match.params.slug);
             setBuilding(data);
         }
         fetchData();
