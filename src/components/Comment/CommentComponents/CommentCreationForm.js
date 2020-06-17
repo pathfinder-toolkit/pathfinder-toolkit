@@ -24,7 +24,7 @@ const CommentCreationForm = (props) => {
     };
 
     return <Paper className={classes.root}>
-        <Typography>Create your comment</Typography>
+        <Typography className={classes.headerText} >Create your comment below</Typography>
         <TextField
             id="comment-text-field"
             label="Comment text"

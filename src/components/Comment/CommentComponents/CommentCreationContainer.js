@@ -10,11 +10,15 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(2)
     },
     root: {
-        marginBottom: theme.spacing(2),
+        marginBottom: theme.spacing(4),
         marginRight: theme.spacing(2),
     },
+    headerText: {
+        paddingTop: theme.spacing(1),
+        marginLeft: theme.spacing(2),
+    },
     textArea: {
-        marginTop: theme.spacing(2),
+        marginTop: theme.spacing(1),
         marginLeft: theme.spacing(2),
         paddingRight: theme.spacing(4),
         marginBottom: theme.spacing(1),
