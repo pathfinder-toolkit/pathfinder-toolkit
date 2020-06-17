@@ -9,19 +9,13 @@ const Comments = (props) => {
     
     return <React.Fragment>
         <List>
-            {props.comments && props.comments.length > 0 ? (
-                    props.comments.map((comment, key) => {
-                        return (
-                            <React.Fragment>
-                                <Comment comment={comment} key={key} classes={classes} />
-                                <Divider variant="inset" component="li" />
-                            </React.Fragment>
-                        )
-                    })
-                ) : (
-                    <p>No comments</p>
-                )
-            }
+        {props.comments.map((comment, key) => {
+            return (
+                <React.Fragment>
+                    <Comment comment={comment} key={key} classes={classes} />
+                    <Divider variant="inset" component="li" />
+                </React.Fragment>)
+        })}
         </List>
         </React.Fragment>
 }
