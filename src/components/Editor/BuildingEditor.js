@@ -4,7 +4,6 @@ import { Paper, CircularProgress } from "@material-ui/core";
 import NavigationBar from "./NavigationBar";
 
 import { useEditor } from "../../utils/EditorProvider";
-import { useBackend } from "../../utils/FakeBackend";
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
