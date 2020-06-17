@@ -1,7 +1,8 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import Radio from '@material-ui/core/Radio';
@@ -12,6 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import CloseIcon from '@material-ui/icons/Close';
 import { green } from '@material-ui/core/colors';
 
 const CommentCreationForm = (props) => {
@@ -23,8 +25,17 @@ const CommentCreationForm = (props) => {
         setValue(event.target.value);
     };
 
-    return <Paper className={classes.root}>
-        <Typography className={classes.headerText} >Create your comment below</Typography>
+    return <Card className={classes.root}>
+        <CardHeader
+        className={classes.headerText}
+        action={
+          <IconButton onClick={props.onClose} aria-label="settings">
+            <CloseIcon />
+          </IconButton>
+        }
+        title="Create your comment below"
+      />
+        <Typography  ></Typography>
         <TextField
             id="comment-text-field"
             label="Comment text"
@@ -60,8 +71,7 @@ const CommentCreationForm = (props) => {
                 />
             </RadioGroup>
         </FormControl>
-        
-    </Paper>
+    </Card>
 }
 
 export default CommentCreationForm;

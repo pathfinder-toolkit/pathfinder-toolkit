@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import { makeStyles } from '@material-ui/core/styles';
 
 import CommentCreationForm from "./CommentCreationForm";
@@ -14,19 +13,18 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     headerText: {
-        paddingTop: theme.spacing(1),
-        marginLeft: theme.spacing(2),
+        fontSizeAdjust: 0.4,
     },
     textArea: {
         marginTop: theme.spacing(1),
         marginLeft: theme.spacing(2),
         paddingRight: theme.spacing(4),
-        marginBottom: theme.spacing(1),
+        marginBottom: theme.spacing(2),
     },
     radioForm: {
         marginLeft: theme.spacing(2),
         paddingRight: theme.spacing(4),
-        marginBottom: theme.spacing(1),
+        marginBottom: theme.spacing(2),
     }
   }));
 
@@ -48,7 +46,7 @@ const CommentCreationContainer = () => {
                 Create comment
             </Button>
         )}
-        {showForm && <CommentCreationForm classes={classes} />}
+        {showForm && <CommentCreationForm classes={classes} onClose={_handleToggle}/>}
     </React.Fragment>
 }
 
