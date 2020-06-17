@@ -9,15 +9,16 @@ export const useBackend = () => useContext(BackendContext);
 
 export const BackendProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
-
-  const [loading, setLoading] = useState(true);
+  
   const [materials, setMaterials] = useState();
   const [countries, setCountries] = useState();
   const [roofTypes, setRoofTypes] = useState();
   const [heatingTypes, setHeatingTypes] = useState();
   const [ventilationTypes, setVentilationTypes] = useState();
   const [buildingTypes, setBuildingTypes] = useState();
-  const [tips, setTips] = useState();
+  
+  const [loading, setLoading] = useState(true);
+  const [optionsLoading, setOptionsLoading] = useState(true);
 
   const testRequest = async () => {
     const address = process.env.REACT_APP_API_ROOT + "/buildings";
@@ -30,43 +31,37 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    testRequest();
-  }, []);
+  const requestAreas = async () => {
+    const address = process.env.REACT_APP_API_ROOT + "/editor/areas";
+    try {
+      const response = await axios.get(address)
+      console.log(response.data)
+      setCountries(response.data);
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-
-  const fakeRequest = async () => {
-    const result = await fakeResponse();
-    console.log("result: " + result);
-  };
-
-  const fakeResponse = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        setMaterials(["Wood", "Stone", "Concrete"]);
-        setCountries([
-          "Southern Finland",
-          "Northern Finland",
-          "Southern Sweden",
-          "Northern Sweden",
-          "Scotland",
-          "Northern Ireland",
-          "Ireland",
-          "Faroe Islands",
-        ]);
-        setRoofTypes(["Roof 1", "Roof 2", "Roof 3"]);
-        setVentilationTypes(["Gravity based", "Machine based", "Mixed type"]);
-        setHeatingTypes(["Heating 1", "Heating 2", "Heating 3"]);
-        setTips(
-          ["Replace heating system", "Remove windows & doors"],
-          "Placeholder tip"
-        );
-        setBuildingTypes(["Building 1", "Building 2", "Building 3"]);
-        resolve("resolved");
-        setLoading(false);
-      }, 2000);
-    });
-  };
+  const requestAreaOptions = async (selectedArea) => {
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/editor/options/" + selectedArea);
+    console.log("asd: " +  address);
+    setOptionsLoading(true);
+    try {
+      const response = await axios.get(address)
+      console.log(response.data)
+      console.log(response.data.materials)
+      setMaterials(response.data.materials);
+      setRoofTypes(response.data.roofTypes);
+      setVentilationTypes(response.data.ventilationTypes);
+      setHeatingTypes(response.data.heatingTypes);
+      setBuildingTypes(response.data.buildingTypes);
+      console.log("here:");
+      setOptionsLoading(false);
+    } catch (error) {
+      console.log("err:" + error);
+    }
+  }
 
   const getMaterials = () => {
     return materials;
@@ -86,10 +81,6 @@ export const BackendProvider = ({ children }) => {
 
   const getCountries = () => {
     return countries;
-  };
-
-  const getTips = (tag) => {
-    return tips;
   };
 
   const getBuildingTypes = () => {
@@ -297,14 +288,15 @@ export const BackendProvider = ({ children }) => {
     <BackendContext.Provider
       value={{
         loading,
-        fakeRequest,
+        optionsLoading,
+        requestAreas,
+        requestAreaOptions,
         getMaterials,
         getRoofTypes,
         getVentilationTypes,
         getHeatingTypes,
         getCountries,
         getSavedBuildings,
-        getTips,
         getBuildingTypes,
         getBuildingFromSlug,
       }}

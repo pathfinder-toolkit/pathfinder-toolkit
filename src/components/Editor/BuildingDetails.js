@@ -17,7 +17,6 @@ import { useEditor } from "../../utils/EditorProvider";
 
 import DropdownSelect from "../reusable/DropdownSelect";
 import Tip from "./Tip";
-import SuggestionAlert from "../reusable/SuggestionAlert";
 import IncrementValue from "./IncrementValue";
 
 const BuildingDetails = (props) => {
@@ -82,12 +81,6 @@ const BuildingDetails = (props) => {
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  useEffect(() => {
-    if (buildingInformation.details.name) {
-      setNavigationEnabled(true);
-    }
-  }, [buildingInformation.details]);
 
   return (
     <Fade in={loading}>

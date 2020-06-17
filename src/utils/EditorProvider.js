@@ -33,9 +33,9 @@ export const EditorProvider = ({ children }) => {
     buildingInformation,
     setBuildingInformation,
   ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(
-    buildingInformation.area ? true : false
+    false
   );
 
   const getSteps = () => {
@@ -86,12 +86,12 @@ export const EditorProvider = ({ children }) => {
 
   const nextStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setNavigationEnabled(false);
+    //setNavigationEnabled(false);
   };
 
   const previousStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    setNavigationEnabled(true);
+    //setNavigationEnabled(true);
   };
 
   const resetSteps = () => {

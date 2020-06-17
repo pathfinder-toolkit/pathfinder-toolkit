@@ -80,9 +80,9 @@ const BuildingEditor = () => {
 
   const styleComponent = useStylesForEditorComponent();
 
-  const { fakeRequest, loading } = useBackend();
+  const { requestAreas, loading } = useBackend();
   useEffect(() => {
-    fakeRequest();
+    requestAreas();
   }, []);
 
   const { getStepComponent } = useEditor();
