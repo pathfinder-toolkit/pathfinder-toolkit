@@ -8,10 +8,10 @@ import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingHeating = (props) => {
   const {
-    buildingInformation,
     setNavigationEnabled,
     setSavedProperty,
     getSavedProperty,
+    buildingOptions,
   } = useEditor();
 
   const [heatingType, setHeatingType] = useState(
@@ -22,10 +22,6 @@ const BuildingHeating = (props) => {
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  const { getHeatingTypes } = useBackend();
-
-  const heatingTypes = getHeatingTypes();
 
   const handleHeatingTypeChange = (value) => {
     setHeatingType(value);
@@ -43,7 +39,7 @@ const BuildingHeating = (props) => {
           <Typography variant="h6">General</Typography>
           <FormControl className={props.style.formControl}>
             <DropdownSelect
-              data={heatingTypes}
+              data={buildingOptions.heatingTypes}
               label="Type"
               value={heatingType}
               id="heating-type"

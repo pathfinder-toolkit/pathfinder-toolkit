@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import SuggestionAlert from "../../reusable/SuggestionAlert.js";
-import CommentContainer from "../../Comment/CommentContainer.js";
+import CommentField from "../../Comment/CommentField.js";
 
 const CategoryItem = (props) => {
     const classes = props.classes;
@@ -18,7 +18,7 @@ const CategoryItem = (props) => {
             })}
         </Grid>
         <Grid item xs={4}>
-            {props.item.suggestions && props.item.suggestions.length > 0 && <CommentContainer comments={props.item.comments} />}
+            {props.item.comments && <CommentField comments={props.item.comments} />}
         </Grid>
     </Grid>
 }
