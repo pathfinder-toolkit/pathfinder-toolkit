@@ -5,51 +5,61 @@ import AreaMap from "./AreaMap";
 
 const AreaSelection = () => {
   const {
-    buildingInformation,
     setSavedProperty,
     getSavedProperty,
     setNavigationEnabled,
-    optionsLoading,
+    setBuildingOptions,
   } = useEditor();
 
-  const { getCountries, requestAreaOptions } = useBackend();
+  const { requestAreaOptions, requestAreas } = useBackend();
+
+  const [loading, setLoading] = useState(true);
   const [selectedArea, setSelectedArea] = useState(
     getSavedProperty("details", "area")
   );
-
-  const [allowedCountries] = useState(getCountries());
-
-  const handleSelection = (selectedCountry) => {
-    setNavigationEnabled(false);
-    setSelectedArea(selectedCountry);
-    requestAreaOptions(selectedCountry);
-    setSavedProperty("details", "area", selectedCountry);
-  };
+  const [allowedCountries, setAllowedCountries] = useState();
 
   useEffect(() => {
-    if (selectedArea !== null || selectedArea !== '') {
-      requestAreaOptions(selectedArea);
+    async function fetchData() {
+      const data = await requestAreas();
+      setAllowedCountries(data);
+      setLoading(false);
     }
+    fetchData();
   }, []);
 
   useEffect(() => {
-
-    
-  }, []);
+    async function fetchData() {
+      console.log("fetching options:");
+      const data = await requestAreaOptions(selectedArea);
+      setBuildingOptions(data);
+    }
+    fetchData();
+  }, [selectedArea]);
 
   useEffect(() => {
-    if (!optionsLoading) {
+    if (selectedArea !== '') {
+      requestAreaOptions(selectedArea);
       setNavigationEnabled(true);
     }
-  }, [optionsLoading]);
+  }, []);
+
+  const handleSelection = (selectedCountry) => {
+    setSelectedArea(selectedCountry);
+    //requestAreaOptions(selectedCountry);
+    setSavedProperty("details", "area", selectedCountry);
+    setNavigationEnabled(true);
+  };
 
   return (
     <React.Fragment>
-      <AreaMap
-        allowedCountries={allowedCountries}
-        selectedCountry={selectedArea}
-        handleSelection={handleSelection}
-      ></AreaMap>
+      {!loading && (
+        <AreaMap
+          allowedCountries={allowedCountries}
+          selectedCountry={selectedArea}
+          handleSelection={handleSelection}
+        ></AreaMap>
+      )}
     </React.Fragment>
   );
 };

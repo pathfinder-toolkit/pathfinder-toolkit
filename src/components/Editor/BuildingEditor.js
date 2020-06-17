@@ -79,22 +79,16 @@ const BuildingEditor = () => {
   }));
 
   const styleComponent = useStylesForEditorComponent();
-
-  const { requestAreas, loading } = useBackend();
-  useEffect(() => {
-    requestAreas();
-  }, []);
-
   const { getStepComponent } = useEditor();
 
   return (
     <div className={classes.root}>
       <div className={classes.editorContainer}>
         <div className={classes.editorComponent}>
-          <Paper>{!loading && getStepComponent(styleComponent)}</Paper>
+          <Paper>{getStepComponent(styleComponent)}</Paper>
         </div>
       </div>
-      {!loading && <NavigationBar />}
+      <NavigationBar />
     </div>
   );
 };

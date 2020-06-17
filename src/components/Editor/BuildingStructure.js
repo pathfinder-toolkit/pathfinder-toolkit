@@ -14,9 +14,9 @@ import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingStructure = (props) => {
   const {
-    buildingInformation,
     setSavedProperty,
     getSavedProperty,
+    buildingOptions,
     setNavigationEnabled,
   } = useEditor();
   const [wallMaterial, setWallMaterial] = useState(
@@ -31,11 +31,6 @@ const BuildingStructure = (props) => {
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  const { getMaterials, getRoofTypes } = useBackend();
-
-  const materials = getMaterials();
-  const roofs = getRoofTypes();
 
   const handleMaterialChange = (value) => {
     setWallMaterial(value);
@@ -66,7 +61,7 @@ const BuildingStructure = (props) => {
 
           <DropdownSelect
             className={props.style.formComponent}
-            data={materials}
+            data={buildingOptions.materials}
             label="Material"
             value={wallMaterial}
             id="wall-material"
@@ -75,7 +70,7 @@ const BuildingStructure = (props) => {
           <Typography variant="h6">Roof</Typography>
           <DropdownSelect
             className={props.style.formComponent}
-            data={roofs}
+            data={buildingOptions.roofTypes}
             label="Type"
             value={roofType}
             id="roof-type"

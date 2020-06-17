@@ -8,10 +8,10 @@ import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingVentilation = (props) => {
   const {
-    buildingInformation,
     setNavigationEnabled,
     setSavedProperty,
     getSavedProperty,
+    buildingOptions,
   } = useEditor();
 
   const [ventilationType, setVentilationType] = useState(
@@ -22,10 +22,6 @@ const BuildingVentilation = (props) => {
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  const { getVentilationTypes } = useBackend();
-
-  const ventilationSystems = getVentilationTypes();
 
   const handleVentilationTypeChange = (value) => {
     setVentilationType(value);
@@ -43,7 +39,7 @@ const BuildingVentilation = (props) => {
           <Typography variant="h6">General</Typography>
           <FormControl className={props.style.formControl}>
             <DropdownSelect
-              data={ventilationSystems}
+              data={buildingOptions.ventilationTypes}
               label="Type"
               value={ventilationType}
               id="ventilation-type"

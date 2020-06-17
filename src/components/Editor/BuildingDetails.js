@@ -12,7 +12,6 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
 import DropdownSelect from "../reusable/DropdownSelect";
@@ -21,10 +20,10 @@ import IncrementValue from "./IncrementValue";
 
 const BuildingDetails = (props) => {
   const {
-    buildingInformation,
     setSavedProperty,
     getSavedProperty,
     setNavigationEnabled,
+    buildingOptions,
   } = useEditor();
 
   const [materialValue, setMaterialValue] = useState();
@@ -41,10 +40,6 @@ const BuildingDetails = (props) => {
   const [buildingFloors, setBuildingFloors] = useState(
     getSavedProperty("floorsAmount", "name")
   );
-
-  const { getMaterials, getBuildingTypes } = useBackend();
-  const materials = getMaterials();
-  const buildingTypes = getBuildingTypes();
 
   const handleMaterialChange = (value) => {
     setMaterialValue(value);
@@ -116,7 +111,7 @@ const BuildingDetails = (props) => {
                 <Grid item>
                   <DropdownSelect
                     className={props.style.formComponent}
-                    data={buildingTypes}
+                    data={buildingOptions.buildingTypes}
                     label="Type"
                     value={buildingType}
                     id="type-dropdown"
@@ -126,7 +121,7 @@ const BuildingDetails = (props) => {
                 <Grid item>
                   <DropdownSelect
                     className={props.style.formComponent}
-                    data={materials}
+                    data={buildingOptions.materials}
                     label="Material"
                     value={materialValue}
                     id="material-dropdown"
