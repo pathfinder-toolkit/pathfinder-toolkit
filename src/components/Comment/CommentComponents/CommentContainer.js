@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     displayText: {
         display: "inline",
         marginLeft: theme.spacing(1),
+        maxWidth: 320
     }
   }));
 
@@ -50,6 +51,9 @@ const CommentContainer = (props) => {
                 {state.switch && <Comments comments={props.comments} classes={classes} />}
             </React.Fragment>
          )}
+        {props.comments.length == 0 && (
+            <Typography className={classes.displayText}>No comments found, add one below</Typography>
+        )}
     </Paper>
 }
 
