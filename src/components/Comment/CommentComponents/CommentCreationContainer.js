@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
         paddingRight: theme.spacing(4),
         marginBottom: theme.spacing(1),
+    },
+    radioForm: {
+        marginLeft: theme.spacing(2),
+        paddingRight: theme.spacing(4),
+        marginBottom: theme.spacing(1),
     }
   }));
 

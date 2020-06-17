@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
@@ -16,13 +17,14 @@ import { green } from '@material-ui/core/colors';
 const CommentCreationForm = (props) => {
     const classes = props.classes;
 
-    const [value, setValue] = React.useState('female');
+    const [value, setValue] = React.useState('none');
 
     const handleChange = (event) => {
         setValue(event.target.value);
     };
 
     return <Paper className={classes.root}>
+        <Typography>Create your comment</Typography>
         <TextField
             id="comment-text-field"
             label="Comment text"
@@ -32,22 +34,32 @@ const CommentCreationForm = (props) => {
             variant="outlined"
             className={classes.textArea}
         />
-        <Grid container>
-            <Grid item xs={3}>
-                <Typography>Sentiment:</Typography>
-            </Grid>
-            <Grid item xs={9}>
-                <FormControl component="sentiment-form">
-                <RadioGroup row aria-label="sentiment" name="gender1" value={value} onChange={handleChange}>
-                    <FormControlLabel value="none" control={<Radio />} label="None" />
-                    <FormControlLabel value="positive" control={<Radio />} label={<SentimentSatisfiedAltIcon style={ { color: green[500]} } />} />
-                    <FormControlLabel value="neutral" control={<Radio />} label={<SentimentSatisfiedIcon />} />
-                    <FormControlLabel value="negative" control={<Radio />} label={<SentimentVeryDissatisfiedIcon style={ {fontSize: 26} } color="secondary" />}/>
-                </RadioGroup>
+        <FormControl className={classes.radioForm} >
+            <FormLabel>Select sentiment</FormLabel>
+            <RadioGroup row aria-label="sentiment" name="gender1" value={value} onChange={handleChange}>
+                <FormControlLabel
+                value="none"
+                control={<Radio />}
+                label="None"
+                />
+                <FormControlLabel
+                value="positive"
+                control={<Radio />}
+                label={<SentimentSatisfiedAltIcon
+                style={ { color: green[500]} } />}
+                />
+                <FormControlLabel
+                value="neutral"
+                control={<Radio />}
+                label={<SentimentSatisfiedIcon />}
+                />
+                <FormControlLabel
+                value="negative"
+                control={<Radio />}
+                label={<SentimentVeryDissatisfiedIcon style={ {fontSize: 26} } color="secondary" />}
+                />
+            </RadioGroup>
         </FormControl>
-            </Grid>
-        </Grid>
-        
         
     </Paper>
 }
