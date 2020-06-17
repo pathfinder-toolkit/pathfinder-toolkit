@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import frontPageImage from "../external/images/frontpage_house.jpg";
 
 import axios from "axios";
 import { useAuth0 } from "./react-auth0-spa";

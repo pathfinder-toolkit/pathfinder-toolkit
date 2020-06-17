@@ -17,6 +17,7 @@ import { useEditor } from "../../utils/EditorProvider";
 import DropdownSelect from "../reusable/DropdownSelect";
 import Tip from "./Tip";
 import IncrementValue from "./IncrementValue";
+import useHandler from "./useHandler";
 
 const BuildingDetails = (props) => {
   const {
@@ -25,6 +26,8 @@ const BuildingDetails = (props) => {
     setNavigationEnabled,
     buildingOptions,
   } = useEditor();
+
+  const { values, handleChange } = useHandler();
 
   const [materialValue, setMaterialValue] = useState();
   const [nameValue, setNameValue] = useState(
@@ -38,17 +41,13 @@ const BuildingDetails = (props) => {
     getSavedProperty("details", "floorArea")
   );
   const [buildingFloors, setBuildingFloors] = useState(
-    getSavedProperty("floorsAmount", "name")
+    getSavedProperty("details", "floorsAmount")
   );
 
   const handleMaterialChange = (value) => {
     setMaterialValue(value);
   };
 
-  const handleNameChange = (event) => {
-    setNameValue(event.target.value);
-    setSavedProperty("details", "name", event.target.value);
-  };
 
   const handleBuildingTypeChange = (event) => {
     //setBuildingType(event.target.value);
@@ -91,16 +90,17 @@ const BuildingDetails = (props) => {
                   <TextField
                     className={props.style.formComponent}
                     label="Building name"
-                    value={nameValue}
-                    onChange={handleNameChange}
+                    name="name"
+                    value={values.name}
+                    onChange={(e) => handleChange(e, "details", "name")}
                   />
                 </Grid>
                 <Grid item sm={2}>
                   <TextField
                     label="Floor area"
                     className={props.style.formComponent}
-                    value={floorArea}
-                    onChange={handleFloorAreaChange}
+                    value={values.floorArea}
+                    onChange={(e) => handleChange(e, "details", "floorArea")}
                     //InputProps={{
                     // startAdornment: (
                     //  <InputAdornment position="end">m2</InputAdornment>
@@ -115,7 +115,7 @@ const BuildingDetails = (props) => {
                     label="Type"
                     value={buildingType}
                     id="type-dropdown"
-                    handler={handleBuildingTypeChange}
+                    handler={(e) => handleChange(e, "details", "buildingType")}
                   />
                 </Grid>
                 <Grid item>
@@ -156,7 +156,7 @@ const BuildingDetails = (props) => {
                 Count
               </TextField>
               <Grid container className={props.style.controls}>
-                <IncrementValue value={buildingFloors}/>
+                <IncrementValue value={buildingFloors} />
               </Grid>
             </div>
           </Grid>
