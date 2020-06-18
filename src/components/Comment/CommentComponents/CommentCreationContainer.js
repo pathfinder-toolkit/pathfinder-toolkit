@@ -24,16 +24,21 @@ const useStyles = makeStyles((theme) => ({
     radioForm: {
         marginLeft: theme.spacing(2),
         paddingRight: theme.spacing(4),
-        marginBottom: theme.spacing(1),
         display:"block",
     },
-    displayText: {
+    switch: {
+        marginLeft:theme.spacing(1),
+    },
+    switchText: {
         display: "inline-block",
-        marginLeft: theme.spacing(1),
-        marginBottom: theme.spacing(1)
+        marginLeft: theme.spacing(1)
+    },
+    explanationText: {
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(2),
     },
     submitCommentButton: {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(2),
         marginBottom: theme.spacing(2),
         display:"block",
     }

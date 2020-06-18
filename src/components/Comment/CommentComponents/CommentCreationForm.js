@@ -26,16 +26,29 @@ const CommentCreationForm = (props) => {
     const { user } = useAuth0();
 
     const [radioValue, setRadioValue] = useState('none');
+    const [commentTextValue, setCommentTextValue] = useState('');
     const [switchState, setSwitchState] = useState(false);
 
     const _handleRadioChange = (event) => {
-        console.log(user);
         setRadioValue(event.target.value);
     };
+
+    const _handleTextFieldChange = (event) => {
+        setCommentTextValue(event.target.value);
+    }
 
     const _handleSwitchChange = (event) => {
         setSwitchState(switchState ? false : true)
     };
+
+    const _handleSubmit = () => {
+        console.log("submitted");
+        const comment = {
+            commentText: commentTextValue,
+            sentiment: radioValue
+        }
+        console.log(comment);
+    }
 
     return <Card className={classes.root}>
         <CardHeader
@@ -55,6 +68,7 @@ const CommentCreationForm = (props) => {
             fullWidth
             rows={4}
             variant="outlined"
+            onChange={_handleTextFieldChange}
             className={classes.textArea}
         />
         <FormControl className={classes.radioForm} >
@@ -88,14 +102,16 @@ const CommentCreationForm = (props) => {
         onChange={_handleSwitchChange}
         color="primary"
         name="switch"
+        className={classes.switch}
         inputProps={{ 'aria-label': 'display-username-checkbox' }}
         />
-        <Typography className={classes.displayText}>Display your username in your comment</Typography>
-        <Typography className={classes.displayText}>Your username will be displayed as <strong>{switchState ? user.nickname : "Anonymous user"}</strong></Typography>
+        <Typography className={classes.switchText}>Display your username in your comment</Typography>
+        <Typography className={classes.explanationText}>Your username will be displayed as <strong>{switchState ? user.nickname : "Anonymous user"}</strong></Typography>
         <Button 
         className={classes.submitCommentButton} 
         variant="contained"
         color="primary"
+        onClick={_handleSubmit}
         >
             Submit
         </Button>
