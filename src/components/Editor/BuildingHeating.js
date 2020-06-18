@@ -34,7 +34,7 @@ const BuildingHeating = (props) => {
       console.log("saving");
       setSavedCategory("heating", formData);
     },
-    15000,
+    500,
     [formData]
   );
 
