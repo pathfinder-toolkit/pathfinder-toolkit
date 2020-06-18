@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Switch from "@material-ui/core/Switch";
+import Button from "@material-ui/core/Button";
+
+import {useAuth0} from "./../../../utils/react-auth0-spa";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -19,10 +23,18 @@ import { green } from '@material-ui/core/colors';
 const CommentCreationForm = (props) => {
     const classes = props.classes;
 
-    const [value, setValue] = React.useState('none');
+    const { user } = useAuth0();
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const [radioValue, setRadioValue] = useState('none');
+    const [switchState, setSwitchState] = useState(false);
+
+    const _handleRadioChange = (event) => {
+        console.log(user);
+        setRadioValue(event.target.value);
+    };
+
+    const _handleSwitchChange = (event) => {
+        setSwitchState(switchState ? false : true)
     };
 
     return <Card className={classes.root}>
@@ -47,7 +59,7 @@ const CommentCreationForm = (props) => {
         />
         <FormControl className={classes.radioForm} >
             <FormLabel>Select sentiment</FormLabel>
-            <RadioGroup row aria-label="sentiment" name="gender1" value={value} onChange={handleChange}>
+            <RadioGroup row aria-label="sentiment" name="sentiment" value={radioValue} onChange={_handleRadioChange}>
                 <FormControlLabel
                 value="none"
                 control={<Radio />}
@@ -71,6 +83,22 @@ const CommentCreationForm = (props) => {
                 />
             </RadioGroup>
         </FormControl>
+        <Switch
+        checked={switchState}
+        onChange={_handleSwitchChange}
+        color="primary"
+        name="switch"
+        inputProps={{ 'aria-label': 'display-username-checkbox' }}
+        />
+        <Typography className={classes.displayText}>Display your username in your comment</Typography>
+        <Typography className={classes.displayText}>Your username will be displayed as <strong>{switchState ? user.nickname : "Anonymous user"}</strong></Typography>
+        <Button 
+        className={classes.submitCommentButton} 
+        variant="contained"
+        color="primary"
+        >
+            Submit
+        </Button>
     </Card>
 }
 

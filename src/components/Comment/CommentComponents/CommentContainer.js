@@ -29,26 +29,24 @@ const useStyles = makeStyles((theme) => ({
 const CommentContainer = (props) => {
     const classes = useStyles();
 
-    const [state, setState] = useState({
-        checked: true,
-      });
+    const [switchState, setSwitchState] = useState(false);
     
-      const _handleSwitchChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-      };
+    const _handleSwitchChange = (event) => {
+        setSwitchState(switchState ? false : true);
+    };
     
 
     return <Paper className={classes.root}>
         {props.comments.length > 0 && (<React.Fragment>
                 <Switch
-                checked={state.switch}
+                checked={switchState}
                 onChange={_handleSwitchChange}
                 color="primary"
                 name="switch"
-                inputProps={{ 'aria-label': 'primary checkbox' }}
+                inputProps={{ 'aria-label': 'show-comments-checkbox' }}
                 />
-                <Typography className={classes.displayText}>{state.switch ? "Hide comments" : "Show comments"}</Typography>
-                {state.switch && <Comments comments={props.comments} classes={classes} />}
+                <Typography className={classes.displayText}>{switchState ? "Hide comments" : "Show comments"}</Typography>
+                {switchState && <Comments comments={props.comments} classes={classes} />}
             </React.Fragment>
          )}
         {props.comments.length == 0 && (

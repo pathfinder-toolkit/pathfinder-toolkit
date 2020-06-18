@@ -6,7 +6,7 @@ import CommentCreationForm from "./CommentCreationForm";
 
 const useStyles = makeStyles((theme) => ({
     createCommentButton: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
     },
     root: {
         marginBottom: theme.spacing(4),
@@ -24,7 +24,18 @@ const useStyles = makeStyles((theme) => ({
     radioForm: {
         marginLeft: theme.spacing(2),
         paddingRight: theme.spacing(4),
+        marginBottom: theme.spacing(1),
+        display:"block",
+    },
+    displayText: {
+        display: "inline-block",
+        marginLeft: theme.spacing(1),
+        marginBottom: theme.spacing(1)
+    },
+    submitCommentButton: {
+        marginLeft: theme.spacing(1),
         marginBottom: theme.spacing(2),
+        display:"block",
     }
   }));
 
