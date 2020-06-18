@@ -22,7 +22,6 @@ import IncrementValue from "./IncrementValue";
 const BuildingDetails = (props) => {
   const {
     setNavigationEnabled,
-    activeStep,
     getSavedCategory,
     setSavedCategory,
     buildingOptions,
@@ -47,14 +46,9 @@ const BuildingDetails = (props) => {
       console.log("saving");
       setSavedCategory("details", formData);
     },
-    15000,
+    500,
     [formData]
   );
-
-  useEffect(() => {
-    console.log("sSAVING");
-    setSavedCategory("details", formData);
-  }, [activeStep]);
 
   const handleYearChange = (event, newValue) => {};
 
