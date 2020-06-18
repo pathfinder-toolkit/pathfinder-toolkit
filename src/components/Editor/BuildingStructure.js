@@ -39,7 +39,7 @@ const BuildingStructure = (props) => {
       console.log("saving");
       setSavedCategory("structure", formData);
     },
-    15000,
+    500,
     [formData]
   );
 

@@ -34,7 +34,7 @@ const BuildingVentilation = (props) => {
       console.log("saving");
       setSavedCategory("ventilation", formData);
     },
-    15000,
+    500,
     [formData]
   );
 
