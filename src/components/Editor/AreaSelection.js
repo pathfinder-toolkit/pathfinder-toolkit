@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
+import { CircularProgress } from "@material-ui/core";
 
 const AreaSelection = () => {
   const {
@@ -30,29 +31,23 @@ const AreaSelection = () => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("fetching options:");
       const data = await requestAreaOptions(selectedArea);
       setBuildingOptions(data);
-    }
-    fetchData();
-  }, [selectedArea]);
-
-  useEffect(() => {
-    if (selectedArea !== '') {
-      requestAreaOptions(selectedArea);
       setNavigationEnabled(true);
     }
-  }, []);
+    if (selectedArea !== "") {
+      fetchData();
+    }
+  }, [,selectedArea]);
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
-    //requestAreaOptions(selectedCountry);
     setSavedProperty("details", "area", selectedCountry);
-    setNavigationEnabled(true);
   };
 
   return (
     <React.Fragment>
+      {loading && <CircularProgress />}
       {!loading && (
         <AreaMap
           allowedCountries={allowedCountries}
