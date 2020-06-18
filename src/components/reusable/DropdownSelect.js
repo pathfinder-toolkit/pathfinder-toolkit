@@ -22,7 +22,7 @@ const DropdownSelect = (props) => {
   const handleChange = (event) => {
     setSelection(event.target.value);
     if (props.handler) {
-      props.handler(event.target.value);
+      props.handler(event);
     }
   };
 

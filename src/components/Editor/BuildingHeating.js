@@ -3,30 +3,45 @@ import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
+import { useTimer } from "../../utils/useTimer";
 
 import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingHeating = (props) => {
   const {
     setNavigationEnabled,
-    setSavedProperty,
-    getSavedProperty,
+    getSavedCategory,
+    setSavedCategory,
     buildingOptions,
   } = useEditor();
 
-  const [heatingType, setHeatingType] = useState(
-    getSavedProperty("heating", "heatingSystem")
+  const [formData, setFormData] = useState(getSavedCategory("heating"));
+
+  const handleChange = (event, propertyName) => {
+    event.persist();
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: {
+        ...formData[propertyName],
+        value: event.target.value,
+      },
+    }));
+  };
+
+  // Save form data to local storage
+  useTimer(
+    () => {
+      console.log("saving");
+      setSavedCategory("heating", formData);
+    },
+    500,
+    [formData]
   );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  const handleHeatingTypeChange = (value) => {
-    setHeatingType(value);
-    setSavedProperty("heating", "heatingSystem", value);
-  };
 
   //className={props.style.required}
   return (
@@ -41,9 +56,9 @@ const BuildingHeating = (props) => {
             <DropdownSelect
               data={buildingOptions.heatingTypes}
               label="Type"
-              value={heatingType}
+              value={formData.heatingSystem.value}
               id="heating-type"
-              handler={handleHeatingTypeChange}
+              handler={(e) => handleChange(e, "heatingSystem")}
             />
           </FormControl>
         </div>

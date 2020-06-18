@@ -1,0 +1,104 @@
+{
+  "details": {
+    "name": {
+      "propertyName": "Name",
+      "value": ""
+    },
+    "area": {
+      "propertyName": "Area",
+      "value": ""
+    },
+    "material": {
+      "propertyName": "Material",
+      "value": ""
+    },
+    "year": {
+      "propertyName": "Construction year",
+      "value": ""
+    },
+    "buildingType": {
+      "propertyName": "Building type",
+      "value": ""
+    },
+    "floorArea": {
+      "propertyName": "Floor area(in square meters)",
+      "value": ""
+    },
+    "heatedFloorArea": {
+      "propertyName": "Heated floor area(in square meters)",
+      "value": ""
+    },
+    "floorsAmount": {
+      "propertyName": "Amount of floors",
+      "value": ""
+    },
+    "description": {
+      "propertyName": "Description of building",
+      "value": ""
+    },
+    "image": {
+      "propertyName": "Image",
+      "value": ""
+    }
+  },
+  "heating": {
+    "heatingSystem": {
+      "propertyName": "Heating System",
+      "value": ""
+    },
+    "heatingSource": {
+      "propertyName": "Heating Source",
+      "value": ""
+    },
+    "annualCost": {
+      "propertyName": "Annual cost",
+      "value": ""
+    }
+  },
+  "electricity": {
+    "annualUse": {
+      "propertyName": "Annual use",
+      "value": ""
+    },
+    "annualCost": {
+      "propertyName": "Annual cost",
+      "value": ""
+    }
+  },
+  "structure": {
+    "wallMaterial": {
+      "propertyName": "Wall material",
+      "value": ""
+    },
+    "wallThickness": {
+      "propertyName": "Wall Thickness",
+      "value": ""
+    },
+    "windowAmount": {
+      "propertyName": "Amount of windows",
+      "value": ""
+    },
+    "doorMaterial": {
+      "propertyName": "Door material",
+      "value": ""
+    },
+    "doorAmount": {
+      "propertyName": "Amount of doors",
+      "value": ""
+    },
+    "roofMaterial": {
+      "propertyName": "Roof material",
+      "value": ""
+    },
+    "roofInsulation": {
+      "propertyName": "Roof insulation",
+      "value": ""
+    }
+  },
+  "ventilation": {
+    "ventilationSystem": {
+      "propertyName": "Ventilation system",
+      "value": ""
+    }
+  }
+}
