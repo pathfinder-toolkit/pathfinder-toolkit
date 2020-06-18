@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Switch from "@material-ui/core/Switch";
+import Button from "@material-ui/core/Button";
+
+import {useAuth0} from "./../../../utils/react-auth0-spa";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -19,11 +23,32 @@ import { green } from '@material-ui/core/colors';
 const CommentCreationForm = (props) => {
     const classes = props.classes;
 
-    const [value, setValue] = React.useState('none');
+    const { user } = useAuth0();
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
+    const [radioValue, setRadioValue] = useState('none');
+    const [commentTextValue, setCommentTextValue] = useState('');
+    const [switchState, setSwitchState] = useState(false);
+
+    const _handleRadioChange = (event) => {
+        setRadioValue(event.target.value);
     };
+
+    const _handleTextFieldChange = (event) => {
+        setCommentTextValue(event.target.value);
+    }
+
+    const _handleSwitchChange = (event) => {
+        setSwitchState(switchState ? false : true)
+    };
+
+    const _handleSubmit = () => {
+        console.log("submitted");
+        const comment = {
+            commentText: commentTextValue,
+            sentiment: radioValue
+        }
+        console.log(comment);
+    }
 
     return <Card className={classes.root}>
         <CardHeader
@@ -43,11 +68,12 @@ const CommentCreationForm = (props) => {
             fullWidth
             rows={4}
             variant="outlined"
+            onChange={_handleTextFieldChange}
             className={classes.textArea}
         />
         <FormControl className={classes.radioForm} >
             <FormLabel>Select sentiment</FormLabel>
-            <RadioGroup row aria-label="sentiment" name="gender1" value={value} onChange={handleChange}>
+            <RadioGroup row aria-label="sentiment" name="sentiment" value={radioValue} onChange={_handleRadioChange}>
                 <FormControlLabel
                 value="none"
                 control={<Radio />}
@@ -71,6 +97,24 @@ const CommentCreationForm = (props) => {
                 />
             </RadioGroup>
         </FormControl>
+        <Switch
+        checked={switchState}
+        onChange={_handleSwitchChange}
+        color="primary"
+        name="switch"
+        className={classes.switch}
+        inputProps={{ 'aria-label': 'display-username-checkbox' }}
+        />
+        <Typography className={classes.switchText}>Display your username in your comment</Typography>
+        <Typography className={classes.explanationText}>Your username will be displayed as <strong>{switchState ? user.nickname : "Anonymous user"}</strong></Typography>
+        <Button 
+        className={classes.submitCommentButton} 
+        variant="contained"
+        color="primary"
+        onClick={_handleSubmit}
+        >
+            Submit
+        </Button>
     </Card>
 }
 
