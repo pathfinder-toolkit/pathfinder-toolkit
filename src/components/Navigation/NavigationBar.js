@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavigationBar = (props) => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { loading, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
-  const { user, fakeLogout, privateRequest } = useBackend();
+  const {fakeLogout} = useBackend();
 
   const classes = useStyles();
 
@@ -95,6 +95,7 @@ const NavigationBar = (props) => {
         {isAuthenticated && (
           <div>
             <IconButton
+              disabled={loading}
               className={classes.navButton}
               edge="end"
               aria-label="account of current user"
@@ -128,8 +129,11 @@ const NavigationBar = (props) => {
                 Give feedback
               </MenuItem>
               <MenuItem
-                onClick={() =>
-                  logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL })
+                onClick={() => {
+                    if (!loading) {
+                      logout({ returnTo: process.env.REACT_APP_AUTH_RETURN_URL })
+                    }
+                  }
                 }
               >
                 Logout
@@ -140,8 +144,11 @@ const NavigationBar = (props) => {
         {!isAuthenticated && (
           <Button
             className={classes.navButton}
+            disabled={loading}
             onClick={() => {
-              loginWithRedirect({});
+              if (!loading) {
+                loginWithRedirect({});
+              }
             }}
             color="inherit"
           >

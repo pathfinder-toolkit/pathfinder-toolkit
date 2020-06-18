@@ -7,18 +7,15 @@ import BuildingVentilation from "../components/Editor/BuildingVentilation";
 import BuildingHeating from "../components/Editor/BuildingHeating";
 import Summary from "../components/Editor/Summary";
 
+import buildingDetailsModel from "../json/buildingDetailsModel.json";
+
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 const useStateWithSessionStorage = (sessionStorageKey) => {
   const [value, setValue] = useState(
-    JSON.parse(sessionStorage.getItem(sessionStorageKey)) || {
-      details: {},
-      structure: {},
-      heating: {},
-      ventilation: {},
-      electricity: {},
-    }
+    JSON.parse(sessionStorage.getItem(sessionStorageKey)) ||
+      buildingDetailsModel
   );
 
   useEffect(() => {
@@ -130,6 +127,20 @@ export const EditorProvider = ({ children }) => {
     return "";
   };
 
+  const getSavedCategory = (category) => {
+    if (Object.keys(buildingInformation).includes(category)) {
+      return buildingInformation[category];
+    }
+    return "";
+  };
+
+  const setSavedCategory = (categoryName, data) => {
+    setBuildingInformation((buildingInformation) => ({
+      ...buildingInformation,
+      [categoryName]: data,
+    }));
+  };
+
   return (
     <EditorContext.Provider
       value={{
@@ -144,6 +155,8 @@ export const EditorProvider = ({ children }) => {
         previousStep,
         setSavedProperty,
         getSavedProperty,
+        getSavedCategory,
+        setSavedCategory,
         buildingOptions,
         setBuildingOptions,
       }}

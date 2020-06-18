@@ -3,30 +3,45 @@ import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
+import { useTimer } from "../../utils/useTimer";
 
 import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingVentilation = (props) => {
   const {
     setNavigationEnabled,
-    setSavedProperty,
-    getSavedProperty,
+    getSavedCategory,
+    setSavedCategory,
     buildingOptions,
   } = useEditor();
 
-  const [ventilationType, setVentilationType] = useState(
-    getSavedProperty("ventilation", "ventilationSystem")
+  const [formData, setFormData] = useState(getSavedCategory("ventilation"));
+
+  const handleChange = (event, propertyName) => {
+    event.persist();
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: {
+        ...formData[propertyName],
+        value: event.target.value,
+      },
+    }));
+  };
+
+  // Save form data to local storage
+  useTimer(
+    () => {
+      console.log("saving");
+      setSavedCategory("ventilation", formData);
+    },
+    500,
+    [formData]
   );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  const handleVentilationTypeChange = (value) => {
-    setVentilationType(value);
-    setSavedProperty("ventilation", "ventilationSystem", value);
-  };
 
   return (
     <Fade in={loading}>
@@ -41,9 +56,9 @@ const BuildingVentilation = (props) => {
             <DropdownSelect
               data={buildingOptions.ventilationTypes}
               label="Type"
-              value={ventilationType}
+              value={formData.ventilationSystem.value}
               id="ventilation-type"
-              handler={handleVentilationTypeChange}
+              handler={(e) => handleChange(e, "ventilationSystem")}
             />
           </FormControl>
         </Paper>
