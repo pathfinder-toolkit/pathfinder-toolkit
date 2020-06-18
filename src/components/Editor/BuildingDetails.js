@@ -13,63 +13,50 @@ import {
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
+import { useTimer } from "../../utils/useTimer";
 
 import DropdownSelect from "../reusable/DropdownSelect";
 import Tip from "./Tip";
 import IncrementValue from "./IncrementValue";
-import useHandler from "./useHandler";
 
 const BuildingDetails = (props) => {
   const {
-    setSavedProperty,
-    getSavedProperty,
     setNavigationEnabled,
+    activeStep,
+    getSavedCategory,
+    setSavedCategory,
     buildingOptions,
   } = useEditor();
 
-  const { values, handleChange } = useHandler();
+  const [formData, setFormData] = useState(getSavedCategory("details"));
 
-  const [materialValue, setMaterialValue] = useState();
-  const [nameValue, setNameValue] = useState(
-    getSavedProperty("details", "name")
+  const handleChange = (event, propertyName) => {
+    event.persist();
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: {
+        ...formData[propertyName],
+        value: event.target.value,
+      },
+    }));
+  };
+
+  // Save form data to local storage
+  useTimer(
+    () => {
+      console.log("saving");
+      setSavedCategory("details", formData);
+    },
+    15000,
+    [formData]
   );
-  const [buildingYear, setBuildingYear] = useState(
-    getSavedProperty("details", "year")
-  );
-  const [buildingType, setBuildingType] = useState();
-  const [floorArea, setFloorArea] = useState(
-    getSavedProperty("details", "floorArea")
-  );
-  const [buildingFloors, setBuildingFloors] = useState(
-    getSavedProperty("details", "floorsAmount")
-  );
 
-  const handleMaterialChange = (value) => {
-    setMaterialValue(value);
-  };
+  useEffect(() => {
+    console.log("sSAVING");
+    setSavedCategory("details", formData);
+  }, [activeStep]);
 
-
-  const handleBuildingTypeChange = (event) => {
-    //setBuildingType(event.target.value);
-  };
-
-  const handleFloorAreaChange = (event) => {
-    setFloorArea(event.target.value);
-    setSavedProperty("details", "floorArea", event.target.value);
-  };
-
-  const handleYearChange = (event, newValue) => {
-    setBuildingYear(newValue);
-    setSavedProperty("details", "year", newValue);
-  };
-
-  const handleFloorChange = (event) => {
-    if (event.target.value < 0) {
-      return;
-    }
-    setBuildingFloors(event.target.value);
-    setSavedProperty("details", "floorsAmount", event.target.value);
-  };
+  const handleYearChange = (event, newValue) => {};
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -90,17 +77,16 @@ const BuildingDetails = (props) => {
                   <TextField
                     className={props.style.formComponent}
                     label="Building name"
-                    name="name"
-                    value={values.name}
-                    onChange={(e) => handleChange(e, "details", "name")}
+                    value={formData.name.value}
+                    onChange={(e) => handleChange(e, "name")}
                   />
                 </Grid>
                 <Grid item sm={2}>
                   <TextField
                     label="Floor area"
                     className={props.style.formComponent}
-                    value={values.floorArea}
-                    onChange={(e) => handleChange(e, "details", "floorArea")}
+                    value={formData.floorArea.value}
+                    onChange={(e) => handleChange(e, "floorArea")}
                     //InputProps={{
                     // startAdornment: (
                     //  <InputAdornment position="end">m2</InputAdornment>
@@ -113,9 +99,9 @@ const BuildingDetails = (props) => {
                     className={props.style.formComponent}
                     data={buildingOptions.buildingTypes}
                     label="Type"
-                    value={buildingType}
+                    value={formData.buildingType.value}
                     id="type-dropdown"
-                    handler={(e) => handleChange(e, "details", "buildingType")}
+                    handler={(e) => handleChange(e, "buildingType")}
                   />
                 </Grid>
                 <Grid item>
@@ -123,9 +109,9 @@ const BuildingDetails = (props) => {
                     className={props.style.formComponent}
                     data={buildingOptions.materials}
                     label="Material"
-                    value={materialValue}
+                    value={formData.material.value}
                     id="material-dropdown"
-                    handler={handleMaterialChange}
+                    handler={(e) => handleChange(e, "material")}
                   />
                 </Grid>
               </Grid>
@@ -135,28 +121,29 @@ const BuildingDetails = (props) => {
                   marks
                   valueLabelDisplay="auto"
                   step={10}
-                  defaultValue={buildingYear ? buildingYear : 1990}
+                  defaultValue={1990}
                   marks
                   min={1890}
                   max={2010}
+                  value={formData.year.value}
                   onChange={handleYearChange}
                 />
                 <Typography variant="subtitle1" gutterBottom>
-                  Construction year {buildingYear}
+                  Construction year {formData.year.value}
                 </Typography>
               </Grid>
 
               <Typography variant="h6">Floors</Typography>
               <TextField
                 size="small"
-                value={buildingFloors ? buildingFloors : "0"}
+                value={formData.floorsAmount.value}
                 type="number"
-                onChange={handleFloorChange}
+                onChange={(e) => handleChange(e, "floorsAmount")}
               >
                 Count
               </TextField>
               <Grid container className={props.style.controls}>
-                <IncrementValue value={buildingFloors} />
+                <IncrementValue value={formData.floorsAmount.value} />
               </Grid>
             </div>
           </Grid>

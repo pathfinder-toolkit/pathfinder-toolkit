@@ -7,47 +7,46 @@ import {
   TextField,
 } from "@material-ui/core";
 
-import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
+import {useTimer} from "../../utils/useTimer";
 
 import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingStructure = (props) => {
   const {
-    setSavedProperty,
-    getSavedProperty,
-    buildingOptions,
     setNavigationEnabled,
+    getSavedCategory,
+    setSavedCategory,
+    buildingOptions,
   } = useEditor();
-  const [wallMaterial, setWallMaterial] = useState(
-    getSavedProperty("structure", "wallMaterial")
-  );
-  const [roofType, setRoofType] = useState();
-  const [windowCount, setWindowCount] = useState(
-    getSavedProperty("structure", "windowAmount")
+
+  const [formData, setFormData] = useState(getSavedCategory("structure"));
+
+  const handleChange = (event, propertyName) => {
+    event.persist();
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: {
+        ...formData[propertyName],
+        value: event.target.value,
+      },
+    }));
+  };
+
+  // Save form data to local storage
+  useTimer(
+    () => {
+      console.log("saving");
+      setSavedCategory("structure", formData);
+    },
+    15000,
+    [formData]
   );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
   }, []);
-
-  const handleMaterialChange = (value) => {
-    setWallMaterial(value);
-    setSavedProperty("structure", "wallMaterial", value);
-  };
-
-  const handleRoofChange = (value) => {
-    setRoofType(value);
-  };
-
-  const handleWindowChange = (event) => {
-    if (event.target.value < 0 || isNaN(event.target.value)) {
-      return;
-    }
-    setWindowCount(event.target.value);
-    setSavedProperty("structure", "windowAmount", event.target.value);
-  };
 
   //Just a quick sketch, will be split into smaller components/remade later
   return (
@@ -63,27 +62,27 @@ const BuildingStructure = (props) => {
             className={props.style.formComponent}
             data={buildingOptions.materials}
             label="Material"
-            value={wallMaterial}
+            value={formData.wallMaterial.value}
             id="wall-material"
-            handler={handleMaterialChange}
+            handler={(e) => handleChange(e, "wallMaterial")}
           />
           <Typography variant="h6">Roof</Typography>
           <DropdownSelect
             className={props.style.formComponent}
             data={buildingOptions.roofTypes}
             label="Type"
-            value={roofType}
+            value={formData.roofMaterial.value}
             id="roof-type"
-            handler={handleRoofChange}
+            handler={(e) => handleChange(e, "roofMaterial")}
           />
 
           <Typography variant="h6">Windows</Typography>
           <TextField
             className={props.style.formComponent}
             size="small"
-            value={windowCount}
+            value={formData.windowAmount.value}
             type="number"
-            onChange={handleWindowChange}
+            onChange={(e) => handleChange(e, "windowAmount")}
           >
             Count
           </TextField>
