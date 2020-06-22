@@ -5,7 +5,7 @@ import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import DropdownSelect from "../reusable/DropdownSelect";
+import DropdownSelect from "./reusable/DropdownSelect";
 
 const BuildingHeating = (props) => {
   const {

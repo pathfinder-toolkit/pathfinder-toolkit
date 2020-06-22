@@ -21,6 +21,7 @@ const BuildingEditor = () => {
       height: "90vh",
       maxHeight: "92vh",
     },
+
   }));
   const classes = useStyles();
 
@@ -47,7 +48,7 @@ const BuildingEditor = () => {
     },
     row: {
       borderBottom: "1px solid #E0E0E0",
-      marginBottom: theme.spacing(0.5),
+      marginBottom: theme.spacing(1),
     },
     formComponent: {
       marginBottom: theme.spacing(2),
@@ -59,11 +60,18 @@ const BuildingEditor = () => {
     formButton: {
       margin: theme.spacing(1),
     },
+    formBorder: {
+      border: "1px solid #E0E0E0",
+      borderRadius: "4px",
+    },
+    clearButton: {
+      marginBottom: theme.spacing(-5.5),
+    },
     controls: {
       display: "flex",
     },
     valueText: {
-      border: "1px solid #E0E0E0",
+      border: "2px solid #E0E0E0",
       borderRadius: "4px",
       padding: theme.spacing(2),
       width: "50px",
