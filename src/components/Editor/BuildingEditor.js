@@ -63,6 +63,9 @@ const BuildingEditor = () => {
       border: "1px solid #E0E0E0",
       borderRadius: "4px",
     },
+    clearButton: {
+      paddingTop: theme.spacing(2),
+    },
     controls: {
       display: "flex",
     },

@@ -11,14 +11,16 @@ import {
   FormControl,
   Button,
   InputAdornment,
+  IconButton,
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import DropdownSelect from "../reusable/DropdownSelect";
+import DropdownSelect from "./reusable/DropdownSelect";
+import ClearButton from "./reusable/ClearButton";
 import Tip from "./Tip";
-import IncrementValue from "./IncrementValue";
+import { InsertPhoto } from "@material-ui/icons";
 
 const BuildingDetails = (props) => {
   const {
@@ -47,6 +49,18 @@ const BuildingDetails = (props) => {
         value: event.target.value,
       },
     }));
+  };
+
+  const resetProperty = (propertyName) => {
+    console.log("resetting: " + propertyName);
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: {
+        ...formData[propertyName],
+        value: "",
+      },
+    }));
+    console.log(formData);
   };
 
   // Need a different handler function for the slider,
@@ -86,6 +100,7 @@ const BuildingDetails = (props) => {
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    console.log(formData);
     setLoading(true);
   }, []);
 
@@ -102,13 +117,18 @@ const BuildingDetails = (props) => {
                 <Grid item>
                   <TextField
                     className={style.formComponent}
-                    label="Building name"
+                    label="Building name *"
                     value={formData.name.value}
                     onChange={(e) => handleChange(e, "name")}
                   />
                 </Grid>
 
                 <Grid item>
+                  <ClearButton
+                    className={style.ClearButton}
+                    handler={resetProperty}
+                    target="buildingType"
+                  />
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.buildingTypes}
@@ -201,14 +221,20 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
                 <Grid item sm={2}>
-                  <Button variant="contained" color="primary" component="label">
-                    Image
+                  <Button
+                    startIcon={<InsertPhoto />}
+                    variant="contained"
+                    color="primary"
+                    component="label"
+                  >
+                    Add
                     <input
                       onChange={handleFileChange}
                       type="file"
                       style={{ display: "none" }}
                     />
                   </Button>
+                  <Typography>{formData.image.value?.name}</Typography>
                 </Grid>
               </Grid>
             </div>
