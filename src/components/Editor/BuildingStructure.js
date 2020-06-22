@@ -10,7 +10,7 @@ import {
 import { useEditor } from "../../utils/EditorProvider";
 import {useTimer} from "../../utils/useTimer";
 
-import DropdownSelect from "../reusable/DropdownSelect";
+import DropdownSelect from "./reusable/DropdownSelect";
 
 const BuildingStructure = (props) => {
   const {

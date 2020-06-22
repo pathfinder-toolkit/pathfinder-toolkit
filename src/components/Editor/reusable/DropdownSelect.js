@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Select, MenuItem, InputLabel } from "@material-ui/core";
+import { Select, MenuItem, InputLabel, TextField } from "@material-ui/core";
 
 const DropdownSelect = (props) => {
   const value = props.value ? props.value : "";
@@ -28,11 +28,11 @@ const DropdownSelect = (props) => {
 
   return (
     <React.Fragment>
-      <InputLabel id={id}>{label}</InputLabel>
-      <Select
-        labelId={id}
+      <TextField
+        label={label}
         id={id}
         open={open}
+        select
         className={className}
         onClose={handleClose}
         onOpen={handleOpen}
@@ -44,7 +44,7 @@ const DropdownSelect = (props) => {
             {entry}
           </MenuItem>
         ))}
-      </Select>
+      </TextField>
     </React.Fragment>
   );
 };
