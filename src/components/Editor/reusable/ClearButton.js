@@ -4,7 +4,7 @@ import Clear from "@material-ui/icons/Clear";
 
 const ClearButton = (props) => {
   return (
-    <IconButton edge="end" onClick={() => props.handler(props.target)}>
+    <IconButton size="small" className={props.className} edge="end" onClick={() => props.handler(props.target)}>
       <Clear color="error" />
     </IconButton>
   );

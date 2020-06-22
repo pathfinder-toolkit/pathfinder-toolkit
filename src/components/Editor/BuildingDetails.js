@@ -124,16 +124,19 @@ const BuildingDetails = (props) => {
                 </Grid>
 
                 <Grid item>
-                  <ClearButton
-                    className={style.ClearButton}
-                    handler={resetProperty}
-                    target="buildingType"
-                  />
+                  {formData.buildingType.value && (
+                    <ClearButton
+                      className={style.clearButton}
+                      handler={resetProperty}
+                      target="buildingType"
+                    />
+                  )}
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.buildingTypes}
                     label="Type"
                     value={formData.buildingType.value}
+                    defaultValue="gggg"
                     id="type-dropdown"
                     handler={(e) => handleChange(e, "buildingType")}
                   />

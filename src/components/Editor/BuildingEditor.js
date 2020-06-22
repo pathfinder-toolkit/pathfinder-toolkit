@@ -21,6 +21,7 @@ const BuildingEditor = () => {
       height: "90vh",
       maxHeight: "92vh",
     },
+
   }));
   const classes = useStyles();
 
@@ -64,7 +65,7 @@ const BuildingEditor = () => {
       borderRadius: "4px",
     },
     clearButton: {
-      paddingTop: theme.spacing(2),
+      marginBottom: theme.spacing(-5.5),
     },
     controls: {
       display: "flex",
