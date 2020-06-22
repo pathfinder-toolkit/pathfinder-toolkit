@@ -47,7 +47,7 @@ const BuildingEditor = () => {
     },
     row: {
       borderBottom: "1px solid #E0E0E0",
-      marginBottom: theme.spacing(0.5),
+      marginBottom: theme.spacing(1),
     },
     formComponent: {
       marginBottom: theme.spacing(2),

@@ -71,6 +71,19 @@ const BuildingDetails = (props) => {
     [formData]
   );
 
+  const handleFileChange = (event) => {
+    event.persist();
+    console.log(event.target.files[0]);
+    setFormData((formData) => ({
+      ...formData,
+      image: {
+        ...formData.image,
+        value: event.target.files[0],
+      },
+    }));
+    console.log(formData);
+  };
+
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -105,25 +118,25 @@ const BuildingDetails = (props) => {
                     handler={(e) => handleChange(e, "buildingType")}
                   />
                 </Grid>
-                <Grid item>
-                  <DropdownSelect
+                <Grid item sm={1}>
+                  <TextField
                     className={style.formComponent}
-                    data={buildingOptions.materials}
-                    label="Material"
-                    value={formData.material.value}
-                    id="material-dropdown"
-                    handler={(e) => handleChange(e, "material")}
-                  />
+                    defaultValue="1"
+                    value={formData.floorsAmount.value}
+                    label="Floors"
+                    type="number"
+                    onChange={(e) => handleChange(e, "floorsAmount")}
+                  ></TextField>
                 </Grid>
-                <Grid
-                  item
-                  sm={2}
-                  className={formData.floorArea.value ? style.formBorder : ""}
-                >
+                <Grid item sm={2}>
                   <TextField
                     label="Floor area"
                     className={style.formComponent}
                     value={formData.floorArea.value}
+                    error={isNaN(formData.floorArea.value)}
+                    helperText={
+                      isNaN(formData.floorArea.value) ? "Incorrect entry" : ""
+                    }
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">m²</InputAdornment>
@@ -131,36 +144,29 @@ const BuildingDetails = (props) => {
                     }}
                     onChange={(e) => handleChange(e, "floorArea")}
                   />
-
-                  {formData.floorArea.value && (
-                    <Fade timeout={500} in={formData.floorArea.value}>
-                      <TextField
-                        label="Heated"
-                        className={style.formComponent}
-                        value={formData.heatedFloorArea.value}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">m²</InputAdornment>
-                          ),
-                        }}
-                        onChange={(e) => handleChange(e, "heatedFloorArea")}
-                      />
-                    </Fade>
-                  )}
+                </Grid>
+                <Grid item sm={2}>
+                  <TextField
+                    label="Heated"
+                    disabled={!formData.floorArea.value}
+                    className={style.formComponent}
+                    value={formData.heatedFloorArea.value}
+                    error={isNaN(formData.heatedFloorArea.value)}
+                    helperText={
+                      isNaN(formData.heatedFloorArea.value)
+                        ? "Incorrect entry"
+                        : ""
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">m²</InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => handleChange(e, "heatedFloorArea")}
+                  />
                 </Grid>
                 <Grid container sm={12} md={12} lg={12}>
-                  <Grid item sm={1}>
-                    <TextField
-                      size="small"
-                      className={style.formComponent}
-                      value={formData.floorsAmount.value}
-                      label="Floors"
-                      type="number"
-                      onChange={(e) => handleChange(e, "floorsAmount")}
-                    >
-                      Count
-                    </TextField>
-                  </Grid>
+                  <Grid item sm={1}></Grid>
                 </Grid>
               </Grid>
               <Grid container className={style.row} spacing={0}>
@@ -180,16 +186,31 @@ const BuildingDetails = (props) => {
                   onChange={handleYearChange}
                 />
               </Grid>
-              <TextField
-                id="description"
-                label="Description"
-                multiline
-                fullWidth
-                rows={4}
-                value={formData.description.value}
-                onChange={(e) => handleChange(e, "description")}
-                variant="outlined"
-              />
+              <Grid container spacing={3} sm={12} md={12} lg={12}>
+                <Grid item sm={10}>
+                  <TextField
+                    className={style.formComponent}
+                    id="description"
+                    label="Description"
+                    multiline
+                    fullWidth
+                    rows={4}
+                    value={formData.description.value}
+                    onChange={(e) => handleChange(e, "description")}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item sm={2}>
+                  <Button variant="contained" color="primary" component="label">
+                    Image
+                    <input
+                      onChange={handleFileChange}
+                      type="file"
+                      style={{ display: "none" }}
+                    />
+                  </Button>
+                </Grid>
+              </Grid>
             </div>
           </Grid>
           <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
