@@ -3,6 +3,7 @@ import {
   Typography,
   Grid,
   Fade,
+  Zoom,
   TextField,
   Paper,
   Slider,
@@ -34,6 +35,11 @@ const BuildingDetails = (props) => {
 
   const handleChange = (event, propertyName) => {
     event.persist();
+
+    if (event.target.value < 0) {
+      return;
+    }
+
     setFormData((formData) => ({
       ...formData,
       [propertyName]: {
@@ -76,7 +82,7 @@ const BuildingDetails = (props) => {
         <div className={style.header}>
           <Typography variant="h5">Building details</Typography>
         </div>
-        <Grid container spacing={4} sm={12} md={12} lg={12}>
+        <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.category}>
               <Grid container className={style.row} spacing={0}>
@@ -88,19 +94,7 @@ const BuildingDetails = (props) => {
                     onChange={(e) => handleChange(e, "name")}
                   />
                 </Grid>
-                <Grid item sm={2}>
-                  <TextField
-                    label="Floor area"
-                    className={style.formComponent}
-                    value={formData.floorArea.value}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">m2</InputAdornment>
-                      ),
-                    }}
-                    onChange={(e) => handleChange(e, "floorArea")}
-                  />
-                </Grid>
+
                 <Grid item>
                   <DropdownSelect
                     className={style.formComponent}
@@ -121,6 +115,53 @@ const BuildingDetails = (props) => {
                     handler={(e) => handleChange(e, "material")}
                   />
                 </Grid>
+                <Grid
+                  item
+                  sm={2}
+                  className={formData.floorArea.value ? style.formBorder : ""}
+                >
+                  <TextField
+                    label="Floor area"
+                    className={style.formComponent}
+                    value={formData.floorArea.value}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">m²</InputAdornment>
+                      ),
+                    }}
+                    onChange={(e) => handleChange(e, "floorArea")}
+                  />
+
+                  {formData.floorArea.value && (
+                    <Fade timeout={500} in={formData.floorArea.value}>
+                      <TextField
+                        label="Heated"
+                        className={style.formComponent}
+                        value={formData.heatedFloorArea.value}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">m²</InputAdornment>
+                          ),
+                        }}
+                        onChange={(e) => handleChange(e, "heatedFloorArea")}
+                      />
+                    </Fade>
+                  )}
+                </Grid>
+                <Grid container sm={12} md={12} lg={12}>
+                  <Grid item sm={1}>
+                    <TextField
+                      size="small"
+                      className={style.formComponent}
+                      value={formData.floorsAmount.value}
+                      label="Floors"
+                      type="number"
+                      onChange={(e) => handleChange(e, "floorsAmount")}
+                    >
+                      Count
+                    </TextField>
+                  </Grid>
+                </Grid>
               </Grid>
               <Grid container className={style.row} spacing={0}>
                 <Typography variant="subtitle1" gutterBottom>
@@ -138,19 +179,6 @@ const BuildingDetails = (props) => {
                   value={formData.year.value}
                   onChange={handleYearChange}
                 />
-              </Grid>
-
-              <Typography variant="h6">Floors</Typography>
-              <TextField
-                size="small"
-                value={formData.floorsAmount.value}
-                type="number"
-                onChange={(e) => handleChange(e, "floorsAmount")}
-              >
-                Count
-              </TextField>
-              <Grid container className={style.controls}>
-                <IncrementValue value={formData.floorsAmount.value} />
               </Grid>
               <TextField
                 id="description"

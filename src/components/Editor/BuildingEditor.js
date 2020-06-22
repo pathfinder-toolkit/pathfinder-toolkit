@@ -59,11 +59,15 @@ const BuildingEditor = () => {
     formButton: {
       margin: theme.spacing(1),
     },
+    formBorder: {
+      border: "1px solid #E0E0E0",
+      borderRadius: "4px",
+    },
     controls: {
       display: "flex",
     },
     valueText: {
-      border: "1px solid #E0E0E0",
+      border: "2px solid #E0E0E0",
       borderRadius: "4px",
       padding: theme.spacing(2),
       width: "50px",
