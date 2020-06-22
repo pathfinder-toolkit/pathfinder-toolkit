@@ -6,10 +6,10 @@ import {
   TextField,
   Paper,
   Slider,
-  InputAdornment,
   Input,
   FormControl,
   Button,
+  InputAdornment,
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
@@ -27,6 +27,9 @@ const BuildingDetails = (props) => {
     buildingOptions,
   } = useEditor();
 
+  const style = props.style;
+
+  // Get form data from local storage
   const [formData, setFormData] = useState(getSavedCategory("details"));
 
   const handleChange = (event, propertyName) => {
@@ -36,6 +39,18 @@ const BuildingDetails = (props) => {
       [propertyName]: {
         ...formData[propertyName],
         value: event.target.value,
+      },
+    }));
+  };
+
+  // Need a different handler function for the slider,
+  // because event doesn't contain the updated value.
+  const handleYearChange = (event, newValue) => {
+    setFormData((formData) => ({
+      ...formData,
+      year: {
+        ...formData.year,
+        value: newValue,
       },
     }));
   };
@@ -50,8 +65,6 @@ const BuildingDetails = (props) => {
     [formData]
   );
 
-  const handleYearChange = (event, newValue) => {};
-
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -59,17 +72,17 @@ const BuildingDetails = (props) => {
 
   return (
     <Fade in={loading}>
-      <div className={props.style.root}>
-        <div className={props.style.header}>
+      <div className={style.root}>
+        <div className={style.header}>
           <Typography variant="h5">Building details</Typography>
         </div>
         <Grid container spacing={4} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
-            <div className={props.style.category}>
-              <Grid container className={props.style.row} spacing={0}>
+            <div className={style.category}>
+              <Grid container className={style.row} spacing={0}>
                 <Grid item>
                   <TextField
-                    className={props.style.formComponent}
+                    className={style.formComponent}
                     label="Building name"
                     value={formData.name.value}
                     onChange={(e) => handleChange(e, "name")}
@@ -78,19 +91,19 @@ const BuildingDetails = (props) => {
                 <Grid item sm={2}>
                   <TextField
                     label="Floor area"
-                    className={props.style.formComponent}
+                    className={style.formComponent}
                     value={formData.floorArea.value}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">m2</InputAdornment>
+                      ),
+                    }}
                     onChange={(e) => handleChange(e, "floorArea")}
-                    //InputProps={{
-                    // startAdornment: (
-                    //  <InputAdornment position="end">m2</InputAdornment>
-                    //),
-                    //}}
                   />
                 </Grid>
                 <Grid item>
                   <DropdownSelect
-                    className={props.style.formComponent}
+                    className={style.formComponent}
                     data={buildingOptions.buildingTypes}
                     label="Type"
                     value={formData.buildingType.value}
@@ -100,7 +113,7 @@ const BuildingDetails = (props) => {
                 </Grid>
                 <Grid item>
                   <DropdownSelect
-                    className={props.style.formComponent}
+                    className={style.formComponent}
                     data={buildingOptions.materials}
                     label="Material"
                     value={formData.material.value}
@@ -109,11 +122,14 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Grid container className={props.style.row} spacing={0}>
+              <Grid container className={style.row} spacing={0}>
+                <Typography variant="subtitle1" gutterBottom>
+                  Construction year {formData.year.value}
+                </Typography>
                 <Slider
-                  className={props.style.slider}
+                  className={style.slider}
                   marks
-                  valueLabelDisplay="auto"
+                  valueLabelDisplay="on"
                   step={10}
                   defaultValue={1990}
                   marks
@@ -122,9 +138,6 @@ const BuildingDetails = (props) => {
                   value={formData.year.value}
                   onChange={handleYearChange}
                 />
-                <Typography variant="subtitle1" gutterBottom>
-                  Construction year {formData.year.value}
-                </Typography>
               </Grid>
 
               <Typography variant="h6">Floors</Typography>
@@ -136,18 +149,22 @@ const BuildingDetails = (props) => {
               >
                 Count
               </TextField>
-              <Grid container className={props.style.controls}>
+              <Grid container className={style.controls}>
                 <IncrementValue value={formData.floorsAmount.value} />
               </Grid>
+              <TextField
+                id="description"
+                label="Description"
+                multiline
+                fullWidth
+                rows={4}
+                value={formData.description.value}
+                onChange={(e) => handleChange(e, "description")}
+                variant="outlined"
+              />
             </div>
           </Grid>
-          <Grid
-            className={props.style.suggestionContainer}
-            item
-            sm={4}
-            md={4}
-            lg={4}
-          >
+          <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
             <Tip text="Text" title="Title"></Tip>
             <Tip text="Text" title="Title"></Tip>
           </Grid>
