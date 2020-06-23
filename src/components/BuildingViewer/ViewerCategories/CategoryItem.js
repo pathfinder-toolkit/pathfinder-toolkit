@@ -1,16 +1,31 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import SuggestionAlert from "../../reusable/SuggestionAlert.js";
-import CommentContainer from "../../Comment/CommentContainer.js";
+import CommentField from "../../Comment/CommentField.js";
 
 const CategoryItem = (props) => {
     const classes = props.classes;
 
     return <Grid container>
         <Grid item xs={4}>
-            <Typography className={classes.categoryItemText}variant="h6">{props.item.propertyName}: {typeof props.item.value === "boolean" ? props.item.value.toString() : props.item.value}</Typography>
+            <Typography className={classes.categoryItemText}variant="h6">
+                {props.item.propertyName}: {typeof props.item.value === "boolean" ? (
+                        <Checkbox
+                        size="large"
+                        disabled
+                        indeterminate={!props.item.value}
+                        checked={props.item.value}
+                        style={props.item.value ? {color: "#00e676"} : {color: "#ff0076"} }
+                        className={props.item.value ? classes.checkBoxChecked : classes.checkBoxNotChecked}
+                        />
+                    ) : (
+                        props.item.value
+                    )
+                }
+            </Typography>
         </Grid>
         <Grid item xs={4}>
             {props.item.suggestions && props.item.suggestions.map((suggestion, key) => {
@@ -18,7 +33,7 @@ const CategoryItem = (props) => {
             })}
         </Grid>
         <Grid item xs={4}>
-            {props.item.suggestions && props.item.suggestions.length > 0 && <CommentContainer comments={props.item.comments} />}
+            {props.item.comments && <CommentField comments={props.item.comments} />}
         </Grid>
     </Grid>
 }

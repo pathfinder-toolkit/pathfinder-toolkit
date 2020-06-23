@@ -24,8 +24,7 @@ const SavedBuildingPage = (props) => {
         }
         fetchData();
     },[]);
-
-
+    
     return <Container maxWidth={false} className={classes.root}>
         <NavigationBar />
         <Container maxWidth={false} >

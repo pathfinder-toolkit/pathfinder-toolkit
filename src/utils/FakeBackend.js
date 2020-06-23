@@ -69,7 +69,7 @@ export const BackendProvider = ({ children }) => {
     const response = await axios.get(address);
     console.log(response);
     if (Object.keys(response).includes("data")) {
-      return response.data.data;
+      return response.data;
     } else {
       return null;
     }

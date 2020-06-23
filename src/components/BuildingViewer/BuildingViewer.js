@@ -8,6 +8,7 @@ import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
 import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 
 import { makeStyles } from '@material-ui/core/styles';
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     categoryItemLongText: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
+        paddingRight: theme.spacing(4),
         boxDecorationBreak: "clone",
         fontSizeAdjust: 0.7
     },
@@ -40,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight:theme.spacing(2),
         fontSizeAdjust: 0.6,
         lineHeight: 1.8
+    },
+    buildingImage: {
+        display: "relative",
+        bottom: 1000
     }
   }));
 
