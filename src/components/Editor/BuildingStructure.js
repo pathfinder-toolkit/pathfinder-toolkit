@@ -51,9 +51,13 @@ const BuildingStructure = (props) => {
     [formData]
   );
 
+  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    return () => {
+      setSavedCategory("structure", formData);
+    };
   }, []);
 
   //Just a quick sketch, will be split into smaller components/remade later
@@ -85,8 +89,8 @@ const BuildingStructure = (props) => {
                     className={style.formComponent}
                     data={buildingOptions.materials}
                     label="Wall Material"
-                    defaultValue="Material"
                     value={formData.wallMaterial.value}
+                    handler={(e) => handleChange(e, "wallMaterial")}
                   />
                 </Grid>
               </Grid>
@@ -103,16 +107,7 @@ const BuildingStructure = (props) => {
                   ></TextField>
                 </Grid>
               </Grid>
-              <Grid container className={style.row} spacing={2}>
-                <Grid item sm={2}>
-                  <DropdownSelect
-                    className={style.formComponent}
-                    data={buildingOptions.materials}
-                    label="Door material"
-                    defaultValue="Wood"
-                    value={formData.doorMaterial.value}
-                  />
-                </Grid>
+              <Grid container className={style.row} spacing={0}>
                 <Grid item sm={2}>
                   <TextField
                     className={style.formComponent}
@@ -124,15 +119,26 @@ const BuildingStructure = (props) => {
                     onChange={(e) => handleChange(e, "doorAmount")}
                   ></TextField>
                 </Grid>
+                <Grid item sm={2}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.materials}
+                    label="Door material"
+                    defaultValue="Wood"
+                    value={formData.doorMaterial.value}
+                    handler={(e) => handleChange(e, "doorMaterial")}
+                  />
+                </Grid>
               </Grid>
               <Grid container className={style.row} spacing={2}>
                 <Grid item sm={2}>
                   <DropdownSelect
                     className={style.formComponent}
-                    data={buildingOptions.materials}
-                    label="Roof material"
-                    defaultValue="Wood"
+                    data={buildingOptions.roofTypes}
+                    label="Roof type"
+                    defaultValue="Roof 1"
                     value={formData.roofMaterial.value}
+                    handler={(e) => handleChange(e, "roofMaterial")}
                   />
                 </Grid>
                 <Grid item sm={2}>
