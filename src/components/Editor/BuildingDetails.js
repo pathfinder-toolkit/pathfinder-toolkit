@@ -20,7 +20,6 @@ import { useTimer } from "../../utils/useTimer";
 import DropdownSelect from "./reusable/DropdownSelect";
 import ClearButton from "./reusable/ClearButton";
 import Tip from "./Tip";
-import { InsertPhoto } from "@material-ui/icons";
 import PhotoButton from "./reusable/PhotoButton";
 
 const BuildingDetails = (props) => {
@@ -114,7 +113,7 @@ const BuildingDetails = (props) => {
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.category}>
-              <Grid container spacing={2}>
+              <Grid className={style.row} container spacing={2}>
                 <Grid item>
                   <TextField
                     className={style.formComponent}

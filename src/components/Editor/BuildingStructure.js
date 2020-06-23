@@ -7,6 +7,8 @@ import {
   TextField,
   InputAdornment,
   Grid,
+  Switch,
+  FormControlLabel,
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
@@ -121,6 +123,29 @@ const BuildingStructure = (props) => {
                     error={isNaN(formData.doorAmount.value)}
                     onChange={(e) => handleChange(e, "doorAmount")}
                   ></TextField>
+                </Grid>
+              </Grid>
+              <Grid container className={style.row} spacing={2}>
+                <Grid item sm={2}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.materials}
+                    label="Roof material"
+                    defaultValue="Wood"
+                    value={formData.roofMaterial.value}
+                  />
+                </Grid>
+                <Grid item sm={2}>
+                  <FormControlLabel
+                    className={style.formComponent}
+                    control={
+                      <Switch
+                        onChange={(e) => handleChange(e, "roofInsulation")}
+                      />
+                    }
+                    label="Insulated"
+                    labelPlacement="top"
+                  />
                 </Grid>
               </Grid>
             </div>

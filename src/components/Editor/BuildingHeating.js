@@ -38,9 +38,13 @@ const BuildingHeating = (props) => {
     [formData]
   );
 
+  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    return () => {
+      setSavedCategory("heating", formData);
+    }
   }, []);
 
   //className={props.style.required}
