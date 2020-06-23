@@ -3,15 +3,11 @@ import {
   Typography,
   Grid,
   Fade,
-  Zoom,
   TextField,
-  Paper,
   Slider,
-  Input,
   FormControl,
   Button,
   InputAdornment,
-  IconButton,
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
@@ -98,10 +94,13 @@ const BuildingDetails = (props) => {
     console.log(formData);
   };
 
+  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    console.log(formData);
     setLoading(true);
+    return () => {
+      setSavedCategory("details", formData);
+    };
   }, []);
 
   return (
@@ -203,7 +202,14 @@ const BuildingDetails = (props) => {
                   onChange={handleYearChange}
                 />
               </Grid>
-              <Grid container spacing={3} sm={12} md={12} lg={12}>
+              <Grid
+                className={style.row}
+                container
+                spacing={3}
+                sm={12}
+                md={12}
+                lg={12}
+              >
                 <Grid item sm={10}>
                   <TextField
                     className={style.formComponent}
@@ -222,6 +228,39 @@ const BuildingDetails = (props) => {
                     handler={handleFileChange}
                     defaultValue={formData.image?.value?.name}
                   />
+                </Grid>
+              </Grid>
+              <Typography variant="h6" gutterBottom>
+                Electricity
+              </Typography>
+              <Grid container className={style.row} spacing={0}>
+                <Grid item sm={3}>
+                  <TextField
+                    className={style.formComponent}
+                    value={formData.floorsAmount.value}
+                    label="Annual use"
+                    type="number"
+                    error={isNaN(formData.floorsAmount.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">kWh</InputAdornment>
+                      ),
+                    }}
+                  ></TextField>
+                </Grid>
+                <Grid item sm={3}>
+                  <TextField
+                    className={style.formComponent}
+                    value={formData.floorsAmount.value}
+                    label="Annual cost"
+                    type="number"
+                    error={isNaN(formData.floorsAmount.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">€</InputAdornment>
+                      ),
+                    }}
+                  ></TextField>
                 </Grid>
               </Grid>
             </div>
