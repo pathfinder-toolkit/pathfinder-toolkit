@@ -113,7 +113,7 @@ const BuildingDetails = (props) => {
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.category}>
-              <Grid container className={style.row} spacing={0}>
+              <Grid container spacing={2}>
                 <Grid item>
                   <TextField
                     className={style.formComponent}
@@ -122,26 +122,19 @@ const BuildingDetails = (props) => {
                     onChange={(e) => handleChange(e, "name")}
                   />
                 </Grid>
-
-                <Grid item>
-                  {formData.buildingType.value && (
-                    <ClearButton
-                      className={style.clearButton}
-                      handler={resetProperty}
-                      target="buildingType"
-                    />
-                  )}
+                <Grid item sm={2}>
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.buildingTypes}
                     label="Type"
+                    defaultValue="Building 1"
                     value={formData.buildingType.value}
-                    defaultValue="gggg"
-                    id="type-dropdown"
                     handler={(e) => handleChange(e, "buildingType")}
                   />
                 </Grid>
-                <Grid item sm={1}>
+              </Grid>
+              <Grid container className={style.row} spacing={0}>
+                <Grid item sm={2}>
                   <TextField
                     className={style.formComponent}
                     defaultValue="1"
@@ -188,9 +181,9 @@ const BuildingDetails = (props) => {
                     onChange={(e) => handleChange(e, "heatedFloorArea")}
                   />
                 </Grid>
-                <Grid container sm={12} md={12} lg={12}>
-                  <Grid item sm={1}></Grid>
-                </Grid>
+              </Grid>
+              <Grid container sm={12} md={12} lg={12}>
+                <Grid item sm={1}></Grid>
               </Grid>
               <Grid container className={style.row} spacing={0}>
                 <Typography variant="subtitle1" gutterBottom>
