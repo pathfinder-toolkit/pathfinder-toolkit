@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
+import {
+  Typography,
+  Fade,
+  TextField,
+  Grid,
+  InputAdornment,
+} from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import DropdownSelect from "../reusable/DropdownSelect";
+import Tip from "./Tip";
+
+import DropdownSelect from "./reusable/DropdownSelect";
 
 const BuildingHeating = (props) => {
   const {
@@ -14,6 +22,8 @@ const BuildingHeating = (props) => {
     setSavedCategory,
     buildingOptions,
   } = useEditor();
+
+  const style = props.style;
 
   const [formData, setFormData] = useState(getSavedCategory("heating"));
 
@@ -38,39 +48,68 @@ const BuildingHeating = (props) => {
     [formData]
   );
 
+  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    return () => {
+      setSavedCategory("heating", formData);
+    };
   }, []);
 
   //className={props.style.required}
   return (
     <Fade in={loading}>
-      <div className={props.style.root}>
-        <Typography className={props.style.header} variant="h5">
-          Heating details
-        </Typography>
-        <div className={props.style.category}>
-          <Typography variant="h6">General</Typography>
-          <FormControl className={props.style.formControl}>
-            <DropdownSelect
-              data={buildingOptions.heatingTypes}
-              label="Type"
-              value={formData.heatingSystem.value}
-              id="heating-type"
-              handler={(e) => handleChange(e, "heatingSystem")}
-            />
-          </FormControl>
+      <div className={style.root}>
+        <div className={style.header}>
+          <Typography variant="h5">Building structure</Typography>
         </div>
-        <div className={props.style.category}>
-          <Typography variant="h6">Energy source</Typography>
-        </div>
-        <div className={props.style.category}>
-          <Typography variant="h6">Heat distribution</Typography>
-        </div>
-        <div className={props.style.category}>
-          <Typography variant="h6">Automation</Typography>
-        </div>
+        <Grid container spacing={3} sm={12} md={12} lg={12}>
+          <Grid item sm={8} md={8} lg={8}>
+            <div className={style.category}>
+              <Grid className={style.row} container spacing={2}>
+                <Grid item sm={3}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.heatingTypes}
+                    label="Heating System"
+                    value={formData.heatingSystem.value}
+                    handler={(e) => handleChange(e, "heatingSystem")}
+                  />
+                </Grid>
+                <Grid item sm={3}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.heatingTypes}
+                    label="Heating source"
+                    value={formData.heatingSystem.value}
+                    handler={(e) => handleChange(e, "heatingSystem")}
+                  />
+                </Grid>
+              </Grid>
+              <Grid className={style.row} container spacing={2}>
+                <Grid item sm={3}>
+                  <TextField
+                    className={style.formComponent}
+                    value={formData.annualCost.value}
+                    label="Annual cost"
+                    onChange={(e) => handleChange(e, "annualCost")}
+                    error={isNaN(formData.annualCost.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">€</InputAdornment>
+                      ),
+                    }}
+                  ></TextField>
+                </Grid>
+              </Grid>
+            </div>
+          </Grid>
+          <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
+            <Tip text="Text" title="Title"></Tip>
+            <Tip text="Text" title="Title"></Tip>
+          </Grid>
+        </Grid>
       </div>
     </Fade>
   );
