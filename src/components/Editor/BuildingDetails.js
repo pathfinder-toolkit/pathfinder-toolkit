@@ -21,6 +21,7 @@ import DropdownSelect from "./reusable/DropdownSelect";
 import ClearButton from "./reusable/ClearButton";
 import Tip from "./Tip";
 import { InsertPhoto } from "@material-ui/icons";
+import PhotoButton from "./reusable/PhotoButton";
 
 const BuildingDetails = (props) => {
   const {
@@ -126,7 +127,7 @@ const BuildingDetails = (props) => {
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.buildingTypes}
-                    label="Type"
+                    label="Building type"
                     defaultValue="Building 1"
                     value={formData.buildingType.value}
                     handler={(e) => handleChange(e, "buildingType")}
@@ -142,6 +143,7 @@ const BuildingDetails = (props) => {
                     label="Floors"
                     type="number"
                     onChange={(e) => handleChange(e, "floorsAmount")}
+                    error={isNaN(formData.floorsAmount.value)}
                   ></TextField>
                 </Grid>
                 <Grid item sm={2}>
@@ -150,9 +152,9 @@ const BuildingDetails = (props) => {
                     className={style.formComponent}
                     value={formData.floorArea.value}
                     error={isNaN(formData.floorArea.value)}
-                    helperText={
+                    /*helperText={
                       isNaN(formData.floorArea.value) ? "Incorrect entry" : ""
-                    }
+                    }*/
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">m²</InputAdornment>
@@ -168,11 +170,11 @@ const BuildingDetails = (props) => {
                     className={style.formComponent}
                     value={formData.heatedFloorArea.value}
                     error={isNaN(formData.heatedFloorArea.value)}
-                    helperText={
+                    /*helperText={
                       isNaN(formData.heatedFloorArea.value)
                         ? "Incorrect entry"
                         : ""
-                    }
+                    }*/
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">m²</InputAdornment>
@@ -217,20 +219,10 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
                 <Grid item sm={2}>
-                  <Button
-                    startIcon={<InsertPhoto />}
-                    variant="contained"
-                    color="primary"
-                    component="label"
-                  >
-                    Add
-                    <input
-                      onChange={handleFileChange}
-                      type="file"
-                      style={{ display: "none" }}
-                    />
-                  </Button>
-                  <Typography>{formData.image.value?.name}</Typography>
+                  <PhotoButton
+                    handler={handleFileChange}
+                    defaultValue={formData.image?.value?.name}
+                  />
                 </Grid>
               </Grid>
             </div>
