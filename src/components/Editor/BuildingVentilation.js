@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Typography, FormControl, Fade, Paper } from "@material-ui/core";
+import {
+  Typography,
+  FormControl,
+  Fade,
+  Paper,
+  Grid,
+  TextField,
+  InputAdornment,
+} from "@material-ui/core";
 
 import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
+
+import Tip from "./Tip";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 
@@ -28,6 +38,8 @@ const BuildingVentilation = (props) => {
     }));
   };
 
+  const style = props.style;
+
   // Save form data to local storage
   useTimer(
     () => {
@@ -38,36 +50,42 @@ const BuildingVentilation = (props) => {
     [formData]
   );
 
+  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
+    return () => {
+      setSavedCategory("ventilation", formData);
+    };
   }, []);
 
   return (
     <Fade in={loading}>
-      <div className={props.style.root}>
-        <Typography className={props.style.header} variant="h5">
-          Ventilation details
-        </Typography>
-
-        <Paper className={props.style.category}>
-          <Typography variant="h6">General</Typography>
-          <FormControl className={props.style.formControl}>
-            <DropdownSelect
-              data={buildingOptions.ventilationTypes}
-              label="Type"
-              value={formData.ventilationSystem.value}
-              id="ventilation-type"
-              handler={(e) => handleChange(e, "ventilationSystem")}
-            />
-          </FormControl>
-        </Paper>
-        <Paper className={props.style.category}>
-          <Typography variant="h6">Airtightness</Typography>
-        </Paper>
-        <Paper className={props.style.category}>
-          <Typography variant="h6">Air vents</Typography>
-        </Paper>
+      <div className={style.root}>
+        <div className={style.header}>
+          <Typography variant="h5">Building structure</Typography>
+        </div>
+        <Grid container spacing={3} sm={12} md={12} lg={12}>
+          <Grid item sm={8} md={8} lg={8}>
+            <div className={style.category}>
+              <Grid className={style.row} container spacing={2}>
+                <Grid item sm={3}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.ventilationTypes}
+                    label="Ventilation System"
+                    value={formData.ventilationSystem.value}
+                    handler={(e) => handleChange(e, "ventilationSystem")}
+                  />
+                </Grid>
+              </Grid>
+            </div>
+          </Grid>
+          <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
+            <Tip text="Text" title="Title"></Tip>
+            <Tip text="Text" title="Title"></Tip>
+          </Grid>
+        </Grid>
       </div>
     </Fade>
   );
