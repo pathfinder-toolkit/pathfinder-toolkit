@@ -20,7 +20,7 @@ import { useTimer } from "../../utils/useTimer";
 import DropdownSelect from "./reusable/DropdownSelect";
 import ClearButton from "./reusable/ClearButton";
 import Tip from "./Tip";
-import { InsertPhoto } from "@material-ui/icons";
+import PhotoButton from "./reusable/PhotoButton";
 
 const BuildingDetails = (props) => {
   const {
@@ -113,7 +113,7 @@ const BuildingDetails = (props) => {
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.category}>
-              <Grid container className={style.row} spacing={0}>
+              <Grid className={style.row} container spacing={2}>
                 <Grid item>
                   <TextField
                     className={style.formComponent}
@@ -122,26 +122,19 @@ const BuildingDetails = (props) => {
                     onChange={(e) => handleChange(e, "name")}
                   />
                 </Grid>
-
-                <Grid item>
-                  {formData.buildingType.value && (
-                    <ClearButton
-                      className={style.clearButton}
-                      handler={resetProperty}
-                      target="buildingType"
-                    />
-                  )}
+                <Grid item sm={2}>
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.buildingTypes}
-                    label="Type"
+                    label="Building type"
+                    defaultValue="Building 1"
                     value={formData.buildingType.value}
-                    defaultValue="gggg"
-                    id="type-dropdown"
                     handler={(e) => handleChange(e, "buildingType")}
                   />
                 </Grid>
-                <Grid item sm={1}>
+              </Grid>
+              <Grid container className={style.row} spacing={0}>
+                <Grid item sm={2}>
                   <TextField
                     className={style.formComponent}
                     defaultValue="1"
@@ -149,6 +142,7 @@ const BuildingDetails = (props) => {
                     label="Floors"
                     type="number"
                     onChange={(e) => handleChange(e, "floorsAmount")}
+                    error={isNaN(formData.floorsAmount.value)}
                   ></TextField>
                 </Grid>
                 <Grid item sm={2}>
@@ -157,9 +151,9 @@ const BuildingDetails = (props) => {
                     className={style.formComponent}
                     value={formData.floorArea.value}
                     error={isNaN(formData.floorArea.value)}
-                    helperText={
+                    /*helperText={
                       isNaN(formData.floorArea.value) ? "Incorrect entry" : ""
-                    }
+                    }*/
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">m²</InputAdornment>
@@ -175,11 +169,11 @@ const BuildingDetails = (props) => {
                     className={style.formComponent}
                     value={formData.heatedFloorArea.value}
                     error={isNaN(formData.heatedFloorArea.value)}
-                    helperText={
+                    /*helperText={
                       isNaN(formData.heatedFloorArea.value)
                         ? "Incorrect entry"
                         : ""
-                    }
+                    }*/
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">m²</InputAdornment>
@@ -188,9 +182,9 @@ const BuildingDetails = (props) => {
                     onChange={(e) => handleChange(e, "heatedFloorArea")}
                   />
                 </Grid>
-                <Grid container sm={12} md={12} lg={12}>
-                  <Grid item sm={1}></Grid>
-                </Grid>
+              </Grid>
+              <Grid container sm={12} md={12} lg={12}>
+                <Grid item sm={1}></Grid>
               </Grid>
               <Grid container className={style.row} spacing={0}>
                 <Typography variant="subtitle1" gutterBottom>
@@ -224,20 +218,10 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
                 <Grid item sm={2}>
-                  <Button
-                    startIcon={<InsertPhoto />}
-                    variant="contained"
-                    color="primary"
-                    component="label"
-                  >
-                    Add
-                    <input
-                      onChange={handleFileChange}
-                      type="file"
-                      style={{ display: "none" }}
-                    />
-                  </Button>
-                  <Typography>{formData.image.value?.name}</Typography>
+                  <PhotoButton
+                    handler={handleFileChange}
+                    defaultValue={formData.image?.value?.name}
+                  />
                 </Grid>
               </Grid>
             </div>

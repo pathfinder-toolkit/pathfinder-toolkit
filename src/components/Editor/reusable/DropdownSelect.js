@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Select, MenuItem, InputLabel, TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@material-ui/core";
 
 const DropdownSelect = (props) => {
   const value = props.value ? props.value : "";
@@ -7,6 +7,7 @@ const DropdownSelect = (props) => {
   const label = props.label;
   const id = props.id ? props.id : "empty";
   const className = props.className ? props.className : "";
+  const defaultValue = props.defaultValue ? props.defaultValue : "";
 
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState(value);
@@ -27,25 +28,24 @@ const DropdownSelect = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <TextField
-        label={label}
-        id={id}
-        open={open}
-        select
-        className={className}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        value={selection}
-        onChange={handleChange}
-      >
-        {data.map((entry, index) => (
-          <MenuItem key={index} value={entry}>
-            {entry}
-          </MenuItem>
-        ))}
-      </TextField>
-    </React.Fragment>
+    <TextField
+      label={label}
+      open={open}
+      select
+      fullWidth
+      className={className}
+      onClose={handleClose}
+      onOpen={handleOpen}
+      value={selection}
+      defaultValue={defaultValue}
+      onChange={handleChange}
+    >
+      {data.map((entry, index) => (
+        <MenuItem key={index} value={entry}>
+          {entry}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 };
 
