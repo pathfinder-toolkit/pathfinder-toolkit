@@ -35,13 +35,19 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestAreas = async () => {
-    const address = process.env.REACT_APP_API_ROOT + "/editor/areas";
+    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/editor/areas";
 
     try {
       const response = await axios.get(address);
       console.log(response.data);
 
-      return response.data;
+      let areas = [];
+      response.data.forEach((areaObject) => {
+        areas.push(areaObject.areaName)
+      });
+      console.log(areas);
+
+      return areas;
     } catch (error) {
       console.log(error);
       return null;
