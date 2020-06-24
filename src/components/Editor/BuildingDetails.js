@@ -5,18 +5,18 @@ import {
   Fade,
   TextField,
   Slider,
-  FormControl,
-  Button,
   InputAdornment,
 } from "@material-ui/core";
+
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
 import DropdownSelect from "./reusable/DropdownSelect";
-import ClearButton from "./reusable/ClearButton";
-import Tip from "./Tip";
+import Tip from "./reusable/Tip";
 import PhotoButton from "./reusable/PhotoButton";
+import SuggestionContainer from "./reusable/SuggestionContainer";
 
 const BuildingDetails = (props) => {
   const {
@@ -30,6 +30,7 @@ const BuildingDetails = (props) => {
 
   // Get form data from local storage
   const [formData, setFormData] = useState(getSavedCategory("details"));
+  const [suggestionData, setSuggestionData] = useState();
 
   const handleChange = (event, propertyName) => {
     event.persist();
@@ -112,13 +113,23 @@ const BuildingDetails = (props) => {
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.category}>
-              <Grid className={style.row} container spacing={2}>
+              <Grid className={style.row} container spacing={0}>
                 <Grid item>
                   <TextField
+                    autoFocus
                     className={style.formComponent}
                     label="Building name *"
                     value={formData.name.value}
                     onChange={(e) => handleChange(e, "name")}
+                  />
+                </Grid>
+                <Grid item sm={2}>
+                  <TextField
+                    className={style.formComponent}
+                    label="Year"
+                    value={formData.year.value}
+                    error={isNaN(formData.year.value)}
+                    onChange={(e) => handleChange(e, "year")}
                   />
                 </Grid>
                 <Grid item sm={2}>
@@ -185,7 +196,7 @@ const BuildingDetails = (props) => {
               <Grid container sm={12} md={12} lg={12}>
                 <Grid item sm={1}></Grid>
               </Grid>
-              <Grid container className={style.row} spacing={0}>
+              {/*<Grid container className={style.row} spacing={0}>
                 <Typography variant="subtitle1" gutterBottom>
                   Construction year {formData.year.value}
                 </Typography>
@@ -201,18 +212,10 @@ const BuildingDetails = (props) => {
                   value={formData.year.value}
                   onChange={handleYearChange}
                 />
-              </Grid>
-              <Grid
-                className={style.row}
-                container
-                spacing={3}
-                sm={12}
-                md={12}
-                lg={12}
-              >
+              </Grid> */}
+              <Grid className={style.row} container spacing={2}>
                 <Grid item sm={10}>
                   <TextField
-                    className={style.formComponent}
                     id="description"
                     label="Description"
                     multiline
@@ -230,16 +233,16 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 Electricity
               </Typography>
               <Grid container className={style.row} spacing={0}>
                 <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
-                    value={formData.floorsAmount.value}
+                    value={formData?.annualUse?.value}
+                    onChange={(e) => handleChange(e, "annualUse")}
                     label="Annual use"
-                    type="number"
                     error={isNaN(formData.floorsAmount.value)}
                     InputProps={{
                       endAdornment: (
@@ -251,9 +254,9 @@ const BuildingDetails = (props) => {
                 <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
-                    value={formData.floorsAmount.value}
+                    value={formData?.annualCost?.value}
+                    onChange={(e) => handleChange(e, "annualCost")}
                     label="Annual cost"
-                    type="number"
                     error={isNaN(formData.floorsAmount.value)}
                     InputProps={{
                       endAdornment: (
@@ -266,8 +269,7 @@ const BuildingDetails = (props) => {
             </div>
           </Grid>
           <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
-            <Tip text="Text" title="Title"></Tip>
-            <Tip text="Text" title="Title"></Tip>
+            <SuggestionContainer />
           </Grid>
         </Grid>
       </div>

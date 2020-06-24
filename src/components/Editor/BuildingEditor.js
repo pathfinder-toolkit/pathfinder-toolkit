@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, CircularProgress } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import NavigationBar from "./NavigationBar";
 
 import { useEditor } from "../../utils/EditorProvider";
@@ -21,7 +21,6 @@ const BuildingEditor = () => {
       height: "90vh",
       maxHeight: "92vh",
     },
-
   }));
   const classes = useStyles();
 
@@ -79,9 +78,9 @@ const BuildingEditor = () => {
       marginTop: theme.spacing(1),
     },
     suggestionContainer: {
-      marginTop: theme.spacing(0),
-      padding: theme.spacing(0.5),
-      border: "px solid black", //debug
+      marginTop: theme.spacing(1),
+      padding: theme.spacing(0),
+      borderLeft: "2px solid #E0E0E0", //debug
     },
   }));
 

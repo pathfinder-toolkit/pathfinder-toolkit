@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Typography,
-  FormControl,
   Fade,
-  Paper,
   TextField,
   InputAdornment,
   Grid,
@@ -14,7 +12,7 @@ import {
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import Tip from "./Tip";
+import Tip from "./reusable/Tip";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
   Typography,
-  FormControl,
   Fade,
-  Paper,
   Grid,
   TextField,
   InputAdornment,
 } from "@material-ui/core";
 
-import { useBackend } from "../../utils/FakeBackend";
+import { Alert, AlertTitle } from "@material-ui/lab";
+
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import Tip from "./Tip";
+import Tip from "./reusable/Tip";
+import SuggestionAlert from "../reusable/SuggestionAlert";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 
@@ -82,8 +82,10 @@ const BuildingVentilation = (props) => {
             </div>
           </Grid>
           <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
-            <Tip text="Text" title="Title"></Tip>
-            <Tip text="Text" title="Title"></Tip>
+            <Alert severity="info">
+              <AlertTitle>Ventilation</AlertTitle>
+              Alert text
+            </Alert>
           </Grid>
         </Grid>
       </div>

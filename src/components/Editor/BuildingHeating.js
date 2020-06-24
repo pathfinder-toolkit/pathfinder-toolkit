@@ -7,11 +7,10 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 
-import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import Tip from "./Tip";
+import Tip from "./reusable/Tip";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 

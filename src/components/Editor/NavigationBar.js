@@ -5,8 +5,6 @@ import { Grid, Button, Paper } from "@material-ui/core";
 import { useEditor } from "../../utils/EditorProvider";
 
 const NavigationBar = () => {
-  const [enabled, setEnabled] = useState(false);
-
   const useStyles = makeStyles((theme) => ({
     actionsContainer: {
       position: "fixed",
@@ -19,7 +17,13 @@ const NavigationBar = () => {
   }));
   const classes = useStyles();
 
-  const { getSteps, activeStep, nextStep, previousStep, navigationEnabled } = useEditor();
+  const {
+    getSteps,
+    activeStep,
+    nextStep,
+    previousStep,
+    navigationEnabled,
+  } = useEditor();
   const steps = getSteps();
 
   return (
