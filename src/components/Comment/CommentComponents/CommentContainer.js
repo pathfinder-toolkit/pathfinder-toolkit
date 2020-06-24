@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
         marginBottom: theme.spacing(2)
     },
-    commentAuthor: {
+    commentHeader: {
         fontSizeAdjust: 0.6,
         lineHeight:'180%'
     },
@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
         display: "inline",
         marginLeft: theme.spacing(1),
         maxWidth: 320
+    },
+    commentSubjectArrow: {
+        fontSizeAdjust: 0.2,
     }
   }));
 
