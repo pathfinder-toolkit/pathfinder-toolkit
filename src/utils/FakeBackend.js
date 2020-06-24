@@ -24,14 +24,21 @@ export const BackendProvider = ({ children }) => {
     axios.get(address, axiosConfig).then((response) => {
       setUserScore(response.data.score);
     });*/
+    try {
 
-    const response = await axios.get(address);
-    console.log(response);
-    if (Object.keys(response).includes("data")) {
-      return response.data;
-    } else {
+      const response = await axios.get(address);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+
+    } catch (error) {
+      console.log(error);
       return null;
     }
+    
   };
 
   const requestAreas = async () => {
@@ -41,7 +48,9 @@ export const BackendProvider = ({ children }) => {
       const response = await axios.get(address);
       console.log(response.data);
 
-      return response.data;
+      const areas = response.data.map((area) => {return area.areaName});
+
+      return areas;
     } catch (error) {
       console.log(error);
       return null;
@@ -56,7 +65,16 @@ export const BackendProvider = ({ children }) => {
       const response = await axios.get(address);
       console.log(response.data);
 
-      return response.data;
+      const options = {
+        materials: response.data.materials.map((material) =>{return material.value}),
+        roofTypes: response.data.roofTypes.map((roofType) => {return roofType.value}),
+        ventilationTypes: response.data.ventilationTypes.map((ventilationType) => {return ventilationType.value}),
+        heatingTypes: response.data.heatingTypes.map((heatingType) => {return heatingType.value}),
+        buildingTypes: response.data.buildingTypes.map((buildingType) => {return buildingType.value})
+      }
+      console.log(options);
+
+      return options;
     } catch (error) {
       console.log(error);
       return null;
@@ -66,13 +84,19 @@ export const BackendProvider = ({ children }) => {
   const getBuildingFromSlug = async (slug) => {
     const address = process.env.REACT_APP_API_ROOT + "/building/" + slug;
 
-    const response = await axios.get(address);
-    console.log(response);
-    if (Object.keys(response).includes("data")) {
-      return response.data;
-    } else {
+    try {
+      const response = await axios.get(address);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
       return null;
     }
+    
   };
 
   return (

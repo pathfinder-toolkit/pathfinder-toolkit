@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { green } from '@material-ui/core/colors';
 
 
@@ -21,14 +22,16 @@ const Comment = (props) => {
         </ListItemIcon>
         <ListItemText
           primary= {
-            <Typography className={classes.commentAuthor}>
-                {props.comment.author ? (props["comment"]["author"]) : ("Anonymous user") }
+            <Typography className={classes.commentHeader}>
+                {props.comment.commentSubject} {props.comment.commentSecondarySubject && (
+                    <React.Fragment> <KeyboardArrowRightIcon fontSize="inherit" /> {props.comment.commentSecondarySubject}</React.Fragment>
+                )}
             </Typography>
             }
           secondary={
             <React.Fragment>
                 <Typography className={classes.commentText}>
-                    {props["comment"]["commentText"]}
+                    <strong>{props.comment.author ? (props["comment"]["author"]) : ("Anonymous user") }</strong> - {props["comment"]["commentText"]}
                 </Typography>
             </React.Fragment>
             }
