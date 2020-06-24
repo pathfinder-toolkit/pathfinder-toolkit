@@ -35,17 +35,13 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestAreas = async () => {
-    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/editor/areas";
+    const address = process.env.REACT_APP_API_ROOT + "/editor/areas";
 
     try {
       const response = await axios.get(address);
       console.log(response.data);
 
-      let areas = [];
-      response.data.forEach((areaObject) => {
-        areas.push(areaObject.areaName)
-      });
-      console.log(areas);
+      const areas = response.data.map((area) => {return area.areaName});
 
       return areas;
     } catch (error) {
@@ -62,7 +58,16 @@ export const BackendProvider = ({ children }) => {
       const response = await axios.get(address);
       console.log(response.data);
 
-      return response.data;
+      const options = {
+        materials: response.data.materials.map((material) =>{return material.value}),
+        roofTypes: response.data.roofTypes.map((roofType) => {return roofType.value}),
+        ventilationTypes: response.data.ventilationTypes.map((ventilationType) => {return ventilationType.value}),
+        heatingTypes: response.data.heatingTypes.map((heatingType) => {return heatingType.value}),
+        buildingTypes: response.data.buildingTypes.map((buildingType) => {return buildingType.value})
+      }
+      console.log(options);
+
+      return options;
     } catch (error) {
       console.log(error);
       return null;
