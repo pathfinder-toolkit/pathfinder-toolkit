@@ -78,7 +78,7 @@ const BuildingEditor = () => {
       marginTop: theme.spacing(1),
     },
     suggestionContainer: {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(0),
       padding: theme.spacing(0),
       borderLeft: "2px solid #E0E0E0", //debug
     },

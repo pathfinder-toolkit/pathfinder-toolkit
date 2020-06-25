@@ -2,103 +2,126 @@
   "details": {
     "name": {
       "propertyName": "Name",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "area": {
       "propertyName": "Area",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "material": {
       "propertyName": "Material",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     },
     "year": {
       "propertyName": "Construction year",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     },
     "buildingType": {
       "propertyName": "Building type",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     },
     "floorArea": {
       "propertyName": "Floor area(in square meters)",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "heatedFloorArea": {
       "propertyName": "Heated floor area(in square meters)",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "floorsAmount": {
       "propertyName": "Amount of floors",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "description": {
       "propertyName": "Description of building",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "image": {
       "propertyName": "Image",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     }
   },
   "heating": {
     "heatingSystem": {
       "propertyName": "Heating System",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     },
     "heatingSource": {
       "propertyName": "Heating Source",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     },
     "annualCost": {
       "propertyName": "Annual cost",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     }
   },
   "electricity": {
     "annualUse": {
       "propertyName": "Annual use",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "annualCost": {
       "propertyName": "Annual cost",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     }
   },
   "structure": {
     "wallMaterial": {
       "propertyName": "Wall material",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     },
     "wallThickness": {
       "propertyName": "Wall Thickness",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "windowAmount": {
       "propertyName": "Amount of windows",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "doorMaterial": {
       "propertyName": "Door material",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "doorAmount": {
       "propertyName": "Amount of doors",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "roofMaterial": {
       "propertyName": "Roof material",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     },
     "roofInsulation": {
       "propertyName": "Roof insulation",
-      "value": ""
+      "value": "",
+      "hasSuggestions": false
     }
   },
   "ventilation": {
     "ventilationSystem": {
       "propertyName": "Ventilation system",
-      "value": ""
+      "value": "",
+      "hasSuggestions": true
     }
   }
 }

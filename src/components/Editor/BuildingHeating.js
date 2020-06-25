@@ -10,7 +10,7 @@ import {
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import Tip from "./reusable/Tip";
+import Tip from "./Sidebar/Tip";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 

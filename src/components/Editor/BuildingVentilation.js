@@ -12,7 +12,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
-import Tip from "./reusable/Tip";
+import Tip from "./Sidebar/Tip";
 import SuggestionAlert from "../reusable/SuggestionAlert";
 
 import DropdownSelect from "./reusable/DropdownSelect";

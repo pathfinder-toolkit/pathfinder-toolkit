@@ -14,9 +14,9 @@ import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
 import DropdownSelect from "./reusable/DropdownSelect";
-import Tip from "./reusable/Tip";
+import Tip from "./Sidebar/Tip";
 import PhotoButton from "./reusable/PhotoButton";
-import SuggestionContainer from "./reusable/SuggestionContainer";
+import SuggestionContainer from "./Sidebar/FeedbackContainer";
 
 const BuildingDetails = (props) => {
   const {
@@ -37,6 +37,12 @@ const BuildingDetails = (props) => {
 
     if (event.target.value < 0) {
       return;
+    }
+
+    if (formData[propertyName].hasSuggestions) {
+      console.log(
+        "fetching suggestions for [" + propertyName + "," + event.target.value + "]"
+      );
     }
 
     setFormData((formData) => ({
@@ -107,11 +113,11 @@ const BuildingDetails = (props) => {
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <div className={style.header}>
-          <Typography variant="h5">Building details</Typography>
-        </div>
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
+            <div className={style.header}>
+              <Typography variant="h5">Building details</Typography>
+            </div>
             <div className={style.category}>
               <Grid className={style.row} container spacing={0}>
                 <Grid item>
@@ -120,7 +126,7 @@ const BuildingDetails = (props) => {
                     className={style.formComponent}
                     label="Building name *"
                     value={formData.name.value}
-                    onChange={(e) => handleChange(e, "name")}
+                    onChange={(e) => handleChange(e, "name", false)}
                   />
                 </Grid>
                 <Grid item sm={2}>
@@ -213,9 +219,10 @@ const BuildingDetails = (props) => {
                   onChange={handleYearChange}
                 />
               </Grid> */}
-              <Grid className={style.row} container spacing={2}>
+              <Grid className={style.row} container spacing={0}>
                 <Grid item sm={10}>
                   <TextField
+                    className={style.formComponent}
                     id="description"
                     label="Description"
                     multiline
