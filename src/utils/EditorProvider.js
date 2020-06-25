@@ -7,6 +7,8 @@ import BuildingVentilation from "../components/Editor/BuildingVentilation";
 import BuildingHeating from "../components/Editor/BuildingHeating";
 import Summary from "../components/Editor/Summary";
 
+import { useBackend } from "./FakeBackend";
+
 import buildingDetailsModel from "../json/buildingDetailsModel.json";
 
 export const EditorContext = React.createContext();
@@ -33,6 +35,10 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
+  const [suggestions, setSuggestions] = useState();
+  const [suggestionsLoading, setSuggestionsLoading] = useState(true);
+
+  const { requestSuggestions } = useBackend();
 
   const getSteps = () => {
     return [
@@ -141,6 +147,14 @@ export const EditorProvider = ({ children }) => {
     }));
   };
 
+  const getSuggestions = async (subject, value) => {
+    console.log("fetching: " + subject);
+    setSuggestionsLoading(true);
+    const data = await requestSuggestions("a", "1");
+    setSuggestions(data);
+    setSuggestionsLoading(false);
+  };
+
   return (
     <EditorContext.Provider
       value={{
@@ -159,6 +173,9 @@ export const EditorProvider = ({ children }) => {
         setSavedCategory,
         buildingOptions,
         setBuildingOptions,
+        getSuggestions,
+        suggestions,
+        suggestionsLoading,
       }}
     >
       {children}

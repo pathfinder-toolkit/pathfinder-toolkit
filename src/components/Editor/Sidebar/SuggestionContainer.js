@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { CircularProgress, ServerStyleSheets } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import SuggestionAlert from "../../reusable/SuggestionAlert";
-import { useBackend } from "../../../utils/FakeBackend";
+import { useEditor } from "../../../utils/EditorProvider";
 
 const useStyles = makeStyles((theme) => ({
   suggestionAlert: {
@@ -14,24 +14,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SuggestionContainer = (props) => {
-  const { getSuggestions } = useBackend();
-  const [loading, setLoading] = useState(true);
-  const [suggestions, setSuggestions] = useState();
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getSuggestions();
-      setSuggestions(data);
-      setLoading(false);
-    }
-    fetchData();
-  }, []);
-
   const classes = useStyles();
+
+  const { suggestions, suggestionsLoading } = useEditor();
 
   return (
     <React.Fragment>
-      {loading ? (
+      {suggestionsLoading ? (
         <CircularProgress />
       ) : (
         <React.Fragment>

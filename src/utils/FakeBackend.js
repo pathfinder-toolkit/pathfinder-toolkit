@@ -92,7 +92,7 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const getSuggestions = async (subject, value) => {
+  const requestSuggestions = async (subject, value) => {
     const address = encodeURI(
       process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + value
     );
@@ -109,7 +109,7 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const getComments = async (subject) => {
+  const requestComments = async (subject) => {
     const address = encodeURI(
       process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/"
     );
@@ -147,8 +147,8 @@ export const BackendProvider = ({ children }) => {
         requestAreaOptions,
         getStoredBuildings,
         getBuildingFromSlug,
-        getSuggestions,
-        getComments,
+        requestSuggestions,
+        requestComments,
       }}
     >
       {children}

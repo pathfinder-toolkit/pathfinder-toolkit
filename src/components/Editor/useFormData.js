@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
 const useFormData = (category) => {
   const { getSavedCategory, setSavedCategory, getSuggestions } = useEditor();
+  //Get form data from local storage
   const [formData, setFormData] = useState(getSavedCategory(category));
 
   const handleChange = (event, propertyName) => {
@@ -22,6 +23,19 @@ const useFormData = (category) => {
     }));
   };
 
+  const handleFileChange = (event) => {
+    event.persist();
+    console.log(event.target.files[0]);
+    setFormData((formData) => ({
+      ...formData,
+      image: {
+        ...formData.image,
+        value: event.target.files[0],
+      },
+    }));
+    console.log(formData);
+  };
+
   const resetProperty = (propertyName) => {
     console.log("resetting: " + propertyName);
     setFormData((formData) => ({
@@ -34,6 +48,7 @@ const useFormData = (category) => {
     console.log(formData);
   };
 
+  //Save category to local storage with timer debounce
   useTimer(
     () => {
       console.log("saving");
@@ -46,7 +61,7 @@ const useFormData = (category) => {
     [formData]
   );
 
-  return { formData, handleChange };
+  return { formData, handleChange, handleFileChange };
 };
 
 export default useFormData;

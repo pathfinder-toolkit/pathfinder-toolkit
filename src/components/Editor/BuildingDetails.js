@@ -8,105 +8,25 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 
-import { Alert, AlertTitle } from "@material-ui/lab";
-
 import { useEditor } from "../../utils/EditorProvider";
-import { useTimer } from "../../utils/useTimer";
+import useFormData from "./useFormData";
 
 import DropdownSelect from "./reusable/DropdownSelect";
-import Tip from "./Sidebar/Tip";
 import PhotoButton from "./reusable/PhotoButton";
 import SuggestionContainer from "./Sidebar/FeedbackContainer";
 
 const BuildingDetails = (props) => {
-  const {
-    setNavigationEnabled,
-    getSavedCategory,
-    setSavedCategory,
-    buildingOptions,
-  } = useEditor();
+  const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  // Get form data from local storage
-  const [formData, setFormData] = useState(getSavedCategory("details"));
-  const [suggestionData, setSuggestionData] = useState();
+  const { formData, handleChange, handleFileChange } = useFormData("details");
 
-  const handleChange = (event, propertyName) => {
-    event.persist();
-
-    if (event.target.value < 0) {
-      return;
-    }
-
-    if (formData[propertyName].hasSuggestions) {
-      console.log(
-        "fetching suggestions for [" + propertyName + "," + event.target.value + "]"
-      );
-    }
-
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: {
-        ...formData[propertyName],
-        value: event.target.value,
-      },
-    }));
-  };
-
-  const resetProperty = (propertyName) => {
-    console.log("resetting: " + propertyName);
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: {
-        ...formData[propertyName],
-        value: "",
-      },
-    }));
-    console.log(formData);
-  };
-
-  // Need a different handler function for the slider,
-  // because event doesn't contain the updated value.
-  const handleYearChange = (event, newValue) => {
-    setFormData((formData) => ({
-      ...formData,
-      year: {
-        ...formData.year,
-        value: newValue,
-      },
-    }));
-  };
-
-  // Save form data to local storage
-  useTimer(
-    () => {
-      console.log("saving");
-      setSavedCategory("details", formData);
-    },
-    500,
-    [formData]
-  );
-
-  const handleFileChange = (event) => {
-    event.persist();
-    console.log(event.target.files[0]);
-    setFormData((formData) => ({
-      ...formData,
-      image: {
-        ...formData.image,
-        value: event.target.files[0],
-      },
-    }));
-    console.log(formData);
-  };
-
-  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     return () => {
-      setSavedCategory("details", formData);
+      //setSavedCategory("details", formData);
     };
   }, []);
 
