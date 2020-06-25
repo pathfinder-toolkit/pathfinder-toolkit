@@ -8,7 +8,6 @@ import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
 import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 
 import { makeStyles } from '@material-ui/core/styles';
-import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,6 +68,15 @@ const BuildingViewer = (props) => {
                             categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(buildingObject[category][categoryItem]);
                             console.log(categoryItemsWithSuggestions);
                         }
+                    } else if (Array.isArray(buildingObject[category][categoryItem])) {
+                        buildingObject[category][categoryItem].map((categoryItemInArray) => {
+                            if (Object.keys(categoryItemInArray).includes("suggestions")) {
+                                if (categoryItemInArray.suggestions.length > 0) {
+                                    categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(categoryItemInArray);
+                                    console.log(categoryItemInArray);
+                                }
+                            }
+                        })
                     }
                 }
             }
