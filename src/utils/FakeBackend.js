@@ -24,14 +24,21 @@ export const BackendProvider = ({ children }) => {
     axios.get(address, axiosConfig).then((response) => {
       setUserScore(response.data.score);
     });*/
+    try {
 
-    const response = await axios.get(address);
-    console.log(response);
-    if (Object.keys(response).includes("data")) {
-      return response.data;
-    } else {
+      const response = await axios.get(address);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+
+    } catch (error) {
+      console.log(error);
       return null;
     }
+    
   };
 
   const requestAreas = async () => {
@@ -77,13 +84,19 @@ export const BackendProvider = ({ children }) => {
   const getBuildingFromSlug = async (slug) => {
     const address = process.env.REACT_APP_API_ROOT + "/building/" + slug;
 
-    const response = await axios.get(address);
-    console.log(response);
-    if (Object.keys(response).includes("data")) {
-      return response.data;
-    } else {
+    try {
+      const response = await axios.get(address);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
       return null;
     }
+    
   };
 
   return (
