@@ -1,61 +1,31 @@
 import React, { useState, useEffect } from "react";
 import {
   Typography,
-  FormControl,
   Fade,
-  Paper,
   Grid,
   TextField,
   InputAdornment,
 } from "@material-ui/core";
 
-import { useBackend } from "../../utils/FakeBackend";
-import { useEditor } from "../../utils/EditorProvider";
-import { useTimer } from "../../utils/useTimer";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
-import Tip from "./Tip";
+import { useEditor } from "../../utils/EditorProvider";
+import useFormData from "./useFormData";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 
 const BuildingVentilation = (props) => {
-  const {
-    setNavigationEnabled,
-    getSavedCategory,
-    setSavedCategory,
-    buildingOptions,
-  } = useEditor();
-
-  const [formData, setFormData] = useState(getSavedCategory("ventilation"));
-
-  const handleChange = (event, propertyName) => {
-    event.persist();
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: {
-        ...formData[propertyName],
-        value: event.target.value,
-      },
-    }));
-  };
+  const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  // Save form data to local storage
-  useTimer(
-    () => {
-      console.log("saving");
-      setSavedCategory("ventilation", formData);
-    },
-    500,
-    [formData]
-  );
+  const { formData, handleChange } = useFormData("ventilation");
 
-  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     return () => {
-      setSavedCategory("ventilation", formData);
+      //setSavedCategory("ventilation", formData);
     };
   }, []);
 
@@ -82,8 +52,10 @@ const BuildingVentilation = (props) => {
             </div>
           </Grid>
           <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
-            <Tip text="Text" title="Title"></Tip>
-            <Tip text="Text" title="Title"></Tip>
+            <Alert severity="info">
+              <AlertTitle>Ventilation</AlertTitle>
+              Alert text
+            </Alert>
           </Grid>
         </Grid>
       </div>

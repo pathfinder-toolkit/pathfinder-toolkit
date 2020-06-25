@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Typography,
-  FormControl,
   Fade,
-  Paper,
   TextField,
   InputAdornment,
   Grid,
@@ -12,51 +10,24 @@ import {
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
-import { useTimer } from "../../utils/useTimer";
+import useFormData from "./useFormData";
 
-import Tip from "./Tip";
+import Tip from "./Sidebar/Tip";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 
 const BuildingStructure = (props) => {
-  const {
-    setNavigationEnabled,
-    getSavedCategory,
-    setSavedCategory,
-    buildingOptions,
-  } = useEditor();
+  const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  const [formData, setFormData] = useState(getSavedCategory("structure"));
+  const { formData, handleChange } = useFormData("structure");
 
-  const handleChange = (event, propertyName) => {
-    event.persist();
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: {
-        ...formData[propertyName],
-        value: event.target.value,
-      },
-    }));
-  };
-
-  // Save form data to local storage
-  useTimer(
-    () => {
-      console.log("saving");
-      setSavedCategory("structure", formData);
-    },
-    500,
-    [formData]
-  );
-
-  // Save form data to local storage on unmount
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
     return () => {
-      setSavedCategory("structure", formData);
+      //setSavedCategory("structure", formData);
     };
   }, []);
 

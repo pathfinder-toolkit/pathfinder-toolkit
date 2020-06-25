@@ -25,7 +25,6 @@ export const BackendProvider = ({ children }) => {
       setUserScore(response.data.score);
     });*/
     try {
-
       const response = await axios.get(address);
       console.log(response);
       if (Object.keys(response).includes("data")) {
@@ -33,12 +32,10 @@ export const BackendProvider = ({ children }) => {
       } else {
         return null;
       }
-
     } catch (error) {
       console.log(error);
       return null;
     }
-    
   };
 
   const requestAreas = async () => {
@@ -48,7 +45,9 @@ export const BackendProvider = ({ children }) => {
       const response = await axios.get(address);
       console.log(response.data);
 
-      const areas = response.data.map((area) => {return area.areaName});
+      const areas = response.data.map((area) => {
+        return area.areaName;
+      });
 
       return areas;
     } catch (error) {
@@ -66,15 +65,58 @@ export const BackendProvider = ({ children }) => {
       console.log(response.data);
 
       const options = {
-        materials: response.data.materials.map((material) =>{return material.value}),
-        roofTypes: response.data.roofTypes.map((roofType) => {return roofType.value}),
-        ventilationTypes: response.data.ventilationTypes.map((ventilationType) => {return ventilationType.value}),
-        heatingTypes: response.data.heatingTypes.map((heatingType) => {return heatingType.value}),
-        buildingTypes: response.data.buildingTypes.map((buildingType) => {return buildingType.value})
-      }
+        materials: response.data.materials.map((material) => {
+          return material.value;
+        }),
+        roofTypes: response.data.roofTypes.map((roofType) => {
+          return roofType.value;
+        }),
+        ventilationTypes: response.data.ventilationTypes.map(
+          (ventilationType) => {
+            return ventilationType.value;
+          }
+        ),
+        heatingTypes: response.data.heatingTypes.map((heatingType) => {
+          return heatingType.value;
+        }),
+        buildingTypes: response.data.buildingTypes.map((buildingType) => {
+          return buildingType.value;
+        }),
+      };
       console.log(options);
 
       return options;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  const requestSuggestions = async (subject, value) => {
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + value
+    );
+
+    console.log("get suggestions about: " + subject + " | " + value);
+
+    try {
+      const response = await axios.get(address);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  const requestComments = async (subject) => {
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/"
+    );
+
+    try {
+      const response = await axios.get(address);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
       return null;
@@ -96,7 +138,6 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return null;
     }
-    
   };
 
   return (
@@ -106,6 +147,8 @@ export const BackendProvider = ({ children }) => {
         requestAreaOptions,
         getStoredBuildings,
         getBuildingFromSlug,
+        requestSuggestions,
+        requestComments,
       }}
     >
       {children}
