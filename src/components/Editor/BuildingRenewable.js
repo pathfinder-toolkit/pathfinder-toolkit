@@ -41,8 +41,8 @@ const BuildingRenewable = (props) => {
                     className={style.formComponent}
                     data={buildingOptions?.ventilationTypes}
                     label="Heat pump"
-                    value={formData?.ventilationSystem?.value}
-                    handler={(e) => handleChange(e, "heatPump")}
+                    value={formData.heatPump.value}
+                    handler={(e) => handleChange(e, "solarHeat")}
                   />
                 </Grid>
               </Grid>

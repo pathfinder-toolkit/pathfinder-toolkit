@@ -12,11 +12,12 @@ const useFormData = (category) => {
 
     // If property is array, find current property, get suggestions and update
     if (Array.isArray(formData[propertyName])) {
-      const currentObjectIndex = formData[propertyName].findIndex(
-        (x) => x.isCurrent
-      );
+      console.log(propertyName + " | array | " + event.target.value);
+      let currentObjectIndex;
 
-      if (formData[propertyName[currentObjectIndex]].hasSuggestions) {
+      currentObjectIndex = formData[propertyName].findIndex((x) => x.isCurrent);
+
+      if (formData[propertyName][currentObjectIndex].hasSuggestions) {
         getSuggestions(propertyName, event.target.value);
       }
 
@@ -28,6 +29,7 @@ const useFormData = (category) => {
         },
       }));
     } else {
+      console.log(propertyName + " | object | " + event.target.value);
       if (formData[propertyName].hasSuggestions) {
         getSuggestions(propertyName, event.target.value);
       }
@@ -70,7 +72,6 @@ const useFormData = (category) => {
   //Save category to local storage with timer debounce
   useTimer(
     () => {
-      console.log("saving");
       setSavedCategory(category, formData);
       return () => {
         setSavedCategory(category, formData);
