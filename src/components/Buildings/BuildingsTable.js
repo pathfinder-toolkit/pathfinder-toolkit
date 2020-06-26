@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Launch from "@material-ui/icons/Launch";
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
-import { useBackend } from "../../utils/FakeBackend";
+import { useBackend } from "../../utils/BackendProvider";
 import history from "../../utils/history";
 
 import BuildingsTableToolbar from "./BuildingsTableToolbar";

@@ -7,7 +7,7 @@ import BuildingVentilation from "../components/Editor/BuildingVentilation";
 import BuildingHeating from "../components/Editor/BuildingHeating";
 import Summary from "../components/Editor/Summary";
 
-import { useBackend } from "./FakeBackend";
+import { useBackend } from "./BackendProvider";
 
 import buildingDetailsModel from "../json/buildingDetailsModel.json";
 
