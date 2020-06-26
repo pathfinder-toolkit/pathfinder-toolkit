@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavigationBar from "../../components/Navigation/NavigationBar";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-import { useBackend } from "../../utils/FakeBackend";
+import { useBackend } from "../../utils/BackendProvider";
 
 import FeedbackForm from "./FeedbackForm";
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import { useBackend } from "../utils/FakeBackend";
+import { useBackend } from "../utils/BackendProvider";
 import history from "../utils/history";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {

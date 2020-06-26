@@ -8,7 +8,7 @@ import BuildingHeating from "../components/Editor/BuildingHeating";
 import BuildingRenewable from "../components/Editor/BuildingRenewable";
 import Summary from "../components/Editor/Summary";
 
-import { useBackend } from "./FakeBackend";
+import { useBackend } from "./BackendProvider";
 
 import buildingDetailsModel from "../json/buildingDetailsModel.json";
 
