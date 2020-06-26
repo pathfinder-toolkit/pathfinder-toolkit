@@ -23,8 +23,8 @@ const SuggestionContainer = (props) => {
       {suggestionsLoading ? (
         <CircularProgress />
       ) : (
-        <React.Fragment>
-          {suggestions.map((suggestion, key) => {
+        <React.Fragment> 
+          {suggestions && suggestions.map((suggestion, key) => {
             return (
               <SuggestionAlert
                 suggestion={suggestion}
