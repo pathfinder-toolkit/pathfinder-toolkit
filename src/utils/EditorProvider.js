@@ -5,27 +5,32 @@ import BuildingDetails from "../components/Editor/BuildingDetails";
 import BuildingStructure from "../components/Editor/BuildingStructure";
 import BuildingVentilation from "../components/Editor/BuildingVentilation";
 import BuildingHeating from "../components/Editor/BuildingHeating";
+import BuildingRenewable from "../components/Editor/BuildingRenewable";
 import Summary from "../components/Editor/Summary";
+
+import { useBackend } from "./BackendProvider";
 
 import buildingDetailsModel from "../json/buildingDetailsModel.json";
 
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
-const useStateWithSessionStorage = (sessionStorageKey) => {
-  const [value, setValue] = useState(
-    JSON.parse(sessionStorage.getItem(sessionStorageKey)) ||
-      buildingDetailsModel
-  );
-
-  useEffect(() => {
-    sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
-  }, [value, sessionStorageKey]);
-
-  return [value, setValue];
-};
-
 export const EditorProvider = ({ children }) => {
+
+  const { requestBuildingModel } = useBackend();
+
+  const useStateWithSessionStorage = (sessionStorageKey) => {
+    const [value, setValue] = useState(null);
+  
+    useEffect(() => {
+      if (value) {
+        sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
+      }
+    }, [value, sessionStorageKey]);
+  
+    return [value, setValue];
+  };
+
   const [
     buildingInformation,
     setBuildingInformation,
@@ -33,14 +38,19 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
+  const [suggestions, setSuggestions] = useState();
+  const [suggestionsLoading, setSuggestionsLoading] = useState(true);
+
+  const { requestSuggestions } = useBackend();
 
   const getSteps = () => {
     return [
-      "Select area",
+      "Area selection",
       "General information",
       "Structure",
       "Ventilation",
       "Heating",
+      "Renewable",
       "Summary",
     ];
   };
@@ -64,7 +74,7 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = (style) => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection style={style} />;
+        return <AreaSelection loadBuildingModel={setBuildingInformation} style={style} />;
       case 1:
         return <BuildingDetails style={style} />;
       case 2:
@@ -74,6 +84,8 @@ export const EditorProvider = ({ children }) => {
       case 4:
         return <BuildingHeating style={style} />;
       case 5:
+        return <BuildingRenewable style={style} />;
+      case 6:
         return <Summary style={style} />;
       default:
         return <p>Unknow component</p>;
@@ -141,6 +153,17 @@ export const EditorProvider = ({ children }) => {
     }));
   };
 
+  const getSuggestions = async (subject, value) => {
+
+    setSuggestionsLoading(true);
+    if (subject === null || value === null) {
+      return;
+    }
+    const data = await requestSuggestions(subject, value);
+    setSuggestions(data);
+    setSuggestionsLoading(false);
+  };
+
   return (
     <EditorContext.Provider
       value={{
@@ -159,6 +182,9 @@ export const EditorProvider = ({ children }) => {
         setSavedCategory,
         buildingOptions,
         setBuildingOptions,
+        getSuggestions,
+        suggestions,
+        suggestionsLoading,
       }}
     >
       {children}

@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Typography,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Box,
-  Grid,
-  Button,
-  Fade,
-  Paper,
-} from "@material-ui/core";
+import { Fade } from "@material-ui/core";
 
-import { useBackend } from "../../utils/FakeBackend";
 import { useEditor } from "../../utils/EditorProvider";
 
 import BuildingViewer from "../BuildingViewer/BuildingViewer";
@@ -54,7 +42,7 @@ const Summary = () => {
 
   return (
     <Fade in={loading}>
-      <BuildingViewer building={buildingInformation}/>
+      <BuildingViewer building={buildingInformation} />
     </Fade>
   );
 };

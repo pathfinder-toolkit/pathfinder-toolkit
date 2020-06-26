@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import DetailsCategory from "./ViewerCategories/DetailsCategory.js";
 import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
-import ElectricityCategory from "./ViewerCategories/ElectricityCategory.js"
+import ElectricCategory from "./ViewerCategories/ElectricCategory.js"
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
+import WaterCategory from "./ViewerCategories/WaterCategory.js";
+import RenewableCategory from "./ViewerCategories/RenewableCategory.js";
 import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 
 import { makeStyles } from '@material-ui/core/styles';
-import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,6 +70,15 @@ const BuildingViewer = (props) => {
                             categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(buildingObject[category][categoryItem]);
                             console.log(categoryItemsWithSuggestions);
                         }
+                    } else if (Array.isArray(buildingObject[category][categoryItem])) {
+                        buildingObject[category][categoryItem].map((categoryItemInArray) => {
+                            if (Object.keys(categoryItemInArray).includes("suggestions")) {
+                                if (categoryItemInArray.suggestions.length > 0) {
+                                    categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(categoryItemInArray);
+                                    console.log(categoryItemInArray);
+                                }
+                            }
+                        })
                     }
                 }
             }
@@ -98,20 +108,28 @@ const BuildingViewer = (props) => {
             category={props.building.details}
             classes={classes}
         />)}
-        {containsCategory("heating") && (<HeatingCategory
-            category={props.building.heating}
-            classes={classes}
-        />)}
-        {containsCategory("electricity") && (<ElectricityCategory
-            category={props.building.electricity}
-            classes={classes}
-        />)}
         {containsCategory("structure") && (<StructureCategory
             category={props.building.structure}
             classes={classes}
         />)}
+        {containsCategory("heating") && (<HeatingCategory
+            category={props.building.heating}
+            classes={classes}
+        />)}
+        {containsCategory("electric") && (<ElectricCategory
+            category={props.building.electric}
+            classes={classes}
+        />)}
+        {containsCategory("water") && (<WaterCategory
+            category={props.building.water}
+            classes={classes}
+        />)}
         {containsCategory("ventilation") && (<VentilationCategory
             category={props.building.ventilation}
+            classes={classes}
+        />)}
+        {containsCategory("renewable") && (<RenewableCategory
+            category={props.building.renewable}
             classes={classes}
         />)}
     </Paper>

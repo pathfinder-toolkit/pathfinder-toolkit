@@ -26,9 +26,27 @@ const StructureCategory = (props) => {
         classes={props.classes}
         />)}
 
+        {containsCategoryItem("windowType") && (
+        <CategoryItem 
+        item={props.category.windowType}
+        classes={props.classes}
+        />)}
+
         {containsCategoryItem("windowAmount") && (
         <CategoryItem 
         item={props.category.windowAmount}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("heatedWindowType") && (
+        <CategoryItem 
+        item={props.category.heatedWindowType}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("heatedWindowAmount") && (
+        <CategoryItem 
+        item={props.category.heatedWindowAmount}
         classes={props.classes}
         />)}
 
@@ -53,6 +71,12 @@ const StructureCategory = (props) => {
         {containsCategoryItem("roofInsulation") && (
         <CategoryItem 
         item={props.category.roofInsulation}
+        classes={props.classes}
+        />)}
+
+        {containsCategoryItem("roofInsulationThickness") && (
+        <CategoryItem 
+        item={props.category.roofInsulationThickness}
         classes={props.classes}
         />)}
         
