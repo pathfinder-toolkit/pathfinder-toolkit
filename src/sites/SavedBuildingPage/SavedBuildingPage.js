@@ -7,7 +7,8 @@ import { useBackend } from "../../utils/BackendProvider";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding:0,
+        padding: theme.spacing(0),
+        paddingBottom: theme.spacing(0.5),
         backgroundColor: "#eceef8",
     }
 }));
