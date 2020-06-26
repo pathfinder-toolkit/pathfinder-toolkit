@@ -64,8 +64,8 @@ const BuildingStructure = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Grid container className={style.row} spacing={0}>
-                <Grid item sm={2}>
+              <Grid container className={style.row} spacing={2}>
+                <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
                     defaultValue="1"
@@ -76,8 +76,39 @@ const BuildingStructure = (props) => {
                     onChange={(e) => handleChange(e, "windowAmount")}
                   ></TextField>
                 </Grid>
+                <Grid item sm={3}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.materials}
+                    label="Window type"
+                    value={formData.wallMaterial.value}
+                    handler={(e) => handleChange(e, "windowType")}
+                  />
+                </Grid>
+                <Grid container className={style.row} spacing={2}>
+                  <Grid item sm={3}>
+                    <TextField
+                      className={style.formComponent}
+                      defaultValue="1"
+                      value={formData.heatedWindowAmount.value}
+                      label="In heated area"
+                      type="number"
+                      error={isNaN(formData.heatedWindowAmount.value)}
+                      onChange={(e) => handleChange(e, "heatedWindowAmount")}
+                    ></TextField>
+                  </Grid>
+                  <Grid item sm={3}>
+                    <DropdownSelect
+                      className={style.formComponent}
+                      data={buildingOptions.materials}
+                      label="Heated window type"
+                      value={formData.wallMaterial.value}
+                      handler={(e) => handleChange(e, "heatedWindowType")}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid container className={style.row} spacing={0}>
+              <Grid container className={style.row} spacing={2}>
                 <Grid item sm={2}>
                   <TextField
                     className={style.formComponent}

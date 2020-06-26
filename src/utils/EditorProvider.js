@@ -154,7 +154,11 @@ export const EditorProvider = ({ children }) => {
   };
 
   const getSuggestions = async (subject, value) => {
+
     setSuggestionsLoading(true);
+    if (subject === null || value === null) {
+      return;
+    }
     const data = await requestSuggestions(subject, value);
     setSuggestions(data);
     setSuggestionsLoading(false);

@@ -138,37 +138,47 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Typography variant="h5" gutterBottom>
-                Electricity
-              </Typography>
-              <Grid container className={style.row} spacing={0}>
-                <Grid item sm={3}>
-                  <TextField
-                    className={style.formComponent}
-                    value={formData.annualConsumption.value}
-                    onChange={(e) => handleChange(e, "annualConsumption")}
-                    label="Annual use"
-                    error={isNaN(formData.floorsAmount.value)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">kWh</InputAdornment>
-                      ),
-                    }}
-                  ></TextField>
-                </Grid>
-                <Grid item sm={3}>
-                  <TextField
-                    className={style.formComponent}
-                    value={formData?.annualCost?.value}
-                    onChange={(e) => handleChange(e, "annualCost")}
-                    label="Annual cost"
-                    error={isNaN(formData.floorsAmount.value)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">€</InputAdornment>
-                      ),
-                    }}
-                  ></TextField>
+              <Grid container direction="row">
+                <Grid
+                  direction="column"
+                  className={style.row}
+                >
+                  <Grid item>
+                    <Typography variant="h5" gutterBottom>
+                      Electricity
+                    </Typography>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item sm={4}>
+                      <TextField
+                        className={style.formComponent}
+                        value={formData.annualConsumption.value}
+                        onChange={(e) => handleChange(e, "annualConsumption")}
+                        label="Annual use"
+                        error={isNaN(formData.annualConsumption.value)}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">kWh</InputAdornment>
+                          ),
+                        }}
+                      ></TextField>
+                    </Grid>
+                    <Grid item sm={4}>
+                      <TextField
+                        className={style.formComponent}
+                        value={formData.annualCost.value}
+                        onChange={(e) => handleChange(e, "annualCost")}
+                        label="Annual cost"
+                        error={isNaN(formData.annualCost.value)}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">€</InputAdornment>
+                          ),
+                        }}
+                      ></TextField>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
               <Typography variant="h5" gutterBottom>
@@ -178,10 +188,10 @@ const BuildingDetails = (props) => {
                 <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
-                    value={formData.annualConsumption.value}
-                    onChange={(e) => handleChange(e, "annualConsumption")}
+                    value={formData.annualHeatingConsumption.value}
+                    onChange={(e) => handleChange(e, "annualHeatingConsumption")}
                     label="Annual use"
-                    error={isNaN(formData.floorsAmount.value)}
+                    error={isNaN(formData.annualHeatingConsumption.value)}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">kWh</InputAdornment>
@@ -192,10 +202,10 @@ const BuildingDetails = (props) => {
                 <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
-                    value={formData?.annualCost?.value}
-                    onChange={(e) => handleChange(e, "annualCost")}
+                    value={formData.annualHeatingCost.value}
+                    onChange={(e) => handleChange(e, "annualHeatingCost")}
                     label="Annual cost"
-                    error={isNaN(formData.floorsAmount.value)}
+                    error={isNaN(formData.annualHeatingCost.value)}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">€</InputAdornment>
