@@ -4,7 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./utils/react-auth0-spa";
 import history from "./utils/history";
-import { BackendProvider } from "./utils/FakeBackend";
+import { BackendProvider } from "./utils/BackendProvider";
 
 const onRedirectCallback = (appState) => {
   history.push(
