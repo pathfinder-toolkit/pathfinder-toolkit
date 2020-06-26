@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useBackend } from "../../utils/FakeBackend";
+import { useBackend } from "../../utils/BackendProvider";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
 import { CircularProgress } from "@material-ui/core";

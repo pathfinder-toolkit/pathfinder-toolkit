@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import CategoryItem from "./CategoryItem.js";
 
 
-const ElectricityCategory = (props) => {
+const ElectricCategory = (props) => {
     const classes = props.classes;
 
     const containsCategoryItem = (categoryItem) => {
@@ -30,4 +30,4 @@ const ElectricityCategory = (props) => {
     </Paper>
 }
 
-export default ElectricityCategory;
+export default ElectricCategory;

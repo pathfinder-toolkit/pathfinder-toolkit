@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
 import GeneralBuildingDetails from "./GeneralBuildingDetails.js";
-import CategoryItemLongText from "./CategoryItemLongText.js";
 import ImageWithModal from "../../reusable/ImageWithModal";
 
 
@@ -19,41 +18,32 @@ const DetailsCategory = (props) => {
         <Typography variant="h4" className={classes.categoryHeader}>Building details</Typography>
 
         <GeneralBuildingDetails 
-        name={containsCategoryItem("image") && props.category.name}
-        description={containsCategoryItem("description") && props.category.description}
-        image={containsCategoryItem("image") && props.category.image.value}
+        category={props.category}
         classes={props.classes}
         />
 
-        {containsCategoryItem("area") && (
-        <CategoryItem
-        item={props.category.area}
+        {containsCategoryItem("annualConsumption") && (
+        <CategoryItem 
+        item={props.category.annualConsumption}
+        classes={props.classes}
+        />)}
+        {containsCategoryItem("annualCost") && (
+        <CategoryItem 
+        item={props.category.annualCost}
+        classes={props.classes}
+        />)}
+        {containsCategoryItem("annualHeatingConsumption") && (
+        <CategoryItem 
+        item={props.category.annualHeatingConsumption}
+        classes={props.classes}
+        />)}
+        {containsCategoryItem("annualHeatingCost") && (
+        <CategoryItem 
+        item={props.category.annualHeatingCost}
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("year") && (
-        <CategoryItem
-        item={props.category.year}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("floorArea") && (
-        <CategoryItem
-        item={props.category.floorArea}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("heatedFloorArea") && (
-        <CategoryItem
-        item={props.category.heatedFloorArea}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("floorsAmount") && (
-        <CategoryItem
-        item={props.category.floorsAmount}
-        classes={props.classes}
-        />)}
+        
 
         
         
