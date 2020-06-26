@@ -11,8 +11,7 @@ import {
 
 import { useEditor } from "../../utils/EditorProvider";
 import useFormData from "./useFormData";
-
-import Tip from "./Sidebar/Tip";
+import FeedbackContainer from "./Sidebar/FeedbackContainer";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 
@@ -35,11 +34,11 @@ const BuildingStructure = (props) => {
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <div className={style.header}>
-          <Typography variant="h5">Building structure</Typography>
-        </div>
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
+            <div className={style.header}>
+              <Typography variant="h5">Building structure</Typography>
+            </div>
             <div className={style.category}>
               <Grid className={style.row} container spacing={2}>
                 <Grid item sm={3}>
@@ -128,8 +127,7 @@ const BuildingStructure = (props) => {
             </div>
           </Grid>
           <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
-            <Tip text="Text" title="Title"></Tip>
-            <Tip text="Text" title="Title"></Tip>
+            <FeedbackContainer />
           </Grid>
         </Grid>
       </div>

@@ -13,12 +13,12 @@ import useFormData from "./useFormData";
 import FeedbackContainer from "./Sidebar/FeedbackContainer";
 import DropdownSelect from "./reusable/DropdownSelect";
 
-const BuildingVentilation = (props) => {
+const BuildingRenewable = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  const { formData, handleChange } = useFormData("ventilation");
+  const { formData, handleChange } = useFormData("renewable");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -32,17 +32,17 @@ const BuildingVentilation = (props) => {
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.header}>
-              <Typography variant="h5">Building ventilation</Typography>
+              <Typography variant="h5">Renewable</Typography>
             </div>
             <div className={style.category}>
               <Grid className={style.row} container spacing={2}>
                 <Grid item sm={3}>
                   <DropdownSelect
                     className={style.formComponent}
-                    data={buildingOptions.ventilationTypes}
-                    label="Ventilation System"
-                    value={formData.ventilationSystem.value}
-                    handler={(e) => handleChange(e, "ventilationSystem")}
+                    data={buildingOptions?.ventilationTypes}
+                    label="Heat pump"
+                    value={formData?.ventilationSystem?.value}
+                    handler={(e) => handleChange(e, "heatPump")}
                   />
                 </Grid>
               </Grid>
@@ -57,4 +57,4 @@ const BuildingVentilation = (props) => {
   );
 };
 
-export default BuildingVentilation;
+export default BuildingRenewable;

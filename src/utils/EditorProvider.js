@@ -5,6 +5,7 @@ import BuildingDetails from "../components/Editor/BuildingDetails";
 import BuildingStructure from "../components/Editor/BuildingStructure";
 import BuildingVentilation from "../components/Editor/BuildingVentilation";
 import BuildingHeating from "../components/Editor/BuildingHeating";
+import BuildingRenewable from "../components/Editor/BuildingRenewable";
 import Summary from "../components/Editor/Summary";
 
 import { useBackend } from "./FakeBackend";
@@ -42,11 +43,12 @@ export const EditorProvider = ({ children }) => {
 
   const getSteps = () => {
     return [
-      "Select area",
+      "Area selection",
       "General information",
       "Structure",
       "Ventilation",
       "Heating",
+      "Renewable",
       "Summary",
     ];
   };
@@ -80,6 +82,8 @@ export const EditorProvider = ({ children }) => {
       case 4:
         return <BuildingHeating style={style} />;
       case 5:
+        return <BuildingRenewable style={style} />;
+      case 6:
         return <Summary style={style} />;
       default:
         return <p>Unknow component</p>;

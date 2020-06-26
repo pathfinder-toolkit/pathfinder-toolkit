@@ -10,17 +10,36 @@ const useFormData = (category) => {
   const handleChange = (event, propertyName) => {
     event.persist();
 
-    if (formData[propertyName].hasSuggestions) {
-      getSuggestions(propertyName, event.target.value);
-    }
+    // If property is array, find current property, get suggestions and update
+    if (Array.isArray(formData[propertyName])) {
+      const currentObjectIndex = formData[propertyName].findIndex(
+        (x) => x.isCurrent
+      );
 
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: {
-        ...formData[propertyName],
-        value: event.target.value,
-      },
-    }));
+      if (formData[propertyName[currentObjectIndex]].hasSuggestions) {
+        getSuggestions(propertyName, event.target.value);
+      }
+
+      setFormData((formData) => ({
+        ...formData,
+        [propertyName]: {
+          ...formData[propertyName[currentObjectIndex]],
+          value: event.target.value,
+        },
+      }));
+    } else {
+      if (formData[propertyName].hasSuggestions) {
+        getSuggestions(propertyName, event.target.value);
+      }
+
+      setFormData((formData) => ({
+        ...formData,
+        [propertyName]: {
+          ...formData[propertyName],
+          value: event.target.value,
+        },
+      }));
+    }
   };
 
   const handleFileChange = (event) => {
