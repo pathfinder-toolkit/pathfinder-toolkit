@@ -16,10 +16,16 @@ const VentilationCategory = (props) => {
         <Typography variant="h4" className={classes.categoryHeader}>Ventilation details</Typography>
         
         {containsCategoryItem("ventilationSystem") && (
-        <CategoryItem 
-        item={props.category.ventilationSystem}
-        classes={props.classes}
-        />)}
+            props.category.ventilationSystem.map((listItem, key) => {
+                return (
+                    <CategoryItem
+                    item={listItem}
+                    classes={props.classes}
+                    key={key}
+                    />
+                )
+            })
+        )}
         
     </Paper>
 }
