@@ -5,6 +5,8 @@ import HeatingCategory from "./ViewerCategories/HeatingCategory.js";
 import ElectricCategory from "./ViewerCategories/ElectricCategory.js"
 import StructureCategory from "./ViewerCategories/StructureCategory.js";
 import VentilationCategory from "./ViewerCategories/VentilationCategory.js";
+import WaterCategory from "./ViewerCategories/WaterCategory.js";
+import RenewableCategory from "./ViewerCategories/RenewableCategory.js";
 import TopSuggestions from "./ViewerCategories/TopSuggestions.js";
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -118,9 +120,16 @@ const BuildingViewer = (props) => {
             category={props.building.electric}
             classes={classes}
         />)}
-        
+        {containsCategory("water") && (<WaterCategory
+            category={props.building.water}
+            classes={classes}
+        />)}
         {containsCategory("ventilation") && (<VentilationCategory
             category={props.building.ventilation}
+            classes={classes}
+        />)}
+        {containsCategory("renewable") && (<RenewableCategory
+            category={props.building.renewable}
             classes={classes}
         />)}
     </Paper>
