@@ -123,6 +123,18 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const requestBuildingModel = async () => {
+    const address = process.env.REACT_APP_API_ROOT + "/building/"
+
+    try {
+      const response = await axios.get(address);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
   const getBuildingFromSlug = async (slug) => {
     const address = process.env.REACT_APP_API_ROOT + "/building/" + slug;
 
@@ -145,6 +157,7 @@ export const BackendProvider = ({ children }) => {
       value={{
         requestAreas,
         requestAreaOptions,
+        requestBuildingModel,
         getStoredBuildings,
         getBuildingFromSlug,
         requestSuggestions,

@@ -4,7 +4,6 @@ import {
   Grid,
   Fade,
   TextField,
-  Slider,
   InputAdornment,
 } from "@material-ui/core";
 
@@ -13,7 +12,7 @@ import useFormData from "./useFormData";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 import PhotoButton from "./reusable/PhotoButton";
-import SuggestionContainer from "./Sidebar/FeedbackContainer";
+import FeedbackContainer from "./Sidebar/FeedbackContainer";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
@@ -64,7 +63,6 @@ const BuildingDetails = (props) => {
                     data={buildingOptions.buildingTypes}
                     label="Building type"
                     defaultValue="Building 1"
-                    value={formData.buildingType.value}
                     handler={(e) => handleChange(e, "buildingType")}
                   />
                 </Grid>
@@ -119,26 +117,6 @@ const BuildingDetails = (props) => {
                   />
                 </Grid>
               </Grid>
-              <Grid container sm={12} md={12} lg={12}>
-                <Grid item sm={1}></Grid>
-              </Grid>
-              {/*<Grid container className={style.row} spacing={0}>
-                <Typography variant="subtitle1" gutterBottom>
-                  Construction year {formData.year.value}
-                </Typography>
-                <Slider
-                  className={style.slider}
-                  marks
-                  valueLabelDisplay="on"
-                  step={10}
-                  defaultValue={1990}
-                  marks
-                  min={1890}
-                  max={2010}
-                  value={formData.year.value}
-                  onChange={handleYearChange}
-                />
-              </Grid> */}
               <Grid className={style.row} container spacing={0}>
                 <Grid item sm={10}>
                   <TextField
@@ -167,8 +145,41 @@ const BuildingDetails = (props) => {
                 <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
-                    value={formData?.annualUse?.value}
-                    onChange={(e) => handleChange(e, "annualUse")}
+                    value={formData.annualConsumption.value}
+                    onChange={(e) => handleChange(e, "annualConsumption")}
+                    label="Annual use"
+                    error={isNaN(formData.floorsAmount.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">kWh</InputAdornment>
+                      ),
+                    }}
+                  ></TextField>
+                </Grid>
+                <Grid item sm={3}>
+                  <TextField
+                    className={style.formComponent}
+                    value={formData?.annualCost?.value}
+                    onChange={(e) => handleChange(e, "annualCost")}
+                    label="Annual cost"
+                    error={isNaN(formData.floorsAmount.value)}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">€</InputAdornment>
+                      ),
+                    }}
+                  ></TextField>
+                </Grid>
+              </Grid>
+              <Typography variant="h5" gutterBottom>
+                Heating
+              </Typography>
+              <Grid container className={style.row} spacing={0}>
+                <Grid item sm={3}>
+                  <TextField
+                    className={style.formComponent}
+                    value={formData.annualConsumption.value}
+                    onChange={(e) => handleChange(e, "annualConsumption")}
                     label="Annual use"
                     error={isNaN(formData.floorsAmount.value)}
                     InputProps={{
@@ -196,7 +207,7 @@ const BuildingDetails = (props) => {
             </div>
           </Grid>
           <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
-            <SuggestionContainer />
+            <FeedbackContainer />
           </Grid>
         </Grid>
       </div>
