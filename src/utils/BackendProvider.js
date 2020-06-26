@@ -124,7 +124,7 @@ export const BackendProvider = ({ children }) => {
   };
 
   const getBuildingFromSlug = async (slug) => {
-    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/building/" + slug;
+    const address = process.env.REACT_APP_API_ROOT + "/building/" + slug;
 
     try {
       const response = await axios.get(address);
