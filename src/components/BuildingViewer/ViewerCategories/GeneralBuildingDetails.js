@@ -2,27 +2,50 @@ import React from "react";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ImageWithModal from "../../reusable/ImageWithModal";
+import CategoryItemNoSuggestions from "./CategoryItemNoSuggestions";
 
 const GeneralBuildingDetails = (props) => {
     const classes = props.classes;
 
+    const containsCategoryItem = (categoryItem) => {
+        return Object.keys(props.category).includes(categoryItem);
+    }
+
     return <Grid container>
         <Grid container item xs={9} >
-            {props.name && (<Grid item direction="column">
-            <Typography className={classes.categoryItemText}variant="h6">{props.name.propertyName}: {props.name.value}</Typography>
-            </Grid>
-            )}
-            {props.description && (
+
+            {containsCategoryItem("name") && (
+            <CategoryItemNoSuggestions
+            item={props.category.name}
+            classes={props.classes}
+            />)}
+            {containsCategoryItem("area") && (
+            <CategoryItemNoSuggestions
+            item={props.category.area}
+            classes={props.classes}
+            />)}
+            {containsCategoryItem("year") && (
+            <CategoryItemNoSuggestions
+            item={props.category.year}
+            classes={props.classes}
+            />)}
+            {containsCategoryItem("buildingType") && (
+            <CategoryItemNoSuggestions
+            item={props.category.buildingType}
+            classes={props.classes}
+            />)}
+            {containsCategoryItem("description") && (
                 <Grid item direction="column">
-                    <Typography className={classes.categoryItemText}variant="h6">{props.description.propertyName}:</Typography>
-                    <Typography className={classes.categoryItemLongText}variant="p">{props.description.value}</Typography>
+                    <Typography className={classes.categoryItemText}variant="h6">{props.category.description.propertyName}:</Typography>
+                    <Typography className={classes.categoryItemLongText}variant="p">{props.category.description.value}</Typography>
                 </Grid>
             )}
+
         </Grid>
         <Grid item xs={3}>
-            {props.image && (
+            {containsCategoryItem("image") && (
                 <ImageWithModal
-                image={props.image}
+                image={props.category.image.value}
                 height={300}
                 width={300}
                 />

@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
 import GeneralBuildingDetails from "./GeneralBuildingDetails.js";
-import CategoryItemLongText from "./CategoryItemLongText.js";
 import ImageWithModal from "../../reusable/ImageWithModal";
 
 
@@ -19,23 +18,9 @@ const DetailsCategory = (props) => {
         <Typography variant="h4" className={classes.categoryHeader}>Building details</Typography>
 
         <GeneralBuildingDetails 
-        name={containsCategoryItem("image") && props.category.name}
-        description={containsCategoryItem("description") && props.category.description}
-        image={containsCategoryItem("image") && props.category.image.value}
+        category={props.category}
         classes={props.classes}
         />
-
-        {containsCategoryItem("area") && (
-        <CategoryItem
-        item={props.category.area}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("year") && (
-        <CategoryItem
-        item={props.category.year}
-        classes={props.classes}
-        />)}
 
         {containsCategoryItem("floorArea") && (
         <CategoryItem
