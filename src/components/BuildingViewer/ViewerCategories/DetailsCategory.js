@@ -22,23 +22,28 @@ const DetailsCategory = (props) => {
         classes={props.classes}
         />
 
-        {containsCategoryItem("floorArea") && (
-        <CategoryItem
-        item={props.category.floorArea}
+        {containsCategoryItem("annualConsumption") && (
+        <CategoryItem 
+        item={props.category.annualConsumption}
+        classes={props.classes}
+        />)}
+        {containsCategoryItem("annualCost") && (
+        <CategoryItem 
+        item={props.category.annualCost}
+        classes={props.classes}
+        />)}
+        {containsCategoryItem("annualHeatingConsumption") && (
+        <CategoryItem 
+        item={props.category.annualHeatingConsumption}
+        classes={props.classes}
+        />)}
+        {containsCategoryItem("annualHeatingCost") && (
+        <CategoryItem 
+        item={props.category.annualHeatingCost}
         classes={props.classes}
         />)}
 
-        {containsCategoryItem("heatedFloorArea") && (
-        <CategoryItem
-        item={props.category.heatedFloorArea}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("floorsAmount") && (
-        <CategoryItem
-        item={props.category.floorsAmount}
-        classes={props.classes}
-        />)}
+        
 
         
         

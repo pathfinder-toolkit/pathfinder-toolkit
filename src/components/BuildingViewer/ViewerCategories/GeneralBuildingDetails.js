@@ -40,6 +40,23 @@ const GeneralBuildingDetails = (props) => {
                     <Typography className={classes.categoryItemLongText}variant="p">{props.category.description.value}</Typography>
                 </Grid>
             )}
+            {containsCategoryItem("floorsAmount") && (
+            <CategoryItemNoSuggestions
+            item={props.category.floorsAmount}
+            classes={props.classes}
+            />)}
+
+            {containsCategoryItem("floorArea") && (
+            <CategoryItemNoSuggestions
+            item={props.category.floorArea}
+            classes={props.classes}
+            />)}
+
+            {containsCategoryItem("heatedFloorArea") && (
+            <CategoryItemNoSuggestions
+            item={props.category.heatedFloorArea}
+            classes={props.classes}
+            />)}
 
         </Grid>
         <Grid item xs={3}>
