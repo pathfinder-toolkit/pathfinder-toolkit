@@ -15,40 +15,59 @@ const useFormData = (category) => {
   const handleChange = (event, propertyName) => {
     event.persist();
 
-    // If property is array, find current property, get suggestions and update
+    console.log(category + " | " + propertyName + " | " + event.target.value);
+
+    // If property is array, find current property
     if (Array.isArray(formData[propertyName])) {
-      console.log(propertyName + " | array | " + event.target.value);
-      let currentObjectIndex;
-
-      currentObjectIndex = formData[propertyName].findIndex((x) => x.isCurrent);
-
-      if (formData[propertyName][currentObjectIndex].hasSuggestions) {
-        getSuggestions(propertyName, event.target.value);
-        getComments(propertyName);
-      }
-
-      setFormData((formData) => ({
-        ...formData,
-        [propertyName]: {
-          ...formData[propertyName[currentObjectIndex]],
-          value: event.target.value,
-        },
-      }));
+      handleArrayChange(event, propertyName);
     } else {
-      console.log(propertyName + " | object | " + event.target.value);
-      if (formData[propertyName].hasSuggestions) {
-        getSuggestions(propertyName, event.target.value);
-        getComments(propertyName);
-      }
+      handleObjectChange(event, propertyName);
+    }
+  };
 
-      setFormData((formData) => ({
-        ...formData,
-        [propertyName]: {
-          ...formData[propertyName],
+  const handleObjectChange = (event, propertyName) => {
+    console.log(propertyName + " | object | " + event.target.value);
+    if (formData[propertyName].hasSuggestions) {
+      console.log("has suggestions.");
+      getSuggestions(propertyName, event.target.value);
+      getComments(propertyName);
+    } else {
+      console.log("has no suggestions.");
+    }
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: {
+        ...formData[propertyName],
+        value: event.target.value,
+      },
+    }));
+  };
+
+  const handleArrayChange = (event, propertyName) => {
+    console.log(propertyName + " | array | " + event.target.value);
+    let currentObjectIndex;
+
+    currentObjectIndex = formData[propertyName].findIndex((x) => x.isCurrent);
+
+    if (formData[propertyName][currentObjectIndex].hasSuggestions) {
+      console.log("has suggestions");
+      getSuggestions(propertyName, event.target.value);
+      getComments(propertyName);
+    } else {
+      console.log("has no suggestions.");
+    }
+
+    console.log(formData[propertyName][currentObjectIndex]);
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: [
+        {
+          ...formData[propertyName][currentObjectIndex],
           value: event.target.value,
         },
-      }));
-    }
+      ],
+    }));
   };
 
   const handleFileChange = (event) => {
