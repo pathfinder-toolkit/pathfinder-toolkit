@@ -111,12 +111,13 @@ export const BackendProvider = ({ children }) => {
 
   const requestComments = async (subject) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/"
+      process.env.REACT_APP_API_ROOT + "/comments/" + subject
     );
 
     try {
       const response = await axios.get(address);
       console.log(response.data);
+      return response.data
     } catch (error) {
       console.log(error);
       return null;

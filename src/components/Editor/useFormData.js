@@ -3,7 +3,12 @@ import { useEditor } from "../../utils/EditorProvider";
 import { useTimer } from "../../utils/useTimer";
 
 const useFormData = (category) => {
-  const { getSavedCategory, setSavedCategory, getSuggestions } = useEditor();
+  const {
+    getSavedCategory,
+    setSavedCategory,
+    getSuggestions,
+    getComments,
+  } = useEditor();
   //Get form data from local storage
   const [formData, setFormData] = useState(getSavedCategory(category));
 
@@ -19,6 +24,7 @@ const useFormData = (category) => {
 
       if (formData[propertyName][currentObjectIndex].hasSuggestions) {
         getSuggestions(propertyName, event.target.value);
+        getComments(propertyName);
       }
 
       setFormData((formData) => ({
@@ -32,6 +38,7 @@ const useFormData = (category) => {
       console.log(propertyName + " | object | " + event.target.value);
       if (formData[propertyName].hasSuggestions) {
         getSuggestions(propertyName, event.target.value);
+        getComments(propertyName);
       }
 
       setFormData((formData) => ({
