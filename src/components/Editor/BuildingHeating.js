@@ -52,8 +52,8 @@ const BuildingHeating = (props) => {
                     className={style.formComponent}
                     data={buildingOptions.heatingTypes}
                     label="Heating source"
-                    value={formData.heatingSystem.value}
-                    handler={(e) => handleChange(e, "heatingSystem")}
+                    value={formData.heatingSource.value}
+                    handler={(e) => handleChange(e, "heatingSource")}
                   />
                 </Grid>
               </Grid>

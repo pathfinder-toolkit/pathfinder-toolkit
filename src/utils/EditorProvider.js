@@ -40,8 +40,10 @@ export const EditorProvider = ({ children }) => {
   const [navigationEnabled, setNavigationEnabled] = useState(false);
   const [suggestions, setSuggestions] = useState();
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
+  const [comments, setComments] = useState();
+  const [commentsLoading, setCommentsLoading] = useState(true);
 
-  const { requestSuggestions } = useBackend();
+  const { requestSuggestions, requestComments } = useBackend();
 
   const getSteps = () => {
     return [
@@ -154,7 +156,6 @@ export const EditorProvider = ({ children }) => {
   };
 
   const getSuggestions = async (subject, value) => {
-
     setSuggestionsLoading(true);
     if (subject === null || value === null) {
       return;
@@ -162,6 +163,16 @@ export const EditorProvider = ({ children }) => {
     const data = await requestSuggestions(subject, value);
     setSuggestions(data);
     setSuggestionsLoading(false);
+  };
+
+  const getComments = async (subject) => {
+    setCommentsLoading(true);
+    if (subject === null) {
+      return;
+    }
+    const data = await requestComments(subject);
+    setComments(data);
+    setCommentsLoading(false);
   };
 
   return (
@@ -185,6 +196,9 @@ export const EditorProvider = ({ children }) => {
         getSuggestions,
         suggestions,
         suggestionsLoading,
+        getComments,
+        comments,
+        commentsLoading,
       }}
     >
       {children}
