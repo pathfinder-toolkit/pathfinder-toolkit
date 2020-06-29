@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useBackend } from "../../utils/FakeBackend";
+import { useBackend } from "../../utils/BackendProvider";
 import { useEditor } from "../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
 import { CircularProgress } from "@material-ui/core";
 
-const AreaSelection = () => {
+const AreaSelection = (props) => {
   const {
     setSavedProperty,
     getSavedProperty,
@@ -12,22 +12,31 @@ const AreaSelection = () => {
     setBuildingOptions,
   } = useEditor();
 
-  const { requestAreaOptions, requestAreas } = useBackend();
+  const { requestBuildingModel, requestAreaOptions, requestAreas } = useBackend();
 
   const [loading, setLoading] = useState(true);
-  const [selectedArea, setSelectedArea] = useState(
-    getSavedProperty("details", "area")
-  );
+  const [selectedArea, setSelectedArea] = useState("");
   const [allowedCountries, setAllowedCountries] = useState();
 
   useEffect(() => {
     async function fetchData() {
       const data = await requestAreas();
+      const model = await requestBuildingModel();
+      props.loadBuildingModel(
+        JSON.parse(sessionStorage.getItem("SavedBuildingDataInStorage"))
+        || model
+      );
       setAllowedCountries(data);
       setLoading(false);
     }
     fetchData();
   }, []);
+
+  useEffect(()=> {
+    if (!loading) {
+      setSelectedArea(getSavedProperty("details", "area"));
+    }
+  },[loading])
 
   useEffect(() => {
     async function fetchData() {
@@ -38,7 +47,7 @@ const AreaSelection = () => {
     if (selectedArea !== "") {
       fetchData();
     }
-  }, [,selectedArea]);
+  }, [selectedArea]);
 
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);

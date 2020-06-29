@@ -8,27 +8,29 @@ import BuildingHeating from "../components/Editor/BuildingHeating";
 import BuildingRenewable from "../components/Editor/BuildingRenewable";
 import Summary from "../components/Editor/Summary";
 
-import { useBackend } from "./FakeBackend";
+import { useBackend } from "./BackendProvider";
 
 import buildingDetailsModel from "../json/buildingDetailsModel.json";
 
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
-const useStateWithSessionStorage = (sessionStorageKey) => {
-  const [value, setValue] = useState(
-    JSON.parse(sessionStorage.getItem(sessionStorageKey)) ||
-      buildingDetailsModel
-  );
-
-  useEffect(() => {
-    sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
-  }, [value, sessionStorageKey]);
-
-  return [value, setValue];
-};
-
 export const EditorProvider = ({ children }) => {
+
+  const { requestBuildingModel } = useBackend();
+
+  const useStateWithSessionStorage = (sessionStorageKey) => {
+    const [value, setValue] = useState(null);
+  
+    useEffect(() => {
+      if (value) {
+        sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
+      }
+    }, [value, sessionStorageKey]);
+  
+    return [value, setValue];
+  };
+
   const [
     buildingInformation,
     setBuildingInformation,
@@ -74,7 +76,7 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = (style) => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection style={style} />;
+        return <AreaSelection loadBuildingModel={setBuildingInformation} style={style} />;
       case 1:
         return <BuildingDetails style={style} />;
       case 2:

@@ -16,22 +16,28 @@ const HeatingCategory = (props) => {
         <Typography variant="h4" className={classes.categoryHeader}>Heating details</Typography>
         
         {containsCategoryItem("heatingSystem") && (
-        <CategoryItem 
-        item={props.category.heatingSystem}
-        classes={props.classes}
-        />)}
+            props.category.heatingSystem.map((listItem, key) => {
+                return (
+                    <CategoryItem
+                    item={listItem}
+                    classes={props.classes}
+                    key={key}
+                    />
+                )
+            })
+        )}
 
         {containsCategoryItem("heatingSource") && (
-        <CategoryItem 
-        item={props.category.heatingSource}
-        classes={props.classes}
-        />)}
-
-        {containsCategoryItem("annualCost") && (
-        <CategoryItem 
-        item={props.category.annualCost}
-        classes={props.classes}
-        />)}
+            props.category.heatingSource.map((listItem, key) => {
+                return (
+                    <CategoryItem
+                    item={listItem}
+                    classes={props.classes}
+                    key={key}
+                    />
+                )
+            })
+        )}
 
     </Paper>
 }
