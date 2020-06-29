@@ -10,22 +10,19 @@ export const BackendProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
 
   const getStoredBuildings = async () => {
-    //const token = await getTokenSilently();
+    const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_API_ROOT + "/buildings/me/";
+    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/buildings/me/";
 
-    /*let axiosConfig = {
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
     };
-
-    axios.get(address, axiosConfig).then((response) => {
-      setUserScore(response.data.score);
-    });*/
+    
     try {
-      const response = await axios.get(address);
+      const response = await axios.get(address, axiosConfig);
       console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
