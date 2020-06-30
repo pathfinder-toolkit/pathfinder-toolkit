@@ -12,13 +12,16 @@ import useFormData from "./useFormData";
 
 import FeedbackContainer from "./Sidebar/FeedbackContainer";
 import DropdownSelect from "./reusable/DropdownSelect";
+import OldEntry from "./reusable/OldEntry";
 
 const BuildingVentilation = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  const { formData, handleChange,addNewEntry } = useFormData("ventilation");
+  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
+    "ventilation"
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -40,20 +43,24 @@ const BuildingVentilation = (props) => {
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.ventilationTypes}
-                    label="Ventilation System"
-                    value={formData?.ventilationSystem?.value}
-                    handler={(e) => handleChange(e, "ventilationSystem")}
-                  />
-                </Grid>
-                <Grid item sm={3}>
-                  <DropdownSelect
-                    className={style.formComponent}
-                    data={buildingOptions.ventilationTypes}
-                    label="Add new entry test"
+                    label="Current system test"
                     value={formData?.ventilationSystem?.value}
                     handler={(e) => addNewEntry(e, "ventilationSystem")}
                   />
                 </Grid>
+                <Grid item sm={3}>
+                  <OldEntry data={buildingOptions.ventilationTypes} />
+                </Grid>
+                {/*  {formData?.ventilationSystem[0].value && (
+                  <Grid item sm={3}>
+                    <DropdownSelect
+                      className={style.formComponent}
+                      data={buildingOptions.ventilationTypes}
+                      label="Old system test"
+                      value={formData?.ventilationSystem?.value}
+                      handler={(e) => addOldEntry(e, "ventilationSystem")}
+                    />
+                  </Grid> */}
               </Grid>
             </div>
           </Grid>

@@ -69,11 +69,21 @@ const useFormData = (category) => {
       ],
     }));
   };
-  //
+
   const addNewEntry = (event, propertyName) => {
     event.persist();
     console.log("adding new entry to: " + propertyName);
 
+    let objects = formData[propertyName];
+    objects[0].value = event.target.value;
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: objects,
+    }));
+  };
+
+  const addOldEntry = (event, propertyName) => {
     let newObject = {
       propertyName: "",
       value: "",
@@ -81,32 +91,18 @@ const useFormData = (category) => {
       isCurrent: false,
     };
 
-    let previousObject = getObjectByIndex(
-      propertyName,
-      getCurrentIndex(propertyName)
-    );
+    let objects = formData[propertyName];
 
-    newObject.propertyName = previousObject.propertyName;
-    newObject.hasSuggestions = previousObject.hasSuggestions;
-    newObject.isCurrent = true;
+    newObject.propertyName = objects[0].propertyName;
+    newObject.hasSuggestions = objects[0].hasSuggestions;
+    newObject.isCurrent = false;
     newObject.value = event.target.value;
 
-    //Set old object isCurrent false
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: [
-        ...formData[propertyName],
-        {
-          ...formData[propertyName][getCurrentIndex(propertyName)],
-          isCurrent: false,
-        },
-      ],
-    })); 
+    objects.push(newObject);
 
-    //Add new object to property array
     setFormData((formData) => ({
       ...formData,
-      [propertyName]: [...formData[propertyName], newObject],
+      [propertyName]: objects,
     }));
   };
 
@@ -156,7 +152,7 @@ const useFormData = (category) => {
     [formData]
   );
 
-  return { formData, handleChange, handleFileChange, addNewEntry };
+  return { formData, handleChange, handleFileChange, addNewEntry, addOldEntry };
 };
 
 export default useFormData;
