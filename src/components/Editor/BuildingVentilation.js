@@ -18,7 +18,7 @@ const BuildingVentilation = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange } = useFormData("ventilation");
+  const { formData, handleChange,addNewEntry } = useFormData("ventilation");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -41,8 +41,17 @@ const BuildingVentilation = (props) => {
                     className={style.formComponent}
                     data={buildingOptions.ventilationTypes}
                     label="Ventilation System"
-                    value={formData.ventilationSystem.value}
+                    value={formData?.ventilationSystem?.value}
                     handler={(e) => handleChange(e, "ventilationSystem")}
+                  />
+                </Grid>
+                <Grid item sm={3}>
+                  <DropdownSelect
+                    className={style.formComponent}
+                    data={buildingOptions.ventilationTypes}
+                    label="Add new entry test"
+                    value={formData?.ventilationSystem?.value}
+                    handler={(e) => addNewEntry(e, "ventilationSystem")}
                   />
                 </Grid>
               </Grid>
