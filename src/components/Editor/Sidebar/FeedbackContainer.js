@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Tab, Tabs, Box } from "@material-ui/core";
 import SuggestionContainer from "./SuggestionContainer";
+import CommentContainer from "./CommentContainer";
 
 const useStyles = makeStyles((theme) => ({
   suggestionContainer: {
@@ -24,11 +25,7 @@ function TabPanel(props) {
 
   return (
     <div role="tabpanel" hidden={value !== index} {...other}>
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -59,7 +56,7 @@ const FeedbackContainer = (props) => {
         <SuggestionContainer />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        User comments
+        <CommentContainer />
       </TabPanel>
     </React.Fragment>
   );
