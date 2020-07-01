@@ -18,6 +18,10 @@ import BuildingsTableToolbar from "./BuildingsTableToolbar";
 import BuildingsTableHead from "./BuildingsTableHead";
 import ImageWithModal from "../reusable/ImageWithModal";
 
+import { useAuth0 } from "../../utils/react-auth0-spa"
+
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -98,6 +102,8 @@ const BuildingsTable = () => {
   const {getStoredBuildings} = useBackend();
   const [rows, setRows] = useState([]);
 
+  const { loading } = useAuth0();
+
   useEffect(() => {
     async function fetchData() {
       const data = await getStoredBuildings();
@@ -105,8 +111,10 @@ const BuildingsTable = () => {
         setRows(data);
       }
     }
-    fetchData();
-  },[]);
+    if (!loading) {
+      fetchData();
+    }
+  },[loading]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

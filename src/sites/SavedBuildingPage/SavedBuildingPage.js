@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import { makeStyles } from '@material-ui/core/styles';
 import SavedBuilding from "../../components/SavedBuilding/SavedBuilding";
 import { useBackend } from "../../utils/BackendProvider";
+import { useAuth0 } from "../../utils/react-auth0-spa";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,13 +19,17 @@ const SavedBuildingPage = (props) => {
     const { getBuildingFromSlug } = useBackend();
     const [ building, setBuilding ] = useState(null);
 
+    const { loading } = useAuth0();
+
     useEffect(() => {
         async function fetchData() {
             const data = await getBuildingFromSlug(props.match.params.slug);
             setBuilding(data);
         }
-        fetchData();
-    },[]);
+        if (!loading) {
+            fetchData();
+        }
+    },[loading]);
     
     return <Container maxWidth={false} className={classes.root}>
         <NavigationBar />
