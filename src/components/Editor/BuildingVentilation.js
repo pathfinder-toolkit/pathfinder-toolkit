@@ -80,11 +80,12 @@ const BuildingVentilation = (props) => {
                 {formData?.ventilationSystem[0].value && (
                   <Grid item sm={3}>
                     <Button
+                      className={style.formButton}
                       color="primary"
-                      variant="contained  "
+                      variant="contained"
                       onClick={setModal}
                     >
-                      add
+                      Add old system
                     </Button>
                   </Grid>
                 )}
