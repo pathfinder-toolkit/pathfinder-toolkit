@@ -12,7 +12,7 @@ export const BackendProvider = ({ children }) => {
   const getStoredBuildings = async () => {
     const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_API_ROOT + "/buildings/me/";
+    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/buildings/me/";
 
     const axiosConfig = {
       headers: {
@@ -136,7 +136,7 @@ export const BackendProvider = ({ children }) => {
   const getBuildingFromSlug = async (slug) => {
     const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_API_ROOT + "/building/" + slug;
+    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/building/" + slug;
 
     const axiosConfig = {
       headers: {

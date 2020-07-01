@@ -36,7 +36,7 @@ const GeneralBuildingDetails = (props) => {
             />)}
             {containsCategoryItem("description") && (
                 <Grid item direction="column">
-                    <Typography className={classes.categoryItemText}variant="h6">{props.category.description.propertyName}:</Typography>
+                    <Typography className={classes.categoryItemText}variant="h6">{props.category.description.componentDescription}:</Typography>
                     <Typography className={classes.categoryItemLongText}variant="p">{props.category.description.value}</Typography>
                 </Grid>
             )}

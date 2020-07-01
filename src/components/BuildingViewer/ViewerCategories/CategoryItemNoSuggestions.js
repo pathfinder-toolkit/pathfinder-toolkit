@@ -6,7 +6,7 @@ const CategoryItemNoSuggestions = (props) => {
     const classes = props.classes;
 
     return <Grid container item direction="column">
-    <Typography className={classes.categoryItemText}variant="h6">{props.item.propertyName}: {props.item.value}</Typography>
+    <Typography className={classes.categoryItemText}variant="h6">{props.item.componentDescription}: {props.item.value}</Typography>
     </Grid>
 }
 
