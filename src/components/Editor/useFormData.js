@@ -70,6 +70,65 @@ const useFormData = (category) => {
     }));
   };
 
+  const addNewEntry = (event, propertyName) => {
+    event.persist();
+    console.log("adding new entry to: " + propertyName);
+
+    let objects = formData[propertyName];
+    objects[0].value = event.target.value;
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: objects,
+    }));
+  };
+
+  const addOldEntry = (value, year, propertyName) => {
+    let newObject = {
+      propertyName: "",
+      value: "",
+      year: "",
+      hasSuggestions: false,
+      isCurrent: false,
+    };
+
+    let objects = formData[propertyName];
+
+    newObject.propertyName = objects[0].propertyName;
+    newObject.hasSuggestions = objects[0].hasSuggestions;
+    newObject.isCurrent = false;
+    newObject.value = value;
+    newObject.year = year;
+
+    objects.push(newObject);
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: objects,
+    }));
+  };
+
+  const deleteEntry = (propertyName, index) => {
+    console.log("deleting: " + propertyName + " | index " + index);
+
+    let objects = formData[propertyName];
+    objects.splice(index, 1);
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: objects,
+    }));
+  };
+
+  const getCurrentIndex = (propertyName) => {
+    return formData[propertyName].findIndex((x) => x.isCurrent);
+  };
+
+  const getObjectByIndex = (propertyName, index) => {
+    return formData[propertyName][index];
+  };
+  //
+
   const handleFileChange = (event) => {
     event.persist();
     console.log(event.target.files[0]);
@@ -107,7 +166,14 @@ const useFormData = (category) => {
     [formData]
   );
 
-  return { formData, handleChange, handleFileChange };
+  return {
+    formData,
+    handleChange,
+    handleFileChange,
+    addNewEntry,
+    addOldEntry,
+    deleteEntry,
+  };
 };
 
 export default useFormData;
