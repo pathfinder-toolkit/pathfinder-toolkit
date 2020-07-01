@@ -45,7 +45,7 @@ const PropertyList = (props) => {
           <ListItem className={classes.listItem}>
             <ListItemText
               primary={item.value}
-              secondary={item.year || "Current"}
+              secondary={item.isCurrent ? "Current" : item.usageStartYear}
             />
             {index > 0 && (
               <ListItemSecondaryAction>

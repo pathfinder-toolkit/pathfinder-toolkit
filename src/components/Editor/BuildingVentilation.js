@@ -24,6 +24,14 @@ const BuildingVentilation = (props) => {
 
   const [open, setOpen] = useState(false);
 
+  const setModal = () => {
+    setOpen(true);
+  };
+
+  const setClose = () => {
+    setOpen(false);
+  };
+
   const {
     formData,
     handleChange,
@@ -37,14 +45,6 @@ const BuildingVentilation = (props) => {
     setLoading(true);
     return () => {};
   }, []);
-
-  const setModal = () => {
-    setOpen(true);
-  };
-
-  const setClose = () => {
-    setOpen(false);
-  };
 
   return (
     <Fade in={loading}>
