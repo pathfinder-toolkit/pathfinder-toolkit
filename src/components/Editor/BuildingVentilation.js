@@ -39,12 +39,12 @@ const BuildingVentilation = (props) => {
               <Typography variant="h5">Building ventilation</Typography>
             </div>
             <div className={style.category}>
-              <Grid className={style.row} container spacing={2}>
+              <Grid className={style.row} container spacing={4}>
                 <Grid item sm={3}>
                   <DropdownSelect
                     className={style.formComponent}
                     data={buildingOptions.ventilationTypes}
-                    label="Current system test"
+                    label="Ventilation system"
                     value={formData?.ventilationSystem[0].value}
                     handler={(e) => addNewEntry(e, "ventilationSystem")}
                   />
@@ -60,7 +60,7 @@ const BuildingVentilation = (props) => {
                   </Grid>
                 )}
                 {formData?.ventilationSystem.length > 1 && (
-                  <Grid item sm={3}>
+                  <Grid item sm={4}>
                     <PropertyList handleDeletion={(propertyName, index) => deleteEntry("ventilationSystem", index)} data={formData.ventilationSystem} />
                   </Grid>
                 )}
