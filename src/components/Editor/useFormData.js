@@ -83,10 +83,11 @@ const useFormData = (category) => {
     }));
   };
 
-  const addOldEntry = (event, propertyName) => {
+  const addOldEntry = (value, year, propertyName) => {
     let newObject = {
       propertyName: "",
       value: "",
+      year: "",
       hasSuggestions: false,
       isCurrent: false,
     };
@@ -96,7 +97,8 @@ const useFormData = (category) => {
     newObject.propertyName = objects[0].propertyName;
     newObject.hasSuggestions = objects[0].hasSuggestions;
     newObject.isCurrent = false;
-    newObject.value = event.target.value;
+    newObject.value = value;
+    newObject.year = year;
 
     objects.push(newObject);
 

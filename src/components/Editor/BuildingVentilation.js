@@ -13,6 +13,7 @@ import useFormData from "./useFormData";
 import FeedbackContainer from "./Sidebar/FeedbackContainer";
 import DropdownSelect from "./reusable/DropdownSelect";
 import OldEntry from "./reusable/OldEntry";
+import PropertyList from "./reusable/PropertyList";
 
 const BuildingVentilation = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
@@ -44,13 +45,26 @@ const BuildingVentilation = (props) => {
                     className={style.formComponent}
                     data={buildingOptions.ventilationTypes}
                     label="Current system test"
-                    value={formData?.ventilationSystem?.value}
+                    value={formData?.ventilationSystem[0].value}
                     handler={(e) => addNewEntry(e, "ventilationSystem")}
                   />
                 </Grid>
-                <Grid item sm={3}>
-                  <OldEntry data={buildingOptions.ventilationTypes} />
-                </Grid>
+                {formData?.ventilationSystem[0].value && (
+                  <Grid item sm={3}>
+                    <OldEntry
+                      handler={(value, year, propertyName) =>
+                        addOldEntry(value, year, "ventilationSystem")
+                      }
+                      data={buildingOptions.ventilationTypes}
+                    />
+                  </Grid>
+                )}
+                {formData?.ventilationSystem.length > 1 && (
+                  <Grid item sm={3}>
+                    <PropertyList data={formData.ventilationSystem} />
+                  </Grid>
+                )}
+
                 {/*  {formData?.ventilationSystem[0].value && (
                   <Grid item sm={3}>
                     <DropdownSelect
