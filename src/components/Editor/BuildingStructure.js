@@ -68,7 +68,7 @@ const BuildingStructure = (props) => {
                 <Grid item sm={3}>
                   <TextField
                     className={style.formComponent}
-                    defaultValue="1"
+                    defaultValue=""
                     value={formData.windowAmount.value}
                     label="Windows"
                     type="number"
@@ -89,7 +89,7 @@ const BuildingStructure = (props) => {
                   <Grid item sm={3}>
                     <TextField
                       className={style.formComponent}
-                      defaultValue="1"
+                      defaultValue=""
                       value={formData.heatedWindowAmount.value}
                       label="In heated area"
                       type="number"
@@ -112,7 +112,7 @@ const BuildingStructure = (props) => {
                 <Grid item sm={2}>
                   <TextField
                     className={style.formComponent}
-                    defaultValue="1"
+                    defaultValue=""
                     value={formData.doorAmount.value}
                     label="Doors"
                     type="number"
