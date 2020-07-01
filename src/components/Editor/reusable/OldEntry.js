@@ -35,6 +35,9 @@ const OldEntry = (props) => {
   const addNewValue = () => {
     if (props.handler && error === "") {
       props.handler(value, year, props.propertyName);
+      if (props.onEntry) {
+        props.onEntry();
+      }
     }
   };
 

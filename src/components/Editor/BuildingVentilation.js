@@ -5,6 +5,8 @@ import {
   Grid,
   TextField,
   InputAdornment,
+  Modal,
+  Button,
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
@@ -20,9 +22,15 @@ const BuildingVentilation = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange, addNewEntry, addOldEntry, deleteEntry } = useFormData(
-    "ventilation"
-  );
+  const [open, setOpen] = useState(false);
+
+  const {
+    formData,
+    handleChange,
+    addNewEntry,
+    addOldEntry,
+    deleteEntry,
+  } = useFormData("ventilation");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -30,14 +38,34 @@ const BuildingVentilation = (props) => {
     return () => {};
   }, []);
 
+  const setModal = () => {
+    setOpen(true);
+  };
+
+  const setClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Fade in={loading}>
       <div className={style.root}>
+        <Modal open={open} onClose={setClose}>
+          <div className={style.modal}>
+            <OldEntry
+              handler={(value, year, propertyName) =>
+                addOldEntry(value, year, "ventilationSystem")
+              }
+              onEntry={setClose}
+              data={buildingOptions.ventilationTypes}
+            />
+          </div>
+        </Modal>
         <Grid container spacing={3} sm={12} md={12} lg={12}>
           <Grid item sm={8} md={8} lg={8}>
             <div className={style.header}>
               <Typography variant="h5">Building ventilation</Typography>
             </div>
+
             <div className={style.category}>
               <Grid className={style.row} container spacing={4}>
                 <Grid item sm={3}>
@@ -51,17 +79,23 @@ const BuildingVentilation = (props) => {
                 </Grid>
                 {formData?.ventilationSystem[0].value && (
                   <Grid item sm={3}>
-                    <OldEntry
-                      handler={(value, year, propertyName) =>
-                        addOldEntry(value, year, "ventilationSystem")
-                      }
-                      data={buildingOptions.ventilationTypes}
-                    />
+                    <Button
+                      color="primary"
+                      variant="contained  "
+                      onClick={setModal}
+                    >
+                      add
+                    </Button>
                   </Grid>
                 )}
                 {formData?.ventilationSystem.length > 1 && (
                   <Grid item sm={4}>
-                    <PropertyList handleDeletion={(propertyName, index) => deleteEntry("ventilationSystem", index)} data={formData.ventilationSystem} />
+                    <PropertyList
+                      handleDeletion={(propertyName, index) =>
+                        deleteEntry("ventilationSystem", index)
+                      }
+                      data={formData.ventilationSystem}
+                    />
                   </Grid>
                 )}
 
