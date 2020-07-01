@@ -83,10 +83,11 @@ const useFormData = (category) => {
     }));
   };
 
-  const addOldEntry = (event, propertyName) => {
+  const addOldEntry = (value, year, propertyName) => {
     let newObject = {
       propertyName: "",
       value: "",
+      year: "",
       hasSuggestions: false,
       isCurrent: false,
     };
@@ -96,9 +97,22 @@ const useFormData = (category) => {
     newObject.propertyName = objects[0].propertyName;
     newObject.hasSuggestions = objects[0].hasSuggestions;
     newObject.isCurrent = false;
-    newObject.value = event.target.value;
+    newObject.value = value;
+    newObject.year = year;
 
     objects.push(newObject);
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: objects,
+    }));
+  };
+
+  const deleteEntry = (propertyName, index) => {
+    console.log("deleting: " + propertyName + " | index " + index);
+
+    let objects = formData[propertyName];
+    objects.splice(index, 1);
 
     setFormData((formData) => ({
       ...formData,
@@ -152,7 +166,14 @@ const useFormData = (category) => {
     [formData]
   );
 
-  return { formData, handleChange, handleFileChange, addNewEntry, addOldEntry };
+  return {
+    formData,
+    handleChange,
+    handleFileChange,
+    addNewEntry,
+    addOldEntry,
+    deleteEntry,
+  };
 };
 
 export default useFormData;
