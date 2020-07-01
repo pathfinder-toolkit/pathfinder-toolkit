@@ -108,6 +108,25 @@ const useFormData = (category) => {
     }));
   };
 
+  const deleteEntry = (propertyName, index) => {
+    console.log("deleting: " + propertyName + " | index " + index);
+
+    let objects = formData[propertyName];
+
+    console.log("before");
+    console.log(objects);
+
+    objects.splice(index,1);
+
+    console.log("after");
+    console.log(objects);
+
+    setFormData((formData) => ({
+      ...formData,
+      [propertyName]: objects,
+    }));
+  };
+
   const getCurrentIndex = (propertyName) => {
     return formData[propertyName].findIndex((x) => x.isCurrent);
   };
@@ -154,7 +173,14 @@ const useFormData = (category) => {
     [formData]
   );
 
-  return { formData, handleChange, handleFileChange, addNewEntry, addOldEntry };
+  return {
+    formData,
+    handleChange,
+    handleFileChange,
+    addNewEntry,
+    addOldEntry,
+    deleteEntry,
+  };
 };
 
 export default useFormData;

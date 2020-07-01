@@ -20,7 +20,7 @@ const BuildingVentilation = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
+  const { formData, handleChange, addNewEntry, addOldEntry, deleteEntry } = useFormData(
     "ventilation"
   );
 
@@ -61,7 +61,7 @@ const BuildingVentilation = (props) => {
                 )}
                 {formData?.ventilationSystem.length > 1 && (
                   <Grid item sm={3}>
-                    <PropertyList data={formData.ventilationSystem} />
+                    <PropertyList handleDeletion={(propertyName, index) => deleteEntry("ventilationSystem", index)} data={formData.ventilationSystem} />
                   </Grid>
                 )}
 
