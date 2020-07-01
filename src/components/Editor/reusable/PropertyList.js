@@ -15,9 +15,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "4px",
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-  },
-  listItem: {
-    borderBottom: "1px solid #E0E0E0",
+    "& li": {
+      borderBottom: "1px solid #E0E0E0",
+    },
+    "& li:last-child": {
+      borderBottom: "none",
+    },
   },
 }));
 
@@ -27,7 +30,6 @@ const PropertyList = (props) => {
 
   const handleDeletion = (index) => {
     if (index === 0) {
-      console.log("can't delete current object");
       return;
     }
     if (props.handleDeletion) {

@@ -112,14 +112,7 @@ const useFormData = (category) => {
     console.log("deleting: " + propertyName + " | index " + index);
 
     let objects = formData[propertyName];
-
-    console.log("before");
-    console.log(objects);
-
-    objects.splice(index,1);
-
-    console.log("after");
-    console.log(objects);
+    objects.splice(index, 1);
 
     setFormData((formData) => ({
       ...formData,
