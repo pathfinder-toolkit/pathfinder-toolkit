@@ -12,7 +12,7 @@ const CategoryItem = (props) => {
     return <Grid container>
         <Grid item xs={4}>
             <Typography className={classes.categoryItemText}variant="h6">
-                {props.item.propertyName}: {typeof props.item.value === "boolean" ? (
+                {props.item.componentDescription}: {typeof props.item.value === "boolean" ? (
                         <Checkbox
                         size="large"
                         disabled
