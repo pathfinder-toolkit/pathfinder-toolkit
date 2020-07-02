@@ -14,19 +14,25 @@ const WaterCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Water details</Typography>
-        
+
         {containsCategoryItem("heatedWaterEnergySource") && (
-            props.category.heatedWaterEnergySource.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.heatedWaterEnergySource) ? (
+                props.category.heatedWaterEnergySource.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.heatedWaterEnergySource}
+                classes={props.classes}
+                />
+            )
         )}
-        
     </Paper>
 }
 
