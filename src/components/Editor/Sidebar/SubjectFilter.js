@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Typography, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import clsx from 'clsx'
+
 const useStyles = makeStyles((theme) => ({
   filterRoot: {
     display: "flex",
@@ -15,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
     margin: 0,
   },
+  filteredItem: { 
+    backgroundColor: "red",
+  }
 }));
 
 const SubjectFilter = (props) => {
@@ -33,9 +38,8 @@ const SubjectFilter = (props) => {
           return (
             <Chip
               onClick={() => handleClick(item)}
-              disabled
               clickable
-              className={classes.filterItem}
+              className={clsx(classes.filterItem,classes.filteredItem)}
               label={item}
             />
           );
