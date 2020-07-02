@@ -207,11 +207,8 @@ export const EditorProvider = ({ children }) => {
         getComments,
         comments,
         commentsLoading,
-<<<<<<< Updated upstream
-=======
         subjects,
         PostBuilding
->>>>>>> Stashed changes
       }}
     >
       {children}
