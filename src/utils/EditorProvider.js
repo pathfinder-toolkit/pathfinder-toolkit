@@ -16,19 +16,18 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-
   const { requestBuildingModel, submitNewBuilding } = useBackend();
-  const [subjects, setSubjects] = useState()
+  const [subjects, setSubjects] = useState();
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
-  
+
     useEffect(() => {
       if (value) {
         sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
       }
     }, [value, sessionStorageKey]);
-  
+
     return [value, setValue];
   };
 
@@ -77,7 +76,12 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = (style) => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection loadBuildingModel={setBuildingInformation} style={style} />;
+        return (
+          <AreaSelection
+            loadBuildingModel={setBuildingInformation}
+            style={style}
+          />
+        );
       case 1:
         return <BuildingDetails style={style} />;
       case 2:
@@ -178,7 +182,7 @@ export const EditorProvider = ({ children }) => {
 
   const PostBuilding = () => {
     submitNewBuilding(buildingInformation);
-  }
+  };
 
   return (
     <EditorContext.Provider

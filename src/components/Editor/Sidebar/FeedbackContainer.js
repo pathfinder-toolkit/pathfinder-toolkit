@@ -7,7 +7,6 @@ import CommentContainer from "./CommentContainer";
 const useStyles = makeStyles((theme) => ({
   suggestionContainer: {
     marginTop: theme.spacing(0),
-    padding: theme.spacing(0.5),
     border: "1px solid black", //debug
   },
   suggestionHeader: {
@@ -25,7 +24,7 @@ function TabPanel(props) {
 
   return (
     <div role="tabpanel" hidden={value !== index} {...other}>
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && <Box >{children}</Box>}
     </div>
   );
 }
