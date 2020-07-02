@@ -59,7 +59,7 @@ const DetailsCategory = (props) => {
         )}
         {containsCategoryItem("annualHeatingConsumption") && (
             Array.isArray(props.category.annualHeatingConsumption) ? (
-                props.category.annualCost.map((listItem, key) => {
+                props.category.annualHeatingConsumption.map((listItem, key) => {
                     return (
                         <CategoryItem
                         item={listItem}
@@ -77,7 +77,7 @@ const DetailsCategory = (props) => {
         )}
         {containsCategoryItem("annualHeatingCost") && (
             Array.isArray(props.category.annualHeatingCost) ? (
-                props.category.annualCost.map((listItem, key) => {
+                props.category.annualHeatingCost.map((listItem, key) => {
                     return (
                         <CategoryItem
                         item={listItem}
