@@ -3,8 +3,12 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "./react-auth0-spa";
 
+//import requestBody from "../json/postRequestExample.json";
+
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
+
+
 
 export const BackendProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
@@ -159,10 +163,12 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const submitNewBuilding = async () => {
+  const submitNewBuilding = async (requestBody) => {
     const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/test";
+    const address = process.env.REACT_APP_API_ROOT + "/building";
+
+    console.log(requestBody);
 
     const axiosConfig = {
       headers: {
@@ -172,7 +178,7 @@ export const BackendProvider = ({ children }) => {
     };
 
     try {
-      const response = await axios.get(address, axiosConfig);
+      const response = await axios.post(address, requestBody, axiosConfig);
       console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
