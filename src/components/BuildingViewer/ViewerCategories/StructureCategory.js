@@ -13,73 +13,205 @@ const StructureCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Structure details</Typography>
-        
+
         {containsCategoryItem("wallMaterial") && (
-        <CategoryItem 
-        item={props.category.wallMaterial}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.wallMaterial) ? (
+                props.category.wallMaterial.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.wallMaterial}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("wallThickness") && (
-        <CategoryItem 
-        item={props.category.wallThickness}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.wallThickness) ? (
+                props.category.wallThickness.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.wallThickness}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("windowType") && (
-        <CategoryItem 
-        item={props.category.windowType}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.windowType) ? (
+                props.category.windowType.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.windowType}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("windowAmount") && (
-        <CategoryItem 
-        item={props.category.windowAmount}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.windowAmount) ? (
+                props.category.windowAmount.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.windowAmount}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("heatedWindowType") && (
-        <CategoryItem 
-        item={props.category.heatedWindowType}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.heatedWindowType) ? (
+                props.category.heatedWindowType.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.heatedWindowType}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("heatedWindowAmount") && (
-        <CategoryItem 
-        item={props.category.heatedWindowAmount}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.heatedWindowAmount) ? (
+                props.category.heatedWindowAmount.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.heatedWindowAmount}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("doorMaterial") && (
-        <CategoryItem 
-        item={props.category.doorMaterial}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.doorMaterial) ? (
+                props.category.doorMaterial.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.doorMaterial}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("doorAmount") && (
-        <CategoryItem 
-        item={props.category.doorAmount}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.doorAmount) ? (
+                props.category.doorAmount.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.doorAmount}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("roofMaterial") && (
-        <CategoryItem 
-        item={props.category.roofMaterial}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.roofMaterial) ? (
+                props.category.roofMaterial.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.roofMaterial}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("roofInsulation") && (
-        <CategoryItem 
-        item={props.category.roofInsulation}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.roofInsulation) ? (
+                props.category.roofInsulation.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.roofInsulation}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("roofInsulationThickness") && (
-        <CategoryItem 
-        item={props.category.roofInsulationThickness}
-        classes={props.classes}
-        />)}
-        
+            Array.isArray(props.category.roofInsulationThickness) ? (
+                props.category.roofInsulationThickness.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.roofInsulationThickness}
+                classes={props.classes}
+                />
+            )
+        )}
     </Paper>
 }
 

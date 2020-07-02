@@ -14,17 +14,24 @@ const VentilationCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Ventilation details</Typography>
-        
+
         {containsCategoryItem("ventilationSystem") && (
-            props.category.ventilationSystem.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.ventilationSystem) ? (
+                props.category.ventilationSystem.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.ventilationSystem}
+                classes={props.classes}
+                />
+            )
         )}
         
     </Paper>
