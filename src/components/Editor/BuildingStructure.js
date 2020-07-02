@@ -20,7 +20,7 @@ const BuildingStructure = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange } = useFormData("structure");
+  const { formData, handleChange, addNewEntry } = useFormData("structure");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -45,7 +45,7 @@ const BuildingStructure = (props) => {
                   <TextField
                     className={style.formComponent}
                     label="Wall thickness"
-                    value={formData.wallThickness.value}
+                    value={formData.wallThickness[0].value}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">mm</InputAdornment>
@@ -59,7 +59,7 @@ const BuildingStructure = (props) => {
                     className={style.formComponent}
                     data={buildingOptions.materials}
                     label="Wall Material"
-                    value={formData.wallMaterial.value}
+                    value={formData.wallMaterial[0].value}
                     handler={(e) => handleChange(e, "wallMaterial")}
                   />
                 </Grid>
@@ -69,7 +69,7 @@ const BuildingStructure = (props) => {
                   <TextField
                     className={style.formComponent}
                     defaultValue=""
-                    value={formData.windowAmount.value}
+                    value={formData.windowAmount[0].value}
                     label="Windows"
                     type="number"
                     error={isNaN(formData.windowAmount.value)}
@@ -81,7 +81,7 @@ const BuildingStructure = (props) => {
                     className={style.formComponent}
                     data={buildingOptions.materials}
                     label="Window type"
-                    value={formData.wallMaterial.value}
+                    value={formData.wallMaterial[0].value}
                     handler={(e) => handleChange(e, "windowType")}
                   />
                 </Grid>
@@ -90,7 +90,7 @@ const BuildingStructure = (props) => {
                     <TextField
                       className={style.formComponent}
                       defaultValue=""
-                      value={formData.heatedWindowAmount.value}
+                      value={formData.heatedWindowAmount[0].value}
                       label="In heated area"
                       type="number"
                       error={isNaN(formData.heatedWindowAmount.value)}
@@ -102,7 +102,7 @@ const BuildingStructure = (props) => {
                       className={style.formComponent}
                       data={buildingOptions.materials}
                       label="Heated window type"
-                      value={formData.wallMaterial.value}
+                      value={formData.wallMaterial[0].value}
                       handler={(e) => handleChange(e, "heatedWindowType")}
                     />
                   </Grid>
@@ -113,7 +113,7 @@ const BuildingStructure = (props) => {
                   <TextField
                     className={style.formComponent}
                     defaultValue=""
-                    value={formData.doorAmount.value}
+                    value={formData.doorAmount[0].value}
                     label="Doors"
                     type="number"
                     error={isNaN(formData.doorAmount.value)}
@@ -126,7 +126,7 @@ const BuildingStructure = (props) => {
                     data={buildingOptions.materials}
                     label="Door material"
                     defaultValue="Wood"
-                    value={formData.doorMaterial.value}
+                    value={formData.doorMaterial[0].value}
                     handler={(e) => handleChange(e, "doorMaterial")}
                   />
                 </Grid>
@@ -138,7 +138,7 @@ const BuildingStructure = (props) => {
                     data={buildingOptions.roofTypes}
                     label="Roof type"
                     defaultValue="Roof 1"
-                    value={formData.roofMaterial.value}
+                    value={formData.roofMaterial[0].value}
                     handler={(e) => handleChange(e, "roofMaterial")}
                   />
                 </Grid>

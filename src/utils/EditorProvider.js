@@ -11,23 +11,23 @@ import Summary from "../components/Editor/Summary";
 import { useBackend } from "./BackendProvider";
 
 import buildingDetailsModel from "../json/buildingDetailsModel.json";
+import { DataUsageRounded } from "@material-ui/icons";
 
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-
   const { requestBuildingModel } = useBackend();
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
-  
+
     useEffect(() => {
       if (value) {
         sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
       }
     }, [value, sessionStorageKey]);
-  
+
     return [value, setValue];
   };
 
@@ -38,10 +38,20 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
-  const [suggestions, setSuggestions] = useState();
+
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
   const [comments, setComments] = useState();
   const [commentsLoading, setCommentsLoading] = useState(true);
+
+  const [suggestions, setSuggestions] = useState([
+    {
+      suggestionText: "default",
+      priority: 2,
+      suggestionSubject: "de",
+      suggestionSecondarySubject: "d d",
+    },
+  ]);
+  const [subjects, setSubjects] = useState(["default"]);
 
   const { requestSuggestions, requestComments } = useBackend();
 
@@ -76,7 +86,12 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = (style) => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection loadBuildingModel={setBuildingInformation} style={style} />;
+        return (
+          <AreaSelection
+            loadBuildingModel={setBuildingInformation}
+            style={style}
+          />
+        );
       case 1:
         return <BuildingDetails style={style} />;
       case 2:
@@ -161,7 +176,16 @@ export const EditorProvider = ({ children }) => {
       return;
     }
     const data = await requestSuggestions(subject, value);
-    setSuggestions(data);
+    if (!suggestions.includes(subject)) {
+      // Temporary solution for testing
+      setSuggestions([...suggestions, data[0]]);
+      console.log(suggestions);
+    }
+
+    if (!subjects.includes(subject)) {
+      setSubjects([...subjects, subject]);
+    }
+
     setSuggestionsLoading(false);
   };
 
@@ -199,6 +223,7 @@ export const EditorProvider = ({ children }) => {
         getComments,
         comments,
         commentsLoading,
+        subjects,
       }}
     >
       {children}

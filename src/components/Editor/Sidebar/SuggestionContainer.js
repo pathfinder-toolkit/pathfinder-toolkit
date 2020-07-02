@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SuggestionAlert from "../../reusable/SuggestionAlert";
 import { useEditor } from "../../../utils/EditorProvider";
 import InfoBox from "./InfoBox";
+import SubjectFilter from "./SubjectFilter";
 
 const useStyles = makeStyles((theme) => ({
   suggestionAlert: {
@@ -18,7 +19,17 @@ const SuggestionContainer = (props) => {
   const classes = useStyles();
 
   const [showInfo, setShowInfo] = useState(true);
-  const { suggestions, suggestionsLoading } = useEditor();
+  const { suggestions, suggestionsLoading, subjects } = useEditor();
+
+  const [filteredSuggestions, setFilteredSuggestions] = useState([
+    "test",
+    "aaa",
+  ]);
+
+  const filterSuggestions = (subject) => {
+    console.log("filtering: " + subject);
+    setFilteredSuggestions([...filteredSuggestions, subject]);
+  };
 
   useEffect(() => {
     if (!suggestionsLoading) {
@@ -36,8 +47,18 @@ const SuggestionContainer = (props) => {
         )
       ) : (
         <React.Fragment>
+          <SubjectFilter
+            subjects={subjects}
+            filtered={filteredSuggestions}
+            handleClick={(subject) => filterSuggestions(subject)}
+          />
           {suggestions &&
             suggestions.map((suggestion, key) => {
+
+              if (filteredSuggestions.includes(suggestion.suggestionSubject)) {
+                return;
+              }
+
               return (
                 <SuggestionAlert
                   suggestion={suggestion}
