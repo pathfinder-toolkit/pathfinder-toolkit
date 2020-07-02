@@ -3,8 +3,12 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "./react-auth0-spa";
 
+//import requestBody from "../json/postRequestExample.json";
+
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
+
+
 
 export const BackendProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
@@ -159,6 +163,35 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const submitNewBuilding = async (requestBody) => {
+    const token = await getTokenSilently();
+
+    const address = process.env.REACT_APP_API_ROOT + "/building";
+
+    console.log(requestBody);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.post(address, requestBody, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -169,6 +202,7 @@ export const BackendProvider = ({ children }) => {
         getBuildingFromSlug,
         requestSuggestions,
         requestComments,
+        submitNewBuilding
       }}
     >
       {children}

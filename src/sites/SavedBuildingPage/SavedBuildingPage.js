@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SavedBuildingPage = (props) => {
     const classes = useStyles();
-    const { getBuildingFromSlug } = useBackend();
+    const { getBuildingFromSlug, submitNewBuilding } = useBackend();
     const [ building, setBuilding ] = useState(null);
 
     const { loading } = useAuth0();
@@ -24,6 +24,7 @@ const SavedBuildingPage = (props) => {
     useEffect(() => {
         async function fetchData() {
             const data = await getBuildingFromSlug(props.match.params.slug);
+            const response = await submitNewBuilding();
             setBuilding(data);
         }
         if (!loading) {
