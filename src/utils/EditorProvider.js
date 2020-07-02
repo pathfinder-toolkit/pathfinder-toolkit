@@ -18,6 +18,7 @@ export const useEditor = () => useContext(EditorContext);
 export const EditorProvider = ({ children }) => {
 
   const { requestBuildingModel, submitNewBuilding } = useBackend();
+  const [subjects, setSubjects] = useState()
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
@@ -205,7 +206,6 @@ export const EditorProvider = ({ children }) => {
         commentsLoading,
         subjects,
         PostBuilding,
-        subjects,
       }}
     >
       {children}
