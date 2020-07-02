@@ -14,67 +14,97 @@ const RenewableCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Renewable energy sources</Typography>
-        
+
         {containsCategoryItem("heatPump") && (
-            props.category.heatPump.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.heatPump) ? (
+                props.category.heatPump.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.heatPump}
+                classes={props.classes}
+                />
+            )
         )}
-
         {containsCategoryItem("solarHeat") && (
-            props.category.solarHeat.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.solarHeat) ? (
+                props.category.solarHeat.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.solarHeat}
+                classes={props.classes}
+                />
+            )
         )}
-
         {containsCategoryItem("solarElectric") && (
-            props.category.solarElectric.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.solarElectric) ? (
+                props.category.solarElectric.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.solarElectric}
+                classes={props.classes}
+                />
+            )
         )}
-
         {containsCategoryItem("bioMass") && (
-            props.category.bioMass.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.bioMass) ? (
+                props.category.bioMass.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.bioMass}
+                classes={props.classes}
+                />
+            )
         )}
-
         {containsCategoryItem("chp") && (
-            props.category.chp.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.chp) ? (
+                props.category.chp.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.chp}
+                classes={props.classes}
+                />
+            )
         )}
-        
     </Paper>
 }
 

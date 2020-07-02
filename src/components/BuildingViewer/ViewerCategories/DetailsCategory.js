@@ -21,32 +21,78 @@ const DetailsCategory = (props) => {
         category={props.category}
         classes={props.classes}
         />
-
         {containsCategoryItem("annualConsumption") && (
-        <CategoryItem 
-        item={props.category.annualConsumption}
-        classes={props.classes}
-        />)}
+            Array.isArray(props.category.annualConsumption) ? (
+                props.category.annualConsumption.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualConsumption}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("annualCost") && (
-        <CategoryItem 
-        item={props.category.annualCost}
-        classes={props.classes}
-        />)}
+            Array.isArray(props.category.annualCost) ? (
+                props.category.annualCost.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualCost}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("annualHeatingConsumption") && (
-        <CategoryItem 
-        item={props.category.annualHeatingConsumption}
-        classes={props.classes}
-        />)}
+            Array.isArray(props.category.annualHeatingConsumption) ? (
+                props.category.annualCost.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualHeatingConsumption}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("annualHeatingCost") && (
-        <CategoryItem 
-        item={props.category.annualHeatingCost}
-        classes={props.classes}
-        />)}
-
-        
-
-        
-        
+            Array.isArray(props.category.annualHeatingCost) ? (
+                props.category.annualCost.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualHeatingCost}
+                classes={props.classes}
+                />
+            )
+        )}
     </Paper>
 }
 
