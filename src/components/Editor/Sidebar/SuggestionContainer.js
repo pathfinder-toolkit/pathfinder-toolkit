@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     fontSizeAdjust: 0.6,
     lineHeight: 1.8,
   },
+  suggestionsRoot: {
+    padding: theme.spacing(1),
+  },
 }));
 
 const SuggestionContainer = (props) => {
@@ -27,6 +30,12 @@ const SuggestionContainer = (props) => {
   ]);
 
   const filterSuggestions = (subject) => {
+    if (filteredSuggestions.includes(subject)) {
+      setFilteredSuggestions(
+        filteredSuggestions.filter((item) => item !== subject)
+      );
+      return;
+    }
     console.log("filtering: " + subject);
     setFilteredSuggestions([...filteredSuggestions, subject]);
   };
@@ -52,21 +61,24 @@ const SuggestionContainer = (props) => {
             filtered={filteredSuggestions}
             handleClick={(subject) => filterSuggestions(subject)}
           />
-          {suggestions &&
-            suggestions.map((suggestion, key) => {
+          <div className={classes.suggestionsRoot}>
+            {suggestions &&
+              suggestions.map((suggestion, key) => {
+                if (
+                  filteredSuggestions.includes(suggestion.suggestionSubject)
+                ) {
+                  return;
+                }
 
-              if (filteredSuggestions.includes(suggestion.suggestionSubject)) {
-                return;
-              }
-
-              return (
-                <SuggestionAlert
-                  suggestion={suggestion}
-                  classes={classes}
-                  key={key}
-                />
-              );
-            })}
+                return (
+                  <SuggestionAlert
+                    suggestion={suggestion}
+                    classes={classes}
+                    key={key}
+                  />
+                );
+              })}
+          </div>
         </React.Fragment>
       )}
     </React.Fragment>

@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Typography, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import clsx from 'clsx'
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   filterRoot: {
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    paddingTop: theme.spacing(1),
     display: "flex",
-    border: "1px solid black",
+    borderBottom: "1px solid #E0E0E0",
     flexDirection: "row",
     flexGrow: 1,
     flexWrap: "wrap",
@@ -17,15 +20,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
     margin: 0,
   },
-  filteredItem: { 
+  filteredItem: {
     backgroundColor: "red",
-  }
+  },
 }));
 
 const SubjectFilter = (props) => {
   const classes = useStyles();
 
-  const handleClick = (subject) => {
+  const filterSubject = (subject) => {
     if (props.handleClick) {
       props.handleClick(subject);
     }
@@ -37,17 +40,19 @@ const SubjectFilter = (props) => {
         if (props.filtered.includes(item)) {
           return (
             <Chip
-              onClick={() => handleClick(item)}
+              onClick={() => filterSubject(item)}
               clickable
-              className={clsx(classes.filterItem,classes.filteredItem)}
+              color="default"
+              className={classes.filterItem}
               label={item}
             />
           );
         }
         return (
           <Chip
-            onClick={() => handleClick(item)}
+            onClick={() => filterSubject(item)}
             clickable
+            color="primary"
             className={classes.filterItem}
             label={item}
           />
