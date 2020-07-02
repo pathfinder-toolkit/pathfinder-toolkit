@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Fade } from "@material-ui/core";
+import { Fade, Button } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Summary = () => {
-  const { buildingInformation } = useEditor();
+  const { buildingInformation, PostBuilding } = useEditor();
 
   const classes = useStyles();
 
@@ -41,9 +41,10 @@ const Summary = () => {
   }, []);
 
   return (
-    <Fade in={loading}>
+    <React.Fragment>
+      <Button onClick={() => PostBuilding()}> submit</Button>
       <BuildingViewer building={buildingInformation} />
-    </Fade>
+    </React.Fragment>
   );
 };
 

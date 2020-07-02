@@ -16,8 +16,12 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
+<<<<<<< Updated upstream
 
   const { requestBuildingModel } = useBackend();
+=======
+  const { requestBuildingModel, submitNewBuilding } = useBackend();
+>>>>>>> Stashed changes
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
@@ -175,6 +179,10 @@ export const EditorProvider = ({ children }) => {
     setCommentsLoading(false);
   };
 
+  const PostBuilding = () => {
+    submitNewBuilding(buildingInformation);
+  }
+
   return (
     <EditorContext.Provider
       value={{
@@ -199,6 +207,11 @@ export const EditorProvider = ({ children }) => {
         getComments,
         comments,
         commentsLoading,
+<<<<<<< Updated upstream
+=======
+        subjects,
+        PostBuilding
+>>>>>>> Stashed changes
       }}
     >
       {children}
