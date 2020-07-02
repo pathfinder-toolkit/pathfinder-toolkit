@@ -159,6 +159,33 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const submitNewBuilding = async () => {
+    const token = await getTokenSilently();
+
+    const address = process.env.REACT_APP_LOCAL_API_ROOT + "/test";
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -169,6 +196,7 @@ export const BackendProvider = ({ children }) => {
         getBuildingFromSlug,
         requestSuggestions,
         requestComments,
+        submitNewBuilding
       }}
     >
       {children}
