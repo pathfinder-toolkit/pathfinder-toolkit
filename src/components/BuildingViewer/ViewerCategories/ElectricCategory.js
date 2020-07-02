@@ -14,19 +14,79 @@ const ElectricCategory = (props) => {
 
     return <Paper className={classes.categoryRoot}>
         <Typography variant="h4" className={classes.categoryHeader}>Electricity details</Typography>
-        
+
         {containsCategoryItem("annualUse") && (
-        <CategoryItem 
-        item={props.category.annualUse}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.annualUse) ? (
+                props.category.annualUse.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualUse}
+                classes={props.classes}
+                />
+            )
+        )}
+        {containsCategoryItem("annualElectricityUse") && (
+            Array.isArray(props.category.annualElectricityUse) ? (
+                props.category.annualElectricityUse.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualElectricityUse}
+                classes={props.classes}
+                />
+            )
+        )}
         {containsCategoryItem("annualCost") && (
-        <CategoryItem 
-        item={props.category.annualCost}
-        classes={props.classes}
-        />)}
-
+            Array.isArray(props.category.annualCost) ? (
+                props.category.annualCost.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualCost}
+                classes={props.classes}
+                />
+            )
+        )}
+        {containsCategoryItem("annualElectricityCost") && (
+            Array.isArray(props.category.annualElectricityCost) ? (
+                props.category.annualElectricityCost.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.annualElectricityCost}
+                classes={props.classes}
+                />
+            )
+        )}
     </Paper>
 }
 

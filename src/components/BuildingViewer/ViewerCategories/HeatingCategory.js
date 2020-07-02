@@ -16,29 +16,41 @@ const HeatingCategory = (props) => {
         <Typography variant="h4" className={classes.categoryHeader}>Heating details</Typography>
         
         {containsCategoryItem("heatingSystem") && (
-            props.category.heatingSystem.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.heatingSystem) ? (
+                props.category.heatingSystem.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.heatingSystem}
+                classes={props.classes}
+                />
+            )
         )}
-
         {containsCategoryItem("heatingSource") && (
-            props.category.heatingSource.map((listItem, key) => {
-                return (
-                    <CategoryItem
-                    item={listItem}
-                    classes={props.classes}
-                    key={key}
-                    />
-                )
-            })
+            Array.isArray(props.category.heatingSource) ? (
+                props.category.heatingSource.map((listItem, key) => {
+                    return (
+                        <CategoryItem
+                        item={listItem}
+                        classes={props.classes}
+                        key={key}
+                        />
+                    )
+                })
+            ) : (
+                <CategoryItem 
+                item={props.category.heatingSource}
+                classes={props.classes}
+                />
+            )
         )}
-
     </Paper>
 }
 
