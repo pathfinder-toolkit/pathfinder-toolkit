@@ -204,7 +204,8 @@ export const EditorProvider = ({ children }) => {
         comments,
         commentsLoading,
         subjects,
-        PostBuilding
+        PostBuilding,
+        subjects,
       }}
     >
       {children}
