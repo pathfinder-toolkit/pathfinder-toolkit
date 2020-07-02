@@ -16,12 +16,8 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-<<<<<<< Updated upstream
 
-  const { requestBuildingModel } = useBackend();
-=======
   const { requestBuildingModel, submitNewBuilding } = useBackend();
->>>>>>> Stashed changes
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
