@@ -12,7 +12,7 @@ import {
 import { useEditor } from "../../utils/EditorProvider";
 import useFormData from "./useFormData";
 
-import FeedbackContainer from "./Sidebar/FeedbackContainer";
+import FeedbackContainer from "./Sidebar/SuggestionContainer";
 import DropdownSelect from "./reusable/DropdownSelect";
 import OldEntry from "./reusable/OldEntry";
 import PropertyList from "./reusable/PropertyList";
@@ -101,20 +101,6 @@ const BuildingHeating = (props) => {
                 </Grid>
               </Grid>
               <Grid className={style.row} container spacing={2}>
-                <Grid item sm={3}>
-                  <TextField
-                    className={style.formComponent}
-                    value={formData?.annualCost?.value}
-                    label="Annual cost"
-                    onChange={(e) => handleChange(e, "annualCost")}
-                    error={isNaN(formData?.annualCost?.value)}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">€</InputAdornment>
-                      ),
-                    }}
-                  ></TextField>
-                </Grid>
               </Grid>
             </div>
           </Grid>

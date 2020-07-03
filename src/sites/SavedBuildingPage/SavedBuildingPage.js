@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SavedBuildingPage = (props) => {
     const classes = useStyles();
-    const { getBuildingFromSlug } = useBackend();
+    const { getBuildingFromSlug} = useBackend();
     const [ building, setBuilding ] = useState(null);
 
     const { loading } = useAuth0();
