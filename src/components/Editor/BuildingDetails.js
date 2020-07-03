@@ -12,7 +12,7 @@ import useFormData from "./useFormData";
 
 import DropdownSelect from "./reusable/DropdownSelect";
 import PhotoButton from "./reusable/PhotoButton";
-import FeedbackContainer from "./Sidebar/FeedbackContainer";
+import FeedbackContainer from "./Sidebar/SuggestionContainer";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();

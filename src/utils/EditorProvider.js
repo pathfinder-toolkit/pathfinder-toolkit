@@ -40,7 +40,15 @@ export const EditorProvider = ({ children }) => {
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([
+    {
+      commentText: "comment",
+      commentSubject: "subject",
+      commentSecondarySubject: "subject",
+      date: "2000-01-01 0:00:01",
+      sentiment: "negative",
+    },
+  ]);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
   const [suggestions, setSuggestions] = useState([
@@ -175,11 +183,17 @@ export const EditorProvider = ({ children }) => {
     if (subject === null || value === null) {
       return;
     }
-    const data = await requestSuggestions(subject, value);
-    if (!suggestions.includes(subject)) {
-      // Temporary solution for testing
-      setSuggestions([...suggestions, data[0]]);
-      console.log(suggestions);
+
+    try {
+      const data = await requestSuggestions(subject, value);
+
+      if (!suggestions.includes(subject)) {
+        // Temporary solution for testing
+        setSuggestions([...suggestions, data[0]]);
+        console.log(suggestions);
+      }
+    } catch (error) {
+      console.log(error);
     }
 
     if (!subjects.includes(subject)) {
@@ -194,8 +208,18 @@ export const EditorProvider = ({ children }) => {
     if (subject === null) {
       return;
     }
-    const data = await requestComments(subject);
-    setComments(data);
+
+    try {
+      const data = await requestComments(subject);
+
+      console.log(data);
+      if (!suggestions.includes(subject)) {
+        setComments([...comments, data[0]]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     setCommentsLoading(false);
   };
 

@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Chip } from "@material-ui/core";
+import React from "react";
+import { Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   filterRoot: {
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    paddingTop: theme.spacing(1),
     display: "flex",
-    borderBottom: "1px solid #E0E0E0",
     flexDirection: "row",
     flexGrow: 1,
     flexWrap: "wrap",
+    padding: theme.spacing(1),
+    borderTop: "1px solid #E0E0E0",
+    borderBottom: "1px solid #E0E0E0",
   },
   filterItem: {
     marginRight: "10px",
@@ -33,6 +30,10 @@ const SubjectFilter = (props) => {
       props.handleClick(subject);
     }
   };
+
+  if (!props.subjects) {
+    return <div>empty</div>;
+  }
 
   return (
     <div className={classes.filterRoot}>

@@ -1,86 +1,88 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Tab, Tabs, Box } from "@material-ui/core";
 
-import SuggestionAlert from "../../reusable/SuggestionAlert";
 import { useEditor } from "../../../utils/EditorProvider";
-import InfoBox from "./InfoBox";
 import SubjectFilter from "./SubjectFilter";
+import { Subject } from "@material-ui/icons";
+import UserSuggestions from "./UserSuggestions";
+import Suggestions from "./Suggestions"
 
 const useStyles = makeStyles((theme) => ({
-  suggestionAlert: {
-    marginBottom: theme.spacing(1),
-    fontSizeAdjust: 0.6,
-    lineHeight: 1.8,
+  suggestionContainer: {
+    marginTop: theme.spacing(0),
+    border: "1px solid black", //debug
   },
-  suggestionsRoot: {
-    padding: theme.spacing(1),
+  suggestionHeader: {
+    borderBottom: "1px solid #E0E0E0",
+    marginBottom: theme.spacing(1),
+  },
+  tab: {
+    //backgroundColor: "#EEEEEE",
+    marginRight: theme.spacing(0),
   },
 }));
+
+const TabPanel = (props) => {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div role="tabpanel" hidden={value !== index} {...other}>
+      {value === index && <Box>{children}</Box>}
+    </div>
+  );
+};
 
 const SuggestionContainer = (props) => {
   const classes = useStyles();
 
-  const [showInfo, setShowInfo] = useState(true);
-  const { suggestions, suggestionsLoading, subjects } = useEditor();
+  const [value, setValue] = useState(0);
 
-  const [filteredSuggestions, setFilteredSuggestions] = useState([
+  const { subjects, suggestionsLoading } = useEditor();
+
+  const [filteredSubjects, setFilteredSubjects] = useState([
     "test",
-    "aaa",
+    "filtered",
   ]);
 
-  const filterSuggestions = (subject) => {
-    if (filteredSuggestions.includes(subject)) {
-      setFilteredSuggestions(
-        filteredSuggestions.filter((item) => item !== subject)
-      );
+  const filterSubject = (subject) => {
+    if (filteredSubjects.includes(subject)) {
+      setFilteredSubjects(filteredSubjects.filter((item) => item !== subject));
       return;
     }
+
     console.log("filtering: " + subject);
-    setFilteredSuggestions([...filteredSuggestions, subject]);
+    setFilteredSubjects([...filteredSubjects, subject]);
   };
 
-  useEffect(() => {
-    if (!suggestionsLoading) {
-      setShowInfo(false);
-    }
-  }, [suggestionsLoading]);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <React.Fragment>
-      {suggestionsLoading ? (
-        showInfo ? (
-          <InfoBox />
-        ) : (
-          <CircularProgress />
-        )
-      ) : (
-        <React.Fragment>
-          <SubjectFilter
-            subjects={subjects}
-            filtered={filteredSuggestions}
-            handleClick={(subject) => filterSuggestions(subject)}
-          />
-          <div className={classes.suggestionsRoot}>
-            {suggestions &&
-              suggestions.map((suggestion, key) => {
-                if (
-                  filteredSuggestions.includes(suggestion.suggestionSubject)
-                ) {
-                  return;
-                }
-
-                return (
-                  <SuggestionAlert
-                    suggestion={suggestion}
-                    classes={classes}
-                    key={key}
-                  />
-                );
-              })}
-          </div>
-        </React.Fragment>
-      )}
+      <Tabs
+        className={classes.tab}
+        variant="fullWidth"
+        value={value}
+        onChange={handleChange}
+        indicatorColor="primary"
+        textColor="primary"
+      >
+        <Tab label="Suggestions" />
+        <Tab label="User comments" />
+      </Tabs>
+      <SubjectFilter
+        subjects={subjects}
+        filtered={filteredSubjects}
+        handleClick={(subject) => filterSubject(subject)}
+      />
+      <TabPanel value={value} index={0}>
+        <Suggestions filteredSubjects={filteredSubjects} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <UserSuggestions filteredSubjects={filteredSubjects} />
+      </TabPanel>
     </React.Fragment>
   );
 };

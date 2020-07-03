@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
+  commentsRoot: {
+    padding: theme.spacing(1),
+  },
   comment: {
     marginBottom: theme.spacing(1),
   },
@@ -30,10 +33,14 @@ const useStyles = makeStyles((theme) => ({
   commentSubjectArrow: {
     fontSizeAdjust: 0.2,
   },
+  infoBox: {
+    marginTop: theme.spacing(5),
+  },
 }));
 
-const CommentContainer = (props) => {
+const UserSuggestions = (props) => {
   const classes = useStyles();
+  const filteredSubjects = props.filteredSubjects;
 
   const [showInfo, setShowInfo] = useState(true);
   const { comments, commentsLoading } = useEditor();
@@ -48,24 +55,32 @@ const CommentContainer = (props) => {
     <React.Fragment>
       {commentsLoading ? (
         showInfo ? (
-          <InfoBox />
+          <div className={classes.infoBox}>
+            <InfoBox />
+          </div>
         ) : (
           <CircularProgress />
         )
       ) : (
         <React.Fragment>
-          {comments &&
-            comments.map((comment, key) => {
-              return (
-                <Paper className={classes.comment}>
-                  <Comment comment={comment} classes={classes} key={key} />
-                </Paper>
-              );
-            })}
+          <div className={classes.commentsRoot}>
+            {comments &&
+              comments.map((comment, key) => {
+                if (filteredSubjects.includes(comment.commentSubject)) {
+                  return;
+                }
+                
+                return (
+                  <Paper className={classes.comment}>
+                    <Comment comment={comment} classes={classes} key={key} />
+                  </Paper>
+                );
+              })}
+          </div>
         </React.Fragment>
       )}
     </React.Fragment>
   );
 };
 
-export default CommentContainer;
+export default UserSuggestions;
