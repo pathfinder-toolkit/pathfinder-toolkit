@@ -54,7 +54,7 @@ const ImageModal = (props) => {
                 <CardMedia className={classes.cardMedia}>
                   <Image
                     cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-                    publicId="pathfinder_userimages/lu8sfgxublj03fojad8c" 
+                    publicId={props.image}
                   />
                 </CardMedia>
             </Card>
