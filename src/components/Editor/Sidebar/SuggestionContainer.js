@@ -7,6 +7,7 @@ import { useEditor } from "../../../utils/EditorProvider";
 import SubjectFilter from "./SubjectFilter";
 import UserSuggestions from "./UserSuggestions";
 import Suggestions from "./Suggestions";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   suggestionContainer: {
@@ -36,12 +37,15 @@ const SuggestionContainer = (props) => {
 
   const [value, setValue] = useState(0);
 
-  const { subjects, suggestions, comments } = useEditor();
+  const { subjects, suggestions, comments, activeStep } = useEditor();
 
-  const [filteredSubjects, setFilteredSubjects] = useState([
-    "test",
-    "filtered",
-  ]);
+  const [filteredSubjects, setFilteredSubjects] = useState([]);
+
+  useEffect(() => {
+    console.log("Here");
+    setFilteredSubjects([]);
+    console.log(filteredSubjects);
+  }, [activeStep]);
 
   const filterSubject = (subject) => {
     if (filteredSubjects.includes(subject)) {

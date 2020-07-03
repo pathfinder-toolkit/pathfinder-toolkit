@@ -120,11 +120,8 @@ export const EditorProvider = ({ children }) => {
   };
 
   const previousStep = () => {
+    clearSuggestions();
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const resetSteps = () => {
-    setActiveStep(0);
   };
 
   const setSavedProperty = (category, propertyName, newValue) => {
