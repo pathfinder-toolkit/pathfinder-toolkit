@@ -6,6 +6,8 @@ import Fade from '@material-ui/core/Fade';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 
+import { Image } from 'cloudinary-react';
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -49,7 +51,12 @@ const ImageModal = (props) => {
       >
         <Fade in={open}>
             <Card raised={true} className={classes.card}>
-                <CardMedia className={classes.cardMedia} image={image} />
+                <CardMedia className={classes.cardMedia}>
+                  <Image
+                    cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+                    publicId="pathfinder_userimages/lu8sfgxublj03fojad8c" 
+                  />
+                </CardMedia>
             </Card>
         </Fade>
       </Modal>
