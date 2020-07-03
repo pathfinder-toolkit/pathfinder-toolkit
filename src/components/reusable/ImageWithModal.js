@@ -4,6 +4,10 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import ImageModal from "./ImageModal";
 
+import { Image } from 'cloudinary-react';
+
+
+
 
 
 const ImageWithModal = (props) => {
@@ -35,7 +39,12 @@ const ImageWithModal = (props) => {
     
   return <React.Fragment>
     <Card raised={true} className={classes.card}>
-        <CardMedia onClick={ _showImageModal } className={classes.cardMedia} image={props.image} />
+        <CardMedia onClick={ _showImageModal } className={classes.cardMedia}>
+          <Image 
+            cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+            publicId={props.image}
+          />
+        </CardMedia>
       </Card>
       <ImageModal open={showImageModal} onHide={_hideImageModal} image={props.image} />
   </React.Fragment>
