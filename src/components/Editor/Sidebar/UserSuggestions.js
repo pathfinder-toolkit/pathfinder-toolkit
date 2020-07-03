@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress, Paper, Divider } from "@material-ui/core";
+import { CircularProgress, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useEditor } from "../../../utils/EditorProvider";
@@ -40,10 +40,12 @@ const useStyles = makeStyles((theme) => ({
 
 const UserSuggestions = (props) => {
   const classes = useStyles();
-  const filteredSubjects = props.filteredSubjects;
 
+  const { commentsLoading } = useEditor();
   const [showInfo, setShowInfo] = useState(true);
-  const { comments, commentsLoading } = useEditor();
+
+  const filteredSubjects = props.filteredSubjects;
+  const comments = props.UserSuggestions;
 
   useEffect(() => {
     if (!commentsLoading) {
@@ -69,7 +71,7 @@ const UserSuggestions = (props) => {
                 if (filteredSubjects.includes(comment.commentSubject)) {
                   return;
                 }
-                
+
                 return (
                   <Paper className={classes.comment}>
                     <Comment comment={comment} classes={classes} key={key} />

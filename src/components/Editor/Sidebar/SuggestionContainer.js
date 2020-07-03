@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tab, Tabs, Box } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
+
 import SubjectFilter from "./SubjectFilter";
-import { Subject } from "@material-ui/icons";
 import UserSuggestions from "./UserSuggestions";
-import Suggestions from "./Suggestions"
+import Suggestions from "./Suggestions";
 
 const useStyles = makeStyles((theme) => ({
   suggestionContainer: {
     marginTop: theme.spacing(0),
-    border: "1px solid black", //debug
   },
   suggestionHeader: {
     borderBottom: "1px solid #E0E0E0",
     marginBottom: theme.spacing(1),
   },
   tab: {
-    //backgroundColor: "#EEEEEE",
     marginRight: theme.spacing(0),
   },
 }));
@@ -38,7 +36,7 @@ const SuggestionContainer = (props) => {
 
   const [value, setValue] = useState(0);
 
-  const { subjects, suggestionsLoading } = useEditor();
+  const { subjects, suggestions, comments } = useEditor();
 
   const [filteredSubjects, setFilteredSubjects] = useState([
     "test",
@@ -78,10 +76,16 @@ const SuggestionContainer = (props) => {
         handleClick={(subject) => filterSubject(subject)}
       />
       <TabPanel value={value} index={0}>
-        <Suggestions filteredSubjects={filteredSubjects} />
+        <Suggestions
+          suggestions={suggestions}
+          filteredSubjects={filteredSubjects}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <UserSuggestions filteredSubjects={filteredSubjects} />
+        <UserSuggestions
+          UserSuggestions={comments}
+          filteredSubjects={filteredSubjects}
+        />
       </TabPanel>
     </React.Fragment>
   );

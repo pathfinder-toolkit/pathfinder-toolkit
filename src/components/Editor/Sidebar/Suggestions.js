@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import SuggestionAlert from "../../reusable/SuggestionAlert";
 import { useEditor } from "../../../utils/EditorProvider";
 import InfoBox from "./InfoBox";
-import SubjectFilter from "./SubjectFilter";
 
 const useStyles = makeStyles((theme) => ({
   suggestionAlert: {
@@ -23,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Suggestions = (props) => {
   const classes = useStyles();
-  const filteredSubjects = props.filteredSubjects;
 
+  const { suggestionsLoading } = useEditor();
   const [showInfo, setShowInfo] = useState(true);
-  const { suggestions, suggestionsLoading } = useEditor();
+
+  const filteredSubjects = props.filteredSubjects;
+  const suggestions = props.suggestions;
 
   useEffect(() => {
     if (!suggestionsLoading) {
