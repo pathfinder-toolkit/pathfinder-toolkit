@@ -10,7 +10,7 @@ import {
 import { useEditor } from "../../utils/EditorProvider";
 import useFormData from "./useFormData";
 
-import FeedbackContainer from "./Sidebar/FeedbackContainer";
+import FeedbackContainer from "./Sidebar/SuggestionContainer";
 import DropdownSelect from "./reusable/DropdownSelect";
 
 const BuildingRenewable = (props) => {

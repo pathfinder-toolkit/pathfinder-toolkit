@@ -10,24 +10,21 @@ import Summary from "../components/Editor/Summary";
 
 import { useBackend } from "./BackendProvider";
 
-import buildingDetailsModel from "../json/buildingDetailsModel.json";
-
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-
   const { requestBuildingModel } = useBackend();
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
-  
+
     useEffect(() => {
       if (value) {
         sessionStorage.setItem(sessionStorageKey, JSON.stringify(value));
       }
     }, [value, sessionStorageKey]);
-  
+
     return [value, setValue];
   };
 
@@ -38,10 +35,28 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
-  const [suggestions, setSuggestions] = useState();
+
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState([
+    {
+      commentText: "comment",
+      commentSubject: "subject",
+      commentSecondarySubject: "subject",
+      date: "2000-01-01 0:00:01",
+      sentiment: "negative",
+    },
+  ]);
   const [commentsLoading, setCommentsLoading] = useState(true);
+
+  const [suggestions, setSuggestions] = useState([
+    {
+      suggestionText: "default",
+      priority: 2,
+      suggestionSubject: "de",
+      suggestionSecondarySubject: "d d",
+    },
+  ]);
+  const [subjects, setSubjects] = useState([]);
 
   const { requestSuggestions, requestComments } = useBackend();
 
@@ -76,7 +91,12 @@ export const EditorProvider = ({ children }) => {
   const getStepComponent = (style) => {
     switch (activeStep) {
       case 0:
-        return <AreaSelection loadBuildingModel={setBuildingInformation} style={style} />;
+        return (
+          <AreaSelection
+            loadBuildingModel={setBuildingInformation}
+            style={style}
+          />
+        );
       case 1:
         return <BuildingDetails style={style} />;
       case 2:
@@ -95,30 +115,16 @@ export const EditorProvider = ({ children }) => {
   };
 
   const nextStep = () => {
+    clearSuggestions();
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    //setNavigationEnabled(false);
   };
 
   const previousStep = () => {
+    clearSuggestions();
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    //setNavigationEnabled(true);
-  };
-
-  const resetSteps = () => {
-    setActiveStep(0);
   };
 
   const setSavedProperty = (category, propertyName, newValue) => {
-    /*   if (!Object.keys(buildingInformation).includes(category)) {
-      setBuildingInformation((buildingInformation) => ({
-        ...buildingInformation,
-        category: {
-          ...buildingInformation[category],
-          [propertyName]: {
-            ...buildingInformation[category][propertyName],
-            value: newValue,
-    } */
-
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       [category]: {
@@ -160,8 +166,23 @@ export const EditorProvider = ({ children }) => {
     if (subject === null || value === null) {
       return;
     }
-    const data = await requestSuggestions(subject, value);
-    setSuggestions(data);
+
+    try {
+      const data = await requestSuggestions(subject, value);
+
+      if (!suggestions.includes(subject)) {
+        // Temporary solution for testing
+        setSuggestions([...suggestions, data[0]]);
+        console.log(suggestions);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (!subjects.includes(subject)) {
+      setSubjects([...subjects, subject]);
+    }
+
     setSuggestionsLoading(false);
   };
 
@@ -170,9 +191,24 @@ export const EditorProvider = ({ children }) => {
     if (subject === null) {
       return;
     }
-    const data = await requestComments(subject);
-    setComments(data);
+
+    try {
+      const data = await requestComments(subject);
+
+      console.log(data);
+      if (!suggestions.includes(subject)) {
+        setComments([...comments, data[0]]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
     setCommentsLoading(false);
+  };
+
+  const clearSuggestions = () => {
+    setComments([]);
+    setSuggestions([]);
   };
 
   return (
@@ -199,6 +235,7 @@ export const EditorProvider = ({ children }) => {
         getComments,
         comments,
         commentsLoading,
+        subjects,
       }}
     >
       {children}

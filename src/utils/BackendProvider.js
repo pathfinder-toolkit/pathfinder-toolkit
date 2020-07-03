@@ -94,8 +94,12 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestSuggestions = async (subject, value) => {
-    const address = encodeURI(
+    /*const address = encodeURI(
       process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + value
+    ); */
+
+    const address = encodeURI(
+      "http://localhost:3300" + "/suggestions/" + subject + "/" + value
     );
 
     console.log("get suggestions about: " + subject + " | " + value);

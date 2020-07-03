@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress, Paper, Divider } from "@material-ui/core";
+import { CircularProgress, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useEditor } from "../../../utils/EditorProvider";
@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     marginRight: theme.spacing(2),
     marginBottom: theme.spacing(2),
+  },
+  commentsRoot: {
+    padding: theme.spacing(1),
   },
   comment: {
     marginBottom: theme.spacing(1),
@@ -30,13 +33,19 @@ const useStyles = makeStyles((theme) => ({
   commentSubjectArrow: {
     fontSizeAdjust: 0.2,
   },
+  infoBox: {
+    marginTop: theme.spacing(5),
+  },
 }));
 
-const CommentContainer = (props) => {
+const UserSuggestions = (props) => {
   const classes = useStyles();
 
+  const { commentsLoading } = useEditor();
   const [showInfo, setShowInfo] = useState(true);
-  const { comments, commentsLoading } = useEditor();
+
+  const filteredSubjects = props.filteredSubjects;
+  const comments = props.UserSuggestions;
 
   useEffect(() => {
     if (!commentsLoading) {
@@ -48,24 +57,32 @@ const CommentContainer = (props) => {
     <React.Fragment>
       {commentsLoading ? (
         showInfo ? (
-          <InfoBox />
+          <div className={classes.infoBox}>
+            <InfoBox />
+          </div>
         ) : (
           <CircularProgress />
         )
       ) : (
         <React.Fragment>
-          {comments &&
-            comments.map((comment, key) => {
-              return (
-                <Paper className={classes.comment}>
-                  <Comment comment={comment} classes={classes} key={key} />
-                </Paper>
-              );
-            })}
+          <div className={classes.commentsRoot}>
+            {comments &&
+              comments.map((comment, key) => {
+                if (filteredSubjects.includes(comment.commentSubject)) {
+                  return;
+                }
+
+                return (
+                  <Paper className={classes.comment}>
+                    <Comment comment={comment} classes={classes} key={key} />
+                  </Paper>
+                );
+              })}
+          </div>
         </React.Fragment>
       )}
     </React.Fragment>
   );
 };
 
-export default CommentContainer;
+export default UserSuggestions;
