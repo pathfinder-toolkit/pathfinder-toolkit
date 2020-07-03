@@ -10,9 +10,6 @@ import Summary from "../components/Editor/Summary";
 
 import { useBackend } from "./BackendProvider";
 
-import buildingDetailsModel from "../json/buildingDetailsModel.json";
-import { DataUsageRounded } from "@material-ui/icons";
-
 export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
@@ -59,7 +56,7 @@ export const EditorProvider = ({ children }) => {
       suggestionSecondarySubject: "d d",
     },
   ]);
-  const [subjects, setSubjects] = useState(["default"]);
+  const [subjects, setSubjects] = useState([]);
 
   const { requestSuggestions, requestComments } = useBackend();
 
@@ -118,13 +115,12 @@ export const EditorProvider = ({ children }) => {
   };
 
   const nextStep = () => {
+    clearSuggestions();
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    //setNavigationEnabled(false);
   };
 
   const previousStep = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    //setNavigationEnabled(true);
   };
 
   const resetSteps = () => {
@@ -132,16 +128,6 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setSavedProperty = (category, propertyName, newValue) => {
-    /*   if (!Object.keys(buildingInformation).includes(category)) {
-      setBuildingInformation((buildingInformation) => ({
-        ...buildingInformation,
-        category: {
-          ...buildingInformation[category],
-          [propertyName]: {
-            ...buildingInformation[category][propertyName],
-            value: newValue,
-    } */
-
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
       [category]: {
@@ -221,6 +207,11 @@ export const EditorProvider = ({ children }) => {
     }
 
     setCommentsLoading(false);
+  };
+
+  const clearSuggestions = () => {
+    setComments([]);
+    setSuggestions([]);
   };
 
   return (

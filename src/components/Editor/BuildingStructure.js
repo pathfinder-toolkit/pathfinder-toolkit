@@ -72,7 +72,7 @@ const BuildingStructure = (props) => {
                     value={formData.windowAmount[0].value}
                     label="Windows"
                     type="number"
-                    error={isNaN(formData.windowAmount.value)}
+                    error={isNaN(formData.windowAmount[0].value)}
                     onChange={(e) => handleChange(e, "windowAmount")}
                   ></TextField>
                 </Grid>
@@ -93,7 +93,7 @@ const BuildingStructure = (props) => {
                       value={formData.heatedWindowAmount[0].value}
                       label="In heated area"
                       type="number"
-                      error={isNaN(formData.heatedWindowAmount.value)}
+                      error={isNaN(formData.heatedWindowAmount[0].value)}
                       onChange={(e) => handleChange(e, "heatedWindowAmount")}
                     ></TextField>
                   </Grid>
@@ -116,7 +116,7 @@ const BuildingStructure = (props) => {
                     value={formData.doorAmount[0].value}
                     label="Doors"
                     type="number"
-                    error={isNaN(formData.doorAmount.value)}
+                    error={isNaN(formData.doorAmount[0].value)}
                     onChange={(e) => handleChange(e, "doorAmount")}
                   ></TextField>
                 </Grid>
