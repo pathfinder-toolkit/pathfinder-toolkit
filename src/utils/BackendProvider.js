@@ -94,13 +94,14 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestSuggestions = async (subject, value) => {
-    /*const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + value
-    ); */
-
     const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + "1"
+    ); 
+    //value
+
+    /*const address = encodeURI(
       "http://localhost:3300" + "/suggestions/" + subject + "/" + value
-    );
+    );*/
 
     console.log("get suggestions about: " + subject + " | " + value);
 
@@ -118,6 +119,10 @@ export const BackendProvider = ({ children }) => {
     const address = encodeURI(
       process.env.REACT_APP_API_ROOT + "/comments/" + subject
     );
+
+    /*const address = encodeURI(
+      "http://localhost:3300" + "/comments/" + subject
+    ); */
 
     try {
       const response = await axios.get(address);
