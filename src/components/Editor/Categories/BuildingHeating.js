@@ -67,7 +67,7 @@ const BuildingHeating = (props) => {
           </div>
           <div className={style.category}>
             <Grid className={style.row} container  spacing={2}>
-              <Grid item sm={3}>
+              <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.heatingTypes}
@@ -88,7 +88,7 @@ const BuildingHeating = (props) => {
                   </Button>
                 </Grid>
               )}
-              <Grid item sm={3}>
+              <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.heatingTypes}

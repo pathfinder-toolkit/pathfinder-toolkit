@@ -33,7 +33,7 @@ const BuildingRenewable = (props) => {
             <Typography variant="h5">Renewable</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container spacing={0}>
+            <Grid className={style.row} container spacing={2}>
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}

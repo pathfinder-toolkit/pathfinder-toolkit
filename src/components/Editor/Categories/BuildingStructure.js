@@ -38,7 +38,7 @@ const BuildingStructure = (props) => {
             <Typography variant="h5">Building structure</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container spacing={2}>
+            <Grid className={style.row} container spacing={4}>
               <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
@@ -83,31 +83,30 @@ const BuildingStructure = (props) => {
                   handler={(e) => handleChange(e, "windowType")}
                 />
               </Grid>
-              <Grid container={style.row} spacing={2}>
-                <Grid item sm={2}>
-                  <TextField
-                    className={style.formComponent}
-                    defaultValue=""
-                    value={formData.heatedWindowAmount[0].value}
-                    label="In heated area"
-                    type="number"
-                    error={isNaN(formData.heatedWindowAmount[0].value)}
-                    onChange={(e) => handleChange(e, "heatedWindowAmount")}
-                  ></TextField>
-                </Grid>
-                <Grid item sm={3}>
-                  <DropdownSelect
-                    className={style.formComponent}
-                    data={buildingOptions.materials}
-                    label="Heated window type"
-                    value={formData.wallMaterial[0].value}
-                    handler={(e) => handleChange(e, "heatedWindowType")}
-                  />
-                </Grid>
+
+              <Grid item sm={2}>
+                <TextField
+                  className={style.formComponent}
+                  defaultValue=""
+                  value={formData.heatedWindowAmount[0].value}
+                  label="In heated area"
+                  type="number"
+                  error={isNaN(formData.heatedWindowAmount[0].value)}
+                  onChange={(e) => handleChange(e, "heatedWindowAmount")}
+                ></TextField>
+              </Grid>
+              <Grid item sm={2}>
+                <DropdownSelect
+                  className={style.formComponent}
+                  data={buildingOptions.materials}
+                  label="Heated window type"
+                  value={formData.wallMaterial[0].value}
+                  handler={(e) => handleChange(e, "heatedWindowType")}
+                />
               </Grid>
             </Grid>
             <Grid container className={style.row} spacing={2}>
-              <Grid item sm={2}>
+              <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
                   defaultValue=""

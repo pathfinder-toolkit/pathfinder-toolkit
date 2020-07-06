@@ -154,18 +154,19 @@ export const EditorProvider = ({ children }) => {
 
     try {
       const data = await requestSuggestions(subject, value);
+      console.log(data);
 
       if (!suggestions.includes(subject)) {
         // Temporary solution for testing
         setSuggestions([...suggestions, data[0]]);
         console.log(suggestions);
       }
+
+      if (!subjects.includes(subject)) {
+        setSubjects([...subjects, data[0].suggestionSubject]);
+      }
     } catch (error) {
       console.log(error);
-    }
-
-    if (!subjects.includes(subject)) {
-      setSubjects([...subjects, subject]);
     }
 
     setSuggestionsLoading(false);
