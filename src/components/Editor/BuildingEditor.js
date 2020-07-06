@@ -10,18 +10,24 @@ const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       background: "#eceef8",
+      //background: "#3F51B5",
       maxHeight: "100vh",
     },
     editorContainer: {
-      padding: theme.spacing(0.5),
+      padding: theme.spacing(0),
       minHeight: "91vh",
     },
     editorComponent: {
-      border: "1px solid black",
+      border: "0px solid black",
       borderRadius: "2px",
       height: "90vh",
-      maxHeight: "92vh",
+      maxHeight: "91vh",
       minHeight: "91vh",
+    },
+    suggestionContainer: {
+      minHeight: "91vh",
+      maxHeight: "91vh",
+      paddingLeft: theme.spacing(0.5),
     },
   }));
   const classes = useStyles();
@@ -94,17 +100,47 @@ const BuildingEditor = () => {
   }));
 
   const styleComponent = useStylesForEditorComponent();
-  const { getStepComponent } = useEditor();
+  const { getStepComponent, activeStep } = useEditor();
 
+  // Render area selection and summary with no Sidebar
+  if (activeStep === 0 || activeStep === 6) {
+    return (
+      <React.Fragment>
+        <Grid className={classes.root} container sm={12} md={12} lg={12}>
+          <Grid
+            className={classes.editorContainer}
+            item
+            sm={12}
+            md={12}
+            lg={12}
+          >
+            <Paper className={classes.editorComponent}>
+              {getStepComponent(styleComponent)}
+            </Paper>
+          </Grid>
+        </Grid>
+        <NavigationBar />
+      </React.Fragment>
+    );
+  }
+
+  // Render other components with Sidebar
   return (
-    <div className={classes.root}>
-      <div className={classes.editorContainer}>
-        <Paper className={classes.editorComponent}>
-          {getStepComponent(styleComponent)}
-        </Paper>
-      </div>
+    <React.Fragment>
+      <Grid className={classes.root} container sm={12} md={12} lg={12}>
+        <Grid className={classes.editorContainer} item sm={9} md={9} lg={9}>
+          <Paper className={classes.editorComponent}>
+            {getStepComponent(styleComponent)}
+          </Paper>
+        </Grid>
+        <Grid item sm={3} md={3} lg={3}>
+          <Paper className={classes.suggestionContainer}>
+            <SuggestionContainer />
+          </Paper>
+        </Grid>
+      </Grid>
       <NavigationBar />
-    </div>
+    </React.Fragment>
   );
 };
 

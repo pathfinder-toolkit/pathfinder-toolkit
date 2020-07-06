@@ -62,51 +62,45 @@ const BuildingHeating = (props) => {
             />
           </div>
         </Modal>
-        <Grid container spacing={3} sm={12} md={12} lg={12}>
-          <Grid item sm={8} md={8} lg={8}>
-            <div className={style.header}>
-              <Typography variant="h5">Building heating</Typography>
-            </div>
-            <div className={style.category}>
-              <Grid className={style.row} container spacing={2}>
-                <Grid item sm={3}>
-                  <DropdownSelect
-                    className={style.formComponent}
-                    data={buildingOptions.heatingTypes}
-                    label="Heating System"
-                    value={formData.heatingSystem.value}
-                    handler={(e) => handleChange(e, "heatingSystem")}
-                  />
-                </Grid>
-                {formData?.heatingSystem[0].value && (
-                  <Grid item sm={3}>
-                    <Button
-                      className={style.formButton}
-                      color="primary"
-                      variant="contained"
-                      onClick={setModal}
-                    >
-                      Add old system
-                    </Button>
-                  </Grid>
-                )}
-                <Grid item sm={3}>
-                  <DropdownSelect
-                    className={style.formComponent}
-                    data={buildingOptions.heatingTypes}
-                    label="Heating source"
-                    value={formData.heatingSource.value}
-                    handler={(e) => handleChange(e, "heatingSource")}
-                  />
-                </Grid>
+        <Grid item>
+          <div className={style.header}>
+            <Typography variant="h5">Building heating</Typography>
+          </div>
+          <div className={style.category}>
+            <Grid className={style.row} container spacing={2}>
+              <Grid item sm={3}>
+                <DropdownSelect
+                  className={style.formComponent}
+                  data={buildingOptions.heatingTypes}
+                  label="Heating System"
+                  value={formData.heatingSystem.value}
+                  handler={(e) => handleChange(e, "heatingSystem")}
+                />
               </Grid>
-              <Grid className={style.row} container spacing={2}>
+              {formData?.heatingSystem[0].value && (
+                <Grid item sm={3}>
+                  <Button
+                    className={style.formButton}
+                    color="primary"
+                    variant="contained"
+                    onClick={setModal}
+                  >
+                    Add old system
+                  </Button>
+                </Grid>
+              )}
+              <Grid item sm={3}>
+                <DropdownSelect
+                  className={style.formComponent}
+                  data={buildingOptions.heatingTypes}
+                  label="Heating source"
+                  value={formData.heatingSource.value}
+                  handler={(e) => handleChange(e, "heatingSource")}
+                />
               </Grid>
-            </div>
-          </Grid>
-          <Grid className={style.suggestionContainer} item sm={4} md={4} lg={4}>
-            <FeedbackContainer />
-          </Grid>
+            </Grid>
+            <Grid className={style.row} container spacing={2}></Grid>
+          </div>
         </Grid>
       </div>
     </Fade>
