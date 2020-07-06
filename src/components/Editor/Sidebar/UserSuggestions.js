@@ -45,7 +45,7 @@ const UserSuggestions = (props) => {
   const [showInfo, setShowInfo] = useState(true);
 
   const filteredSubjects = props.filteredSubjects;
-  const comments = props.UserSuggestions;
+  const comments = props.userSuggestions;
 
   useEffect(() => {
     if (!commentsLoading) {
