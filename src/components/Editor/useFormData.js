@@ -74,6 +74,18 @@ const useFormData = (category) => {
     event.persist();
     console.log("adding new entry to: " + propertyName);
 
+    let currentObjectIndex = formData[propertyName].findIndex(
+      (x) => x.isCurrent
+    );
+
+    if (formData[propertyName][currentObjectIndex].hasSuggestions) {
+      console.log("has suggestions");
+      getSuggestions(propertyName, event.target.value);
+      getComments(propertyName);
+    } else {
+      console.log("has no suggestions.");
+    }
+
     let objects = formData[propertyName];
     objects[0].value = event.target.value;
 
