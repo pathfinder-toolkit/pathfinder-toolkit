@@ -207,6 +207,7 @@ export const EditorProvider = ({ children }) => {
   };
 
   const clearSuggestions = () => {
+    setSubjects([])
     setComments([]);
     setSuggestions([]);
   };

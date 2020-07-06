@@ -49,11 +49,11 @@ const SuggestionContainer = (props) => {
 
   const filterSubject = (subject) => {
     if (filteredSubjects.includes(subject)) {
+      // remove subject from filtered list
       setFilteredSubjects(filteredSubjects.filter((item) => item !== subject));
       return;
     }
 
-    console.log("filtering: " + subject);
     setFilteredSubjects([...filteredSubjects, subject]);
   };
 
@@ -87,7 +87,7 @@ const SuggestionContainer = (props) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <UserSuggestions
-          UserSuggestions={comments}
+          userSuggestions={comments}
           filteredSubjects={filteredSubjects}
         />
       </TabPanel>

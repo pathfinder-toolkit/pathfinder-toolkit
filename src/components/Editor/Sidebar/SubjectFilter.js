@@ -32,7 +32,7 @@ const SubjectFilter = (props) => {
   };
 
   if (!props.subjects) {
-    return <div>empty</div>;
+    return <div>Empty</div>;
   }
 
   return (
