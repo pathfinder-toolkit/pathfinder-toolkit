@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 
-import AreaSelection from "../components/Editor/AreaSelection";
-import BuildingDetails from "../components/Editor/BuildingDetails";
-import BuildingStructure from "../components/Editor/BuildingStructure";
-import BuildingVentilation from "../components/Editor/BuildingVentilation";
-import BuildingHeating from "../components/Editor/BuildingHeating";
-import BuildingRenewable from "../components/Editor/BuildingRenewable";
+import AreaSelection from "../components/Editor/Categories/AreaSelection";
+import BuildingDetails from "../components/Editor/Categories/BuildingDetails";
+import BuildingStructure from "../components/Editor/Categories/BuildingStructure";
+import BuildingVentilation from "../components/Editor/Categories/BuildingVentilation";
+import BuildingHeating from "../components/Editor/Categories/BuildingHeating";
+import BuildingRenewable from "../components/Editor/Categories/BuildingRenewable";
 import Summary from "../components/Editor/Summary";
 
 import { useBackend } from "./BackendProvider";

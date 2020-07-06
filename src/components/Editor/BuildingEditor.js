@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Grid } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
-import NavigationBar from "./NavigationBar";
+import EditorNavigationBar from "./EditorNavigationBar";
 import SuggestionContainer from "./Sidebar/SuggestionContainer";
 
 const BuildingEditor = () => {
@@ -119,7 +119,7 @@ const BuildingEditor = () => {
             </Paper>
           </Grid>
         </Grid>
-        <NavigationBar />
+        <EditorNavigationBar />
       </React.Fragment>
     );
   }
@@ -139,7 +139,7 @@ const BuildingEditor = () => {
           </Paper>
         </Grid>
       </Grid>
-      <NavigationBar />
+      <EditorNavigationBar />
     </React.Fragment>
   );
 };

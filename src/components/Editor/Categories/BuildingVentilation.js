@@ -9,13 +9,13 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { useEditor } from "../../utils/EditorProvider";
-import useFormData from "./useFormData";
+import { useEditor } from "../../../utils/EditorProvider";
+import useFormData from "../useFormData";
 
-import FeedbackContainer from "./Sidebar/SuggestionContainer";
-import DropdownSelect from "./reusable/DropdownSelect";
-import OldEntry from "./reusable/OldEntry";
-import PropertyList from "./reusable/PropertyList";
+import FeedbackContainer from "../Sidebar/SuggestionContainer";
+import DropdownSelect from "../reusable/DropdownSelect";
+import OldEntry from "../reusable/OldEntry";
+import PropertyList from "../reusable/PropertyList";
 
 const BuildingVentilation = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();

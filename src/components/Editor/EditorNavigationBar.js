@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Paper } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
 
-const NavigationBar = () => {
+const EditorNavigationBar = () => {
   const useStyles = makeStyles((theme) => ({
     actionsContainer: {
       position: "fixed",
@@ -53,4 +53,4 @@ const NavigationBar = () => {
   );
 };
 
-export default NavigationBar;
+export default EditorNavigationBar;

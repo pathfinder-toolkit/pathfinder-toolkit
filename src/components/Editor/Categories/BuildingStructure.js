@@ -9,11 +9,11 @@ import {
   FormControlLabel,
 } from "@material-ui/core";
 
-import { useEditor } from "../../utils/EditorProvider";
-import useFormData from "./useFormData";
-import FeedbackContainer from "./Sidebar/SuggestionContainer";
+import { useEditor } from "../../../utils/EditorProvider";
+import useFormData from "../useFormData";
+import FeedbackContainer from "../Sidebar/SuggestionContainer";
 
-import DropdownSelect from "./reusable/DropdownSelect";
+import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingStructure = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();

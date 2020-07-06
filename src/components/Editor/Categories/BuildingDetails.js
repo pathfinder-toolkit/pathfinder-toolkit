@@ -7,11 +7,11 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 
-import { useEditor } from "../../utils/EditorProvider";
-import useFormData from "./useFormData";
+import { useEditor } from "../../../utils/EditorProvider";
+import useFormData from "../useFormData";
 
-import DropdownSelect from "./reusable/DropdownSelect";
-import PhotoButton from "./reusable/PhotoButton";
+import DropdownSelect from "../reusable/DropdownSelect";
+import PhotoButton from "../reusable/PhotoButton";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
