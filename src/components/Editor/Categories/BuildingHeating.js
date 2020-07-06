@@ -12,7 +12,6 @@ import {
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
-import FeedbackContainer from "../Sidebar/SuggestionContainer";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
@@ -67,7 +66,7 @@ const BuildingHeating = (props) => {
             <Typography variant="h5">Building heating</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container spacing={2}>
+            <Grid className={style.row} container  spacing={2}>
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}

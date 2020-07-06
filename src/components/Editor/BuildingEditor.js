@@ -27,7 +27,8 @@ const BuildingEditor = () => {
     suggestionContainer: {
       minHeight: "91vh",
       maxHeight: "91vh",
-      paddingLeft: theme.spacing(0.5),
+      paddingLeft: theme.spacing(0),
+      paddingRight: theme.spacing(0),
     },
   }));
   const classes = useStyles();
@@ -57,9 +58,12 @@ const BuildingEditor = () => {
       borderBottom: "1px solid #E0E0E0",
       marginBottom: theme.spacing(1),
     },
+    rowNoBorder: {
+      marginBottom: theme.spacing(1)
+    },
     formComponent: {
-      marginBottom: theme.spacing(2),
-      marginRight: theme.spacing(4),
+      marginBottom: theme.spacing(0),
+      marginRight: theme.spacing(0),
     },
     slider: {
       marginTop: theme.spacing(5.5),

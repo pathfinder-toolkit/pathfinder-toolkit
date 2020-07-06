@@ -18,7 +18,12 @@ const BuildingDetails = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange, handleFileChange } = useFormData("details");
+  const {
+    formData,
+    handleChange,
+    handleFileChange,
+    validateNumber,
+  } = useFormData("details");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -36,7 +41,7 @@ const BuildingDetails = (props) => {
             <Typography variant="h5">Building details</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container spacing={0}>
+            <Grid className={style.row} container spacing={2}>
               <Grid item>
                 <TextField
                   autoFocus
@@ -44,14 +49,15 @@ const BuildingDetails = (props) => {
                   label="Building name *"
                   value={formData.name.value}
                   onChange={(e) => handleChange(e, "name", false)}
+                  onBlur
                 />
               </Grid>
-              <Grid item sm={2}>
+              <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
                   label="Year"
                   value={formData.year.value}
-                  error={isNaN(formData.year.value)}
+                  onBlur={() => console.log("yeee")}
                   onChange={(e) => handleChange(e, "year")}
                 />
               </Grid>
@@ -65,8 +71,8 @@ const BuildingDetails = (props) => {
                 />
               </Grid>
             </Grid>
-            <Grid container className={style.row} spacing={0}>
-              <Grid item sm={2}>
+            <Grid container className={style.row} spacing={2}>
+              <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
                   defaultValue="1"
@@ -115,7 +121,7 @@ const BuildingDetails = (props) => {
                 />
               </Grid>
             </Grid>
-            <Grid className={style.row} container spacing={0}>
+            <Grid className={style.row} container spacing={2}>
               <Grid item sm={10}>
                 <TextField
                   className={style.formComponent}
@@ -136,51 +142,44 @@ const BuildingDetails = (props) => {
                 />
               </Grid>
             </Grid>
-            <Grid container direction="row">
-              <Grid direction="column" className={style.row}>
-                <Grid item>
-                  <Typography variant="h5" gutterBottom>
-                    Electricity
-                  </Typography>
-                </Grid>
-
-                <Grid container>
-                  <Grid item sm={4}>
-                    <TextField
-                      className={style.formComponent}
-                      value={formData.annualConsumption.value}
-                      onChange={(e) => handleChange(e, "annualConsumption")}
-                      label="Annual use"
-                      error={isNaN(formData.annualConsumption.value)}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">kWh</InputAdornment>
-                        ),
-                      }}
-                    ></TextField>
-                  </Grid>
-                  <Grid item sm={4}>
-                    <TextField
-                      className={style.formComponent}
-                      value={formData.annualCost.value}
-                      onChange={(e) => handleChange(e, "annualCost")}
-                      label="Annual cost"
-                      error={isNaN(formData.annualCost.value)}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">€</InputAdornment>
-                        ),
-                      }}
-                    ></TextField>
-                  </Grid>
-                </Grid>
+            <Typography variant="h5" gutterBottom>
+              Electricity
+            </Typography>
+            <Grid container direction="row" spacing={2}>
+              <Grid item sm={2}>
+                <TextField
+                  className={style.formComponent}
+                  value={formData.annualConsumption.value}
+                  onChange={(e) => handleChange(e, "annualConsumption")}
+                  label="Annual use"
+                  error={isNaN(formData.annualConsumption.value)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">kWh</InputAdornment>
+                    ),
+                  }}
+                ></TextField>
+              </Grid>
+              <Grid item sm={2}>
+                <TextField
+                  className={style.formComponent}
+                  value={formData.annualCost.value}
+                  onChange={(e) => handleChange(e, "annualCost")}
+                  label="Annual cost"
+                  error={isNaN(formData.annualCost.value)}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">€</InputAdornment>
+                    ),
+                  }}
+                ></TextField>
               </Grid>
             </Grid>
             <Typography variant="h5" gutterBottom>
               Heating
             </Typography>
-            <Grid container className={style.row} spacing={0}>
-              <Grid item sm={3}>
+            <Grid container className={style.row} spacing={2}>
+              <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
                   value={formData.annualHeatingConsumption.value}
@@ -194,7 +193,7 @@ const BuildingDetails = (props) => {
                   }}
                 ></TextField>
               </Grid>
-              <Grid item sm={3}>
+              <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
                   value={formData.annualHeatingCost.value}

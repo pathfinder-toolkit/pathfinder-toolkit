@@ -11,7 +11,6 @@ import {
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
-import FeedbackContainer from "../Sidebar/SuggestionContainer";
 
 import DropdownSelect from "../reusable/DropdownSelect";
 
@@ -40,7 +39,7 @@ const BuildingStructure = (props) => {
           </div>
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
-              <Grid item sm={3}>
+              <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
                   label="Wall thickness"
@@ -63,8 +62,8 @@ const BuildingStructure = (props) => {
                 />
               </Grid>
             </Grid>
-            <Grid container className={style.row} spacing={2}>
-              <Grid item sm={3}>
+            <Grid container className={style.rowNoBorder} spacing={2}>
+              <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
                   defaultValue=""
@@ -75,7 +74,7 @@ const BuildingStructure = (props) => {
                   onChange={(e) => handleChange(e, "windowAmount")}
                 ></TextField>
               </Grid>
-              <Grid item sm={3}>
+              <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.materials}
@@ -84,8 +83,8 @@ const BuildingStructure = (props) => {
                   handler={(e) => handleChange(e, "windowType")}
                 />
               </Grid>
-              <Grid container className={style.row} spacing={2}>
-                <Grid item sm={3}>
+              <Grid container={style.row} spacing={2}>
+                <Grid item sm={2}>
                   <TextField
                     className={style.formComponent}
                     defaultValue=""

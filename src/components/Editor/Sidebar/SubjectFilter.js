@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     borderTop: "1px solid #E0E0E0",
     borderBottom: "1px solid #E0E0E0",
-    minHeight: "60px",
+    minHeight: theme.spacing(9)
   },
   filterItem: {
     marginRight: "10px",

@@ -10,7 +10,6 @@ import {
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
-import FeedbackContainer from "../Sidebar/SuggestionContainer";
 import DropdownSelect from "../reusable/DropdownSelect";
 
 const BuildingRenewable = (props) => {
@@ -34,7 +33,7 @@ const BuildingRenewable = (props) => {
             <Typography variant="h5">Renewable</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container spacing={2}>
+            <Grid className={style.row} container spacing={0}>
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
