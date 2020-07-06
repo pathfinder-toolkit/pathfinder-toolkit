@@ -1,9 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
-import NavigationBar from "./NavigationBar";
+import { Paper, Grid } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
+import NavigationBar from "./NavigationBar";
+import SuggestionContainer from "./Sidebar/SuggestionContainer";
 
 const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
@@ -20,6 +21,7 @@ const BuildingEditor = () => {
       borderRadius: "2px",
       height: "90vh",
       maxHeight: "92vh",
+      minHeight: "91vh",
     },
   }));
   const classes = useStyles();
@@ -97,9 +99,9 @@ const BuildingEditor = () => {
   return (
     <div className={classes.root}>
       <div className={classes.editorContainer}>
-        <div className={classes.editorComponent}>
-          <Paper>{getStepComponent(styleComponent)}</Paper>
-        </div>
+        <Paper className={classes.editorComponent}>
+          {getStepComponent(styleComponent)}
+        </Paper>
       </div>
       <NavigationBar />
     </div>

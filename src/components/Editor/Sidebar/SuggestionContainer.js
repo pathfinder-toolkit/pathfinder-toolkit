@@ -42,9 +42,7 @@ const SuggestionContainer = (props) => {
   const [filteredSubjects, setFilteredSubjects] = useState([]);
 
   useEffect(() => {
-    console.log("Here");
     setFilteredSubjects([]);
-    console.log(filteredSubjects);
   }, [activeStep]);
 
   const filterSubject = (subject) => {

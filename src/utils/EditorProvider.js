@@ -37,25 +37,10 @@ export const EditorProvider = ({ children }) => {
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
-  const [comments, setComments] = useState([
-    {
-      commentText: "comment",
-      commentSubject: "subject",
-      commentSecondarySubject: "subject",
-      date: "2000-01-01 0:00:01",
-      sentiment: "negative",
-    },
-  ]);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
-  const [suggestions, setSuggestions] = useState([
-    {
-      suggestionText: "default",
-      priority: 2,
-      suggestionSubject: "de",
-      suggestionSecondarySubject: "d d",
-    },
-  ]);
+  const [comments, setComments] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [subjects, setSubjects] = useState([]);
 
   const { requestSuggestions, requestComments } = useBackend();
@@ -70,21 +55,6 @@ export const EditorProvider = ({ children }) => {
       "Renewable",
       "Summary",
     ];
-  };
-
-  // Can be used later if we'd like to provide short description about steps.
-  const getStepDescription = (step) => {
-    return "";
-    switch (step) {
-      case 0:
-        return "Select area";
-      case 1:
-        return "Enter building details";
-      case 2:
-        return "Enter heating details";
-      default:
-        return "Unknown description";
-    }
   };
 
   //Editor components are added here
@@ -111,6 +81,21 @@ export const EditorProvider = ({ children }) => {
         return <Summary style={style} />;
       default:
         return <p>Unknow component</p>;
+    }
+  };
+
+  // Can be used later if we'd like to provide short description about steps.
+  const getStepDescription = (step) => {
+    return "";
+    switch (step) {
+      case 0:
+        return "Select area";
+      case 1:
+        return "Enter building details";
+      case 2:
+        return "Enter heating details";
+      default:
+        return "Unknown description";
     }
   };
 
@@ -207,7 +192,7 @@ export const EditorProvider = ({ children }) => {
   };
 
   const clearSuggestions = () => {
-    setSubjects([])
+    setSubjects([]);
     setComments([]);
     setSuggestions([]);
   };
