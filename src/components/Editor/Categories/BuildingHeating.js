@@ -67,7 +67,7 @@ const BuildingHeating = (props) => {
           </div>
           <div className={style.category}>
             <Grid className={style.row} container alignItems="center" spacing={2}>
-              <Grid item sm={2}>
+              <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.heatingTypes}
@@ -76,7 +76,7 @@ const BuildingHeating = (props) => {
                   handler={(e) => handleChange(e, "heatingSystem")}
                 />
               </Grid>
-              <Grid item sm={2}>
+              <Grid item sm={3}>
                 <Button
                   disabled={!formData?.heatingSystem[0].value}
                   className={style.formButton}
@@ -84,7 +84,7 @@ const BuildingHeating = (props) => {
                   variant="contained"
                   onClick={setModal}
                 >
-                  Old Systems
+                  Add old system
                 </Button>
               </Grid>
 

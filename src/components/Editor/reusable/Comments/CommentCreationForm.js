@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
 
-import { useAuth0 } from "../../../utils/react-auth0-spa";
+import { useAuth0 } from "../../../../utils/react-auth0-spa";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -51,17 +51,7 @@ const CommentCreationForm = (props) => {
   };
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        className={classes.headerText}
-        action={
-          <IconButton onClick={props.onClose} aria-label="settings">
-            <CloseIcon />
-          </IconButton>
-        }
-        title="Create your comment below"
-      />
-      <Typography></Typography>
+    <React.Fragment className={classes.root}>
       <TextField
         id="comment-text-field"
         label="Comment text"
@@ -73,7 +63,7 @@ const CommentCreationForm = (props) => {
         className={classes.textArea}
       />
       <FormControl className={classes.radioForm}>
-        <FormLabel>Select sentiment</FormLabel>
+        <FormLabel>Sentiment</FormLabel>
         <RadioGroup
           row
           aria-label="sentiment"
@@ -119,15 +109,15 @@ const CommentCreationForm = (props) => {
         Your username will be displayed as{" "}
         <strong>{switchState ? user.nickname : "Anonymous user"}</strong>
       </Typography>
-      <Button
+      {/* <Button
         className={classes.submitCommentButton}
         variant="contained"
         color="primary"
         onClick={_handleSubmit}
       >
-        Submit
-      </Button>
-    </Card>
+        Submit 
+      </Button> */}
+    </React.Fragment>
   );
 };
 
