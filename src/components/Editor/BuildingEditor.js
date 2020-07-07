@@ -69,7 +69,7 @@ const BuildingEditor = () => {
       marginTop: theme.spacing(5.5),
     },
     formButton: {
-      margin: theme.spacing(1),
+      marginTop: theme.spacing(0),
     },
     formBorder: {
       border: "1px solid #E0E0E0",

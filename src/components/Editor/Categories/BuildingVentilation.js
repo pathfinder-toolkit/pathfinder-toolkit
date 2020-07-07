@@ -59,7 +59,7 @@ const BuildingVentilation = (props) => {
             />
           </div>
         </Modal>
-        <Grid item>
+        <Grid item alignItems="center">
           <div className={style.header}>
             <Typography variant="h5">Building ventilation</Typography>
           </div>
@@ -75,18 +75,17 @@ const BuildingVentilation = (props) => {
                   handler={(e) => addNewEntry(e, "ventilationSystem")}
                 />
               </Grid>
-              {formData?.ventilationSystem[0].value && (
-                <Grid item sm={3}>
-                  <Button
-                    className={style.formButton}
-                    color="primary"
-                    variant="contained"
-                    onClick={setModal}
-                  >
-                    Add old system
-                  </Button>
-                </Grid>
-              )}
+              <Grid item sm={3}>
+                <Button
+                  disabled={!formData?.ventilationSystem[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="contained"
+                  onClick={setModal}
+                >
+                  Add old system
+                </Button>
+              </Grid>
               {formData?.ventilationSystem.length > 1 && (
                 <Grid item sm={4}>
                   <PropertyList

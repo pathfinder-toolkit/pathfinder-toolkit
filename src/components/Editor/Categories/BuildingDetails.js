@@ -36,7 +36,7 @@ const BuildingDetails = (props) => {
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <Grid item>
+        <Grid item alignItems="center">
           <div className={style.header}>
             <Typography variant="h5">Building details</Typography>
           </div>
