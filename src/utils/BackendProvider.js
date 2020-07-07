@@ -116,8 +116,9 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestComments = async (subject) => {
+    const amount = Math.floor(Math.random() * 5);
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments/" + subject
+      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/" + amount
     );
 
     /*const address = encodeURI(
