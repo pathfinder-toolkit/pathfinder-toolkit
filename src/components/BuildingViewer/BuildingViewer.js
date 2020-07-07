@@ -67,13 +67,17 @@ const BuildingViewer = (props) => {
                 for (let categoryItem in buildingObject[category] ) {
                     if (Object.keys(buildingObject[category][categoryItem]).includes("suggestions")) {
                         if (buildingObject[category][categoryItem].suggestions.length > 0) {
-                            categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(buildingObject[category][categoryItem]);
+                            const newItem = buildingObject[category][categoryItem];
+                            newItem.subject = categoryItem;
+                            categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(newItem);
                             console.log(categoryItemsWithSuggestions);
                         }
                     } else if (Array.isArray(buildingObject[category][categoryItem])) {
                         buildingObject[category][categoryItem].map((categoryItemInArray) => {
                             if (Object.keys(categoryItemInArray).includes("suggestions")) {
                                 if (categoryItemInArray.suggestions.length > 0) {
+                                    const newItem = categoryItemInArray;
+                                    newItem.subject = categoryItem;
                                     categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(categoryItemInArray);
                                     console.log(categoryItemInArray);
                                 }
