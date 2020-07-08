@@ -79,7 +79,9 @@ const CommentCreationForm = (props) => {
                     }
                     title="Sending comment..."
                     />
-                    <CircularProgress />
+                    <CircularProgress 
+                    className={classes.progressSpinner}
+                    />
                 </React.Fragment>
             ) : (
                 <CardHeader

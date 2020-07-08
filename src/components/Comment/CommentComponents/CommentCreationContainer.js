@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
         marginBottom: theme.spacing(2),
         display:"block",
+    },
+    progressSpinner: {
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(2),
     }
   }));
 
