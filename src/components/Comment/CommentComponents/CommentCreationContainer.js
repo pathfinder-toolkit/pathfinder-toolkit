@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const CommentCreationContainer = () => {
+const CommentCreationContainer = (props) => {
     const classes = useStyles();
     const [showForm, setShowForm] = useState(false);
 
@@ -62,7 +62,7 @@ const CommentCreationContainer = () => {
                 Create comment
             </Button>
         )}
-        {showForm && <CommentCreationForm classes={classes} onClose={_handleToggle}/>}
+        {showForm && <CommentCreationForm subject={props.subject} classes={classes} onClose={_handleToggle}/>}
     </React.Fragment>
 }
 

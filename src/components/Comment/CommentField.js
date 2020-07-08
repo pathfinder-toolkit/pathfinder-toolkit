@@ -12,7 +12,7 @@ const CommentField = (props) => {
 
     return <React.Fragment>
         <CommentContainer subject={props.subject} />
-        <CommentCreationContainer />
+        <CommentCreationContainer subject={props.subject} />
     </React.Fragment>
 }
 

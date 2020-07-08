@@ -7,7 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
 
-import {useAuth0} from "./../../../utils/react-auth0-spa";
+import { useAuth0 } from "./../../../utils/react-auth0-spa";
+import { useBackend } from "./../../../utils/BackendProvider";
 
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -25,6 +26,8 @@ const CommentCreationForm = (props) => {
 
     const { user } = useAuth0();
 
+    const { submitNewComment } = useBackend();
+
     const [radioValue, setRadioValue] = useState('none');
     const [commentTextValue, setCommentTextValue] = useState('');
     const [switchState, setSwitchState] = useState(false);
@@ -41,13 +44,17 @@ const CommentCreationForm = (props) => {
         setSwitchState(switchState ? false : true)
     };
 
-    const _handleSubmit = () => {
+    const _handleSubmit = async () => {
         console.log("submitted");
         const comment = {
             commentText: commentTextValue,
-            sentiment: radioValue
-        }
-        console.log(comment);
+            commentSubject: props.subject,
+            commentSecondarySubject: null,
+            anonymity: !switchState,
+            sentiment: (radioValue == "none" ? null : radioValue)
+        };
+        const response = await submitNewComment(comment);
+        console.log(response);
     }
 
     return <Card className={classes.root}>

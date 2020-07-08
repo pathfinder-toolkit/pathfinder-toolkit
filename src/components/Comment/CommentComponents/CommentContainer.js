@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button'
 import Paper from "@material-ui/core/Paper";
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useBackend } from "../../../utils/BackendProvider";
@@ -76,7 +77,7 @@ const CommentContainer = (props) => {
         {!comments && (
             <React.Fragment>
                 {loading ? (
-                    <Typography className={classes.displayText}>Loading</Typography> 
+                    <CircularProgress />
                 ) : (
                     <Button onClick={fetchComments}>Show comments</Button>
                 )}
