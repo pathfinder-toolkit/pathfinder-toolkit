@@ -15,6 +15,7 @@ const TopSuggestions = (props) => {
              item={item}
              classes={props.classes}
              key={key}
+             subject={item.subject}
              />
                 )
          })}

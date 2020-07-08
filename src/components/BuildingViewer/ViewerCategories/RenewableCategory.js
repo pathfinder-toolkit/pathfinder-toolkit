@@ -23,6 +23,7 @@ const RenewableCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="heatPump"
                         />
                     )
                 })
@@ -30,6 +31,7 @@ const RenewableCategory = (props) => {
                 <CategoryItem 
                 item={props.category.heatPump}
                 classes={props.classes}
+                subject="heatPump"
                 />
             )
         )}
@@ -41,6 +43,7 @@ const RenewableCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="solarHeat"
                         />
                     )
                 })
@@ -48,6 +51,7 @@ const RenewableCategory = (props) => {
                 <CategoryItem 
                 item={props.category.solarHeat}
                 classes={props.classes}
+                subject="solarHeat"
                 />
             )
         )}
@@ -59,6 +63,7 @@ const RenewableCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="solarElectric"
                         />
                     )
                 })
@@ -66,6 +71,7 @@ const RenewableCategory = (props) => {
                 <CategoryItem 
                 item={props.category.solarElectric}
                 classes={props.classes}
+                subject="solarElectric"
                 />
             )
         )}
@@ -77,6 +83,7 @@ const RenewableCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="bioMass"
                         />
                     )
                 })
@@ -84,6 +91,7 @@ const RenewableCategory = (props) => {
                 <CategoryItem 
                 item={props.category.bioMass}
                 classes={props.classes}
+                subject="bioMass"
                 />
             )
         )}
@@ -95,6 +103,7 @@ const RenewableCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="chp"
                         />
                     )
                 })
@@ -102,6 +111,7 @@ const RenewableCategory = (props) => {
                 <CategoryItem 
                 item={props.category.chp}
                 classes={props.classes}
+                subject="chp"
                 />
             )
         )}

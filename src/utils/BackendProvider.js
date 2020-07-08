@@ -16,7 +16,9 @@ export const BackendProvider = ({ children }) => {
   const getStoredBuildings = async () => {
     const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_API_ROOT + "/buildings/me/";
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/buildings/me/"
+    );
 
     const axiosConfig = {
       headers: {
@@ -40,7 +42,9 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestAreas = async () => {
-    const address = process.env.REACT_APP_API_ROOT + "/editor/areas";
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/editor/areas"
+    );
 
     try {
       const response = await axios.get(address);
@@ -61,6 +65,7 @@ export const BackendProvider = ({ children }) => {
     const address = encodeURI(
       process.env.REACT_APP_API_ROOT + "/editor/options/" + selectedArea
     );
+
     try {
       const response = await axios.get(address);
       console.log(response.data);
@@ -94,13 +99,14 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestSuggestions = async (subject, value) => {
-    /*const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + value
-    ); */
-
     const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + "1"
+    ); 
+    //value
+
+    /*const address = encodeURI(
       "http://localhost:3300" + "/suggestions/" + subject + "/" + value
-    );
+    );*/
 
     console.log("get suggestions about: " + subject + " | " + value);
 
@@ -115,9 +121,14 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestComments = async (subject) => {
+    const amount = Math.floor(Math.random() * 5);
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments/" + subject
+      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/" + amount
     );
+
+    /*const address = encodeURI(
+      "http://localhost:3300" + "/comments/" + subject
+    ); */
 
     try {
       const response = await axios.get(address);
@@ -130,7 +141,9 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestBuildingModel = async () => {
-    const address = process.env.REACT_APP_API_ROOT + "/building/"
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/building/"
+    );
 
     try {
       const response = await axios.get(address);
@@ -144,7 +157,9 @@ export const BackendProvider = ({ children }) => {
   const getBuildingFromSlug = async (slug) => {
     const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_API_ROOT + "/building/" + slug;
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/building/" + slug
+    );
 
     const axiosConfig = {
       headers: {
@@ -170,7 +185,9 @@ export const BackendProvider = ({ children }) => {
   const submitNewBuilding = async (requestBody) => {
     const token = await getTokenSilently();
 
-    const address = process.env.REACT_APP_API_ROOT + "/building";
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/building"
+    );
 
     console.log(requestBody);
 
@@ -196,6 +213,36 @@ export const BackendProvider = ({ children }) => {
 
   }
 
+  const submitNewComment = async (requestBody) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/comments"
+    );
+
+    console.log(requestBody);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.post(address, requestBody, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -206,7 +253,8 @@ export const BackendProvider = ({ children }) => {
         getBuildingFromSlug,
         requestSuggestions,
         requestComments,
-        submitNewBuilding
+        submitNewBuilding,
+        submitNewComment
       }}
     >
       {children}

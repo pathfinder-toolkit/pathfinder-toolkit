@@ -29,6 +29,7 @@ const DetailsCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualConsumption"
                         />
                     )
                 })
@@ -36,6 +37,7 @@ const DetailsCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualConsumption}
                 classes={props.classes}
+                subject="annualConsumption"
                 />
             )
         )}
@@ -47,6 +49,7 @@ const DetailsCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualCost"
                         />
                     )
                 })
@@ -54,6 +57,7 @@ const DetailsCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualCost}
                 classes={props.classes}
+                subject="annualCost"
                 />
             )
         )}
@@ -65,6 +69,7 @@ const DetailsCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualHeatingConsumption"
                         />
                     )
                 })
@@ -72,6 +77,7 @@ const DetailsCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualHeatingConsumption}
                 classes={props.classes}
+                subject="annualHeatingConsumption"
                 />
             )
         )}
@@ -83,6 +89,7 @@ const DetailsCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualHeatingCost"
                         />
                     )
                 })
@@ -90,6 +97,7 @@ const DetailsCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualHeatingCost}
                 classes={props.classes}
+                subject="annualHeatingCost"
                 />
             )
         )}

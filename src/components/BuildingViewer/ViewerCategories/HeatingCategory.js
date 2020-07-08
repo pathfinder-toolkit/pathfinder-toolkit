@@ -23,6 +23,7 @@ const HeatingCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="heatingSystem"
                         />
                     )
                 })
@@ -30,6 +31,7 @@ const HeatingCategory = (props) => {
                 <CategoryItem 
                 item={props.category.heatingSystem}
                 classes={props.classes}
+                subject="heatingSystem"
                 />
             )
         )}
@@ -41,6 +43,7 @@ const HeatingCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="heatingSource"
                         />
                     )
                 })
@@ -48,6 +51,7 @@ const HeatingCategory = (props) => {
                 <CategoryItem 
                 item={props.category.heatingSource}
                 classes={props.classes}
+                subject="heatingSource"
                 />
             )
         )}

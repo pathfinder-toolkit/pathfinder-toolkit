@@ -41,10 +41,14 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(2),
         marginBottom: theme.spacing(2),
         display:"block",
+    },
+    progressSpinner: {
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(2),
     }
   }));
 
-const CommentCreationContainer = () => {
+const CommentCreationContainer = (props) => {
     const classes = useStyles();
     const [showForm, setShowForm] = useState(false);
 
@@ -62,7 +66,7 @@ const CommentCreationContainer = () => {
                 Create comment
             </Button>
         )}
-        {showForm && <CommentCreationForm classes={classes} onClose={_handleToggle}/>}
+        {showForm && <CommentCreationForm subject={props.subject} classes={classes} onClose={_handleToggle}/>}
     </React.Fragment>
 }
 

@@ -74,6 +74,18 @@ const useFormData = (category) => {
     event.persist();
     console.log("adding new entry to: " + propertyName);
 
+    let currentObjectIndex = formData[propertyName].findIndex(
+      (x) => x.isCurrent
+    );
+
+    if (formData[propertyName][currentObjectIndex].hasSuggestions) {
+      console.log("has suggestions");
+      getSuggestions(propertyName, event.target.value);
+      getComments(propertyName);
+    } else {
+      console.log("has no suggestions.");
+    }
+
     let objects = formData[propertyName];
     objects[0].value = event.target.value;
 
@@ -120,15 +132,6 @@ const useFormData = (category) => {
     }));
   };
 
-  const getCurrentIndex = (propertyName) => {
-    return formData[propertyName].findIndex((x) => x.isCurrent);
-  };
-
-  const getObjectByIndex = (propertyName, index) => {
-    return formData[propertyName][index];
-  };
-  //
-
   const handleFileChange = (event) => {
     event.persist();
     console.log(event.target.files[0]);
@@ -140,6 +143,18 @@ const useFormData = (category) => {
       },
     }));
     console.log(formData);
+  };
+
+  const validateNumber = (input) => {
+    if (isNaN(input)) {
+      return false;
+    }
+
+    if (input < 0) {
+      return false;
+    }
+
+    return true;
   };
 
   const resetProperty = (propertyName) => {
@@ -173,6 +188,7 @@ const useFormData = (category) => {
     addNewEntry,
     addOldEntry,
     deleteEntry,
+    validateNumber,
   };
 };
 

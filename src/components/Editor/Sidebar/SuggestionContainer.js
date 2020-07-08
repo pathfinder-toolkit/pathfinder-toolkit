@@ -42,18 +42,20 @@ const SuggestionContainer = (props) => {
   const [filteredSubjects, setFilteredSubjects] = useState([]);
 
   useEffect(() => {
-    console.log("Here");
     setFilteredSubjects([]);
-    console.log(filteredSubjects);
   }, [activeStep]);
 
   const filterSubject = (subject) => {
+    console.log("Subjects: ");
+    console.log(subjects);
+    console.log("Filtered subjects: ");
+    console.log(filteredSubjects);
     if (filteredSubjects.includes(subject)) {
+      // remove subject from filtered list
       setFilteredSubjects(filteredSubjects.filter((item) => item !== subject));
       return;
     }
 
-    console.log("filtering: " + subject);
     setFilteredSubjects([...filteredSubjects, subject]);
   };
 
@@ -87,7 +89,7 @@ const SuggestionContainer = (props) => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <UserSuggestions
-          UserSuggestions={comments}
+          userSuggestions={comments}
           filteredSubjects={filteredSubjects}
         />
       </TabPanel>
