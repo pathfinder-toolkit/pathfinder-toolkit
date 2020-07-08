@@ -15,22 +15,16 @@ const PhotoButton = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <Button
-        startIcon={<InsertPhoto />}
-        variant="contained"
-        color="primary"
-        component="label"
-      >
-        ADD
-        <input
-          onChange={handleChange}
-          type="file"
-          style={{ display: "none" }}
-        />
-      </Button>
-      <Typography>{file?.name}</Typography>
-    </React.Fragment>
+    <Button
+      startIcon={<InsertPhoto />}
+      style={{borderRight: '1px solid #3f51b5'}}
+      color="primary"
+      component="label"
+    >
+      {" "}
+      +
+      <input onChange={handleChange} type="file" style={{ display: "none" }} />
+    </Button>
   );
 };
 

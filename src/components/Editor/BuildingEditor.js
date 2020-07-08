@@ -101,6 +101,13 @@ const BuildingEditor = () => {
       top: "50%",
       transform: "translate(-50%,-50%)",
     },
+    imageSelectModal: {
+      position: "absolute",
+      width: 800,
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%,-50%)",
+    },
   }));
 
   const styleComponent = useStylesForEditorComponent();

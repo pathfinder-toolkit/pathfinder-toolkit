@@ -83,7 +83,7 @@ const BuildingVentilation = (props) => {
                   disabled={!formData?.ventilationSystem[0].value}
                   className={style.formButton}
                   color="primary"
-                  variant="contained"
+                  variant="outlined"
                   onClick={setModal}
                 >
                   Add old system
@@ -114,7 +114,7 @@ const BuildingVentilation = (props) => {
                   disabled={!formData?.ventilationSystem[0].value}
                   className={style.formButton}
                   color="primary"
-                  variant="contained"
+                  variant="outlined"
                   onClick={setModal}
                 >
                   Add with comment
