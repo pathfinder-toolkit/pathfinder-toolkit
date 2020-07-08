@@ -6,6 +6,7 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Button,
+  Typography,
 } from "@material-ui/core";
 import { Clear } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     "& li:last-child": {
       borderBottom: "none",
     },
+  },
+  listDescription: {
+    borderTop: "0px solid #E0E0E0",
   },
 }));
 
@@ -46,7 +50,14 @@ const PropertyListTest = (props) => {
           <ListItem className={classes.listItem}>
             <ListItemText
               primary={item.value}
-              secondary={item.isCurrent ? "Current" : item.usageStartYear}
+              secondary={
+                <React.Fragment>
+                  {item.usageStartYear}
+                  <div className={classes.listDescription}>
+                    {item.description}
+                  </div>
+                </React.Fragment>
+              }
             />
             {index > 0 && (
               <ListItemSecondaryAction>
@@ -60,6 +71,10 @@ const PropertyListTest = (props) => {
       })}
     </List>
   );
+};
+
+const ListItemDescription = (props) => {
+  const text = props.description ? props.description : "";
 };
 
 export default PropertyListTest;

@@ -10,7 +10,7 @@ import {
 import DropdownSelect from "./DropdownSelect";
 import { makeStyles } from "@material-ui/core/styles";
 
-import CommentCreation from "./Comments/CommentCreation";
+import CommentCreationForm from "./Comments/CommentCreationForm";
 
 const useStyles = makeStyles((theme) => ({
   entryRoot: {
@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   commentRoot: {
-      marginTop: theme.spacing (1),
-  }
+    marginTop: theme.spacing(1),
+  },
 }));
 
 const OldEntryTest = (props) => {
@@ -35,11 +35,18 @@ const OldEntryTest = (props) => {
   const [value, setValue] = useState();
   const [year, setYear] = useState();
   const [error, setError] = useState("");
+  const [commentText, setCommentText] = useState();
 
-  const [show, setShow] = useState(false);
+  const [hasComment, setHasComment] = useState(false);
 
-  const handleShow = (event) => {
-    setShow(event.target.checked);
+  const toggleComment = (event) => {
+    setHasComment(event.target.checked);
+  };
+
+  const handleCommentTextChange = (event) => {
+    if (hasComment) {
+      setCommentText(event.target.value);
+    }
   };
 
   const handleYearChange = (event) => {
@@ -52,7 +59,12 @@ const OldEntryTest = (props) => {
 
   const addNewValue = () => {
     if (props.handler && error === "") {
-      props.handler(value, year, props.propertyName);
+      if (hasComment) {
+        props.handler(value, year, props.propertyName, commentText);
+      } else {
+        props.handler(value, year, props.propertyName, "empty");
+      }
+
       if (props.onEntry) {
         props.onEntry();
       }
@@ -86,13 +98,15 @@ const OldEntryTest = (props) => {
         ></TextField>
 
         <FormControlLabel
-          control={<Switch onChange={handleShow} checked={show} />}
+          control={<Switch onChange={toggleComment} checked={hasComment} />}
           label="Comment"
         />
 
-        {show && (
+        {hasComment && (
           <div className={classes.commentRoot}>
-            <CommentCreation />
+            <CommentCreationForm
+              handleComment={(e) => handleCommentTextChange(e)}
+            />
           </div>
         )}
       </Grid>

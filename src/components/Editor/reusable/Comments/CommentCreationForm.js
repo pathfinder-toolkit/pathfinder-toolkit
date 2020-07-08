@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
-import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { useAuth0 } from "../../../../utils/react-auth0-spa";
 
@@ -17,11 +14,51 @@ import FormControl from "@material-ui/core/FormControl";
 import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
-import CloseIcon from "@material-ui/icons/Close";
 import { green } from "@material-ui/core/colors";
 
+const useStyles = makeStyles((theme) => ({
+  createCommentButton: {
+    marginBottom: theme.spacing(2),
+  },
+  root: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(4),
+    marginRight: theme.spacing(0),
+  },
+  headerText: {
+    fontSizeAdjust: 0.4,
+  },
+  textArea: {
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(0),
+    paddingRight: theme.spacing(0),
+    marginBottom: theme.spacing(2),
+  },
+  radioForm: {
+    marginLeft: theme.spacing(1),
+    paddingRight: theme.spacing(0),
+    display: "block",
+  },
+  switch: {
+    marginLeft: theme.spacing(0),
+  },
+  switchText: {
+    display: "inline-block",
+    marginLeft: theme.spacing(0),
+  },
+  explanationText: {
+    marginLeft: theme.spacing(0),
+    marginBottom: theme.spacing(2),
+  },
+  submitCommentButton: {
+    marginLeft: theme.spacing(0),
+    marginBottom: theme.spacing(2),
+    display: "block",
+  },
+}));
+
 const CommentCreationForm = (props) => {
-  const classes = props.classes;
+  const classes = useStyles();
 
   const { user } = useAuth0();
 
@@ -34,6 +71,9 @@ const CommentCreationForm = (props) => {
   };
 
   const _handleTextFieldChange = (event) => {
+    if (props.handleComment) {
+      props.handleComment(event);
+    }
     setCommentTextValue(event.target.value);
   };
 

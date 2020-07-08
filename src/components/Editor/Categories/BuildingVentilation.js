@@ -54,8 +54,8 @@ const BuildingVentilation = (props) => {
         <Modal open={open} onClose={setClose}>
           <div className={style.modal}>
             <OldEntryTest
-              handler={(value, year, propertyName) =>
-                addOldEntry(value, year, "ventilationSystem")
+              handler={(value, year, propertyName, description) =>
+                addOldEntry(value, year, "ventilationSystem", description)
               }
               onEntry={setClose}
               data={buildingOptions.ventilationTypes}
@@ -122,7 +122,7 @@ const BuildingVentilation = (props) => {
               </Grid>
               {formData?.ventilationSystem.length > 1 && (
                 <Grid item sm={4}>
-                  <PropertyList
+                  <PropertyListTest
                     handleDeletion={(propertyName, index) =>
                       deleteEntry("ventilationSystem", index)
                     }
