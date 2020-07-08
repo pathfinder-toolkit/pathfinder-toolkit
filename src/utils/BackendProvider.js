@@ -217,7 +217,7 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      process.env.REACT_APP_LOCAL_API_ROOT + "/comments"
+      process.env.REACT_APP_API_ROOT + "/comments"
     );
 
     console.log(requestBody);
