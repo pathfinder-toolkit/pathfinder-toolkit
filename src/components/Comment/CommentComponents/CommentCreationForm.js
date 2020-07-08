@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { useAuth0 } from "./../../../utils/react-auth0-spa";
 import { useBackend } from "./../../../utils/BackendProvider";
@@ -32,6 +33,10 @@ const CommentCreationForm = (props) => {
     const [commentTextValue, setCommentTextValue] = useState('');
     const [switchState, setSwitchState] = useState(false);
 
+    const [submitted, setSubmitted] = useState(false);
+    const [pending, setPending] = useState(false);
+    
+
     const _handleRadioChange = (event) => {
         setRadioValue(event.target.value);
     };
@@ -53,8 +58,41 @@ const CommentCreationForm = (props) => {
             anonymity: !switchState,
             sentiment: (radioValue == "none" ? null : radioValue)
         };
+        setSubmitted(true);
+        setPending(true);
         const response = await submitNewComment(comment);
+        setPending(false);
         console.log(response);
+    }
+
+    if (submitted) {
+        return <Card className={classes.root}>
+            {pending ? 
+            (
+                <React.Fragment>
+                    <CardHeader
+                    className={classes.headerText}
+                    action={
+                    <IconButton onClick={props.onClose} aria-label="settings">
+                        <CloseIcon />
+                    </IconButton>
+                    }
+                    title="Sending comment..."
+                    />
+                    <CircularProgress />
+                </React.Fragment>
+            ) : (
+                <CardHeader
+                    className={classes.headerText}
+                    action={
+                    <IconButton onClick={props.onClose} aria-label="settings">
+                        <CloseIcon />
+                    </IconButton>
+                    }
+                    title="Comment created."
+                />
+            )}
+        </Card>
     }
 
     return <Card className={classes.root}>
