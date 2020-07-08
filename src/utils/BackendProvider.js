@@ -117,7 +117,7 @@ export const BackendProvider = ({ children }) => {
 
   const requestComments = async (subject) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments/" + subject
+      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/2"
     );
 
     /*const address = encodeURI(

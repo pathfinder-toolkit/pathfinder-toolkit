@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress, Paper } from "@material-ui/core";
+import { CircularProgress, Paper, List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useEditor } from "../../../utils/EditorProvider";
@@ -36,6 +36,12 @@ const useStyles = makeStyles((theme) => ({
   infoBox: {
     marginTop: theme.spacing(5),
   },
+  suggestionList: {
+    overflow: "auto",
+    position: "relative",
+    height: "75vh",
+    padding: "5px",
+  },
 }));
 
 const UserSuggestions = (props) => {
@@ -65,20 +71,22 @@ const UserSuggestions = (props) => {
         )
       ) : (
         <React.Fragment>
-          <div className={classes.commentsRoot}>
-            {comments &&
-              comments.map((comment, key) => {
-                if (filteredSubjects.includes(comment.commentSubject)) {
-                  return;
-                }
+          <List className={classes.suggestionList}>
+            <div className={classes.commentsRoot}>
+              {comments &&
+                comments.map((comment, key) => {
+                  if (filteredSubjects.includes(comment.commentSubject)) {
+                    return;
+                  }
 
-                return (
-                  <Paper className={classes.comment}>
-                    <Comment comment={comment} classes={classes} key={key} />
-                  </Paper>
-                );
-              })}
-          </div>
+                  return (
+                    <Paper className={classes.comment}>
+                      <Comment comment={comment} classes={classes} key={key} />
+                    </Paper>
+                  );
+                })}
+            </div>
+          </List>
         </React.Fragment>
       )}
     </React.Fragment>
