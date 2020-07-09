@@ -11,7 +11,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useAuth0 } from "./../../../utils/react-auth0-spa";
 import { useBackend } from "./../../../utils/BackendProvider";
 
-
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -28,20 +27,19 @@ const CommentCreationForm = (props) => {
 
   const { user } = useAuth0();
 
+  const { submitNewComment } = useBackend();
 
-    const { submitNewComment } = useBackend();
+  const [radioValue, setRadioValue] = useState('none');
+  const [commentTextValue, setCommentTextValue] = useState('');
+  const [switchState, setSwitchState] = useState(false);
 
-    const [radioValue, setRadioValue] = useState('none');
-    const [commentTextValue, setCommentTextValue] = useState('');
-    const [switchState, setSwitchState] = useState(false);
-
-    const [submitted, setSubmitted] = useState(false);
-    const [pending, setPending] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [pending, setPending] = useState(false);
     
 
-    const _handleRadioChange = (event) => {
-        setRadioValue(event.target.value);
-    };
+  const _handleRadioChange = (event) => {
+      setRadioValue(event.target.value);
+  };
 
   const _handleTextFieldChange = (event) => {
     setCommentTextValue(event.target.value);
@@ -51,21 +49,20 @@ const CommentCreationForm = (props) => {
     setSwitchState(switchState ? false : true);
   };
 
-
-    const _handleSubmit = async () => {
-        console.log("submitted");
-        const comment = {
-            commentText: commentTextValue,
-            commentSubject: props.subject,
-            commentSecondarySubject: null,
-            anonymity: !switchState,
-            sentiment: (radioValue == "none" ? null : radioValue)
-        };
-        setSubmitted(true);
-        setPending(true);
-        const response = await submitNewComment(comment);
-        setPending(false);
-        console.log(response);
+  const _handleSubmit = async () => {
+      console.log("submitted");
+      const comment = {
+          commentText: commentTextValue,
+          commentSubject: props.subject,
+          commentSecondarySubject: null,
+          anonymity: !switchState,
+          sentiment: (radioValue == "none" ? null : radioValue)
+      };
+      setSubmitted(true);
+      setPending(true);
+      const response = await submitNewComment(comment);
+      setPending(false);
+      console.log(response);
     }
 
     if (submitted) {
