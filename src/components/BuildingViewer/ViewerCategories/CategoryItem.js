@@ -33,7 +33,7 @@ const CategoryItem = (props) => {
             })}
         </Grid>
         <Grid item xs={4}>
-            {props.item.comments && <CommentField comments={props.item.comments} />}
+            {props.item.hasSuggestions && <CommentField subject={props.subject}/>}
         </Grid>
     </Grid>
 }

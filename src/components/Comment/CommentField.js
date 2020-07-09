@@ -11,8 +11,8 @@ const CommentField = (props) => {
     
 
     return <React.Fragment>
-        <CommentContainer comments={props.comments} />
-        <CommentCreationContainer />
+        <CommentContainer subject={props.subject} />
+        <CommentCreationContainer subject={props.subject} />
     </React.Fragment>
 }
 

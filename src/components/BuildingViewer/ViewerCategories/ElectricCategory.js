@@ -23,6 +23,7 @@ const ElectricCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualUse"
                         />
                     )
                 })
@@ -30,6 +31,7 @@ const ElectricCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualUse}
                 classes={props.classes}
+                subject="annualUse"
                 />
             )
         )}
@@ -41,6 +43,7 @@ const ElectricCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualElectricityUse"
                         />
                     )
                 })
@@ -48,6 +51,7 @@ const ElectricCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualElectricityUse}
                 classes={props.classes}
+                subject="annualElectricityUse"
                 />
             )
         )}
@@ -59,6 +63,7 @@ const ElectricCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualCost"
                         />
                     )
                 })
@@ -66,6 +71,7 @@ const ElectricCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualCost}
                 classes={props.classes}
+                subject="annualCost"
                 />
             )
         )}
@@ -77,6 +83,7 @@ const ElectricCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="annualElectricityCost"
                         />
                     )
                 })
@@ -84,6 +91,7 @@ const ElectricCategory = (props) => {
                 <CategoryItem 
                 item={props.category.annualElectricityCost}
                 classes={props.classes}
+                subject="annualElectricityCost"
                 />
             )
         )}

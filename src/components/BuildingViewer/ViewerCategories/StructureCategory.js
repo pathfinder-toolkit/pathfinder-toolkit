@@ -22,6 +22,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="wallMaterial"
                         />
                     )
                 })
@@ -29,6 +30,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.wallMaterial}
                 classes={props.classes}
+                subject="wallMaterial"
                 />
             )
         )}
@@ -40,6 +42,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="wallThickness"
                         />
                     )
                 })
@@ -47,6 +50,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.wallThickness}
                 classes={props.classes}
+                subject="wallThickness"
                 />
             )
         )}
@@ -58,6 +62,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="windowType"
                         />
                     )
                 })
@@ -65,6 +70,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.windowType}
                 classes={props.classes}
+                subject="windowType"
                 />
             )
         )}
@@ -76,6 +82,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="windowAmount"
                         />
                     )
                 })
@@ -83,6 +90,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.windowAmount}
                 classes={props.classes}
+                subject="windowAmount"
                 />
             )
         )}
@@ -94,6 +102,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="heatedWindowType"
                         />
                     )
                 })
@@ -101,6 +110,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.heatedWindowType}
                 classes={props.classes}
+                subject="heatedWindowType"
                 />
             )
         )}
@@ -112,6 +122,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="heatedWindowAmount"
                         />
                     )
                 })
@@ -119,6 +130,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.heatedWindowAmount}
                 classes={props.classes}
+                subject="heatedWindowAmount"
                 />
             )
         )}
@@ -130,6 +142,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="doorMaterial"
                         />
                     )
                 })
@@ -137,6 +150,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.doorMaterial}
                 classes={props.classes}
+                subject="doorMaterial"
                 />
             )
         )}
@@ -148,6 +162,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="doorAmount"
                         />
                     )
                 })
@@ -155,6 +170,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.doorAmount}
                 classes={props.classes}
+                subject="doorAmount"
                 />
             )
         )}
@@ -166,6 +182,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="roofMaterial"
                         />
                     )
                 })
@@ -173,6 +190,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.roofMaterial}
                 classes={props.classes}
+                subject="roofMaterial"
                 />
             )
         )}
@@ -184,6 +202,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject="roofInsulation"
                         />
                     )
                 })
@@ -191,6 +210,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.roofInsulation}
                 classes={props.classes}
+                subject="roofInsulation"
                 />
             )
         )}
@@ -202,6 +222,7 @@ const StructureCategory = (props) => {
                         item={listItem}
                         classes={props.classes}
                         key={key}
+                        subject={"roofInsulationThickness"}
                         />
                     )
                 })
@@ -209,6 +230,7 @@ const StructureCategory = (props) => {
                 <CategoryItem 
                 item={props.category.roofInsulationThickness}
                 classes={props.classes}
+                subject="roofInsulationThickness"
                 />
             )
         )}
