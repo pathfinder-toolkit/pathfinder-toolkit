@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography, Grid, Button, IconButton, Zoom } from "@material-ui/core";
+import {
+  Typography,
+  Grid,
+  Button,
+  IconButton,
+  Fade,
+  Zoom,
+} from "@material-ui/core";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
@@ -20,12 +27,14 @@ const ImageSelection = (props) => {
   const [transition, setTransition] = useState(false);
 
   const nextPage = () => {
+    setTransition(false)
     setPage(page + 1);
     //currentItem = currentItem + ITEMS_PER_PAGE;
     setCurrentItem(currentItem + ITEMS_PER_PAGE);
     console.log("current item: " + currentItem);
 
     setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
+    setTransition(true)
   };
 
   const previousPage = () => {
@@ -43,10 +52,10 @@ const ImageSelection = (props) => {
     }
   };
 
+
   useEffect(() => {
     setTransition(true);
-    setTransition(false);
-  }, page);
+  }, []);
 
   return (
     <React.Fragment>
@@ -63,12 +72,14 @@ const ImageSelection = (props) => {
 
         <div className={classes.gridRoot}>
           {items.map((item, index) => (
-            <img
-              src={item.image}
-              alt={item.date}
-              className={classes.gridItem}
-              onClick={() => selectImage(item.image)}
-            ></img>
+            <Zoom in={transition}>
+              <img
+                src={item.image}
+                alt={item.date}
+                className={classes.gridItem}
+                onClick={() => selectImage(item.image)}
+              ></img>
+            </Zoom>
           ))}
         </div>
 
@@ -82,13 +93,16 @@ const ImageSelection = (props) => {
           <NavigateNextIcon />
         </IconButton>
       </div>
-      <Typography align="center">
+      <Typography
+        style={{ paddingRight: "1em" }}
+        align="center"
+        variant="subtitle1"
+      >
         {page}/{TOTAL_PAGES}
       </Typography>
     </React.Fragment>
   );
 };
 
-const GridItem = (props) => {};
 
 export default ImageSelection;
