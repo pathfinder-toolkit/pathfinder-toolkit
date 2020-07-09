@@ -243,6 +243,42 @@ export const BackendProvider = ({ children }) => {
     }
   }
 
+  const uploadUserImage = async (file) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + '/image'
+    );
+    
+    console.log("File:");
+    console.log(file);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.post(address, formData, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+
+
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -254,7 +290,8 @@ export const BackendProvider = ({ children }) => {
         requestSuggestions,
         requestComments,
         submitNewBuilding,
-        submitNewComment
+        submitNewComment,
+        uploadUserImage
       }}
     >
       {children}
