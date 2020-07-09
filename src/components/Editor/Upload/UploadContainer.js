@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, TextField, Select, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useBackend } from "../../../utils/BackendProvider";
 import ImageUpload from "./ImageUpload";
 import ImageSelection from "./ImageSelection";
 
@@ -59,6 +60,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadContainer = (props) => {
+  const { requestUserImages } = useBackend();
+  const [userImagesLoading, setUserImagesLoading] = useState(true);
+  const [userImages, setUserImages] = useState();
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const data = await requestUserImages();
+      setUserImages(data);
+      console.log(data);
+    };
+
+    fetchImages();
+  }, []);
+
   const [imageId, setImageId] = useState("");
   const classes = useStyles();
 
