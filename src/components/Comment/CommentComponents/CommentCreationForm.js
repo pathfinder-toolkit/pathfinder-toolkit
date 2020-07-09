@@ -8,12 +8,8 @@ import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-<<<<<<< HEAD
 import { useAuth0 } from "./../../../utils/react-auth0-spa";
 import { useBackend } from "./../../../utils/BackendProvider";
-=======
-import { useAuth0 } from "../../../utils/react-auth0-spa";
->>>>>>> a12367db6a2452896a3507443a3c8ac1648399bb
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
