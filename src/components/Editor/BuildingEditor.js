@@ -69,7 +69,7 @@ const BuildingEditor = () => {
       marginTop: theme.spacing(5.5),
     },
     formButton: {
-      margin: theme.spacing(1),
+      marginTop: theme.spacing(1),
     },
     formBorder: {
       border: "1px solid #E0E0E0",
@@ -97,6 +97,13 @@ const BuildingEditor = () => {
     modal: {
       position: "absolute",
       width: 400,
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%,-50%)",
+    },
+    imageSelectModal: {
+      position: "absolute",
+      width: 800,
       left: "50%",
       top: "50%",
       transform: "translate(-50%,-50%)",

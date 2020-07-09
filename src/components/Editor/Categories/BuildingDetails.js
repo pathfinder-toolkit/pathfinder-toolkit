@@ -5,13 +5,17 @@ import {
   Fade,
   TextField,
   InputAdornment,
+  Modal,
+  Button,
 } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
 import DropdownSelect from "../reusable/DropdownSelect";
-import PhotoButton from "../reusable/PhotoButton";
+import PhotoButton from "../Upload/PhotoButton";
+
+import UploadContainer from "../Upload/UploadContainer";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
@@ -33,10 +37,25 @@ const BuildingDetails = (props) => {
     };
   }, []);
 
+  const [show, SetShow] = useState(false);
+
+  const handleShow = (event) => {
+    SetShow(true);
+  };
+
+  const setClose = () => {
+    SetShow(false);
+  };
+
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <Grid item>
+        <Modal open={show} onClose={setClose}>
+          <div className={style.imageSelectModal}>
+            <UploadContainer handleChange={(e) => handleChange(e, "image")} />
+          </div>
+        </Modal>
+        <Grid item alignItems="center">
           <div className={style.header}>
             <Typography variant="h5">Building details</Typography>
           </div>
@@ -49,7 +68,6 @@ const BuildingDetails = (props) => {
                   label="Building name *"
                   value={formData.name.value}
                   onChange={(e) => handleChange(e, "name", false)}
-                  onBlur
                 />
               </Grid>
               <Grid item sm={1}>
@@ -57,7 +75,6 @@ const BuildingDetails = (props) => {
                   className={style.formComponent}
                   label="Year"
                   value={formData.year.value}
-                  onBlur={() => console.log("yeee")}
                   onChange={(e) => handleChange(e, "year")}
                 />
               </Grid>
@@ -136,10 +153,9 @@ const BuildingDetails = (props) => {
                 />
               </Grid>
               <Grid item sm={2}>
-                <PhotoButton
-                  handler={handleFileChange}
-                  defaultValue={formData.image?.value?.name}
-                />
+                <Button onClick={SetShow} color="primary" variant="outlined">
+                  Upload
+                </Button>
               </Grid>
             </Grid>
             <Typography variant="h5" gutterBottom>

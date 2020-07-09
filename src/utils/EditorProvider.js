@@ -157,12 +157,11 @@ export const EditorProvider = ({ children }) => {
       console.log(data);
 
       if (!suggestions.includes(subject)) {
-        // Temporary solution for testing
         setSuggestions([...suggestions, data[0]]);
         console.log(suggestions);
       }
 
-      if (!subjects.includes(subject)) {
+      if (!subjects.includes(data[0].suggestionSubject)) {
         setSubjects([...subjects, data[0].suggestionSubject]);
       }
     } catch (error) {

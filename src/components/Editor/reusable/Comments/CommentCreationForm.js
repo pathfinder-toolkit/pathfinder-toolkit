@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
-import Button from "@material-ui/core/Button";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from "@material-ui/core/styles";
 
-import { useAuth0 } from "./../../../utils/react-auth0-spa";
-import { useBackend } from "./../../../utils/BackendProvider";
-
+import { useAuth0 } from "../../../../utils/react-auth0-spa";
 
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -20,30 +14,66 @@ import FormControl from "@material-ui/core/FormControl";
 import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
-import CloseIcon from "@material-ui/icons/Close";
 import { green } from "@material-ui/core/colors";
 
+const useStyles = makeStyles((theme) => ({
+  createCommentButton: {
+    marginBottom: theme.spacing(2),
+  },
+  root: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(4),
+    marginRight: theme.spacing(0),
+  },
+  headerText: {
+    fontSizeAdjust: 0.4,
+  },
+  textArea: {
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(0),
+    paddingRight: theme.spacing(0),
+    marginBottom: theme.spacing(2),
+  },
+  radioForm: {
+    marginLeft: theme.spacing(1),
+    paddingRight: theme.spacing(0),
+    display: "block",
+  },
+  switch: {
+    marginLeft: theme.spacing(0),
+  },
+  switchText: {
+    display: "inline-block",
+    marginLeft: theme.spacing(0),
+  },
+  explanationText: {
+    marginLeft: theme.spacing(0),
+    marginBottom: theme.spacing(2),
+  },
+  submitCommentButton: {
+    marginLeft: theme.spacing(0),
+    marginBottom: theme.spacing(2),
+    display: "block",
+  },
+}));
+
 const CommentCreationForm = (props) => {
-  const classes = props.classes;
+  const classes = useStyles();
 
   const { user } = useAuth0();
 
+  const [radioValue, setRadioValue] = useState("none");
+  const [commentTextValue, setCommentTextValue] = useState("");
+  const [switchState, setSwitchState] = useState(false);
 
-    const { submitNewComment } = useBackend();
-
-    const [radioValue, setRadioValue] = useState('none');
-    const [commentTextValue, setCommentTextValue] = useState('');
-    const [switchState, setSwitchState] = useState(false);
-
-    const [submitted, setSubmitted] = useState(false);
-    const [pending, setPending] = useState(false);
-    
-
-    const _handleRadioChange = (event) => {
-        setRadioValue(event.target.value);
-    };
+  const _handleRadioChange = (event) => {
+    setRadioValue(event.target.value);
+  };
 
   const _handleTextFieldChange = (event) => {
+    if (props.handleComment) {
+      props.handleComment(event);
+    }
     setCommentTextValue(event.target.value);
   };
 
@@ -51,67 +81,17 @@ const CommentCreationForm = (props) => {
     setSwitchState(switchState ? false : true);
   };
 
-
-    const _handleSubmit = async () => {
-        console.log("submitted");
-        const comment = {
-            commentText: commentTextValue,
-            commentSubject: props.subject,
-            commentSecondarySubject: null,
-            anonymity: !switchState,
-            sentiment: (radioValue == "none" ? null : radioValue)
-        };
-        setSubmitted(true);
-        setPending(true);
-        const response = await submitNewComment(comment);
-        setPending(false);
-        console.log(response);
-    }
-
-    if (submitted) {
-        return <Card className={classes.root}>
-            {pending ? 
-            (
-                <React.Fragment>
-                    <CardHeader
-                    className={classes.headerText}
-                    action={
-                    <IconButton onClick={props.onClose} aria-label="settings">
-                        <CloseIcon />
-                    </IconButton>
-                    }
-                    title="Sending comment..."
-                    />
-                    <CircularProgress 
-                    className={classes.progressSpinner}
-                    />
-                </React.Fragment>
-            ) : (
-                <CardHeader
-                    className={classes.headerText}
-                    action={
-                    <IconButton onClick={props.onClose} aria-label="settings">
-                        <CloseIcon />
-                    </IconButton>
-                    }
-                    title="Comment created."
-                />
-            )}
-        </Card>
-    }
+  const _handleSubmit = () => {
+    console.log("submitted");
+    const comment = {
+      commentText: commentTextValue,
+      sentiment: radioValue,
+    };
+    console.log(comment);
+  };
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        className={classes.headerText}
-        action={
-          <IconButton onClick={props.onClose} aria-label="settings">
-            <CloseIcon />
-          </IconButton>
-        }
-        title="Create your comment below"
-      />
-      <Typography></Typography>
+    <React.Fragment className={classes.root}>
       <TextField
         id="comment-text-field"
         label="Comment text"
@@ -123,7 +103,7 @@ const CommentCreationForm = (props) => {
         className={classes.textArea}
       />
       <FormControl className={classes.radioForm}>
-        <FormLabel>Select sentiment</FormLabel>
+        <FormLabel>Sentiment</FormLabel>
         <RadioGroup
           row
           aria-label="sentiment"
@@ -169,15 +149,15 @@ const CommentCreationForm = (props) => {
         Your username will be displayed as{" "}
         <strong>{switchState ? user.nickname : "Anonymous user"}</strong>
       </Typography>
-      <Button
+      {/* <Button
         className={classes.submitCommentButton}
         variant="contained"
         color="primary"
         onClick={_handleSubmit}
       >
-        Submit
-      </Button>
-    </Card>
+        Submit 
+      </Button> */}
+    </React.Fragment>
   );
 };
 
