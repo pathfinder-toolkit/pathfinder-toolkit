@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   navButton: {
-    height: "5em",
+    height: "1em",
     width: "1em",
     alignSelf: "center",
     //left: "50%",

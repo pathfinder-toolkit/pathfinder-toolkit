@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography, Grid, Button, IconButton } from "@material-ui/core";
+import { Typography, Grid, Button, IconButton, Zoom } from "@material-ui/core";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
@@ -9,12 +9,15 @@ const ImageSelection = (props) => {
   const classes = props.classes;
 
   const ITEMS_PER_PAGE = 8;
-  const TOTAL_PAGES = Object.keys(images).length / ITEMS_PER_PAGE;
+  const TOTAL_ITEMS = Object.keys(images).length;
+  const TOTAL_PAGES = TOTAL_ITEMS / ITEMS_PER_PAGE;
   //let currentItem = 0;
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [currentItem, setCurrentItem] = useState(0);
   const [items, setItems] = useState(images.slice(currentItem, ITEMS_PER_PAGE));
+
+  const [transition, setTransition] = useState(false);
 
   const nextPage = () => {
     setPage(page + 1);
@@ -40,10 +43,16 @@ const ImageSelection = (props) => {
     }
   };
 
+  useEffect(() => {
+    setTransition(true);
+    setTransition(false);
+  }, page);
+
   return (
     <React.Fragment>
       <div style={{ display: "flex" }}>
         <IconButton
+          disabled={page === 1}
           onClick={previousPage}
           disableRipple
           variant=""
@@ -51,6 +60,7 @@ const ImageSelection = (props) => {
         >
           <NavigateBeforeIcon />
         </IconButton>
+
         <div className={classes.gridRoot}>
           {items.map((item, index) => (
             <img
@@ -62,22 +72,23 @@ const ImageSelection = (props) => {
           ))}
         </div>
 
-        {
-          <IconButton
-            onClick={nextPage}
-            disableRipple
-            variant=""
-            className={classes.navButton}
-          >
-            <NavigateNextIcon />
-          </IconButton>
-        }
+        <IconButton
+          disabled={page >= TOTAL_PAGES}
+          onClick={nextPage}
+          disableRipple
+          variant=""
+          className={classes.navButton}
+        >
+          <NavigateNextIcon />
+        </IconButton>
       </div>
-      <Typography>
-        page:{page}/{TOTAL_PAGES} current item:{currentItem}
+      <Typography align="center">
+        {page}/{TOTAL_PAGES}
       </Typography>
     </React.Fragment>
   );
 };
+
+const GridItem = (props) => {};
 
 export default ImageSelection;
