@@ -12,24 +12,25 @@ const ImageUpload = (props) => {
   const [file, setFile] = useState();
   const [fileLoading, setFileLoading] = useState(false);
 
-  const { uploadUserImage } = useBackend();
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
-  const handleFileChange = async (e) => {
-    if (!fileLoading) {
-      //setFile(e.target.files[0]);
-      //console.log(e);
-      setFileLoading(true);
-      await uploadUserImage(e.target.files[0]);
-    }
+  const startUpload = () => {
+    setFileLoading(true);
   };
 
   return (
     <div>
-
       <Grid className={classes.uploader} container alignItems="center">
         <PhotoButton handler={(e) => handleFileChange(e)} />
         <Typography variant="body2">{file?.name}</Typography>
-        {fileLoading && <CircularProgress />}
+        {file && !fileLoading && (
+          <Button onClick={startUpload} color="primary" variant="outlined">
+            upload
+          </Button>
+        )}{" "}
+        {fileLoading && <CircularProgress style={{ padding: "5px" }} />}
       </Grid>
     </div>
   );
