@@ -52,7 +52,7 @@ const BuildingDetails = (props) => {
       <div className={style.root}>
         <Modal open={show} onClose={setClose}>
           <div className={style.imageSelectModal}>
-            <UploadContainer />
+            <UploadContainer handleChange={(e) => handleChange(e, "image")} />
           </div>
         </Modal>
         <Grid item alignItems="center">
@@ -68,7 +68,6 @@ const BuildingDetails = (props) => {
                   label="Building name *"
                   value={formData.name.value}
                   onChange={(e) => handleChange(e, "name", false)}
-                  onBlur
                 />
               </Grid>
               <Grid item sm={1}>
@@ -76,7 +75,6 @@ const BuildingDetails = (props) => {
                   className={style.formComponent}
                   label="Year"
                   value={formData.year.value}
-                  onBlur={() => console.log("yeee")}
                   onChange={(e) => handleChange(e, "year")}
                 />
               </Grid>
