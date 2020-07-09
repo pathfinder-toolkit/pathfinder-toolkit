@@ -178,7 +178,7 @@ export const EditorProvider = ({ children }) => {
     }
 
     try {
-      const data = await requestComments(subject);
+      const data = await requestComments(subject,1);
 
       console.log(data);
       if (!suggestions.includes(subject)) {
