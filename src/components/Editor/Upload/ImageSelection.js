@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  Typography,
-  Grid,
-  Button,
-  IconButton,
-  Fade,
-  Zoom,
-} from "@material-ui/core";
+import { Typography, Grid, IconButton, Zoom } from "@material-ui/core";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
@@ -18,7 +11,6 @@ const ImageSelection = (props) => {
   const ITEMS_PER_PAGE = 8;
   const TOTAL_ITEMS = Object.keys(images).length;
   const TOTAL_PAGES = TOTAL_ITEMS / ITEMS_PER_PAGE;
-  //let currentItem = 0;
 
   const [page, setPage] = useState(1);
   const [currentItem, setCurrentItem] = useState(0);
@@ -27,21 +19,14 @@ const ImageSelection = (props) => {
   const [transition, setTransition] = useState(false);
 
   const nextPage = () => {
-    setTransition(false)
     setPage(page + 1);
-    //currentItem = currentItem + ITEMS_PER_PAGE;
     setCurrentItem(currentItem + ITEMS_PER_PAGE);
-    console.log("current item: " + currentItem);
-
     setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
-    setTransition(true)
   };
 
   const previousPage = () => {
     setPage(page - 1);
-    //currentItem = currentItem - ITEMS_PER_PAGE;
     setCurrentItem(currentItem - ITEMS_PER_PAGE);
-
     setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
   };
 
@@ -51,7 +36,6 @@ const ImageSelection = (props) => {
       props.handler(image);
     }
   };
-
 
   useEffect(() => {
     setTransition(true);
@@ -84,6 +68,7 @@ const ImageSelection = (props) => {
         </div>
 
         <IconButton
+          style={{ marginLeft: "auto" }}
           disabled={page >= TOTAL_PAGES}
           onClick={nextPage}
           disableRipple
@@ -103,6 +88,5 @@ const ImageSelection = (props) => {
     </React.Fragment>
   );
 };
-
 
 export default ImageSelection;

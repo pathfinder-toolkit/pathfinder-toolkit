@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   gridRoot: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   navButton: {
     height: "1em",
@@ -80,60 +80,28 @@ const UploadContainer = (props) => {
       date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/400",
-      date: "04-02-2020",
-    },
-    {
-      image: "https://picsum.photos/220",
-      date: "06-02-2020",
-    },
-    {
-      image: "https://picsum.photos/210",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/214",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/216",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/215",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/201",
+      image: "https://picsum.photos/200",
       date: "02-02-2020",
     },
     {
-      image: "https://picsum.photos/301",
+      image: "https://picsum.photos/300",
       date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/401",
-      date: "04-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/221",
-      date: "06-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/211",
-      date: "01-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/211",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/212",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/266",
-      date: "01-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
   ];
 
