@@ -11,13 +11,21 @@ const ImageUpload = (props) => {
 
   const [file, setFile] = useState();
   const [fileLoading, setFileLoading] = useState(false);
+  const [newImageId, setNewImageId] = useState();
+
+  const { 
+    uploadUserImage
+  } = useBackend();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-  const startUpload = () => {
+  const startUpload = async () => {
     setFileLoading(true);
+    const data = await uploadUserImage(file);
+    setNewImageId(data.publicId);
+    setFileLoading(false);
   };
 
   return (
