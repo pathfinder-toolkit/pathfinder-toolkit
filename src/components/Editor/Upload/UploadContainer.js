@@ -59,14 +59,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadContainer = (props) => {
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageId, setImageId] = useState("");
   const classes = useStyles();
 
-  const handleImageUrl = (url) => {
-    console.log("handleImageUrl: " + url);
-    setImageUrl(url);
-    if (props.handler) {
-      props.handler(url);
+  const handleImageId = (id) => {
+    console.log("handleImageId: " + id);
+    setImageId(id);
+    if (props.handleChange) {
+      props.handleChange(id);
     }
   };
 
@@ -110,19 +110,19 @@ const UploadContainer = (props) => {
       <Typography align="center" className={classes.header} variant="h5">
         Upload building image
       </Typography>
-      <ImageUpload classes={classes} />
+      <ImageUpload handler={(id) => handleImageId(id)} classes={classes} />
       <Typography align="center" className={classes.header} variant="h5">
         Select from your images
       </Typography>
       <div className={classes.imageSelection}>
         <ImageSelection
-          handler={(image) => handleImageUrl(image)}
+          handler={(id) => handleImageId(id)}
           images={mockImages}
           classes={classes}
         />
       </div>
       <div className={classes.controls}>
-        <Typography>Selected image: {imageUrl}</Typography>
+        <Typography>Selected image: {imageId}</Typography>
         <div>
           <Button
             style={{ marginRight: "0.5em" }}
