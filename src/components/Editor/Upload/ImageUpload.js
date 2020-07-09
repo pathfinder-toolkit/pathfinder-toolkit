@@ -4,15 +4,23 @@ import { Typography, Button, Grid, CircularProgress } from "@material-ui/core";
 import InsertPhoto from "@material-ui/icons/InsertPhoto";
 import PhotoButton from "./PhotoButton";
 
+import { useBackend } from "../../../utils/BackendProvider";
+
 const ImageUpload = (props) => {
   const classes = props.classes;
 
   const [file, setFile] = useState();
   const [fileLoading, setFileLoading] = useState(false);
 
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setFileLoading(true);
+  const { uploadUserImage } = useBackend();
+
+  const handleFileChange = async (e) => {
+    if (!fileLoading) {
+      //setFile(e.target.files[0]);
+      //console.log(e);
+      setFileLoading(true);
+      await uploadUserImage(e.target.files[0]);
+    }
   };
 
   return (
