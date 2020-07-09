@@ -33,12 +33,12 @@ const BuildingStructure = (props) => {
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <Grid item>
+        <Grid item alignItems="center" >
           <div className={style.header}>
             <Typography variant="h5">Building structure</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container spacing={4}>
+            <Grid className={style.row} container spacing={2}>
               <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}

@@ -74,6 +74,18 @@ const useFormData = (category) => {
     event.persist();
     console.log("adding new entry to: " + propertyName);
 
+    let currentObjectIndex = formData[propertyName].findIndex(
+      (x) => x.isCurrent
+    );
+
+    if (formData[propertyName][currentObjectIndex].hasSuggestions) {
+      console.log("has suggestions");
+      getSuggestions(propertyName, event.target.value);
+      getComments(propertyName);
+    } else {
+      console.log("has no suggestions.");
+    }
+
     let objects = formData[propertyName];
     objects[0].value = event.target.value;
 
@@ -83,13 +95,14 @@ const useFormData = (category) => {
     }));
   };
 
-  const addOldEntry = (value, year, propertyName) => {
+  const addOldEntry = (value, year, propertyName, description) => {
     let newObject = {
       propertyName: "",
       value: "",
       usageStartYear: "",
       hasSuggestions: false,
       isCurrent: false,
+      description: "",
     };
 
     let objects = formData[propertyName];
@@ -99,6 +112,7 @@ const useFormData = (category) => {
     newObject.isCurrent = false;
     newObject.value = value;
     newObject.usageStartYear = year;
+    newObject.description = description;
 
     objects.push(newObject);
 
