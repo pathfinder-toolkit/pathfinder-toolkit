@@ -275,10 +275,36 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return null;
     }
-
-
   }
 
+  const requestUserImages = async () => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + '/images'
+    );
+
+    const axiosConfig = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    }
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  
+  }
+
+  
   return (
     <BackendContext.Provider
       value={{
@@ -291,7 +317,8 @@ export const BackendProvider = ({ children }) => {
         requestComments,
         submitNewBuilding,
         submitNewComment,
-        uploadUserImage
+        uploadUserImage,
+        requestUserImages
       }}
     >
       {children}
