@@ -306,6 +306,35 @@ export const BackendProvider = ({ children }) => {
   
   }
 
+  const requestImageDeletion= async (id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + '/image/' + id
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  
+  }
+
   
   return (
     <BackendContext.Provider
@@ -320,7 +349,8 @@ export const BackendProvider = ({ children }) => {
         submitNewBuilding,
         submitNewComment,
         uploadUserImage,
-        requestUserImages
+        requestUserImages,
+        requestImageDeletion
       }}
     >
       {children}
