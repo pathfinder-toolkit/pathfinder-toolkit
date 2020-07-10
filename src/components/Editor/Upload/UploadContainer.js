@@ -66,9 +66,11 @@ const UploadContainer = (props) => {
 
   useEffect(() => {
     const fetchImages = async () => {
+      setUserImagesLoading(true);
       const data = await requestUserImages();
       setUserImages(data);
       console.log(data);
+      setUserImagesLoading(false);
     };
 
     fetchImages();
@@ -130,11 +132,14 @@ const UploadContainer = (props) => {
         Select from your images
       </Typography>
       <div className={classes.imageSelection}>
-        <ImageSelection
-          handler={(id) => handleImageId(id)}
-          images={mockImages}
-          classes={classes}
-        />
+        {!userImagesLoading && (
+          <ImageSelection
+            handler={(id) => handleImageId(id)}
+            //images={mockImages}
+            images={userImages}
+            classes={classes}
+          />
+        )}
       </div>
       <div className={classes.controls}>
         <Typography>Selected image: {imageId}</Typography>
