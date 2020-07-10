@@ -12,7 +12,6 @@ const ImageUpload = (props) => {
   const [file, setFile] = useState();
   const [fileLoading, setFileLoading] = useState(false);
   const [fileUploaded, setFileUploaded] = useState(false);
-  const [newImageId, setNewImageId] = useState();
 
   const { uploadUserImage } = useBackend();
 
@@ -23,13 +22,12 @@ const ImageUpload = (props) => {
   const startUpload = async () => {
     setFileLoading(true);
     const data = await uploadUserImage(file);
-    setNewImageId(data.publicId);
     setFileUploaded(true);
     if (props.fetchImages) {
       props.fetchImages();
     }
     if (props.handler) {
-      props.handler(data.publicId);
+      props.handler(data);
     }
     setFileLoading(false);
   };

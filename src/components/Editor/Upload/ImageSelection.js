@@ -81,7 +81,7 @@ const ImageSelection = (props) => {
                       ? clsx(classes.gridItem, classes.selected)
                       : classes.gridItem
                   }
-                  onClick={() => selectImage(item.publicId)}
+                  onClick={() => selectImage(item)}
                 ></Image>
               </Zoom>
             ))}

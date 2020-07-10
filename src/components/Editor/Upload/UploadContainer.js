@@ -60,10 +60,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadContainer = (props) => {
-  const { requestUserImages } = useBackend();
+  const { requestUserImages, requestImageDeletion } = useBackend();
   const [userImagesLoading, setUserImagesLoading] = useState(true);
   const [userImages, setUserImages] = useState();
-  const [imageId, setImageId] = useState("");
+  const [image, setImage] = useState();
 
   const fetchImages = async () => {
     setUserImagesLoading(true);
@@ -79,10 +79,20 @@ const UploadContainer = (props) => {
 
   const classes = useStyles();
 
-  const handleImageId = (id) => {
-    setImageId(id);
+  const handleImage = (item) => {
+    setImage(item);
     if (props.handleChange) {
-      props.handleChange(id);
+      props.handleChange(item.publicId);
+    }
+  };
+
+  const handleDeletion = async (id) => {
+    try {
+      await requestImageDeletion(id);
+      setImage();
+      fetchImages();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -92,7 +102,7 @@ const UploadContainer = (props) => {
         Upload image
       </Typography>
       <ImageUpload
-        handler={(id) => handleImageId(id)}
+        handler={(id) => handleImage(id)}
         fetchImages={fetchImages}
         classes={classes}
       />
@@ -102,18 +112,25 @@ const UploadContainer = (props) => {
       <div className={classes.imageSelection}>
         {!userImagesLoading && (
           <ImageSelection
-            handler={(id) => handleImageId(id)}
+            handler={(id) => handleImage(id)}
             images={userImages}
-            selectedId={imageId}
+            selectedId={image?.publicId}
             classes={classes}
           />
         )}
       </div>
       <div className={classes.controls}>
-        <Typography>Selected image: {imageId}</Typography>
+        <Button
+          disabled={!image}
+          onClick={() => handleDeletion(image.idImage)}
+          variant="outlined"
+          color="secondary"
+        >
+          x
+        </Button>
         <div>
           <Button
-            disabled={!imageId}
+            disabled={!image}
             style={{ marginRight: "0.5em" }}
             color="primary"
             variant="contained"
@@ -125,6 +142,7 @@ const UploadContainer = (props) => {
           </Button>
         </div>
       </div>
+      <Typography>Selected image: {image?.publicId}</Typography>
     </div>
   );
 };
