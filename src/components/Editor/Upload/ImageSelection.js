@@ -9,8 +9,12 @@ import CloudinaryContext from "cloudinary-react/lib/components/CloudinaryContext
 import { Image } from "cloudinary-react";
 
 const ImageSelection = (props) => {
-  const images = props.images;
   const classes = props.classes;
+
+  // Sort images by recently uploaded
+  const images = props.images.sort((a, b) =>
+    new Date(a.date) < new Date(b.date) ? 1 : -1
+  );
 
   const ITEMS_PER_PAGE = 8;
   const TOTAL_ITEMS = Object.keys(images).length;
@@ -22,6 +26,10 @@ const ImageSelection = (props) => {
 
   const [transition, setTransition] = useState(false);
 
+  useEffect(() => {
+    setTransition(true);
+  }, []);
+
   const nextPage = () => {
     setPage(page + 1);
     setCurrentItem(currentItem + ITEMS_PER_PAGE);
@@ -32,7 +40,7 @@ const ImageSelection = (props) => {
     setCurrentItem(currentItem - ITEMS_PER_PAGE);
   };
 
-  // Update elements of page switch
+  // Update elements on page switch
   useEffect(() => {
     setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
   }, [currentItem]);
@@ -42,10 +50,6 @@ const ImageSelection = (props) => {
       props.handler(publicId);
     }
   };
-
-  useEffect(() => {
-    setTransition(true);
-  }, []);
 
   if (images.length === 0) {
     return (
@@ -67,7 +71,6 @@ const ImageSelection = (props) => {
         >
           <NavigateBeforeIcon />
         </IconButton>
-
         <div className={classes.gridRoot}>
           <CloudinaryContext
             cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
@@ -87,7 +90,6 @@ const ImageSelection = (props) => {
             ))}
           </CloudinaryContext>
         </div>
-
         <IconButton
           style={{ marginLeft: "auto" }}
           disabled={page >= TOTAL_PAGES}
@@ -104,12 +106,10 @@ const ImageSelection = (props) => {
         align="center"
         variant="subtitle1"
       >
-        pages:{page}/{TOTAL_PAGES} items:{currentItem}/{TOTAL_ITEMS}
+        {page}/{TOTAL_PAGES}
       </Typography>
     </React.Fragment>
   );
 };
-
-const GridItem = (props) => {};
 
 export default ImageSelection;

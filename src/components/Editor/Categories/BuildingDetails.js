@@ -11,22 +11,18 @@ import {
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
-
 import DropdownSelect from "../reusable/DropdownSelect";
-
 import UploadContainer from "../Upload/UploadContainer";
+import { Image } from "cloudinary-react";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  const {
-    formData,
-    handleChange,
-    handleFileChange,
-    addImage,
-  } = useFormData("details");
+  const { formData, handleChange, handleFileChange, addImage } = useFormData(
+    "details"
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -51,7 +47,10 @@ const BuildingDetails = (props) => {
       <div className={style.root}>
         <Modal open={show} onClose={setClose}>
           <div className={style.imageSelectModal}>
-            <UploadContainer handleChange={(publicId) => addImage(publicId)} />
+            <UploadContainer
+              handleClose={setClose}
+              handleChange={(publicId) => addImage(publicId)}
+            />
           </div>
         </Modal>
         <Grid item alignItems="center">
@@ -155,6 +154,14 @@ const BuildingDetails = (props) => {
                 <Button onClick={SetShow} color="primary" variant="outlined">
                   Upload
                 </Button>
+                {formData.image.value && (
+                  <Image
+                    width="70"
+                    height="70"
+                    publicId={formData.image.value}
+                    cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+                  />
+                )}
               </Grid>
             </Grid>
             <Typography variant="h5" gutterBottom>
