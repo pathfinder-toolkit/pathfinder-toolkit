@@ -14,7 +14,8 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const { requestBuildingModel } = useBackend();
+  const { requestBuildingModel, submitNewBuilding } = useBackend();
+  const [subjects, setSubjects] = useState();
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
     const [value, setValue] = useState(null);
@@ -35,13 +36,11 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
-
+  const [suggestions, setSuggestions] = useState();
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
-  const [comments, setComments] = useState([]);
-  const [suggestions, setSuggestions] = useState([]);
-  const [subjects, setSubjects] = useState([]);
+  const [comments, setComments] = useState([])
 
   const { requestSuggestions, requestComments } = useBackend();
 
@@ -157,12 +156,11 @@ export const EditorProvider = ({ children }) => {
       console.log(data);
 
       if (!suggestions.includes(subject)) {
-        // Temporary solution for testing
         setSuggestions([...suggestions, data[0]]);
         console.log(suggestions);
       }
 
-      if (!subjects.includes(subject)) {
+      if (!subjects.includes(data[0].suggestionSubject)) {
         setSubjects([...subjects, data[0].suggestionSubject]);
       }
     } catch (error) {
@@ -179,7 +177,7 @@ export const EditorProvider = ({ children }) => {
     }
 
     try {
-      const data = await requestComments(subject);
+      const data = await requestComments(subject, 1);
 
       console.log(data);
       if (!suggestions.includes(subject)) {
@@ -196,6 +194,9 @@ export const EditorProvider = ({ children }) => {
     setSubjects([]);
     setComments([]);
     setSuggestions([]);
+  };
+  const PostBuilding = () => {
+    submitNewBuilding(buildingInformation);
   };
 
   return (
@@ -223,6 +224,7 @@ export const EditorProvider = ({ children }) => {
         comments,
         commentsLoading,
         subjects,
+        PostBuilding,
       }}
     >
       {children}

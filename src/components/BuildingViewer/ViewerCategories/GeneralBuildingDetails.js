@@ -63,8 +63,8 @@ const GeneralBuildingDetails = (props) => {
             {containsCategoryItem("image") && (
                 <ImageWithModal
                 image={props.category.image.value}
-                height={300}
-                width={300}
+                width={'15vw'}
+                height={'25vh'}
                 />
             )}
         </Grid>

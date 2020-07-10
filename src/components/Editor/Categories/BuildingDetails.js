@@ -5,25 +5,24 @@ import {
   Fade,
   TextField,
   InputAdornment,
+  Modal,
+  Button,
 } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
-
 import DropdownSelect from "../reusable/DropdownSelect";
-import PhotoButton from "../reusable/PhotoButton";
+import UploadContainer from "../Upload/UploadContainer";
+import { Image } from "cloudinary-react";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  const {
-    formData,
-    handleChange,
-    handleFileChange,
-    validateNumber,
-  } = useFormData("details");
+  const { formData, handleChange, handleFileChange, addImage } = useFormData(
+    "details"
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -33,10 +32,28 @@ const BuildingDetails = (props) => {
     };
   }, []);
 
+  const [show, SetShow] = useState(false);
+
+  const handleShow = (event) => {
+    SetShow(true);
+  };
+
+  const setClose = () => {
+    SetShow(false);
+  };
+
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <Grid item>
+        <Modal open={show} onClose={setClose}>
+          <div className={style.imageSelectModal}>
+            <UploadContainer
+              handleClose={setClose}
+              handleChange={(publicId) => addImage(publicId)}
+            />
+          </div>
+        </Modal>
+        <Grid item alignItems="center">
           <div className={style.header}>
             <Typography variant="h5">Building details</Typography>
           </div>
@@ -49,7 +66,6 @@ const BuildingDetails = (props) => {
                   label="Building name *"
                   value={formData.name.value}
                   onChange={(e) => handleChange(e, "name", false)}
-                  onBlur
                 />
               </Grid>
               <Grid item sm={1}>
@@ -57,7 +73,6 @@ const BuildingDetails = (props) => {
                   className={style.formComponent}
                   label="Year"
                   value={formData.year.value}
-                  onBlur={() => console.log("yeee")}
                   onChange={(e) => handleChange(e, "year")}
                 />
               </Grid>
@@ -136,10 +151,17 @@ const BuildingDetails = (props) => {
                 />
               </Grid>
               <Grid item sm={2}>
-                <PhotoButton
-                  handler={handleFileChange}
-                  defaultValue={formData.image?.value?.name}
-                />
+                <Button onClick={SetShow} color="primary" variant="outlined">
+                  Upload
+                </Button>
+                {formData.image.value && (
+                  <Image
+                    width="70"
+                    height="70"
+                    publicId={formData.image.value}
+                    cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+                  />
+                )}
               </Grid>
             </Grid>
             <Typography variant="h5" gutterBottom>

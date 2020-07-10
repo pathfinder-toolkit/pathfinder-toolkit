@@ -46,9 +46,7 @@ const SuggestionContainer = (props) => {
   }, [activeStep]);
 
   const filterSubject = (subject) => {
-    console.log("Subjects: ");
     console.log(subjects);
-    console.log("Filtered subjects: ");
     console.log(filteredSubjects);
     if (filteredSubjects.includes(subject)) {
       // remove subject from filtered list
