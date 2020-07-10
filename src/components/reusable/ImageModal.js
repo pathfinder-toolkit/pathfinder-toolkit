@@ -15,17 +15,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     cursor: "pointer"
   },
-  card: {
+  image: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #FFF',
     boxShadow: theme.shadows[1],
-    padding: theme.spacing(0,0,0),
-    width:"90%",
-    height:"90%",
-  },
-  cardMedia: {
-    padding: theme.spacing(1,1,1),
-    height:"100%"
+    maxWidth:"90%",
+    maxHeight:"90%",
   }
 }));
 
@@ -50,14 +45,11 @@ const ImageModal = (props) => {
         onClick={onHide}
       >
         <Fade in={open}>
-            <Card raised={true} className={classes.card}>
-                <CardMedia className={classes.cardMedia}>
-                  <Image
-                    cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-                    publicId={props.image}
-                  />
-                </CardMedia>
-            </Card>
+            <Image
+              className={classes.image}
+              cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+              publicId={props.image}
+            />
         </Fade>
       </Modal>
   );
