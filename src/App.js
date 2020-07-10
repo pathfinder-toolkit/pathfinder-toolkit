@@ -19,14 +19,14 @@ function App() {
           <Route path="/" exact component={FrontPage}></Route>
           <Route path="/login" exact component={LoginPage}></Route>
           <Route path="/design" exact component={DesignPage}></Route>
-          <Route path="/register" exact component={RegisterPage}></Route>
-          <Route path="/feedback" exact component={FeedbackPage}></Route>
-          <Route path="/buildings" exact component={BuildingsPage}></Route>
-          <Route
+          <PrivateRoute path="/register" exact component={RegisterPage}></PrivateRoute>
+          <PrivateRoute path="/feedback" exact component={FeedbackPage}></PrivateRoute>
+          <PrivateRoute path="/buildings" exact component={BuildingsPage}></PrivateRoute>
+          <PrivateRoute
             path="/buildings/:slug"
             exact
             component={SavedBuildingPage}
-          ></Route>
+          ></PrivateRoute>
         </Switch>
       </Router>
     </CssBaseline>
