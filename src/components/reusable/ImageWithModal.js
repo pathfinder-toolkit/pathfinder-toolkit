@@ -12,16 +12,15 @@ import { Image } from 'cloudinary-react';
 
 const ImageWithModal = (props) => {
   const useStyles = makeStyles((theme) => ({
-    card: {
+    image: {
+      border: "2px solid #3F51B5",
+      borderRadius: "4px",
       maxWidth: props.width,
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(3)
-    },
-    cardMedia: {
-      height:props.height,
-      maxWidth:props.width,
+      maxHeight: props.height,
+      marginBottom: theme.spacing(2),
+      marginTop: theme.spacing(2),
       "&:hover": {
-        cursor:"pointer"
+        cursor:"pointer",
       }
     }
   }));
@@ -38,14 +37,12 @@ const ImageWithModal = (props) => {
   }
     
   return <React.Fragment>
-    <Card raised={true} className={classes.card}>
-        <CardMedia onClick={ _showImageModal } className={classes.cardMedia}>
-          <Image 
-            cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-            publicId={props.image}
-          />
-        </CardMedia>
-      </Card>
+      <Image 
+        className={classes.image}
+        onClick={ _showImageModal }
+        cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+        publicId={props.image}
+      />
       <ImageModal open={showImageModal} onHide={_hideImageModal} image={props.image} />
   </React.Fragment>
 }
