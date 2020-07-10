@@ -9,7 +9,10 @@ import CloudinaryContext from "cloudinary-react/lib/components/CloudinaryContext
 import { Image } from "cloudinary-react";
 
 const ImageSelection = (props) => {
-  const images = props.images;
+  // Sort images by recently uploaded
+  const images = props.images.sort((a, b) =>
+    new Date(a.date) < new Date(b.date) ? 1 : -1
+  );
   const classes = props.classes;
 
   const ITEMS_PER_PAGE = 8;
