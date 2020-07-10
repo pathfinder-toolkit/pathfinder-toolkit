@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
+import clsx from "clsx";
 
-import { Typography, Grid, IconButton, Zoom } from "@material-ui/core";
+import { Typography, IconButton, Zoom } from "@material-ui/core";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
-import { Image } from "cloudinary-react";
 import CloudinaryContext from "cloudinary-react/lib/components/CloudinaryContext";
+import { Image } from "cloudinary-react";
 
 const ImageSelection = (props) => {
   const images = props.images;
-  console.log(images);
   const classes = props.classes;
 
   const ITEMS_PER_PAGE = 8;
@@ -25,25 +25,35 @@ const ImageSelection = (props) => {
   const nextPage = () => {
     setPage(page + 1);
     setCurrentItem(currentItem + ITEMS_PER_PAGE);
-    setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
   };
 
   const previousPage = () => {
     setPage(page - 1);
     setCurrentItem(currentItem - ITEMS_PER_PAGE);
-    setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
   };
 
-  const selectImage = (image) => {
-    console.log("selected: " + image);
+  // Update elements of page switch
+  useEffect(() => {
+    setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
+  }, [currentItem]);
+
+  const selectImage = (publicId) => {
     if (props.handler) {
-      props.handler(image);
+      props.handler(publicId);
     }
   };
 
   useEffect(() => {
     setTransition(true);
   }, []);
+
+  if (images.length === 0) {
+    return (
+      <Typography style={{ padding: "2em" }} align="center">
+        No user images found.
+      </Typography>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -66,8 +76,12 @@ const ImageSelection = (props) => {
               <Zoom in={transition}>
                 <Image
                   publicId={item.publicId}
-                  className={classes.gridItem}
-                  onClick={() => selectImage(item.publicId)}
+                  className={
+                    item.publicId === props.selectedId
+                      ? clsx(classes.gridItem, classes.selected)
+                      : classes.gridItem
+                  }
+                  onClick={() => selectImage(item)}
                 ></Image>
               </Zoom>
             ))}
@@ -95,5 +109,7 @@ const ImageSelection = (props) => {
     </React.Fragment>
   );
 };
+
+const GridItem = (props) => {};
 
 export default ImageSelection;
