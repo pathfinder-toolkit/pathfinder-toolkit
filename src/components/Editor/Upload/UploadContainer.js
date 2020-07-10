@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Typography, TextField, Select, Button } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useBackend } from "../../../utils/BackendProvider";
 import ImageUpload from "./ImageUpload";
 import ImageSelection from "./ImageSelection";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,9 +42,6 @@ const useStyles = makeStyles((theme) => ({
     height: "1em",
     width: "1em",
     alignSelf: "center",
-    //left: "50%",
-    //top: "50%",
-    //transform: "translate(-50%,-50%)",
   },
   gridItem: {
     border: "1px solid black",
@@ -121,12 +119,13 @@ const UploadContainer = (props) => {
       </div>
       <div className={classes.controls}>
         <Button
+          variant="outlined"
           disabled={!image}
           onClick={() => handleDeletion(image.idImage)}
           variant="outlined"
           color="secondary"
         >
-          x
+          <DeleteIcon />
         </Button>
         <div>
           <Button
@@ -147,7 +146,6 @@ const UploadContainer = (props) => {
           </Button>
         </div>
       </div>
-      <Typography>Selected image: {image?.publicId}</Typography>
     </div>
   );
 };

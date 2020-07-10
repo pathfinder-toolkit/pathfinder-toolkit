@@ -49,7 +49,7 @@ const ImageUpload = (props) => {
           >
             upload
           </Button>
-        )}{" "}
+        )}
         {fileLoading && <CircularProgress style={{ padding: "5px" }} />}
         {file && fileUploaded && <DoneIcon color="primary" />}
       </Grid>
