@@ -4,13 +4,17 @@ import { Typography, Grid, IconButton, Zoom } from "@material-ui/core";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
+import { Image } from "cloudinary-react";
+import CloudinaryContext from "cloudinary-react/lib/components/CloudinaryContext";
+
 const ImageSelection = (props) => {
   const images = props.images;
+  console.log(images);
   const classes = props.classes;
 
   const ITEMS_PER_PAGE = 8;
   const TOTAL_ITEMS = Object.keys(images).length;
-  const TOTAL_PAGES = TOTAL_ITEMS / ITEMS_PER_PAGE;
+  const TOTAL_PAGES = Math.ceil(TOTAL_ITEMS / ITEMS_PER_PAGE);
 
   const [page, setPage] = useState(1);
   const [currentItem, setCurrentItem] = useState(0);
@@ -55,16 +59,19 @@ const ImageSelection = (props) => {
         </IconButton>
 
         <div className={classes.gridRoot}>
-          {items.map((item, index) => (
-            <Zoom in={transition}>
-              <img
-                src={item.image}
-                alt={item.date}
-                className={classes.gridItem}
-                onClick={() => selectImage(item.image)}
-              ></img>
-            </Zoom>
-          ))}
+          <CloudinaryContext
+            cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+          >
+            {items.map((item, index) => (
+              <Zoom in={transition}>
+                <Image
+                  publicId={item.publicId}
+                  className={classes.gridItem}
+                  onClick={() => selectImage(item.publicId)}
+                ></Image>
+              </Zoom>
+            ))}
+          </CloudinaryContext>
         </div>
 
         <IconButton
@@ -83,7 +90,7 @@ const ImageSelection = (props) => {
         align="center"
         variant="subtitle1"
       >
-        {page}/{TOTAL_PAGES}
+        pages:{page}/{TOTAL_PAGES} items:{currentItem}/{TOTAL_ITEMS}
       </Typography>
     </React.Fragment>
   );
