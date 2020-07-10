@@ -16,8 +16,9 @@ const PhotoButton = (props) => {
 
   return (
     <Button
+      disabled={props.disabled}
       startIcon={<InsertPhoto />}
-      style={{borderRight: '1px solid #3f51b5'}}
+      style={{ borderRight: "1px solid #3f51b5" }}
       color="primary"
       component="label"
     >

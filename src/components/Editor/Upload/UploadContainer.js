@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, TextField, Select, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useBackend } from "../../../utils/BackendProvider";
 import ImageUpload from "./ImageUpload";
 import ImageSelection from "./ImageSelection";
 
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   gridRoot: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   navButton: {
     height: "1em",
@@ -59,14 +60,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadContainer = (props) => {
-  const [imageUrl, setImageUrl] = useState("");
+  const { requestUserImages } = useBackend();
+  const [userImagesLoading, setUserImagesLoading] = useState(true);
+  const [userImages, setUserImages] = useState();
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const data = await requestUserImages();
+      setUserImages(data);
+      console.log(data);
+    };
+
+    fetchImages();
+  }, []);
+
+  const [imageId, setImageId] = useState("");
   const classes = useStyles();
 
-  const handleImageUrl = (url) => {
-    console.log("handleImageUrl: " + url);
-    setImageUrl(url);
-    if (props.handler) {
-      props.handler(url);
+  const handleImageId = (id) => {
+    console.log("handleImageId: " + id);
+    setImageId(id);
+    if (props.handleChange) {
+      props.handleChange(id);
     }
   };
 
@@ -80,60 +95,28 @@ const UploadContainer = (props) => {
       date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/400",
-      date: "04-02-2020",
-    },
-    {
-      image: "https://picsum.photos/220",
-      date: "06-02-2020",
-    },
-    {
-      image: "https://picsum.photos/210",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/214",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/216",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/215",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/201",
+      image: "https://picsum.photos/200",
       date: "02-02-2020",
     },
     {
-      image: "https://picsum.photos/301",
+      image: "https://picsum.photos/300",
       date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/401",
-      date: "04-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/221",
-      date: "06-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/211",
-      date: "01-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
     {
-      image: "https://picsum.photos/211",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/212",
-      date: "01-02-2020",
-    },
-    {
-      image: "https://picsum.photos/266",
-      date: "01-02-2020",
+      image: "https://picsum.photos/300",
+      date: "03-02-2020",
     },
   ];
 
@@ -142,19 +125,19 @@ const UploadContainer = (props) => {
       <Typography align="center" className={classes.header} variant="h5">
         Upload building image
       </Typography>
-      <ImageUpload classes={classes} />
+      <ImageUpload handler={(id) => handleImageId(id)} classes={classes} />
       <Typography align="center" className={classes.header} variant="h5">
         Select from your images
       </Typography>
       <div className={classes.imageSelection}>
         <ImageSelection
-          handler={(image) => handleImageUrl(image)}
+          handler={(id) => handleImageId(id)}
           images={mockImages}
           classes={classes}
         />
       </div>
       <div className={classes.controls}>
-        <Typography>Selected image: {imageUrl}</Typography>
+        <Typography>Selected image: {imageId}</Typography>
         <div>
           <Button
             style={{ marginRight: "0.5em" }}

@@ -13,7 +13,6 @@ import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
 import DropdownSelect from "../reusable/DropdownSelect";
-import PhotoButton from "../Upload/PhotoButton";
 
 import UploadContainer from "../Upload/UploadContainer";
 
@@ -26,7 +25,7 @@ const BuildingDetails = (props) => {
     formData,
     handleChange,
     handleFileChange,
-    validateNumber,
+    addImage,
   } = useFormData("details");
 
   const [loading, setLoading] = useState(false);
@@ -52,7 +51,7 @@ const BuildingDetails = (props) => {
       <div className={style.root}>
         <Modal open={show} onClose={setClose}>
           <div className={style.imageSelectModal}>
-            <UploadContainer handleChange={(e) => handleChange(e, "image")} />
+            <UploadContainer handleChange={(publicId) => addImage(publicId)} />
           </div>
         </Modal>
         <Grid item alignItems="center">

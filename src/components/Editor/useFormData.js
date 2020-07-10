@@ -147,6 +147,17 @@ const useFormData = (category) => {
     console.log(formData);
   };
 
+  const addImage = (publicId) => {
+    console.log("addImage: " + publicId);
+    setFormData((formData) => ({
+      ...formData,
+      image: {
+        ...formData.image,
+        value: publicId,
+      },
+    }));
+  };
+
   const validateNumber = (input) => {
     if (isNaN(input)) {
       return false;
@@ -189,6 +200,7 @@ const useFormData = (category) => {
     handleFileChange,
     addNewEntry,
     addOldEntry,
+    addImage,
     deleteEntry,
     validateNumber,
   };
