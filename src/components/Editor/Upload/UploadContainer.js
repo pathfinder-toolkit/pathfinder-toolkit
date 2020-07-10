@@ -46,16 +46,16 @@ const useStyles = makeStyles((theme) => ({
     //transform: "translate(-50%,-50%)",
   },
   gridItem: {
-    border: "1px solid #3F51B5",
+    border: "1px solid black",
     borderRadius: "3px",
     width: "10em",
     height: "10em",
     marginRight: "1em",
     marginBottom: "1em",
     cursor: "pointer",
-    "&:hover": {
-      border: "1px solid #3F51B5",
-    },
+  },
+  selected: {
+    border: "2px solid #3F51B5",
   },
 }));
 
@@ -63,71 +63,39 @@ const UploadContainer = (props) => {
   const { requestUserImages } = useBackend();
   const [userImagesLoading, setUserImagesLoading] = useState(true);
   const [userImages, setUserImages] = useState();
+  const [imageId, setImageId] = useState("");
+
+  const fetchImages = async () => {
+    setUserImagesLoading(true);
+    const data = await requestUserImages();
+    setUserImages(data);
+    console.log(data);
+    setUserImagesLoading(false);
+  };
 
   useEffect(() => {
-    const fetchImages = async () => {
-      setUserImagesLoading(true);
-      const data = await requestUserImages();
-      setUserImages(data);
-      console.log(data);
-      setUserImagesLoading(false);
-    };
-
     fetchImages();
   }, []);
 
-  const [imageId, setImageId] = useState("");
   const classes = useStyles();
 
   const handleImageId = (id) => {
-    console.log("handleImageId: " + id);
     setImageId(id);
     if (props.handleChange) {
       props.handleChange(id);
     }
   };
 
-  const mockImages = [
-    {
-      image: "https://picsum.photos/200",
-      date: "02-02-2020",
-    },
-    {
-      image: "https://picsum.photos/300",
-      date: "03-02-2020",
-    },
-    {
-      image: "https://picsum.photos/200",
-      date: "02-02-2020",
-    },
-    {
-      image: "https://picsum.photos/300",
-      date: "03-02-2020",
-    },
-    {
-      image: "https://picsum.photos/300",
-      date: "03-02-2020",
-    },
-    {
-      image: "https://picsum.photos/300",
-      date: "03-02-2020",
-    },
-    {
-      image: "https://picsum.photos/300",
-      date: "03-02-2020",
-    },
-    {
-      image: "https://picsum.photos/300",
-      date: "03-02-2020",
-    },
-  ];
-
   return (
     <div className={classes.root}>
       <Typography align="center" className={classes.header} variant="h5">
-        Upload building image
+        Upload image
       </Typography>
-      <ImageUpload handler={(id) => handleImageId(id)} classes={classes} />
+      <ImageUpload
+        handler={(id) => handleImageId(id)}
+        fetchImages={fetchImages}
+        classes={classes}
+      />
       <Typography align="center" className={classes.header} variant="h5">
         Select from your images
       </Typography>
@@ -135,8 +103,8 @@ const UploadContainer = (props) => {
         {!userImagesLoading && (
           <ImageSelection
             handler={(id) => handleImageId(id)}
-            //images={mockImages}
             images={userImages}
+            selectedId={imageId}
             classes={classes}
           />
         )}
@@ -145,6 +113,7 @@ const UploadContainer = (props) => {
         <Typography>Selected image: {imageId}</Typography>
         <div>
           <Button
+            disabled={!imageId}
             style={{ marginRight: "0.5em" }}
             color="primary"
             variant="contained"

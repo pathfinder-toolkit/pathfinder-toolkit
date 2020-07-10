@@ -25,6 +25,9 @@ const ImageUpload = (props) => {
     const data = await uploadUserImage(file);
     setNewImageId(data.publicId);
     setFileUploaded(true);
+    if (props.fetchImages) {
+      props.fetchImages();
+    }
     if (props.handler) {
       props.handler(data.publicId);
     }
