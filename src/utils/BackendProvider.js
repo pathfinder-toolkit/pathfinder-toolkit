@@ -310,7 +310,7 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + '/image'
+      process.env.REACT_APP_API_ROOT + '/image/' + id
     );
 
     const axiosConfig = {
