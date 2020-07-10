@@ -131,13 +131,18 @@ const UploadContainer = (props) => {
         <div>
           <Button
             disabled={!image}
+            onClick={() => props.handleClose()}
             style={{ marginRight: "0.5em" }}
             color="primary"
             variant="contained"
           >
             OK
           </Button>
-          <Button color="secondary" variant="outlined">
+          <Button
+            onClick={() => props.handleClose()}
+            color="secondary"
+            variant="outlined"
+          >
             Cancel
           </Button>
         </div>
