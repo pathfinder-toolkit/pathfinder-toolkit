@@ -8,6 +8,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Home from "@material-ui/icons/Home";
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { makeStyles } from "@material-ui/core/styles";
 
 import Snackbar from "@material-ui/core/Snackbar";
@@ -74,6 +75,15 @@ const NavigationBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           EnergyPathfinder
         </Typography>
+        <IconButton
+          onClick={() => {
+            redirectTo("/admin");
+          }}
+          color="inherit"
+          className={classes.navButton}
+        >
+          <VpnKeyIcon />
+        </IconButton>
         <IconButton
           onClick={() => {
             redirectTo("");

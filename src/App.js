@@ -8,6 +8,7 @@ import RegisterPage from "./sites/RegisterPage/RegisterPage";
 import FeedbackPage from "./sites/FeedbackPage/FeedbackPage";
 import BuildingsPage from "./sites/BuildingsPage/BuildingsPage";
 import SavedBuildingPage from "./sites/SavedBuildingPage/SavedBuildingPage";
+import AdminPage from "./sites/AdminPage/AdminPage";
 import { CssBaseline } from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -27,6 +28,7 @@ function App() {
             exact
             component={SavedBuildingPage}
           ></PrivateRoute>
+          <PrivateRoute path="/admin" exact component={AdminPage}></PrivateRoute>
         </Switch>
       </Router>
     </CssBaseline>
