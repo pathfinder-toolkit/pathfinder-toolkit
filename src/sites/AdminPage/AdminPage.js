@@ -1,9 +1,11 @@
 import React from 'react';
 import NavigationBar from '../../components/Navigation/NavigationBar';
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
 
 import AdminPageContainer from "../../components/AdminPage/AdminPageContainer";
+import AdminNavigationBar from "../../components/AdminPage/AdminNavigationBar/AdminNavigation";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,12 +18,15 @@ const useStyles = makeStyles((theme) => ({
 const AdminPage = () => {
     const classes = useStyles();
 
-    return <Container maxWidth={false} className={classes.root}>
+    return  <Grid container maxWidth={false} className={classes.root}>
         <NavigationBar />
-        <Container maxWidth={false} >
+        <Grid item className={classes.sidebar} sm={2} md={2} lg={2}>
+            <AdminNavigationBar />
+        </Grid>
+        <Grid item sm={10} md={10} lg={10}>
             <AdminPageContainer />
-        </Container>
-    </Container>
+        </Grid>
+    </Grid>
 }
 
 export default AdminPage;
