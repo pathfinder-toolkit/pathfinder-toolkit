@@ -63,6 +63,8 @@ const UploadContainer = (props) => {
   const [userImages, setUserImages] = useState();
   const [image, setImage] = useState();
 
+  const [deleteWarning, setDeleteWarning] = useState(false);
+
   const fetchImages = async () => {
     setUserImagesLoading(true);
     const data = await requestUserImages();
@@ -78,9 +80,18 @@ const UploadContainer = (props) => {
   const classes = useStyles();
 
   const handleImage = (item) => {
-    setImage(item);
-    if (props.handleChange) {
-      props.handleChange(item.publicId);
+    setDeleteWarning(false);
+    // If user clicks same image again, deselect
+    if (item.publicId === image?.publicId) {
+      setImage();
+      if (props.handleChange) {
+        props.handleChange("");
+      }
+    } else {
+      setImage(item);
+      if (props.handleChange) {
+        props.handleChange(item.publicId);
+      }
     }
   };
 
@@ -121,12 +132,21 @@ const UploadContainer = (props) => {
         <Button
           variant="outlined"
           disabled={!image}
-          onClick={() => handleDeletion(image.idImage)}
+          onClick={
+            !deleteWarning
+              ? () => setDeleteWarning(true)
+              : () => handleDeletion(image.idImage)
+          }
           variant="outlined"
           color="secondary"
         >
           <DeleteIcon />
         </Button>
+        {/*deleteWarning && (
+          <Button variant="outlined" onClick={() => setDeleteWarning(false)}>
+            Cancel
+          </Button>
+        )*/}
         <div>
           <Button
             disabled={!image}
@@ -146,6 +166,11 @@ const UploadContainer = (props) => {
           </Button>
         </div>
       </div>
+      {deleteWarning && (
+        <React.Fragment>
+          <Typography variant="subtitle2">Are you sure?</Typography>
+        </React.Fragment>
+      )}
     </div>
   );
 };

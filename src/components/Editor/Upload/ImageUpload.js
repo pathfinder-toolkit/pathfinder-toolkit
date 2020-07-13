@@ -32,8 +32,8 @@ const ImageUpload = (props) => {
       }
       setFileLoading(false);
     } catch (error) {
-      console.log(error)
-      setFileLoading(false)
+      console.log(error);
+      setFileLoading(false);
     }
   };
 
