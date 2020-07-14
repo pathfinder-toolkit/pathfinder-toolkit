@@ -3,8 +3,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 
-import AdminDashboard from "./AdminDashboard";
-
 import { useAdmin } from "../../utils/AdminProvider";
 
 const AdminPageContainer = () => {
