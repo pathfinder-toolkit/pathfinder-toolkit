@@ -18,6 +18,7 @@ const VentilationCategory = (props) => {
         {containsCategoryItem("ventilationSystem") && (
             Array.isArray(props.category.ventilationSystem) ? (
                 props.category.ventilationSystem.map((listItem, key) => {
+                    console.log(listItem);
                     return (
                         <CategoryItem
                         item={listItem}

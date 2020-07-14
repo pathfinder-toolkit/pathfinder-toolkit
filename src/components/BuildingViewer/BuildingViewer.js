@@ -70,7 +70,6 @@ const BuildingViewer = (props) => {
                             const newItem = buildingObject[category][categoryItem];
                             newItem.subject = categoryItem;
                             categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(newItem);
-                            console.log(categoryItemsWithSuggestions);
                         }
                     } else if (Array.isArray(buildingObject[category][categoryItem])) {
                         buildingObject[category][categoryItem].map((categoryItemInArray) => {
@@ -79,7 +78,6 @@ const BuildingViewer = (props) => {
                                     const newItem = categoryItemInArray;
                                     newItem.subject = categoryItem;
                                     categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(categoryItemInArray);
-                                    console.log(categoryItemInArray);
                                 }
                             }
                         })

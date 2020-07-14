@@ -22,13 +22,12 @@ const AdminPageContainer = () => {
             marginTop: theme.spacing(1.5),
         },
     }));
-    const classes = useStyles();
+    const styleClasses = useStyles();
 
     const { getComponent } = useAdmin();
 
-    return <Paper className={classes.root}>
-        <Typography variant="h4" component="h4" className={classes.header}>Admin page</Typography>
-        {getComponent()}
+    return <Paper className={styleClasses.root}>
+        {getComponent(styleClasses)}
     </Paper>
 }
 
