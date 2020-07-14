@@ -3,8 +3,6 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "./react-auth0-spa";
 
-//import requestBody from "../json/postRequestExample.json";
-
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 

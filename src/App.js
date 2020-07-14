@@ -8,6 +8,7 @@ import RegisterPage from "./sites/RegisterPage/RegisterPage";
 import FeedbackPage from "./sites/FeedbackPage/FeedbackPage";
 import BuildingsPage from "./sites/BuildingsPage/BuildingsPage";
 import SavedBuildingPage from "./sites/SavedBuildingPage/SavedBuildingPage";
+import AdminPage from "./sites/AdminPage/AdminPage";
 import { CssBaseline } from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -19,14 +20,15 @@ function App() {
           <Route path="/" exact component={FrontPage}></Route>
           <Route path="/login" exact component={LoginPage}></Route>
           <Route path="/design" exact component={DesignPage}></Route>
-          <Route path="/register" exact component={RegisterPage}></Route>
-          <Route path="/feedback" exact component={FeedbackPage}></Route>
-          <Route path="/buildings" exact component={BuildingsPage}></Route>
-          <Route
+          <PrivateRoute path="/register" exact component={RegisterPage}></PrivateRoute>
+          <PrivateRoute path="/feedback" exact component={FeedbackPage}></PrivateRoute>
+          <PrivateRoute path="/buildings" exact component={BuildingsPage}></PrivateRoute>
+          <PrivateRoute
             path="/buildings/:slug"
             exact
             component={SavedBuildingPage}
-          ></Route>
+          ></PrivateRoute>
+          <PrivateRoute path="/admin" exact component={AdminPage}></PrivateRoute>
         </Switch>
       </Router>
     </CssBaseline>
