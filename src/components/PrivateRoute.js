@@ -1,20 +1,24 @@
 import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
-import { useBackend } from "../utils/BackendProvider";
-import history from "../utils/history";
+import { useAuth0 } from "../utils/react-auth0-spa";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
-  const { isLoggedIn } = useBackend();
+  const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (loading || isAuthenticated) {
       return;
     }
-    history.push('/');
-  }, [isLoggedIn, path]);
+    const fn = async () => {
+      await loginWithRedirect({
+        appState: { targetUrl: path }
+      });
+    };
+    fn();
+  }, [loading, isAuthenticated, loginWithRedirect, path]);
 
   const render = props =>
-    isLoggedIn === true ? <Component {...props} /> : null;
+    isAuthenticated === true ? <Component {...props} /> : null;
 
   return <Route path={path} render={render} {...rest} />;
 };

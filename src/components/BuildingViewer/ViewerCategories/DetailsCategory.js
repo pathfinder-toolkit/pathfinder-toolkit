@@ -3,6 +3,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
+import CategoryItemChangelog from "./CategoryItemChangelog";
+
 import GeneralBuildingDetails from "./GeneralBuildingDetails.js";
 import ImageWithModal from "../../reusable/ImageWithModal";
 
@@ -23,16 +25,10 @@ const DetailsCategory = (props) => {
         />
         {containsCategoryItem("annualConsumption") && (
             Array.isArray(props.category.annualConsumption) ? (
-                props.category.annualConsumption.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="annualConsumption"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.annualConsumption}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.annualConsumption}
@@ -43,16 +39,10 @@ const DetailsCategory = (props) => {
         )}
         {containsCategoryItem("annualCost") && (
             Array.isArray(props.category.annualCost) ? (
-                props.category.annualCost.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="annualCost"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.annualCost}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.annualCost}
@@ -63,16 +53,10 @@ const DetailsCategory = (props) => {
         )}
         {containsCategoryItem("annualHeatingConsumption") && (
             Array.isArray(props.category.annualHeatingConsumption) ? (
-                props.category.annualHeatingConsumption.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="annualHeatingConsumption"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.annualHeatingConsumption}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.annualHeatingConsumption}
@@ -83,16 +67,10 @@ const DetailsCategory = (props) => {
         )}
         {containsCategoryItem("annualHeatingCost") && (
             Array.isArray(props.category.annualHeatingCost) ? (
-                props.category.annualHeatingCost.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="annualHeatingCost"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.annualHeatingCost}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.annualHeatingCost}

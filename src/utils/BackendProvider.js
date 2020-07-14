@@ -3,8 +3,6 @@ import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useAuth0 } from "./react-auth0-spa";
 
-//import requestBody from "../json/postRequestExample.json";
-
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
@@ -208,7 +206,7 @@ export const BackendProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-      return null;
+      return error;
     }
 
   }
@@ -335,6 +333,33 @@ export const BackendProvider = ({ children }) => {
   
   }
 
+  const requestAdminPrivileges = async () => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + '/admin'
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }
+    };
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null
+    }
+  }
+
   
   return (
     <BackendContext.Provider
@@ -350,7 +375,8 @@ export const BackendProvider = ({ children }) => {
         submitNewComment,
         uploadUserImage,
         requestUserImages,
-        requestImageDeletion
+        requestImageDeletion,
+        requestAdminPrivileges
       }}
     >
       {children}

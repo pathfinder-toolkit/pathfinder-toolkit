@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
+import CategoryItemChangelog from "./CategoryItemChangelog";
 
 
 const RenewableCategory = (props) => {
@@ -17,16 +18,10 @@ const RenewableCategory = (props) => {
 
         {containsCategoryItem("heatPump") && (
             Array.isArray(props.category.heatPump) ? (
-                props.category.heatPump.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="heatPump"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.heatPump}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.heatPump}
@@ -37,16 +32,10 @@ const RenewableCategory = (props) => {
         )}
         {containsCategoryItem("solarHeat") && (
             Array.isArray(props.category.solarHeat) ? (
-                props.category.solarHeat.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="solarHeat"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.solarHeat}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.solarHeat}
@@ -57,16 +46,10 @@ const RenewableCategory = (props) => {
         )}
         {containsCategoryItem("solarElectric") && (
             Array.isArray(props.category.solarElectric) ? (
-                props.category.solarElectric.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="solarElectric"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.solarElectric}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.solarElectric}
@@ -77,16 +60,10 @@ const RenewableCategory = (props) => {
         )}
         {containsCategoryItem("bioMass") && (
             Array.isArray(props.category.bioMass) ? (
-                props.category.bioMass.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="bioMass"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.bioMass}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.bioMass}
@@ -97,16 +74,10 @@ const RenewableCategory = (props) => {
         )}
         {containsCategoryItem("chp") && (
             Array.isArray(props.category.chp) ? (
-                props.category.chp.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="chp"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.chp}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.chp}

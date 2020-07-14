@@ -21,15 +21,20 @@ const ImageUpload = (props) => {
 
   const startUpload = async () => {
     setFileLoading(true);
-    const data = await uploadUserImage(file);
-    setFileUploaded(true);
-    if (props.fetchImages) {
-      props.fetchImages();
+    try {
+      const data = await uploadUserImage(file);
+      setFileUploaded(true);
+      if (props.fetchImages) {
+        props.fetchImages();
+      }
+      if (props.handler) {
+        props.handler(data);
+      }
+      setFileLoading(false);
+    } catch (error) {
+      console.log(error);
+      setFileLoading(false);
     }
-    if (props.handler) {
-      props.handler(data);
-    }
-    setFileLoading(false);
   };
 
   return (
