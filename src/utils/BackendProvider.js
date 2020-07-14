@@ -206,7 +206,7 @@ export const BackendProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error);
-      return null;
+      return error;
     }
 
   }

@@ -134,19 +134,6 @@ const useFormData = (category) => {
     }));
   };
 
-  const handleFileChange = (event) => {
-    event.persist();
-    console.log(event.target.files[0]);
-    setFormData((formData) => ({
-      ...formData,
-      image: {
-        ...formData.image,
-        value: event.target.files[0],
-      },
-    }));
-    console.log(formData);
-  };
-
   const addImage = (publicId) => {
     console.log("addImage: " + publicId);
     setFormData((formData) => ({
@@ -197,7 +184,6 @@ const useFormData = (category) => {
   return {
     formData,
     handleChange,
-    handleFileChange,
     addNewEntry,
     addOldEntry,
     addImage,

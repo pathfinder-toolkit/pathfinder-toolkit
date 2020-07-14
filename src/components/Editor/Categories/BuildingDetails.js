@@ -20,9 +20,7 @@ const BuildingDetails = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange, handleFileChange, addImage } = useFormData(
-    "details"
-  );
+  const { formData, handleChange, addImage } = useFormData("details");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -156,6 +154,7 @@ const BuildingDetails = (props) => {
                 </Button>
                 {formData.image.value && (
                   <Image
+                    className={style.formImage}
                     width="70"
                     height="70"
                     publicId={formData.image.value}

@@ -40,7 +40,7 @@ export const EditorProvider = ({ children }) => {
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
   const [commentsLoading, setCommentsLoading] = useState(true);
 
-  const [comments, setComments] = useState([])
+  const [comments, setComments] = useState([]);
 
   const { requestSuggestions, requestComments } = useBackend();
 
@@ -195,8 +195,9 @@ export const EditorProvider = ({ children }) => {
     setComments([]);
     setSuggestions([]);
   };
-  const PostBuilding = () => {
-    submitNewBuilding(buildingInformation);
+  const postBuilding = async () => {
+    const response = submitNewBuilding(buildingInformation);
+    return response;
   };
 
   return (
@@ -224,7 +225,7 @@ export const EditorProvider = ({ children }) => {
         comments,
         commentsLoading,
         subjects,
-        PostBuilding,
+        postBuilding,
       }}
     >
       {children}
