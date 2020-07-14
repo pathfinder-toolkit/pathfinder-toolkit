@@ -10,12 +10,12 @@ export const AdminProvider = ( { children } ) => {
     const [selectedComponent, setSelectedComponent] = React.useState("dashboard");
 
 
-    const getComponent = () => { 
+    const getComponent = (style) => { 
         switch (selectedComponent) {
             case "dashboard":
-                return <AdminDashboard />;
+                return <AdminDashboard style={style}/>;
             case "createNewSuggestion":
-                return <CreateNewSuggestion />
+                return <CreateNewSuggestion style={style}/>
             default:
                 return <p>No component</p>
         }

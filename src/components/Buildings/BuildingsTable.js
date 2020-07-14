@@ -175,7 +175,7 @@ const BuildingsTable = () => {
                       className={classes.row}
                       hover
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.slug}
                     >
                       <TableCell padding="checkbox">
                       </TableCell>
