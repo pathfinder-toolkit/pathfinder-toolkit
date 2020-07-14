@@ -63,10 +63,10 @@ const AdminNavigationBar = () => {
                     <ListItem button className={classes.itemNested} onClick={() => {handleSelection("createNewSuggestion")}}>
                         <ListItemText>Create new suggestion</ListItemText>
                     </ListItem>
-                    <ListItem button className={classes.itemNested}>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("editSuggestions")}}>
                         <ListItemText>Edit existing suggestions</ListItemText>
                     </ListItem>
-                    <ListItem button className={classes.itemNested}>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("deleteSuggestions")}}>
                         <ListItemText>Delete suggestions</ListItemText>
                     </ListItem>
                 </List>
