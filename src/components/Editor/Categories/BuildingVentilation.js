@@ -53,7 +53,7 @@ const BuildingVentilation = (props) => {
       <div className={style.root}>
         <Modal open={open} onClose={setClose}>
           <div className={style.modal}>
-            <OldEntry
+            <OldEntryTest
               handler={(value, year, propertyName, description) =>
                 addOldEntry(value, year, "ventilationSystem", description)
               }
