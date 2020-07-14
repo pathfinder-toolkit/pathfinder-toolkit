@@ -75,6 +75,11 @@ const BuildingEditor = () => {
       border: "1px solid #E0E0E0",
       borderRadius: "4px",
     },
+    formImage: {
+      border: "1px solid #E0E0E0",
+      borderRadius: "4px",
+      marginTop: theme.spacing(0.5),
+    },
     clearButton: {
       marginBottom: theme.spacing(-5.5),
     },
