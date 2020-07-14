@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
 
 import CategoryItem from "./CategoryItem.js";
+import CategoryItemChangelog from "./CategoryItemChangelog";
 
 
 const WaterCategory = (props) => {
@@ -17,15 +18,10 @@ const WaterCategory = (props) => {
 
         {containsCategoryItem("heatedWaterEnergySource") && (
             Array.isArray(props.category.heatedWaterEnergySource) ? (
-                props.category.heatedWaterEnergySource.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.heatedWaterEnergySource}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.heatedWaterEnergySource}

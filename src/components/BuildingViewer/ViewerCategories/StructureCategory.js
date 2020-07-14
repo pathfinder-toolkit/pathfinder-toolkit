@@ -1,7 +1,9 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from '@material-ui/core/Typography';
+
 import CategoryItem from "./CategoryItem.js";
+import CategoryItemChangelog from "./CategoryItemChangelog";
 
 
 const StructureCategory = (props) => {
@@ -16,16 +18,10 @@ const StructureCategory = (props) => {
 
         {containsCategoryItem("wallMaterial") && (
             Array.isArray(props.category.wallMaterial) ? (
-                props.category.wallMaterial.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="wallMaterial"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.wallMaterial}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.wallMaterial}
@@ -36,16 +32,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("wallThickness") && (
             Array.isArray(props.category.wallThickness) ? (
-                props.category.wallThickness.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="wallThickness"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.wallThickness}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.wallThickness}
@@ -56,16 +46,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("windowType") && (
             Array.isArray(props.category.windowType) ? (
-                props.category.windowType.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="windowType"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.windowType}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.windowType}
@@ -76,16 +60,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("windowAmount") && (
             Array.isArray(props.category.windowAmount) ? (
-                props.category.windowAmount.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="windowAmount"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.windowAmount}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.windowAmount}
@@ -96,16 +74,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("heatedWindowType") && (
             Array.isArray(props.category.heatedWindowType) ? (
-                props.category.heatedWindowType.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="heatedWindowType"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.heatedWindowType}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.heatedWindowType}
@@ -116,16 +88,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("heatedWindowAmount") && (
             Array.isArray(props.category.heatedWindowAmount) ? (
-                props.category.heatedWindowAmount.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="heatedWindowAmount"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.heatedWindowAmount}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.heatedWindowAmount}
@@ -136,16 +102,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("doorMaterial") && (
             Array.isArray(props.category.doorMaterial) ? (
-                props.category.doorMaterial.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="doorMaterial"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.doorMaterial}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.doorMaterial}
@@ -156,16 +116,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("doorAmount") && (
             Array.isArray(props.category.doorAmount) ? (
-                props.category.doorAmount.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="doorAmount"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.doorAmount}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.doorAmount}
@@ -176,16 +130,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("roofMaterial") && (
             Array.isArray(props.category.roofMaterial) ? (
-                props.category.roofMaterial.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="roofMaterial"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.roofMaterial}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.roofMaterial}
@@ -196,16 +144,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("roofInsulation") && (
             Array.isArray(props.category.roofInsulation) ? (
-                props.category.roofInsulation.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject="roofInsulation"
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.roofInsulation}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.roofInsulation}
@@ -216,16 +158,10 @@ const StructureCategory = (props) => {
         )}
         {containsCategoryItem("roofInsulationThickness") && (
             Array.isArray(props.category.roofInsulationThickness) ? (
-                props.category.roofInsulationThickness.map((listItem, key) => {
-                    return (
-                        <CategoryItem
-                        item={listItem}
-                        classes={props.classes}
-                        key={key}
-                        subject={"roofInsulationThickness"}
-                        />
-                    )
-                })
+                <CategoryItemChangelog
+                itemList={props.category.roofInsulationThickness}
+                classes={props.classes}
+                />
             ) : (
                 <CategoryItem 
                 item={props.category.roofInsulationThickness}

@@ -47,6 +47,17 @@ const useStyles = makeStyles((theme) => ({
     buildingImage: {
         display: "relative",
         bottom: 1000
+    },
+    timeline: {
+        marginLeft: theme.spacing(0),
+    },
+    timelineLeftColumn: {
+        maxWidth: "6vw",
+        margin: 0,
+        paddingLeft: 0
+    },
+    timelineItemText: {
+        marginLeft: theme.spacing(1),
     }
   }));
 
