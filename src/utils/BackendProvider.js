@@ -333,6 +333,33 @@ export const BackendProvider = ({ children }) => {
   
   }
 
+  const requestAdminPrivileges = async () => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_LOCAL_API_ROOT + '/admin'
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      }
+    };
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null
+    }
+  }
+
   
   return (
     <BackendContext.Provider
@@ -348,7 +375,8 @@ export const BackendProvider = ({ children }) => {
         submitNewComment,
         uploadUserImage,
         requestUserImages,
-        requestImageDeletion
+        requestImageDeletion,
+        requestAdminPrivileges
       }}
     >
       {children}
