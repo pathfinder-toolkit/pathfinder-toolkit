@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavigationBar = (props) => {
-  const { loading, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { loading, isAuthenticated, loginWithRedirect, logout, isAdmin } = useAuth0();
 
   const {fakeLogout} = useBackend();
 
@@ -75,7 +75,7 @@ const NavigationBar = (props) => {
         <Typography variant="h6" className={classes.title}>
           EnergyPathfinder
         </Typography>
-        <IconButton
+        {isAdmin && <IconButton
           onClick={() => {
             redirectTo("/admin");
           }}
@@ -84,6 +84,7 @@ const NavigationBar = (props) => {
         >
           <VpnKeyIcon />
         </IconButton>
+        }
         <IconButton
           onClick={() => {
             redirectTo("");

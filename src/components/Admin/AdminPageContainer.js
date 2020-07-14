@@ -11,9 +11,7 @@ const AdminPageContainer = () => {
     const useStyles = makeStyles((theme) => ({
         root: {
             maxWidth: "100%",
-            marginTop: theme.spacing(2),
-            marginBottom: theme.spacing(2),
-            marginLeft: theme.spacing(2),
+            margin: theme.spacing(2),
             padding: theme.spacing(1)
         },
         header: {

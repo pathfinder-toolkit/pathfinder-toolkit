@@ -17,6 +17,15 @@ export const Auth0Provider = ({
   const [auth0Client, setAuth0] = useState();
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const checkAdminStatus = (user) => {
+    if (user["https://pathfinder-toolkit.herokuapp.com/roles"].includes("Admin")) {
+        setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }
 
   useEffect(() => {
     const initAuth0 = async () => {
@@ -36,6 +45,7 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+        checkAdminStatus(user);
       }
 
       setLoading(false);
@@ -56,6 +66,7 @@ export const Auth0Provider = ({
     const user = await auth0Client.getUser();
     setUser(user);
     setIsAuthenticated(true);
+    checkAdminStatus(user);
   };
 
   const handleRedirectCallback = async () => {
@@ -65,12 +76,14 @@ export const Auth0Provider = ({
     setLoading(false);
     setIsAuthenticated(true);
     setUser(user);
+    checkAdminStatus(user);
   };
   return (
     <Auth0Context.Provider
       value={{
         isAuthenticated,
         user,
+        isAdmin,
         loading,
         popupOpen,
         loginWithPopup,
