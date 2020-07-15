@@ -2,6 +2,8 @@ import React,  {useState, useContext } from "react";
 
 import AdminDashboard from "../components/Admin/AdminDashboard";
 import CreateNewSuggestion from "../components/Admin/Suggestions/CreateNewSuggestion";
+import EditSuggestions from "../components/Admin/Suggestions/EditSuggestions";
+import DeleteSuggestions from "../components/Admin/Suggestions/DeleteSuggestions";
 
 export const AdminContext = React.createContext();
 export const useAdmin = () => useContext(AdminContext);
@@ -13,11 +15,15 @@ export const AdminProvider = ( { children } ) => {
     const getComponent = (style) => { 
         switch (selectedComponent) {
             case "dashboard":
-                return <AdminDashboard style={style}/>;
+                return <AdminDashboard style={style} />;
             case "createNewSuggestion":
-                return <CreateNewSuggestion style={style}/>
+                return <CreateNewSuggestion style={style} />;
+            case "editSuggestions":
+                return <EditSuggestions style={style} />;
+            case "deleteSuggestions":
+                return <DeleteSuggestions style={style} />;
             default:
-                return <p>No component</p>
+                return <p>No component</p>;
         }
     }
     return (
