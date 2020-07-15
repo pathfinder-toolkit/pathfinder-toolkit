@@ -360,6 +360,24 @@ export const BackendProvider = ({ children }) => {
     }
   }
 
+  const sendFeedbackWithRecaptcha = async (requestBody) => {
+    const address = encodeURI(
+      process.env.REACT_APP_LOCAL_API_ROOT + "/feedback/recaptcha"
+    );
+
+    try {
+      const response = await axios.post(address, requestBody);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return error;
+    }
+  }
+
   
   return (
     <BackendContext.Provider
@@ -376,7 +394,8 @@ export const BackendProvider = ({ children }) => {
         uploadUserImage,
         requestUserImages,
         requestImageDeletion,
-        requestAdminPrivileges
+        requestAdminPrivileges,
+        sendFeedbackWithRecaptcha
       }}
     >
       {children}

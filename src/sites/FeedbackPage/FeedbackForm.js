@@ -4,11 +4,15 @@ import {
   Button,
   Paper,
   TextField,
-  Box
+  Box,
+  CircularProgress
 } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from "@material-ui/core/styles";
 
 import ReCAPTCHA from "react-google-recaptcha";
+
+import { useBackend } from "../../utils/BackendProvider";
 
 const useStyles = makeStyles((theme) => ({
   actions: {
@@ -32,13 +36,27 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     marginBottom: theme.spacing(2),
   },
+  progress: {
+    margin: theme.spacing(2),
+  },
+  alert: {
+    margin: theme.spacing(2),
+  }
 }));
 
 const FeedbackForm = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [recaptcha, setRecaptcha] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
   const classes = useStyles();
+
+  const {
+    sendFeedbackWithRecaptcha
+  } = useBackend();
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -52,6 +70,37 @@ const FeedbackForm = () => {
     setRecaptcha(value);
   }
 
+  const onExpired = () => {
+    setRecaptcha(false);
+  }
+
+  const resetForRequest = () => {
+    setSuccess(false);
+    setShow(false);
+    setTitle("");
+    setText("");
+    setRecaptcha(false);
+  }
+
+  const onSubmit = async () => {
+    resetForRequest();
+    const feedback= {
+      title: title,
+      text: text,
+      recaptcha: recaptcha
+    };
+    setPending(true);
+    const result = await sendFeedbackWithRecaptcha(feedback);
+    setPending(false);
+    if (result) {
+      setMessage(result)
+      if (result === 'Your feedback has been sent.') {
+        setSuccess(true);
+      }
+    }
+    setShow(true);
+  }
+
   return (
     <Paper className={classes.actions}>
       <Typography variant="h5"className={classes.actionsText}>Feedback</Typography>
@@ -59,7 +108,7 @@ const FeedbackForm = () => {
         className={classes.feedbackField}
         id="feedback-title"
         label="Title"
-        defaultValue=""
+        value={title}
         variant="outlined"
         onChange={handleTitleChange}
       />
@@ -68,7 +117,7 @@ const FeedbackForm = () => {
         id="feedback-content"
         multiline
         rows={4}
-        defaultValue=""
+        value={text}
         variant="outlined"
         onChange={handleTextChange}
       />
@@ -76,6 +125,7 @@ const FeedbackForm = () => {
         <ReCAPTCHA
         sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITE_KEY}
         onChange={onChange}
+        onExpired={onExpired}
         />
       </Box>
       <Button
@@ -83,9 +133,22 @@ const FeedbackForm = () => {
         variant="contained"
         color="primary"
         disabled={!(text && title && recaptcha)}
+        onClick={onSubmit}
       >
         Submit
       </Button>
+      <Box alignSelf="center" m={0}>
+      {pending && (
+        <CircularProgress className={classes.progress} />
+      )}
+      {show && (
+        <Alert 
+        severity={success ? "success" : "error"}
+        onClose={() => {setShow(false)}}>
+          {message}
+        </Alert>
+      )}
+      </Box>
     </Paper>
   );
 };
