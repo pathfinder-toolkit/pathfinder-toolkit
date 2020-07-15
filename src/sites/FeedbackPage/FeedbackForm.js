@@ -4,9 +4,11 @@ import {
   Button,
   Paper,
   TextField,
-  FormControl,
+  Box
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
+import ReCAPTCHA from "react-google-recaptcha";
 
 const useStyles = makeStyles((theme) => ({
   actions: {
@@ -22,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   feedbackTitle: {},
   feedbackField: {
-    padding: theme.spacing(1),
+    margin: theme.spacing(1),
+    backgroundColor: "#ffffff"
   },
   actionsButton: {
     width: "50%",
@@ -34,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const FeedbackForm = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [recaptcha, setRecaptcha] = useState(false);
   const classes = useStyles();
 
   const handleTitleChange = (event) => {
@@ -43,6 +47,10 @@ const FeedbackForm = () => {
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
+
+  const onChange = (value) => {
+    setRecaptcha(value);
+  }
 
   return (
     <Paper className={classes.actions}>
@@ -64,11 +72,17 @@ const FeedbackForm = () => {
         variant="outlined"
         onChange={handleTextChange}
       />
+      <Box alignSelf="center" m={1}>
+        <ReCAPTCHA
+        sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITE_KEY}
+        onChange={onChange}
+        />
+      </Box>
       <Button
         className={classes.actionsButton}
         variant="contained"
         color="primary"
-        disabled={(text && title) ? false : true}
+        disabled={!(text && title && recaptcha)}
       >
         Submit
       </Button>
