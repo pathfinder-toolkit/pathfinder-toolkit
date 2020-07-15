@@ -92,6 +92,7 @@ const FeedbackForm = () => {
     setPending(true);
     const result = await sendFeedbackWithRecaptcha(feedback);
     setPending(false);
+    console.log(result)
     if (result) {
       setMessage(result)
       if (result === 'Your feedback has been sent.') {
@@ -144,7 +145,9 @@ const FeedbackForm = () => {
       {show && (
         <Alert 
         severity={success ? "success" : "error"}
-        onClose={() => {setShow(false)}}>
+        onClose={() => {setShow(false)}}
+        className={classes.alert}
+        >
           {message}
         </Alert>
       )}

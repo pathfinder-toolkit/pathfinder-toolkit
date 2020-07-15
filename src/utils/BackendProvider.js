@@ -374,7 +374,8 @@ export const BackendProvider = ({ children }) => {
         return null;
       }
     } catch (error) {
-      return error;
+      console.log(error.response.data);
+      return error.response.data;
     }
   }
 
