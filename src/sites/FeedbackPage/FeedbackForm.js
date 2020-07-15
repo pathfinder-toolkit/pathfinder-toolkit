@@ -94,8 +94,8 @@ const FeedbackForm = () => {
     setPending(false);
     console.log(result)
     if (result) {
-      setMessage(result)
-      if (result === 'Your feedback has been sent.') {
+      setMessage(result.data)
+      if (result.status === 201) {
         setSuccess(true);
       }
     }
