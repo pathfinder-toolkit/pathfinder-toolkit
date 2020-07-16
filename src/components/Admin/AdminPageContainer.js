@@ -1,6 +1,5 @@
 import React from "react";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useAdmin } from "../../utils/AdminProvider";
@@ -21,6 +20,21 @@ const AdminPageContainer = () => {
             marginLeft: theme.spacing(1),
             marginTop: theme.spacing(1.5),
         },
+        progress: {
+            marginLeft: theme.spacing(1),
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(2)
+        },
+        submitButton: {
+            marginLeft: theme.spacing(1),
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(1)
+        },
+        textField: {
+            marginLeft: theme.spacing(1),
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(2),
+        }
     }));
     const styleClasses = useStyles();
 

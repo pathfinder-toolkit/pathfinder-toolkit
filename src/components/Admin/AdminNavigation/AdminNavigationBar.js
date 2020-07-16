@@ -35,12 +35,18 @@ const AdminNavigationBar = () => {
 
     const [ showSuggestions, setShowSuggestions ] = useState(false);
     const [ showEditor, setShowEditor ] = useState(false);
+    const [ showFeedback, setShowFeedback ] = useState(false);
 
     const handleSuggestionClick = () => {
         setShowSuggestions(!showSuggestions);
     };
+
     const handleEditorClick = () => {
         setShowEditor(!showEditor);
+    };
+
+    const handleFeedbackClick = () => {
+        setShowFeedback(!showFeedback);
     };
 
     const handleSelection = (selection) => {
@@ -63,10 +69,10 @@ const AdminNavigationBar = () => {
                     <ListItem button className={classes.itemNested} onClick={() => {handleSelection("createNewSuggestion")}}>
                         <ListItemText>Create new suggestion</ListItemText>
                     </ListItem>
-                    <ListItem button className={classes.itemNested}>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("editSuggestions")}}>
                         <ListItemText>Edit existing suggestions</ListItemText>
                     </ListItem>
-                    <ListItem button className={classes.itemNested}>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("deleteSuggestions")}}>
                         <ListItemText>Delete suggestions</ListItemText>
                     </ListItem>
                 </List>
@@ -80,6 +86,18 @@ const AdminNavigationBar = () => {
                 <List component="div" disablePadding>
                     <ListItem button className={classes.itemNested}>
                         <ListItemText>Update region options</ListItemText>
+                    </ListItem>
+                </List>
+            </Collapse>
+            <Divider />
+            <ListItem button className={classes.listItem} onClick={handleFeedbackClick}>
+            <ListItemText><b>Feedback</b></ListItemText>
+            {showFeedback ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={showFeedback} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("emailSettings")}}>
+                        <ListItemText>Recipient e-mail settings</ListItemText>
                     </ListItem>
                 </List>
             </Collapse>
