@@ -183,7 +183,7 @@ const BuildingsTable = () => {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">
-                        <ImageWithModal image={row.image} width={'15vw'} height={'10vh'}/>
+                        {row.image && (<ImageWithModal image={row.image} width={'15vw'} height={'10vh'}/>)}
                       </TableCell>
                       <TableCell align="right">{row.creationDate}</TableCell>
                       <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.slug)}}> <Launch /> </Button></TableCell>
