@@ -5,18 +5,18 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { useAdmin } from "../../../utils/AdminProvider";
+import { useBackend } from "../../../utils/BackendProvider";
 
 const EmailSettings = (props) => {
     const classes = props.style;
 
-    const { getFeedbackRecipients } = useAdmin();
+    const { getFeedbackRecipients, updateFeedbackRecipients } = useBackend();
     const [ pending, setPending ] = useState(false);
     const [ recipients, setRecipients ] = useState(false);
     const [ error, setError ] = useState(false);
     const [ newRecipient, setNewRecipient ] = useState("")
 
-    const updateFeedbackRecipientList = async () => {
+    const refreshFeedbackRecipientList = async () => {
         setPending(true);
         setError(false);
         setRecipients(false);
@@ -31,7 +31,7 @@ const EmailSettings = (props) => {
     }
 
     useEffect(() => {
-        updateFeedbackRecipientList();
+        refreshFeedbackRecipientList();
     },[])
 
     const _handleChange = (e) => {
@@ -39,7 +39,17 @@ const EmailSettings = (props) => {
     }
 
     const _onClick = async () => {
-        updateFeedbackRecipientList();
+        const request = [
+            {
+                email: newRecipient
+            }
+        ]
+        console.log(request);
+        setNewRecipient("");
+        setRecipients(false);
+        setPending(true);
+        const response = await updateFeedbackRecipients(request);
+        refreshFeedbackRecipientList();
     }
 
     return <React.Fragment>

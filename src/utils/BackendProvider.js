@@ -379,6 +379,54 @@ export const BackendProvider = ({ children }) => {
     }
   }
 
+  const getFeedbackRecipients = async () => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+        process.env.REACT_APP_API_ROOT + '/admin/feedback/recipients'
+    );
+
+    const axiosConfig = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        }
+    };
+
+    try {
+        const response = await axios.get(address, axiosConfig)
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response;
+    }
+  }
+
+  const updateFeedbackRecipients = async (request) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + '/admin/feedback/recipients'
+    );
+
+    const axiosConfig = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        }
+    };
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
+
   
   return (
     <BackendContext.Provider
@@ -396,7 +444,9 @@ export const BackendProvider = ({ children }) => {
         requestUserImages,
         requestImageDeletion,
         requestAdminPrivileges,
-        sendFeedbackWithRecaptcha
+        sendFeedbackWithRecaptcha,
+        getFeedbackRecipients,
+        updateFeedbackRecipients,
       }}
     >
       {children}
