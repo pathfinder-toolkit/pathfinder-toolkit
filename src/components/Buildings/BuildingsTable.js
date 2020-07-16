@@ -185,7 +185,9 @@ const BuildingsTable = () => {
                       <TableCell align="left">
                         {row.image && (<ImageWithModal image={row.image} width={'15vw'} height={'10vh'}/>)}
                       </TableCell>
-                      <TableCell align="right">{row.creationDate}</TableCell>
+                      <TableCell align="right">
+                        {new Date(Date.parse(row["creationDate"])).toLocaleDateString()} {new Date(Date.parse(row["creationDate"])).toLocaleTimeString()}
+                      </TableCell>
                       <TableCell align="right"><Button variant="contained" color="primary" onClick={() => {_handleClick(row.slug)}}> <Launch /> </Button></TableCell>
                     </TableRow>
                   );
