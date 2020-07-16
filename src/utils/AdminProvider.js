@@ -4,13 +4,13 @@ import AdminDashboard from "../components/Admin/AdminDashboard";
 import CreateNewSuggestion from "../components/Admin/Suggestions/CreateNewSuggestion";
 import EditSuggestions from "../components/Admin/Suggestions/EditSuggestions";
 import DeleteSuggestions from "../components/Admin/Suggestions/DeleteSuggestions";
+import EmailSettings from "../components/Admin/Feedback/EmailSettings";
 
 export const AdminContext = React.createContext();
 export const useAdmin = () => useContext(AdminContext);
 
 export const AdminProvider = ( { children } ) => {
     const [selectedComponent, setSelectedComponent] = React.useState("dashboard");
-
 
     const getComponent = (style) => { 
         switch (selectedComponent) {
@@ -22,16 +22,19 @@ export const AdminProvider = ( { children } ) => {
                 return <EditSuggestions style={style} />;
             case "deleteSuggestions":
                 return <DeleteSuggestions style={style} />;
+            case "emailSettings":
+                return <EmailSettings style={style} />;
             default:
                 return <p>No component</p>;
         }
     }
+
     return (
         
         <AdminContext.Provider
             value={{
                 setSelectedComponent,
-                getComponent
+                getComponent,
             }}
         >
             {children}
