@@ -426,6 +426,29 @@ export const BackendProvider = ({ children }) => {
     }
   }
 
+  const getSuggestionSubjectsForAdmin = async () => {
+    const token = await getTokenSilently();
+
+    const address= encodeURI(
+      `${process.env.REACT_APP_LOCAL_API_ROOT}/admin/suggestions/subjects`
+    );
+
+    const axiosConfig = {
+      headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+      }
+    };
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
 
   
   return (
@@ -447,6 +470,7 @@ export const BackendProvider = ({ children }) => {
         sendFeedbackWithRecaptcha,
         getFeedbackRecipients,
         updateFeedbackRecipients,
+        getSuggestionSubjectsForAdmin,
       }}
     >
       {children}
