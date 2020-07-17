@@ -22,6 +22,7 @@ const CreateNewSuggestion = (props) => {
   const [target, setTarget] = useState();
   const [priority, setPriority] = useState();
   const [conditions, setConditions] = useState();
+  const [rule, setRule] = useState();
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -75,8 +76,16 @@ const CreateNewSuggestion = (props) => {
     setPriority(e.target.value);
   };
 
+  const handleRuleChange = (e) => {
+    setRule(e.target.value);
+  };
+
   const addSuggestion = () => {
     console.log();
+  };
+
+  const addCondition = (type) => {
+    console.log("asd");
   };
 
   const [open, setOpen] = useState(false);
@@ -123,21 +132,44 @@ const CreateNewSuggestion = (props) => {
               ))}
             </TextField>
           </Grid>
-          <Grid className={classes.bordered} item sm={2} md={2} lg={2}>
-            <TextField label="Condition(s)" />
-            <Button
-              className={classes.conditionButton}
-              color="primary"
-              variant="outlined"
-            >
-              +
-            </Button>
+          <Grid
+            className={classes.bordered}
+            alignItems="center"
+            container
+            item
+            spacing={1}
+            sm={4}
+            md={4}
+            lg={4}
+          >
+            <Grid item>
+              <TextField label="Condition(s)" onChange={handleRuleChange} />
+            </Grid>
+            <Grid item>
+              <Button
+                className={classes.conditionButton}
+                color="primary"
+                variant="outlined"
+              >
+                {"<"}
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                className={classes.conditionButton}
+                color="primary"
+                variant="outlined"
+              >
+                {">"}
+              </Button>
+            </Grid>
           </Grid>
 
           <Grid item={3}>
             <div className={classes.bordered}>
               <p>target: {target} </p>
               <p>priority: {priority}</p>
+              <p>rule: {rule}</p>
               <ConditionInfo />
             </div>
           </Grid>
