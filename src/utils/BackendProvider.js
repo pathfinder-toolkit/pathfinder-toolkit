@@ -430,7 +430,7 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address= encodeURI(
-      `${process.env.REACT_APP_LOCAL_API_ROOT}/admin/suggestions/subjects`
+      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/subjects`
     );
 
     const axiosConfig = {
