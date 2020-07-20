@@ -44,11 +44,13 @@ export const BackendProvider = ({ children }) => {
       const response = await axios.get(address);
       console.log(response.data);
 
-      const areas = response.data.map((area) => {
-        return area.areaName;
-      });
+      //const areas = response.data.map((area) => {
+      //  return [area.areaName, area.idArea];
+      // });
 
-      return areas;
+      return response.data;
+
+      //return areas;
     } catch (error) {
       console.log(error);
       return null;
@@ -428,11 +430,11 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const getSuggestionSubjectOptions = async (identifier) => {
+  const getSuggestionSubjectOptions = async (identifier, areas) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/subject/${identifier}`
+      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/subject/${identifier}/?areas=${areas}`
     );
 
     const axiosConfig = {
