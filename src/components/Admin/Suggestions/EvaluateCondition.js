@@ -39,15 +39,9 @@ const EvaluateCondition = (props) => {
     let condition;
 
     if (valueType === "string") {
-      condition = {
-        condition: expression,
-        conditionedBy: valueType,
-      };
+      condition = expression;
     } else {
-      condition = {
-        condition: operator + expression,
-        conditionedBy: valueType,
-      };
+      condition = operator + expression;
     }
 
     if (props.handler) {

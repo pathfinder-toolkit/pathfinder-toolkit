@@ -78,7 +78,12 @@ const CreateNewSuggestion = (props) => {
   const addCondition = (newCondition) => {
     console.log("adding new condition: ");
     console.log(newCondition);
-    setConditions((conditions) => [...conditions, newCondition]);
+    setConditions((conditions) => [
+      ...conditions,
+      { condition: newCondition, conditionedBy: subject.identifier },
+    ]);
+
+    //setConditions((conditions) => [...conditions, newCondition]);
   };
 
   const postSuggestion = async () => {
@@ -90,6 +95,7 @@ const CreateNewSuggestion = (props) => {
 
     const newSuggestion = {
       suggestion: suggestionText,
+      identifier: subject.identifier,
       priority: priority,
       conditions: conditions,
       areas: areaIds,
@@ -166,8 +172,6 @@ const CreateNewSuggestion = (props) => {
       { areaName: e.target.value.areaName, idArea: e.target.value.idArea },
     ]);
   };
-
-  const [open, setOpen] = useState(false);
 
   return (
     <React.Fragment>
