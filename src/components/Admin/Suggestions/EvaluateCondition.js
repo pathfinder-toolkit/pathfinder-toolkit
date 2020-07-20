@@ -142,11 +142,6 @@ const EvaluateCondition = (props) => {
           {"="}
         </Button>
       </Grid>
-
-      <p>value type: {valueType} </p>
-      {options?.map((item, index) => (
-        <p>{item}</p>
-      ))}
     </Grid>
   );
 };

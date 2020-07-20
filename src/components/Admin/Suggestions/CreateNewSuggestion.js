@@ -11,7 +11,6 @@ import {
 import { useBackend } from "../../../utils/BackendProvider";
 import ConditionInfo from "./ConditionInfo";
 import EvaluateCondition from "./EvaluateCondition";
-import { Subject } from "@material-ui/icons";
 
 const CreateNewSuggestion = (props) => {
   const classes = props.style;
@@ -19,6 +18,7 @@ const CreateNewSuggestion = (props) => {
     getSuggestionSubjectsForAdmin,
     getSuggestionSubjectOptions,
     requestAreas,
+    submitNewSuggestion,
   } = useBackend();
 
   const [areas, setAreas] = useState();
@@ -75,6 +75,33 @@ const CreateNewSuggestion = (props) => {
     }
   };
 
+  const addCondition = (newCondition) => {
+    console.log("adding new condition: ");
+    console.log(newCondition);
+    setConditions((conditions) => [...conditions, newCondition]);
+  };
+
+  const postSuggestion = async () => {
+    let areaIds = [];
+    selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
+
+    console.log("ids:");
+    console.log(areaIds);
+
+    const newSuggestion = {
+      suggestion: suggestionText,
+      priority: priority,
+      conditions: conditions,
+      areas: areaIds,
+    };
+
+    console.log(newSuggestion);
+
+    const response = await submitNewSuggestion(newSuggestion);
+
+    console.log(response);
+  };
+
   useEffect(() => {
     if (areas) {
       console.log(areas);
@@ -129,17 +156,15 @@ const CreateNewSuggestion = (props) => {
     setPriority(e.target.value);
   };
 
+  const handleSuggestionText = (e) => {
+    setSuggestionText(e.target.value);
+  };
+
   const handleAreaChange = (e) => {
     setSelectedAreas((selectedAreas) => [
       ...selectedAreas,
       { areaName: e.target.value.areaName, idArea: e.target.value.idArea },
     ]);
-  };
-
-  const addCondition = (newCondition) => {
-    console.log("adding new condition: ");
-    console.log(newCondition);
-    setConditions((conditions) => [...conditions, newCondition]);
   };
 
   const [open, setOpen] = useState(false);
@@ -149,98 +174,109 @@ const CreateNewSuggestion = (props) => {
       <Typography variant="h4" component="h4" className={classes.header}>
         Create a new suggestion
       </Typography>
-      <Grid container className={classes.suggestionRoot}>
-        <Grid className={classes.row} container alignItems="center" spacing={2}>
-          <Grid item sm={2} md={2} lg={2}>
-            <TextField
-              variant="outlined"
-              label="Areas"
-              select
-              fullWidth
-              onChange={handleAreaChange}
-            >
-              {areas?.map((area, index) => (
-                <MenuItem key={index} value={area}>
-                  {area.areaName}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
-          <Grid item sm={2} md={2} lg={2}>
-            {!loading && (
-              <React.Fragment>
-                <TextField
-                  variant="outlined"
-                  className={classes.targetSelect}
-                  label="Subject"
-                  select
-                  fullWidth
-                  onChange={selectSubject}
-                >
-                  {suggestionSubjects.map((item, index) => (
-                    <MenuItem key={index} value={item}>
-                      {item.subject}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </React.Fragment>
-            )}
-          </Grid>
-          <Grid item sm={2} md={2} lg={2}>
-            <TextField
-              variant="outlined"
-              label="Priority"
-              select
-              fullWidth
-              onChange={handlePriorityChange}
-            >
-              {priorities.map((item, index) => (
-                <MenuItem key={index} value={item.value}>
-                  {item.text}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+      <Grid container>
+        <Grid container sm={9} className={classes.suggestionRoot}>
+          <Grid
+            className={classes.row}
+            container
+            alignItems="center"
+            spacing={2}
+          >
+            <Grid item sm={2} md={2} lg={2}>
+              <TextField
+                variant="outlined"
+                label="Areas"
+                select
+                fullWidth
+                onChange={handleAreaChange}
+              >
+                {areas?.map((area, index) => (
+                  <MenuItem key={index} value={area}>
+                    {area.areaName}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item sm={2} md={2} lg={2}>
+              {!loading && (
+                <React.Fragment>
+                  <TextField
+                    variant="outlined"
+                    className={classes.targetSelect}
+                    label="Subject"
+                    select
+                    fullWidth
+                    onChange={selectSubject}
+                  >
+                    {suggestionSubjects.map((item, index) => (
+                      <MenuItem key={index} value={item}>
+                        {item.subject}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </React.Fragment>
+              )}
+            </Grid>
+            <Grid item sm={2} md={2} lg={2}>
+              <TextField
+                variant="outlined"
+                label="Priority"
+                select
+                fullWidth
+                onChange={handlePriorityChange}
+              >
+                {priorities.map((item, index) => (
+                  <MenuItem key={index} value={item.value}>
+                    {item.text}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
 
-          <Grid item={3}>
-            <div className={classes.bordered}>{/*<ConditionInfo />*/}</div>
+            <Grid item={3}>
+              <div className={classes.bordered}>{/*<ConditionInfo />*/}</div>
+            </Grid>
+          </Grid>
+          <Grid className={classes.row} container spacing={2}>
+            <EvaluateCondition
+              classes={classes}
+              valueType={subject?.valueType}
+              options={subjectOptions}
+              handler={(newCondition) => addCondition(newCondition)}
+            />
+            <Grid item sm={6} md={6} lg={6}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                rows={4}
+                multiline
+                label="Suggestion text"
+                value={suggestionText}
+                onChange={handleSuggestionText}
+              ></TextField>
+            </Grid>
           </Grid>
         </Grid>
-        <Grid className={classes.row} container spacing={2}>
-          <EvaluateCondition
+        <Grid item sm={2}>
+          <ConditionInfo
             classes={classes}
-            valueType={subject?.valueType}
-            options={subjectOptions}
-            handler={(newCondition) => addCondition(newCondition)}
+            subject={subject}
+            areas={selectedAreas}
+            priority={priority}
+            conditions={conditions}
           />
-          <Grid item sm={6} md={6} lg={6}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              rows={4}
-              multiline
-              label="Suggestion text"
-              value={suggestionText}
-            ></TextField>
-          </Grid>
         </Grid>
       </Grid>
+
       <Button
         className={classes.submitButton}
         color="primary"
         variant="contained"
+        onClick={postSuggestion}
+        disabled={conditions.length < 1}
       >
-        add
+        submit
       </Button>
-      <Grid item>
-        <ConditionInfo
-          classes={classes}
-          subject={subject}
-          areas={selectedAreas}
-          priority={priority}
-          conditions={conditions}
-        />
-      </Grid>
     </React.Fragment>
   );
 };

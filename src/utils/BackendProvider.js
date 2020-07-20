@@ -453,6 +453,32 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const submitNewSuggestion = async (request) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/admin/suggestion"
+    );
+
+    console.log(request);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.post(address, request, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   return (
     <BackendContext.Provider
       value={{
@@ -474,6 +500,7 @@ export const BackendProvider = ({ children }) => {
         updateFeedbackRecipients,
         getSuggestionSubjectsForAdmin,
         getSuggestionSubjectOptions,
+        submitNewSuggestion,
       }}
     >
       {children}
