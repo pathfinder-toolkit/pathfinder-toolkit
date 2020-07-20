@@ -66,7 +66,7 @@ const EvaluateCondition = (props) => {
       md={4}
       lg={4}
     >
-      <Grid item>
+      <Grid item sm={8}>
         {valueType === "string" && (
           <TextField
             fullWidth
@@ -99,6 +99,7 @@ const EvaluateCondition = (props) => {
       </Grid>
       <Grid item sm={4}>
         <Button
+          disabled={!expression}
           fullWidth
           className={classes.conditionButton}
           color="primary"
@@ -110,6 +111,7 @@ const EvaluateCondition = (props) => {
       </Grid>
       <Grid item>
         <Button
+          disabled={valueType === "string"}
           className={classes.conditionButton}
           color="primary"
           variant="outlined"
@@ -120,6 +122,7 @@ const EvaluateCondition = (props) => {
       </Grid>
       <Grid item>
         <Button
+          disabled={valueType === "string"}
           className={classes.conditionButton}
           color="primary"
           variant="outlined"
@@ -130,6 +133,7 @@ const EvaluateCondition = (props) => {
       </Grid>
       <Grid item>
         <Button
+          disabled={valueType === "string"}
           className={classes.conditionButton}
           color="primary"
           variant="outlined"

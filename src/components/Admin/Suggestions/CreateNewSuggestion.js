@@ -11,6 +11,7 @@ import {
 import { useBackend } from "../../../utils/BackendProvider";
 import ConditionInfo from "./ConditionInfo";
 import EvaluateCondition from "./EvaluateCondition";
+import { Subject } from "@material-ui/icons";
 
 const CreateNewSuggestion = (props) => {
   const classes = props.style;
@@ -21,16 +22,14 @@ const CreateNewSuggestion = (props) => {
   } = useBackend();
 
   const [areas, setAreas] = useState();
-  const [selectedArea, setSelectedArea] = useState();
+  const [selectedAreas, setSelectedAreas] = useState([]);
 
   const [suggestionSubjects, setSuggestionSubjects] = useState();
   const [subject, setSubject] = useState();
   const [subjectOptions, setSubjectOptions] = useState();
   const [priority, setPriority] = useState();
 
-  const [conditions, setConditions] = useState([
-    { condition: "test condition", conditionedBy: "string" },
-  ]);
+  const [conditions, setConditions] = useState([]);
 
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
@@ -61,7 +60,7 @@ const CreateNewSuggestion = (props) => {
   };
 
   const getSubjectOptions = async (identifier, areas) => {
-    if (!selectedArea) {
+    if (!selectedAreas) {
       console.log("no area selected");
       return;
     }
@@ -86,10 +85,27 @@ const CreateNewSuggestion = (props) => {
     getSubjects();
   }, []);
 
-  const priorities = ["High", "Medium", "Low", "No priority"];
+  const priorities = [
+    {
+      text: "High",
+      value: "100",
+    },
+    {
+      text: "Medium",
+      value: "50",
+    },
+    {
+      text: "Low",
+      value: "25",
+    },
+    {
+      text: "No priority",
+      value: "0",
+    },
+  ];
 
   useEffect(() => {
-    if (!selectedArea) {
+    if (!selectedAreas) {
       console.log("no area selected");
       return;
     }
@@ -98,7 +114,7 @@ const CreateNewSuggestion = (props) => {
       console.log("subject changed: " + subject.identifier);
       if (subject.valueType === "string") {
         console.log("valueType is string, get options");
-        getSubjectOptions(subject.identifier, selectedArea.idArea);
+        getSubjectOptions(subject.identifier, selectedAreas[0].idArea);
       } else {
         setSubjectOptions();
       }
@@ -114,7 +130,10 @@ const CreateNewSuggestion = (props) => {
   };
 
   const handleAreaChange = (e) => {
-    setSelectedArea(e.target.value);
+    setSelectedAreas((selectedAreas) => [
+      ...selectedAreas,
+      { areaName: e.target.value.areaName, idArea: e.target.value.idArea },
+    ]);
   };
 
   const addCondition = (newCondition) => {
@@ -133,12 +152,27 @@ const CreateNewSuggestion = (props) => {
       <Grid container className={classes.suggestionRoot}>
         <Grid className={classes.row} container alignItems="center" spacing={2}>
           <Grid item sm={2} md={2} lg={2}>
+            <TextField
+              variant="outlined"
+              label="Areas"
+              select
+              fullWidth
+              onChange={handleAreaChange}
+            >
+              {areas?.map((area, index) => (
+                <MenuItem key={index} value={area}>
+                  {area.areaName}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item sm={2} md={2} lg={2}>
             {!loading && (
               <React.Fragment>
                 <TextField
                   variant="outlined"
                   className={classes.targetSelect}
-                  label="Target"
+                  label="Subject"
                   select
                   fullWidth
                   onChange={selectSubject}
@@ -161,23 +195,8 @@ const CreateNewSuggestion = (props) => {
               onChange={handlePriorityChange}
             >
               {priorities.map((item, index) => (
-                <MenuItem key={index} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
-          <Grid item sm={2} md={2} lg={2}>
-            <TextField
-              variant="outlined"
-              label="Areas"
-              select
-              fullWidth
-              onChange={handleAreaChange}
-            >
-              {areas?.map((area, index) => (
-                <MenuItem key={index} value={area}>
-                  {area.areaName}
+                <MenuItem key={index} value={item.value}>
+                  {item.text}
                 </MenuItem>
               ))}
             </TextField>
@@ -213,18 +232,15 @@ const CreateNewSuggestion = (props) => {
       >
         add
       </Button>
-      <p>subject: {subject?.subject} </p>
-      <p>type: {subject?.identifier}</p>
-      <p>selected area: {selectedArea?.areaName}</p>
-      <p>priority: {priority}</p>
-      <p className={classes.bordered}>
-        conditions:
-        {conditions?.map((item, index) => (
-          <p>
-            {item.condition} | {item.conditionedBy}
-          </p>
-        ))}
-      </p>
+      <Grid item>
+        <ConditionInfo
+          classes={classes}
+          subject={subject}
+          areas={selectedAreas}
+          priority={priority}
+          conditions={conditions}
+        />
+      </Grid>
     </React.Fragment>
   );
 };
