@@ -28,7 +28,9 @@ const CreateNewSuggestion = (props) => {
   const [subjectOptions, setSubjectOptions] = useState();
   const [priority, setPriority] = useState();
 
-  const [conditions, setConditions] = useState(["test condition"]);
+  const [conditions, setConditions] = useState([
+    { condition: "test condition", conditionedBy: "string" },
+  ]);
 
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
@@ -215,6 +217,14 @@ const CreateNewSuggestion = (props) => {
       <p>type: {subject?.identifier}</p>
       <p>selected area: {selectedArea?.areaName}</p>
       <p>priority: {priority}</p>
+      <p className={classes.bordered}>
+        conditions:
+        {conditions?.map((item, index) => (
+          <p>
+            {item.condition} | {item.conditionedBy}
+          </p>
+        ))}
+      </p>
     </React.Fragment>
   );
 };

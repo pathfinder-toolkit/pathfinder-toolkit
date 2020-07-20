@@ -6,6 +6,7 @@ import {
   Select,
   Button,
   MenuItem,
+  InputAdornment,
 } from "@material-ui/core";
 
 const EvaluateCondition = (props) => {
@@ -13,11 +14,41 @@ const EvaluateCondition = (props) => {
   const options = props?.options;
   const classes = props.classes;
 
-  const newCondition = (expression) => {
-    const condition = {
-      condition: expression,
-      conditionedBy: valueType,
-    };
+  const [expression, setExpression] = useState();
+  const [operator, setOperator] = useState("=");
+
+  useEffect(() => {
+    if (expression) {
+      console.log("expression changed: " + expression);
+    }
+  }, [expression]);
+
+  const handleStringExpression = (e) => {
+    setExpression(e.target.value);
+  };
+
+  const handleNumberExpression = (e) => {
+    if (!isNaN(e.target.value)) {
+      setExpression(e.target.value);
+    }
+  };
+
+  const newCondition = () => {
+    console.log("newCondition" + expression + " " + valueType);
+
+    let condition;
+
+    if (valueType === "string") {
+      condition = {
+        condition: expression,
+        conditionedBy: valueType,
+      };
+    } else {
+      condition = {
+        condition: operator + expression,
+        conditionedBy: valueType,
+      };
+    }
 
     if (props.handler) {
       props.handler(condition);
@@ -37,7 +68,13 @@ const EvaluateCondition = (props) => {
     >
       <Grid item>
         {valueType === "string" && (
-          <TextField label="Condition(s)" select defaultValue="Options">
+          <TextField
+            fullWidth
+            label="Options"
+            select
+            defaultValue="Options"
+            onChange={handleStringExpression}
+          >
             {options?.map((item, index) => (
               <MenuItem key={index} value={item}>
                 {item}
@@ -45,13 +82,38 @@ const EvaluateCondition = (props) => {
             ))}
           </TextField>
         )}
-        {valueType !== "string" && <TextField label="Condition(s)" />}
+        {valueType !== "string" && (
+          <TextField
+            fullWidth
+            label="Number"
+            onChange={handleNumberExpression}
+            value={expression}
+            type="number"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">{operator}</InputAdornment>
+              ),
+            }}
+          />
+        )}
+      </Grid>
+      <Grid item sm={4}>
+        <Button
+          fullWidth
+          className={classes.conditionButton}
+          color="primary"
+          variant="contained"
+          onClick={newCondition}
+        >
+          {"+"}
+        </Button>
       </Grid>
       <Grid item>
         <Button
           className={classes.conditionButton}
           color="primary"
           variant="outlined"
+          onClick={() => setOperator("<")}
         >
           {"<"}
         </Button>
@@ -61,6 +123,7 @@ const EvaluateCondition = (props) => {
           className={classes.conditionButton}
           color="primary"
           variant="outlined"
+          onClick={() => setOperator(">")}
         >
           {">"}
         </Button>
@@ -69,12 +132,13 @@ const EvaluateCondition = (props) => {
         <Button
           className={classes.conditionButton}
           color="primary"
-          variant="contained"
-          onClick={newCondition}
+          variant="outlined"
+          onClick={() => setOperator("=")}
         >
-          {"+"}
+          {"="}
         </Button>
       </Grid>
+
       <p>value type: {valueType} </p>
       {options?.map((item, index) => (
         <p>{item}</p>
