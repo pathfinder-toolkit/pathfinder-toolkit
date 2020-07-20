@@ -6,8 +6,6 @@ import { useAuth0 } from "./react-auth0-spa";
 export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
-
-
 export const BackendProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
 
@@ -24,7 +22,7 @@ export const BackendProvider = ({ children }) => {
         Authorization: "Bearer " + token,
       },
     };
-    
+
     try {
       const response = await axios.get(address, axiosConfig);
       console.log(response);
@@ -40,19 +38,19 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestAreas = async () => {
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/editor/areas"
-    );
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/editor/areas");
 
     try {
       const response = await axios.get(address);
       console.log(response.data);
 
-      const areas = response.data.map((area) => {
-        return area.areaName;
-      });
+      //const areas = response.data.map((area) => {
+      //  return [area.areaName, area.idArea];
+      // });
 
-      return areas;
+      return response.data;
+
+      //return areas;
     } catch (error) {
       console.log(error);
       return null;
@@ -99,7 +97,7 @@ export const BackendProvider = ({ children }) => {
   const requestSuggestions = async (subject, value) => {
     const address = encodeURI(
       process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + "1"
-    ); 
+    );
     //value
 
     /*const address = encodeURI(
@@ -131,7 +129,7 @@ export const BackendProvider = ({ children }) => {
     try {
       const response = await axios.get(address);
       console.log(response.data);
-      return response.data
+      return response.data;
     } catch (error) {
       console.log(error);
       return null;
@@ -139,9 +137,7 @@ export const BackendProvider = ({ children }) => {
   };
 
   const requestBuildingModel = async () => {
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/building/"
-    );
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/building/");
 
     try {
       const response = await axios.get(address);
@@ -183,9 +179,7 @@ export const BackendProvider = ({ children }) => {
   const submitNewBuilding = async (requestBody) => {
     const token = await getTokenSilently();
 
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/building"
-    );
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/building");
 
     console.log(requestBody);
 
@@ -208,15 +202,12 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return error;
     }
-
-  }
+  };
 
   const submitNewComment = async (requestBody) => {
     const token = await getTokenSilently();
 
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments"
-    );
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/comments");
 
     console.log(requestBody);
 
@@ -239,15 +230,13 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return null;
     }
-  }
+  };
 
   const uploadUserImage = async (file) => {
     const token = await getTokenSilently();
 
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + '/image'
-    );
-    
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/image");
+
     console.log("File:");
     console.log(file);
 
@@ -273,78 +262,18 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return null;
     }
-  }
+  };
 
   const requestUserImages = async () => {
     const token = await getTokenSilently();
 
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + '/images'
-    );
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/images");
 
     const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
-      }
-    };
-
-    try {
-      const response = await axios.get(address, axiosConfig);
-      console.log(response);
-      if (Object.keys(response).includes("data")) {
-        return response.data
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  
-  }
-
-  const requestImageDeletion= async (id) => {
-    const token = await getTokenSilently();
-
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + '/image/' + id
-    );
-
-    const axiosConfig = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      }
-    };
-
-    try {
-      const response = await axios.delete(address, axiosConfig);
-      console.log(response);
-      if (Object.keys(response).includes("data")) {
-        return response.data
-      } else {
-        return null;
-      }
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  
-  }
-
-  const requestAdminPrivileges = async () => {
-    const token = await getTokenSilently();
-
-    const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + '/admin'
-    );
-
-    const axiosConfig = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      }
+      },
     };
 
     try {
@@ -356,9 +285,61 @@ export const BackendProvider = ({ children }) => {
         return null;
       }
     } catch (error) {
-      return null
+      console.log(error);
+      return null;
     }
-  }
+  };
+
+  const requestImageDeletion = async (id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/image/" + id);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  const requestAdminPrivileges = async () => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(process.env.REACT_APP_API_ROOT + "/admin");
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      if (Object.keys(response).includes("data")) {
+        return response.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  };
 
   const sendFeedbackWithRecaptcha = async (requestBody) => {
     const address = encodeURI(
@@ -377,44 +358,44 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const getFeedbackRecipients = async () => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-        process.env.REACT_APP_API_ROOT + '/admin/feedback/recipients'
+      process.env.REACT_APP_API_ROOT + "/admin/feedback/recipients"
     );
 
     const axiosConfig = {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        }
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     };
 
     try {
-        const response = await axios.get(address, axiosConfig)
-        console.log(response);
-        return response;
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
     } catch (error) {
-        console.log(error.response.data);
-        return error.response;
+      console.log(error.response.data);
+      return error.response;
     }
-  }
+  };
 
   const updateFeedbackRecipients = async (request) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + '/admin/feedback/recipients'
+      process.env.REACT_APP_API_ROOT + "/admin/feedback/recipients"
     );
 
     const axiosConfig = {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-        }
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     };
     try {
       const response = await axios.put(address, request, axiosConfig);
@@ -424,20 +405,20 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const getSuggestionSubjectsForAdmin = async () => {
     const token = await getTokenSilently();
 
-    const address= encodeURI(
+    const address = encodeURI(
       `${process.env.REACT_APP_API_ROOT}/admin/suggestions/subjects`
     );
 
     const axiosConfig = {
       headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-      }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     };
     try {
       const response = await axios.get(address, axiosConfig);
@@ -447,10 +428,57 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
+  const getSuggestionSubjectOptions = async (identifier, areas) => {
+    const token = await getTokenSilently();
 
-  
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/subject/${identifier}/?areas=${areas}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  };
+
+  const submitNewSuggestion = async (request) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + "/admin/suggestion"
+    );
+
+    console.log(request);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.post(address, request, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   return (
     <BackendContext.Provider
       value={{
@@ -471,6 +499,8 @@ export const BackendProvider = ({ children }) => {
         getFeedbackRecipients,
         updateFeedbackRecipients,
         getSuggestionSubjectsForAdmin,
+        getSuggestionSubjectOptions,
+        submitNewSuggestion,
       }}
     >
       {children}
