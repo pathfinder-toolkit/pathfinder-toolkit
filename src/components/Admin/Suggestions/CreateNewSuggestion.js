@@ -147,7 +147,11 @@ const CreateNewSuggestion = (props) => {
       console.log("subject changed: " + subject.identifier);
       if (subject.valueType === "string") {
         console.log("valueType is string, get options");
-        getSubjectOptions(subject.identifier, selectedAreas[0].idArea);
+
+        let areaIds = [];
+        selectedAreas.forEach((item) => areaIds.push(item.idArea));
+
+        getSubjectOptions(subject.identifier, areaIds.toString());
       } else {
         setSubjectOptions();
       }
