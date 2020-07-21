@@ -3,14 +3,13 @@ import {
   Typography,
   Grid,
   TextField,
-  Select,
   Button,
   MenuItem,
 } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
-import ConditionInfo from "./ConditionInfo";
 import EvaluateCondition from "./EvaluateCondition";
+import PreviewSuggestion from "./PreviewSuggestion";
 
 const CreateNewSuggestion = (props) => {
   const classes = props.style;
@@ -121,19 +120,19 @@ const CreateNewSuggestion = (props) => {
   const priorities = [
     {
       text: "High",
-      value: "100",
+      value: 100,
     },
     {
       text: "Medium",
-      value: "50",
+      value: 49,
     },
     {
       text: "Low",
-      value: "25",
+      value: 19,
     },
     {
       text: "No priority",
-      value: "0",
+      value: 0,
     },
   ];
 
@@ -183,12 +182,12 @@ const CreateNewSuggestion = (props) => {
         Create a new suggestion
       </Typography>
       <Grid container>
-        <Grid container sm={9} className={classes.suggestionRoot}>
+        <Grid container sm={8} className={classes.suggestionRoot}>
           <Grid
             className={classes.row}
             container
             alignItems="center"
-            spacing={2}
+            spacing={1}
           >
             <Grid item sm={2} md={2} lg={2}>
               <TextField
@@ -245,7 +244,7 @@ const CreateNewSuggestion = (props) => {
               <div className={classes.bordered}>{/*<ConditionInfo />*/}</div>
             </Grid>
           </Grid>
-          <Grid className={classes.row} container spacing={2}>
+          <Grid className={classes.row} container spacing={1}>
             <EvaluateCondition
               classes={classes}
               valueType={subject?.valueType}
@@ -265,10 +264,11 @@ const CreateNewSuggestion = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item sm={2}>
-          <ConditionInfo
+        <Grid item sm={3}>
+          <PreviewSuggestion
             classes={classes}
             subject={subject}
+            suggestionText={suggestionText}
             areas={selectedAreas}
             priority={priority}
             conditions={conditions}
