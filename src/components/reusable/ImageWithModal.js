@@ -30,8 +30,14 @@ const ImageWithModal = (props) => {
     const address = encodeURI(
       `https://res.cloudinary.com/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload/v1/${publicId}`
     );
+
+    const axiosConfig = {
+      headers: {
+        "Cache-Control": "no-store"
+      },
+    };
     try {
-      const response = await axios.head(address);
+      const response = await axios.head(address, axiosConfig);
       console.log(response);
       return response;
     } catch (error) {
