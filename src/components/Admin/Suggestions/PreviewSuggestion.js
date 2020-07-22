@@ -36,7 +36,7 @@ const PreviewSuggestion = (props) => {
 
   const subject = props?.subject;
   const areas = props?.areas;
-  const suggestionText = props?.suggestionText;
+  const suggestionText = props.suggestionText ? props.suggestionText : "Suggestion text";
   const priority = props?.priority;
   const conditions = props?.conditions;
 
@@ -48,7 +48,7 @@ const PreviewSuggestion = (props) => {
   };
 
   return (
-    <div className={classes.bordered}>
+    <div style={{ padding: "0.5em" }} className={classes.bordered}>
       <Typography align="center" variant="subtitle2">
         Preview
       </Typography>
@@ -59,6 +59,9 @@ const PreviewSuggestion = (props) => {
           <ListItemText className={previewStyles.listHeader}>
             <b>Conditions</b>
           </ListItemText>
+          {conditions.length === 0 && (
+            <ListItemText className={previewStyles.listItem}>None</ListItemText>
+          )}
           {conditions?.map((item, index) => (
             <ListItemText className={previewStyles.listItem}>
               {item.condition} | {item.conditionedBy}
@@ -70,6 +73,9 @@ const PreviewSuggestion = (props) => {
         <ListItemText className={previewStyles.listHeader}>
           <b>Areas</b>
         </ListItemText>
+        {areas.length === 0 && (
+          <ListItemText className={previewStyles.listItem}>None</ListItemText>
+        )}
 
         {areas?.map((item, index) => (
           <ListItemText className={previewStyles.listItem}>

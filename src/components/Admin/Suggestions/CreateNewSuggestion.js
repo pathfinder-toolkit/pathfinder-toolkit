@@ -5,6 +5,7 @@ import {
   TextField,
   Button,
   MenuItem,
+  ThemeProvider,
 } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
@@ -121,18 +122,22 @@ const CreateNewSuggestion = (props) => {
     {
       text: "High",
       value: 100,
+      color: "rgb(253, 236, 234)",
     },
     {
       text: "Medium",
       value: 49,
+      color: "rgb(255, 244, 229)",
     },
     {
       text: "Low",
       value: 19,
+      color: "rgb(232, 244, 253)",
     },
     {
       text: "No priority",
       value: 0,
+      color: "rgb(237, 247, 237)",
     },
   ];
 
@@ -233,7 +238,11 @@ const CreateNewSuggestion = (props) => {
                 onChange={handlePriorityChange}
               >
                 {priorities.map((item, index) => (
-                  <MenuItem key={index} value={item.value}>
+                  <MenuItem
+                    style={{ backgroundColor: item.color }}
+                    key={index}
+                    value={item.value}
+                  >
                     {item.text}
                   </MenuItem>
                 ))}
