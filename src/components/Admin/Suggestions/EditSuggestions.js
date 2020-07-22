@@ -8,8 +8,12 @@ import {
   CircularProgress,
   ListItemText,
   ListItem,
+  ListItemSecondaryAction,
   List,
+  IconButton,
 } from "@material-ui/core";
+
+import EditIcon from "@material-ui/icons/Edit";
 
 import { useBackend } from "../../../utils/BackendProvider";
 
@@ -94,6 +98,11 @@ const EditSuggestions = (props) => {
           {suggestions?.map((suggestion, index) => (
             <ListItem key={index} value={suggestion}>
               <ListItemText primary={JSON.stringify(suggestion)} />
+              <ListItemSecondaryAction>
+                <IconButton>
+                  <EditIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
