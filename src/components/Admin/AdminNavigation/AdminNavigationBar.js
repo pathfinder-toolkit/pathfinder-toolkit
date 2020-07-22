@@ -84,7 +84,7 @@ const AdminNavigationBar = () => {
             </ListItem>
             <Collapse in={showEditor} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItem button className={classes.itemNested}>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("regionOptions")}}>
                         <ListItemText>Update region options</ListItemText>
                     </ListItem>
                 </List>
