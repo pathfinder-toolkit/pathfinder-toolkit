@@ -3,14 +3,13 @@ import {
   Typography,
   Grid,
   TextField,
-  Select,
   Button,
   MenuItem,
 } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
-import ConditionInfo from "./ConditionInfo";
 import EvaluateCondition from "./EvaluateCondition";
+import PreviewSuggestion from "./PreviewSuggestion";
 
 const CreateNewSuggestion = (props) => {
   const classes = props.style;
@@ -34,6 +33,29 @@ const CreateNewSuggestion = (props) => {
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
 
+  const priorities = [
+    {
+      text: "High",
+      value: 100,
+      color: "rgb(253, 236, 234)",
+    },
+    {
+      text: "Medium",
+      value: 49,
+      color: "rgb(255, 244, 229)",
+    },
+    {
+      text: "Low",
+      value: 19,
+      color: "rgb(232, 244, 253)",
+    },
+    {
+      text: "No priority",
+      value: 0,
+      color: "rgb(237, 247, 237)",
+    },
+  ];
+
   const getSubjects = async () => {
     setLoading(true);
     try {
@@ -50,10 +72,7 @@ const CreateNewSuggestion = (props) => {
   };
 
   const getAreas = async () => {
-    console.log();
-
     const areas = await requestAreas();
-    console.log(areas);
     if (areas) {
       setAreas(areas);
     }
@@ -82,16 +101,11 @@ const CreateNewSuggestion = (props) => {
       ...conditions,
       { condition: newCondition, conditionedBy: subject.identifier },
     ]);
-
-    //setConditions((conditions) => [...conditions, newCondition]);
   };
 
   const postSuggestion = async () => {
     let areaIds = [];
     selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
-
-    console.log("ids:");
-    console.log(areaIds);
 
     const newSuggestion = {
       suggestion: suggestionText,
@@ -102,40 +116,13 @@ const CreateNewSuggestion = (props) => {
     };
 
     console.log(newSuggestion);
-
     const response = await submitNewSuggestion(newSuggestion);
-
     console.log(response);
   };
 
   useEffect(() => {
-    if (areas) {
-      console.log(areas);
-    }
-  }, [areas]);
-
-  useEffect(() => {
     getSubjects();
   }, []);
-
-  const priorities = [
-    {
-      text: "High",
-      value: "100",
-    },
-    {
-      text: "Medium",
-      value: "50",
-    },
-    {
-      text: "Low",
-      value: "25",
-    },
-    {
-      text: "No priority",
-      value: "0",
-    },
-  ];
 
   useEffect(() => {
     if (!selectedAreas) {
@@ -147,7 +134,11 @@ const CreateNewSuggestion = (props) => {
       console.log("subject changed: " + subject.identifier);
       if (subject.valueType === "string") {
         console.log("valueType is string, get options");
-        getSubjectOptions(subject.identifier, selectedAreas[0].idArea);
+
+        let areaIds = [];
+        selectedAreas.forEach((item) => areaIds.push(item.idArea));
+
+        getSubjectOptions(subject.identifier, areaIds.toString());
       } else {
         setSubjectOptions();
       }
@@ -173,18 +164,26 @@ const CreateNewSuggestion = (props) => {
     ]);
   };
 
+  const removeSelectedArea = (area) => {
+    setSelectedAreas(selectedAreas.filter((item) => item !== area));
+  };
+
+  const removeSelectedCondition = (condition) => {
+    setConditions(conditions.filter((item) => item !== condition));
+  };
+
   return (
     <React.Fragment>
       <Typography variant="h4" component="h4" className={classes.header}>
         Create a new suggestion
       </Typography>
       <Grid container>
-        <Grid container sm={9} className={classes.suggestionRoot}>
+        <Grid container sm={8} className={classes.suggestionRoot}>
           <Grid
             className={classes.row}
             container
             alignItems="center"
-            spacing={2}
+            spacing={1}
           >
             <Grid item sm={2} md={2} lg={2}>
               <TextField
@@ -230,7 +229,11 @@ const CreateNewSuggestion = (props) => {
                 onChange={handlePriorityChange}
               >
                 {priorities.map((item, index) => (
-                  <MenuItem key={index} value={item.value}>
+                  <MenuItem
+                    style={{ backgroundColor: item.color }}
+                    key={index}
+                    value={item.value}
+                  >
                     {item.text}
                   </MenuItem>
                 ))}
@@ -241,7 +244,7 @@ const CreateNewSuggestion = (props) => {
               <div className={classes.bordered}>{/*<ConditionInfo />*/}</div>
             </Grid>
           </Grid>
-          <Grid className={classes.row} container spacing={2}>
+          <Grid className={classes.row} container spacing={1}>
             <EvaluateCondition
               classes={classes}
               valueType={subject?.valueType}
@@ -261,13 +264,16 @@ const CreateNewSuggestion = (props) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item sm={2}>
-          <ConditionInfo
+        <Grid item sm={3}>
+          <PreviewSuggestion
             classes={classes}
             subject={subject}
+            suggestionText={suggestionText}
             areas={selectedAreas}
             priority={priority}
             conditions={conditions}
+            handleArea={(area) => removeSelectedArea(area)}
+            handleCondition={(condition) => removeSelectedCondition(condition)}
           />
         </Grid>
       </Grid>
