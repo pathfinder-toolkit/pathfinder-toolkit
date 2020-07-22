@@ -9,7 +9,10 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
 } from "@material-ui/core";
+import { Clear } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
 
 import SuggestionAlert from "../../reusable/SuggestionAlert";
@@ -36,7 +39,9 @@ const PreviewSuggestion = (props) => {
 
   const subject = props?.subject;
   const areas = props?.areas;
-  const suggestionText = props.suggestionText ? props.suggestionText : "Suggestion text";
+  const suggestionText = props.suggestionText
+    ? props.suggestionText
+    : "Suggestion text";
   const priority = props?.priority;
   const conditions = props?.conditions;
 
@@ -47,40 +52,74 @@ const PreviewSuggestion = (props) => {
     suggestionSecondarySubject: "temp",
   };
 
+  const removeCondition = (condition) => {
+    if (props.handleCondition) {
+      props.handleCondition(condition);
+    }
+  };
+
+  const removeArea = (area) => {
+    if (props.handleArea) {
+      props.handleArea(area);
+    }
+  };
+
   return (
     <div style={{ padding: "0.5em" }} className={classes.bordered}>
-      <Typography align="center" variant="subtitle2">
-        Preview
+      <Typography align="center">
+        <b> Preview</b>
       </Typography>
       <SuggestionAlert suggestion={suggestionPreview} classes={previewStyles} />
       <Typography>Subject: {subject?.subject}</Typography>
       <Typography variant="subtitle2">
         <List>
-          <ListItemText className={previewStyles.listHeader}>
-            <b>Conditions</b>
-          </ListItemText>
-          {conditions.length === 0 && (
-            <ListItemText className={previewStyles.listItem}>None</ListItemText>
-          )}
-          {conditions?.map((item, index) => (
-            <ListItemText className={previewStyles.listItem}>
-              {item.condition} | {item.conditionedBy}
+          <ListItem className={previewStyles.listHeader}>
+            <ListItemText>
+              <b>Conditions</b>
             </ListItemText>
+          </ListItem>
+          {conditions.length === 0 && (
+            <ListItem>
+              <ListItemText className={previewStyles.listItem}>
+                None
+              </ListItemText>
+            </ListItem>
+          )}
+          {conditions?.map((condition, index) => (
+            <ListItem className={previewStyles.listItem}>
+              <ListItemText>
+                {condition.conditionedBy} / {condition.condition}
+              </ListItemText>
+              <ListItemSecondaryAction>
+                <IconButton onClick={() => removeCondition(condition)}>
+                  <Clear />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
           ))}
         </List>
       </Typography>
       <List>
-        <ListItemText className={previewStyles.listHeader}>
-          <b>Areas</b>
-        </ListItemText>
+        <ListItem className={previewStyles.listHeader}>
+          <ListItemText>
+            <b>Areas</b>
+          </ListItemText>
+        </ListItem>
         {areas.length === 0 && (
-          <ListItemText className={previewStyles.listItem}>None</ListItemText>
+          <ListItem>
+            <ListItemText className={previewStyles.listItem}>None</ListItemText>
+          </ListItem>
         )}
 
-        {areas?.map((item, index) => (
-          <ListItemText className={previewStyles.listItem}>
-            {item.areaName}
-          </ListItemText>
+        {areas?.map((area, index) => (
+          <ListItem className={previewStyles.listItem}>
+            <ListItemText primary={area.areaName}></ListItemText>
+            <ListItemSecondaryAction>
+              <IconButton onClick={() => removeArea(area)}>
+                <Clear />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
         ))}
       </List>
     </div>

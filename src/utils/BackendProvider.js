@@ -479,6 +479,10 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const getAdminSuggestions = async () => {
+    
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -501,6 +505,7 @@ export const BackendProvider = ({ children }) => {
         getSuggestionSubjectsForAdmin,
         getSuggestionSubjectOptions,
         submitNewSuggestion,
+        getAdminSuggestions,
       }}
     >
       {children}

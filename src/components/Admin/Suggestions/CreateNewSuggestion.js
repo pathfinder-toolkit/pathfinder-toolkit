@@ -5,7 +5,6 @@ import {
   TextField,
   Button,
   MenuItem,
-  ThemeProvider,
 } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
@@ -34,6 +33,29 @@ const CreateNewSuggestion = (props) => {
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
 
+  const priorities = [
+    {
+      text: "High",
+      value: 100,
+      color: "rgb(253, 236, 234)",
+    },
+    {
+      text: "Medium",
+      value: 49,
+      color: "rgb(255, 244, 229)",
+    },
+    {
+      text: "Low",
+      value: 19,
+      color: "rgb(232, 244, 253)",
+    },
+    {
+      text: "No priority",
+      value: 0,
+      color: "rgb(237, 247, 237)",
+    },
+  ];
+
   const getSubjects = async () => {
     setLoading(true);
     try {
@@ -50,10 +72,7 @@ const CreateNewSuggestion = (props) => {
   };
 
   const getAreas = async () => {
-    console.log();
-
     const areas = await requestAreas();
-    console.log(areas);
     if (areas) {
       setAreas(areas);
     }
@@ -82,16 +101,11 @@ const CreateNewSuggestion = (props) => {
       ...conditions,
       { condition: newCondition, conditionedBy: subject.identifier },
     ]);
-
-    //setConditions((conditions) => [...conditions, newCondition]);
   };
 
   const postSuggestion = async () => {
     let areaIds = [];
     selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
-
-    console.log("ids:");
-    console.log(areaIds);
 
     const newSuggestion = {
       suggestion: suggestionText,
@@ -102,44 +116,13 @@ const CreateNewSuggestion = (props) => {
     };
 
     console.log(newSuggestion);
-
     const response = await submitNewSuggestion(newSuggestion);
-
     console.log(response);
   };
 
   useEffect(() => {
-    if (areas) {
-      console.log(areas);
-    }
-  }, [areas]);
-
-  useEffect(() => {
     getSubjects();
   }, []);
-
-  const priorities = [
-    {
-      text: "High",
-      value: 100,
-      color: "rgb(253, 236, 234)",
-    },
-    {
-      text: "Medium",
-      value: 49,
-      color: "rgb(255, 244, 229)",
-    },
-    {
-      text: "Low",
-      value: 19,
-      color: "rgb(232, 244, 253)",
-    },
-    {
-      text: "No priority",
-      value: 0,
-      color: "rgb(237, 247, 237)",
-    },
-  ];
 
   useEffect(() => {
     if (!selectedAreas) {
@@ -179,6 +162,14 @@ const CreateNewSuggestion = (props) => {
       ...selectedAreas,
       { areaName: e.target.value.areaName, idArea: e.target.value.idArea },
     ]);
+  };
+
+  const removeSelectedArea = (area) => {
+    setSelectedAreas(selectedAreas.filter((item) => item !== area));
+  };
+
+  const removeSelectedCondition = (condition) => {
+    setConditions(conditions.filter((item) => item !== condition));
   };
 
   return (
@@ -281,6 +272,8 @@ const CreateNewSuggestion = (props) => {
             areas={selectedAreas}
             priority={priority}
             conditions={conditions}
+            handleArea={(area) => removeSelectedArea(area)}
+            handleCondition={(condition) => removeSelectedCondition(condition)}
           />
         </Grid>
       </Grid>
