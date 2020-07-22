@@ -57,34 +57,19 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const requestAreaOptions = async (selectedArea) => {
+  const requestAreaOptions = async (areaId) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/editor/options/" + selectedArea
+      process.env.REACT_APP_API_ROOT + "/editor/options/" + areaId
     );
 
     try {
       const response = await axios.get(address);
-      console.log(response.data);
 
-      const options = {
-        materials: response.data.materials.map((material) => {
-          return material.value;
-        }),
-        roofTypes: response.data.roofTypes.map((roofType) => {
-          return roofType.value;
-        }),
-        ventilationTypes: response.data.ventilationTypes.map(
-          (ventilationType) => {
-            return ventilationType.value;
-          }
-        ),
-        heatingTypes: response.data.heatingTypes.map((heatingType) => {
-          return heatingType.value;
-        }),
-        buildingTypes: response.data.buildingTypes.map((buildingType) => {
-          return buildingType.value;
-        }),
-      };
+      const options = {};
+
+      for (const component of response.data.components) {
+        options[component.componentName] = component.options;
+      }
       console.log(options);
 
       return options;
