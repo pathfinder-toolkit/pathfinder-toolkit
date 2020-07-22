@@ -479,9 +479,28 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const getAdminSuggestions = async () => {
-    
-  }
+  const getAdminSuggestions = async (identifier) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/all/${identifier}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  };
 
   return (
     <BackendContext.Provider

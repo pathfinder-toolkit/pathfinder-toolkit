@@ -202,22 +202,20 @@ const CreateNewSuggestion = (props) => {
             </Grid>
             <Grid item sm={2} md={2} lg={2}>
               {!loading && (
-                <React.Fragment>
-                  <TextField
-                    variant="outlined"
-                    className={classes.targetSelect}
-                    label="Subject"
-                    select
-                    fullWidth
-                    onChange={selectSubject}
-                  >
-                    {suggestionSubjects.map((item, index) => (
-                      <MenuItem key={index} value={item}>
-                        {item.subject}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </React.Fragment>
+                <TextField
+                  variant="outlined"
+                  className={classes.targetSelect}
+                  label="Subject"
+                  select
+                  fullWidth
+                  onChange={selectSubject}
+                >
+                  {suggestionSubjects.map((item, index) => (
+                    <MenuItem key={index} value={item}>
+                      {item.subject}
+                    </MenuItem>
+                  ))}
+                </TextField>
               )}
             </Grid>
             <Grid item sm={2} md={2} lg={2}>

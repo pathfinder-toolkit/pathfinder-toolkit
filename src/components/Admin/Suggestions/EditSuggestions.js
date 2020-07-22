@@ -5,31 +5,63 @@ import {
   TextField,
   Button,
   MenuItem,
+  CircularProgress,
+  ListItemText,
+  ListItem,
+  List,
 } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
 
 const EditSuggestions = (props) => {
+  const classes = props.style;
   const [suggestions, setSuggestions] = useState();
+  const [suggestionSubjects, setSuggestionSubjects] = useState();
+  const [selectedSubject, setSelectedSubject] = useState();
   const [selectedSuggestion, setSelectedSuggestion] = useState();
   const [loading, setLoading] = useState(true);
-  const { getAdminSuggestions } = useBackend();
+  const { getAdminSuggestions, getSuggestionSubjectsForAdmin } = useBackend();
 
-  const fetchSuggestions = async () => {
-    console.log("fetching suggestions:");
+  const getSubjects = async () => {
     setLoading(true);
     try {
-      const data = await getAdminSuggestions();
-      setSuggestions(data);
+      const response = await getSuggestionSubjectsForAdmin();
+      if (response.status === 200) {
+        console.log(response.data);
+        setSuggestionSubjects(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchSuggestions = async (identifier) => {
+    console.log("fetching suggestions about :" + identifier);
+    setLoading(true);
+    try {
+      const response = await getAdminSuggestions(identifier);
+      console.log(response.data);
+      setSuggestions(response.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getSubjects();
+  }, []);
 
-  const classes = props.style;
+  useEffect(() => {
+    if (selectedSubject) {
+      fetchSuggestions(selectedSubject.identifier);
+    }
+  }, [selectedSubject]);
+
+  const handleSubjectChange = (e) => {
+    setSelectedSubject(e.target.value);
+  };
 
   return (
     <React.Fragment>
@@ -37,7 +69,34 @@ const EditSuggestions = (props) => {
         Edit existing suggestions
       </Typography>
       <Grid container>
-        <TextField variant="outlined" label="Options"></TextField>
+        <TextField
+          variant="outlined"
+          className={classes.targetSelect}
+          label="Subject"
+          select
+          fullWidth
+          value={selectedSubject}
+          onChange={handleSubjectChange}
+        >
+          {suggestionSubjects?.map((item, index) => (
+            <MenuItem key={index} value={item}>
+              {item.subject}
+            </MenuItem>
+          ))}
+        </TextField>
+        <Typography>Suggestions</Typography>
+        <List>
+          {suggestions?.length === 0 && (
+            <ListItem>
+              <ListItemText primary={"No suggestions."} />
+            </ListItem>
+          )}
+          {suggestions?.map((suggestion, index) => (
+            <ListItem key={index} value={suggestion}>
+              <ListItemText primary={JSON.stringify(suggestion)} />
+            </ListItem>
+          ))}
+        </List>
       </Grid>
     </React.Fragment>
   );
