@@ -20,6 +20,12 @@ const SuggestionEditor = (props) => {
     submitNewSuggestion,
   } = useBackend();
 
+  if (props.suggestion) {
+      console.log("Editing existing suggestion")
+  } else {
+      console.log("Editing new suggestion");
+  }
+
   const [areas, setAreas] = useState();
   const [selectedAreas, setSelectedAreas] = useState([]);
 

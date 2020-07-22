@@ -15,7 +15,9 @@ import {
 
 import EditIcon from "@material-ui/icons/Edit";
 
+import SuggestionList from "./SuggestionList";
 import { useBackend } from "../../../utils/BackendProvider";
+import SuggestionEditor from "./SuggestionEditor";
 
 const EditSuggestions = (props) => {
   const classes = props.style;
@@ -63,8 +65,16 @@ const EditSuggestions = (props) => {
     }
   }, [selectedSubject]);
 
+  useEffect(() => {
+    if (selectedSuggestion) {
+      console.log("selected suggestion:");
+      console.log(selectedSuggestion);
+    }
+  }, [selectedSuggestion]);
+
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);
+    setSelectedSuggestion();
   };
 
   return (
@@ -88,24 +98,25 @@ const EditSuggestions = (props) => {
             </MenuItem>
           ))}
         </TextField>
-        <Typography>Suggestions</Typography>
-        <List>
-          {suggestions?.length === 0 && (
-            <ListItem>
-              <ListItemText primary={"No suggestions."} />
-            </ListItem>
-          )}
-          {suggestions?.map((suggestion, index) => (
-            <ListItem key={index} value={suggestion}>
-              <ListItemText primary={JSON.stringify(suggestion)} />
-              <ListItemSecondaryAction>
-                <IconButton>
-                  <EditIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
-        </List>
+        {selectedSuggestion && (
+          <Grid container>
+            <Grid item>
+              <Typography>Editing {selectedSuggestion.suggestion}</Typography>
+            </Grid>
+            <Grid item>
+              <Button onClick={() => setSelectedSuggestion()}>x</Button>{" "}
+            </Grid>
+          </Grid>
+        )}
+        {!selectedSuggestion && (
+          <SuggestionList
+            suggestions={suggestions}
+            handleSelection={(suggestion) => setSelectedSuggestion(suggestion)}
+          />
+        )}
+        {selectedSuggestion && (
+          <SuggestionEditor style={classes} suggestion={selectedSuggestion} />
+        )}
       </Grid>
     </React.Fragment>
   );
