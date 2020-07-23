@@ -464,6 +464,79 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const editSuggestion = async (request, id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+
+    console.log(request);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
+  const adminDeleteSuggestion = async (id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
+  const getAdminSuggestions = async (identifier) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/all/${identifier}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  };
+
   return (
     <BackendContext.Provider
       value={{
@@ -486,6 +559,9 @@ export const BackendProvider = ({ children }) => {
         getSuggestionSubjectsForAdmin,
         getSuggestionSubjectOptions,
         submitNewSuggestion,
+        editSuggestion,
+        adminDeleteSuggestion,
+        getAdminSuggestions,
       }}
     >
       {children}
