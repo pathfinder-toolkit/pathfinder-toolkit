@@ -18,13 +18,8 @@ const SuggestionEditor = (props) => {
     getSuggestionSubjectOptions,
     requestAreas,
     submitNewSuggestion,
+    editSuggestion,
   } = useBackend();
-
-  if (props.suggestion) {
-      console.log("Editing existing suggestion")
-  } else {
-      console.log("Editing new suggestion");
-  }
 
   const [areas, setAreas] = useState();
   const [selectedAreas, setSelectedAreas] = useState([]);
@@ -38,6 +33,24 @@ const SuggestionEditor = (props) => {
 
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
+
+  // Initalize
+  useEffect(() => {
+    getSubjects();
+
+    if (props.suggestion) {
+      console.log("Editing existing suggestion");
+      console.log(props.suggestion);
+      console.log("areas");
+      console.log(props.suggestion.areas);
+      setSelectedAreas(props.suggestion.areas);
+      setConditions(props.suggestion.conditions);
+      setPriority(props.suggestion.priority);
+      setSuggestionText(props.suggestion.suggestion);
+    } else {
+      console.log("Editing new suggestion");
+    }
+  }, []);
 
   const priorities = [
     {
@@ -113,22 +126,51 @@ const SuggestionEditor = (props) => {
     let areaIds = [];
     selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
 
-    const newSuggestion = {
-      suggestion: suggestionText,
-      identifier: subject.identifier,
-      priority: priority,
-      conditions: conditions,
-      areas: areaIds,
-    };
+    console.log("selected areas: ");
+    console.log(selectedAreas);
+    console.log("areaIds: ");
+    console.log(areaIds);
 
-    console.log(newSuggestion);
-    const response = await submitNewSuggestion(newSuggestion);
-    console.log(response);
+    let newSuggestion;
+    // Edit existing suggestion
+
+    let response;
+
+    if (props.suggestion) {
+      //temp solution
+
+      newSuggestion = {
+        idSuggestion: props.suggestion.idSuggestion,
+        suggestion: suggestionText,
+        identifier: props.suggestion.identifier,
+        priority: priority,
+        conditions: conditions,
+        areas: areaIds,
+      };
+
+      console.log("updating: ");
+      console.log(newSuggestion);
+
+      response = await editSuggestion(
+        newSuggestion,
+        props.suggestion.idSuggestion
+      );
+    } else {
+      newSuggestion = {
+        suggestion: suggestionText,
+        identifier: subject?.identifier,
+        priority: priority,
+        conditions: conditions,
+        areas: areaIds,
+      };
+
+      console.log("posting new:");
+      console.log(newSuggestion);
+
+      response = await submitNewSuggestion(newSuggestion);
+      console.log(response);
+    }
   };
-
-  useEffect(() => {
-    getSubjects();
-  }, []);
 
   useEffect(() => {
     if (!selectedAreas) {
@@ -286,7 +328,7 @@ const SuggestionEditor = (props) => {
         onClick={postSuggestion}
         disabled={conditions.length < 1}
       >
-        submit
+        {props.suggestion ? "Edit" : "Submit"}
       </Button>
     </React.Fragment>
   );

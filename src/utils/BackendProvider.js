@@ -479,6 +479,32 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const editSuggestion = async (request,id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+
+    console.log(request);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   const getAdminSuggestions = async (identifier) => {
     const token = await getTokenSilently();
 
@@ -524,6 +550,7 @@ export const BackendProvider = ({ children }) => {
         getSuggestionSubjectsForAdmin,
         getSuggestionSubjectOptions,
         submitNewSuggestion,
+        editSuggestion,
         getAdminSuggestions,
       }}
     >
