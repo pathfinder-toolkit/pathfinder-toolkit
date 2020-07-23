@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Typography,
   Grid,
   TextField,
   Button,
@@ -34,24 +33,6 @@ const SuggestionEditor = (props) => {
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
 
-  // Initalize
-  useEffect(() => {
-    getSubjects();
-
-    if (props.suggestion) {
-      console.log("Editing existing suggestion");
-      console.log(props.suggestion);
-      console.log("areas");
-      console.log(props.suggestion.areas);
-      setSelectedAreas(props.suggestion.areas);
-      setConditions(props.suggestion.conditions);
-      setPriority(props.suggestion.priority);
-      setSuggestionText(props.suggestion.suggestion);
-    } else {
-      console.log("Editing new suggestion");
-    }
-  }, []);
-
   const priorities = [
     {
       text: "High",
@@ -74,6 +55,19 @@ const SuggestionEditor = (props) => {
       color: "rgb(237, 247, 237)",
     },
   ];
+
+  // Initalize
+  useEffect(() => {
+    getSubjects();
+
+    // If editing existing suggestion
+    if (props.suggestion) {
+      setSelectedAreas(props.suggestion.areas);
+      setConditions(props.suggestion.conditions);
+      setPriority(props.suggestion.priority);
+      setSuggestionText(props.suggestion.suggestion);
+    }
+  }, []);
 
   const getSubjects = async () => {
     setLoading(true);
@@ -126,19 +120,11 @@ const SuggestionEditor = (props) => {
     let areaIds = [];
     selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
 
-    console.log("selected areas: ");
-    console.log(selectedAreas);
-    console.log("areaIds: ");
-    console.log(areaIds);
-
     let newSuggestion;
-    // Edit existing suggestion
-
     let response;
 
     if (props.suggestion) {
-      //temp solution
-
+   // Edit existing suggestion
       newSuggestion = {
         idSuggestion: props.suggestion.idSuggestion,
         suggestion: suggestionText,
@@ -148,14 +134,12 @@ const SuggestionEditor = (props) => {
         areas: areaIds,
       };
 
-      console.log("updating: ");
-      console.log(newSuggestion);
-
       response = await editSuggestion(
         newSuggestion,
         props.suggestion.idSuggestion
       );
     } else {
+
       newSuggestion = {
         suggestion: suggestionText,
         identifier: subject?.identifier,
@@ -164,11 +148,12 @@ const SuggestionEditor = (props) => {
         areas: areaIds,
       };
 
-      console.log("posting new:");
-      console.log(newSuggestion);
-
       response = await submitNewSuggestion(newSuggestion);
       console.log(response);
+    }
+
+    if (props.callback) {
+      props.callback();
     }
   };
 

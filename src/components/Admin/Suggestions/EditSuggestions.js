@@ -5,37 +5,32 @@ import {
   TextField,
   Button,
   MenuItem,
-  CircularProgress,
-  ListItemText,
   ListItem,
-  ListItemSecondaryAction,
   List,
-  IconButton,
+  ListItemText,
+  ListItemSecondaryAction,
 } from "@material-ui/core";
 
-import EditIcon from "@material-ui/icons/Edit";
+import { useBackend } from "../../../utils/BackendProvider";
 
 import SuggestionList from "./SuggestionList";
-import { useBackend } from "../../../utils/BackendProvider";
 import SuggestionEditor from "./SuggestionEditor";
 
 const EditSuggestions = (props) => {
   const classes = props.style;
+  const { getAdminSuggestions, getSuggestionSubjectsForAdmin } = useBackend();
+
   const [suggestions, setSuggestions] = useState();
   const [suggestionSubjects, setSuggestionSubjects] = useState();
   const [selectedSubject, setSelectedSubject] = useState();
   const [selectedSuggestion, setSelectedSuggestion] = useState();
-  const [loading, setLoading] = useState(true);
-  const { getAdminSuggestions, getSuggestionSubjectsForAdmin } = useBackend();
 
   const getSubjects = async () => {
-    setLoading(true);
     try {
       const response = await getSuggestionSubjectsForAdmin();
       if (response.status === 200) {
         console.log(response.data);
         setSuggestionSubjects(response.data);
-        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -44,12 +39,10 @@ const EditSuggestions = (props) => {
 
   const fetchSuggestions = async (identifier) => {
     console.log("fetching suggestions about :" + identifier);
-    setLoading(true);
     try {
       const response = await getAdminSuggestions(identifier);
       console.log(response.data);
       setSuggestions(response.data);
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -64,13 +57,6 @@ const EditSuggestions = (props) => {
       fetchSuggestions(selectedSubject.identifier);
     }
   }, [selectedSubject]);
-
-  useEffect(() => {
-    if (selectedSuggestion) {
-      console.log("selected suggestion:");
-      console.log(selectedSuggestion);
-    }
-  }, [selectedSuggestion]);
 
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);
@@ -99,14 +85,21 @@ const EditSuggestions = (props) => {
           ))}
         </TextField>
         {selectedSuggestion && (
-          <Grid container>
-            <Grid item>
-              <Typography>Editing {selectedSuggestion.suggestion}</Typography>
-            </Grid>
-            <Grid item>
-              <Button onClick={() => setSelectedSuggestion()}>x</Button>{" "}
-            </Grid>
-          </Grid>
+          <List style={{ width: "100%" }}>
+            <ListItem>
+              <ListItemText
+                primary={
+                  "Currently editing suggestion: " +
+                  selectedSuggestion.idSuggestion +
+                  " / " +
+                  selectedSuggestion.suggestion
+                }
+              />
+              <ListItemSecondaryAction>
+                <Button onClick={() => setSelectedSuggestion()}>x</Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
         )}
         {!selectedSuggestion && (
           <SuggestionList
@@ -115,7 +108,16 @@ const EditSuggestions = (props) => {
           />
         )}
         {selectedSuggestion && (
-          <SuggestionEditor style={classes} suggestion={selectedSuggestion} />
+          <div style={{ border: "1px solid #E0E0E0", borderRadius: "3px" }}>
+            <SuggestionEditor
+              style={classes}
+              suggestion={selectedSuggestion}
+              callback={() => {
+                setSelectedSuggestion();
+                fetchSuggestions(selectedSubject.identifier);
+              }}
+            />
+          </div>
         )}
       </Grid>
     </React.Fragment>
