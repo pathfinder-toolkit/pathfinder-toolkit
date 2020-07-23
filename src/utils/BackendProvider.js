@@ -464,13 +464,12 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const editSuggestion = async (request, id) => {
+  const updateAreaOptions = async (identifier, areas, request) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+      `${process.env.REACT_APP_API_ROOT}/admin/options/${identifier}?areas=${areas}`
     );
-
     console.log(request);
 
     const axiosConfig = {
@@ -483,12 +482,39 @@ export const BackendProvider = ({ children }) => {
     try {
       const response = await axios.put(address, request, axiosConfig);
       console.log(response);
-      return response.data;
+      return response;
     } catch (error) {
       console.log(error);
-      return error;
+      return error.response;
     }
-  };
+  }
+
+
+  const editSuggestion = async (request, id) => {
+    const token = await getTokenSilently();
+  
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+  
+    console.log(request);
+  
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
 
   const adminDeleteSuggestion = async (id) => {
     const token = await getTokenSilently();
@@ -562,6 +588,7 @@ export const BackendProvider = ({ children }) => {
         editSuggestion,
         adminDeleteSuggestion,
         getAdminSuggestions,
+        updateAreaOptions
       }}
     >
       {children}
