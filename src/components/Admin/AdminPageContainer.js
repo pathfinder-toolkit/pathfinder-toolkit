@@ -54,7 +54,8 @@ const AdminPageContainer = () => {
     },
     listItem: {
       marginLeft: theme.spacing(1),
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(0.5),
+      marginBottom: theme.spacing(0.5)
     }
   }));
   const styleClasses = useStyles();

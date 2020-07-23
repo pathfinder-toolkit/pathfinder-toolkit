@@ -6,9 +6,12 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
+import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+
+import uniqid from "uniqid";
 
 const RegionOptionsEditor = (props) => {
     const classes = props.classes;
@@ -16,33 +19,43 @@ const RegionOptionsEditor = (props) => {
     const [newOptions, setNewOptions] = useState();
 
     useEffect(() => {
-        setNewOptions(props.options);
+        setNewOptions(
+            props.options?.map((option) => {
+                return {
+                    value: option,
+                    id: uniqid.process()
+                }
+            })
+        );
     },[props.options])
 
     const handleOptionChange = (e) => {
         setNewOptions(newOptions.map(
-            (option, index) => {
-                return index == e.target.id ? e.target.value : option;
+            (option) => {
+                return option.id == e.target.id ? {...option, value: e.target.value} : option;
             })
         );
     }
 
     const handleRemoveOption = (e) => {
-        let currentIndex = e.target.id;
-        if (currentIndex === '') {
-            currentIndex = e.target.parentNode.id;
+        let currentId = e.target.id;
+        if (currentId === '') {
+            currentId = e.target.parentNode.id;
         }
         setNewOptions(newOptions.filter(
-            (option, index) => {
-                console.log(option);
-                console.log(index);
-                return !(index == e.target.id);
-            })
-        );
+            (option) => {
+                return !(option.id == currentId);
+            }
+        ));
     }
 
     const handleAddOption = () => {
-        setNewOptions([...newOptions, '']);
+        setNewOptions([...newOptions, {value: '', id: uniqid.process()}]);
+    }
+
+    const handleSubmit = async () => {
+        console.log(newOptions);
+        await props.refresh();
     }
 
     return <React.Fragment>
@@ -84,26 +97,26 @@ const RegionOptionsEditor = (props) => {
                         </Grid>
                     )
                 })}*/}
-                {newOptions?.map((option, index) => {
-                    return <Grid item xs={10} key={index}>
-                        <FormControl className={classes.listItem} key={index} fullWidth>
+                {newOptions?.map((option) => {
+                    return <Grid item xs={10} key={option.id}>
+                        <FormControl className={classes.listItem} key={option.id} fullWidth>
                             <OutlinedInput
-                            id={index}
-                            key={index}
+                            id={option.id}
+                            key={option.id}
                             type="text"
                             aria-label="edit option text"
-                            value={option}
+                            value={option.value}
                             onChange={handleOptionChange}
                             endAdornment={
-                            <InputAdornment key={index} position="end">
+                            <InputAdornment key={option.id} position="end">
                                 <IconButton
-                                id={index}
-                                key={index}
+                                id={option.id}
+                                key={option.id}
                                 aria-label="remove option"
                                 onClick={handleRemoveOption}
                                 edge="end"
                                 >
-                                    <CloseIcon id={index} key={index} color="secondary" />
+                                    <CloseIcon id={option.id} key={option.id} color="secondary" />
                                 </IconButton>
                             </InputAdornment>
                             }
@@ -122,6 +135,7 @@ const RegionOptionsEditor = (props) => {
                 </Button>
                 </Grid>
             </Grid>
+            <Button variant="contained" color="primary" className={classes.submitButton} onClick={handleSubmit}>Submit changes</Button>
         </Grid>
     </React.Fragment>
 }
