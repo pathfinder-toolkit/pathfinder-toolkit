@@ -57,34 +57,19 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const requestAreaOptions = async (selectedArea) => {
+  const requestAreaOptions = async (areaId) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/editor/options/" + selectedArea
+      process.env.REACT_APP_API_ROOT + "/editor/options/" + areaId
     );
 
     try {
       const response = await axios.get(address);
-      console.log(response.data);
 
-      const options = {
-        materials: response.data.materials.map((material) => {
-          return material.value;
-        }),
-        roofTypes: response.data.roofTypes.map((roofType) => {
-          return roofType.value;
-        }),
-        ventilationTypes: response.data.ventilationTypes.map(
-          (ventilationType) => {
-            return ventilationType.value;
-          }
-        ),
-        heatingTypes: response.data.heatingTypes.map((heatingType) => {
-          return heatingType.value;
-        }),
-        buildingTypes: response.data.buildingTypes.map((buildingType) => {
-          return buildingType.value;
-        }),
-      };
+      const options = {};
+
+      for (const component of response.data.components) {
+        options[component.componentName] = component.options;
+      }
       console.log(options);
 
       return options;
@@ -479,6 +464,105 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const updateAreaOptions = async (identifier, areas, request) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/options/${identifier}?areas=${areas}`
+    );
+    console.log(request);
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
+
+
+  const editSuggestion = async (request, id) => {
+    const token = await getTokenSilently();
+  
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+  
+    console.log(request);
+  
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
+
+  const adminDeleteSuggestion = async (id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
+  const getAdminSuggestions = async (identifier) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/suggestions/all/${identifier}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  };
+
   return (
     <BackendContext.Provider
       value={{
@@ -501,6 +585,10 @@ export const BackendProvider = ({ children }) => {
         getSuggestionSubjectsForAdmin,
         getSuggestionSubjectOptions,
         submitNewSuggestion,
+        editSuggestion,
+        adminDeleteSuggestion,
+        getAdminSuggestions,
+        updateAreaOptions
       }}
     >
       {children}

@@ -70,7 +70,7 @@ const AdminNavigationBar = () => {
                         <ListItemText>Create new suggestion</ListItemText>
                     </ListItem>
                     <ListItem button className={classes.itemNested} onClick={() => {handleSelection("editSuggestions")}}>
-                        <ListItemText>Edit existing suggestions</ListItemText>
+                        <ListItemText>Edit suggestions</ListItemText>
                     </ListItem>
                     <ListItem button className={classes.itemNested} onClick={() => {handleSelection("deleteSuggestions")}}>
                         <ListItemText>Delete suggestions</ListItemText>
@@ -84,7 +84,7 @@ const AdminNavigationBar = () => {
             </ListItem>
             <Collapse in={showEditor} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItem button className={classes.itemNested}>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("regionOptions")}}>
                         <ListItemText>Update region options</ListItemText>
                     </ListItem>
                 </List>
