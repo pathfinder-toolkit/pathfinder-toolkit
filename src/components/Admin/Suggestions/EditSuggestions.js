@@ -9,7 +9,10 @@ import {
   List,
   ListItemText,
   ListItemSecondaryAction,
+  IconButton,
 } from "@material-ui/core";
+
+import EditIcon from "@material-ui/icons/Edit";
 
 import { useBackend } from "../../../utils/BackendProvider";
 
@@ -104,7 +107,12 @@ const EditSuggestions = (props) => {
         {!selectedSuggestion && (
           <SuggestionList
             suggestions={suggestions}
-            handleSelection={(suggestion) => setSelectedSuggestion(suggestion)}
+            handleAction={(suggestion) => setSelectedSuggestion(suggestion)}
+            secondaryAction={
+              <IconButton>
+                <EditIcon color="primary" />
+              </IconButton>
+            }
           />
         )}
         {selectedSuggestion && (

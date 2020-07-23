@@ -4,10 +4,7 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  IconButton,
 } from "@material-ui/core";
-
-import EditIcon from "@material-ui/icons/Edit";
 
 const priorities = [
   {
@@ -49,10 +46,10 @@ const SuggestionList = (props) => {
           style={{ borderBottom: "1px solid #E0E0E0" }}
         >
           <ListItemText primary={JSON.stringify(suggestion)} />
-          <ListItemSecondaryAction>
-            <IconButton onClick={() => props.handleSelection(suggestion)}>
-              <EditIcon color="primary" />
-            </IconButton>
+          <ListItemSecondaryAction
+            onClick={() => props.handleAction(suggestion)}
+          >
+            {props.secondaryAction}
           </ListItemSecondaryAction>
         </ListItem>
       ))}

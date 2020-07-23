@@ -479,7 +479,7 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const editSuggestion = async (request,id) => {
+  const editSuggestion = async (request, id) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
@@ -497,6 +497,30 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
+  const adminDeleteSuggestion = async (id) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
       console.log(response);
       return response.data;
     } catch (error) {
@@ -551,6 +575,7 @@ export const BackendProvider = ({ children }) => {
         getSuggestionSubjectOptions,
         submitNewSuggestion,
         editSuggestion,
+        adminDeleteSuggestion,
         getAdminSuggestions,
       }}
     >
