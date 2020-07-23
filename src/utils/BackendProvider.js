@@ -464,6 +464,30 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const updateAreaOptions = async (identifier, areas, request) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/options/${identifier}?areas=${areas}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.put(address, request, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error.response;
+    }
+  }
+
   const getAdminSuggestions = async () => {
     
   }
@@ -491,6 +515,7 @@ export const BackendProvider = ({ children }) => {
         getSuggestionSubjectOptions,
         submitNewSuggestion,
         getAdminSuggestions,
+        updateAreaOptions
       }}
     >
       {children}

@@ -6,17 +6,23 @@ import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
 import uniqid from "uniqid";
 
+import { useBackend } from "../../../utils/BackendProvider";
+
 const RegionOptionsEditor = (props) => {
     const classes = props.classes;
 
     const [newOptions, setNewOptions] = useState();
+    const [pending, setPending] = useState(false);
+
+    const {
+        updateAreaOptions
+    } = useBackend();
 
     useEffect(() => {
         setNewOptions(
@@ -27,6 +33,7 @@ const RegionOptionsEditor = (props) => {
                 }
             })
         );
+        setPending(true);
     },[props.options])
 
     const handleOptionChange = (e) => {
@@ -54,8 +61,11 @@ const RegionOptionsEditor = (props) => {
     }
 
     const handleSubmit = async () => {
-        console.log(newOptions);
+        const requestBody = newOptions.map((option) => {return {option: option.value}});
+        setPending(true);
+        await updateAreaOptions(props.identifier, props.areas, requestBody);
         await props.refresh();
+        setPending(false);
     }
 
     return <React.Fragment>
@@ -82,21 +92,6 @@ const RegionOptionsEditor = (props) => {
             </Grid>
            <Grid container item xs={6} direction="row">
                 <Typography variant="h6" component="h6" className={classes.subHeader}>Modify options here</Typography>
-                 {/*{newOptions.map((option, index) => {
-                    return (
-                        <Grid item xs={10} key={index}>
-                            <TextField
-                            variant="outlined"
-                            className={classes.listItem}
-                            fullWidth
-                            value={option}
-                            id={index}
-                            onChange={handleOptionChange}
-                            >
-                            </TextField>
-                        </Grid>
-                    )
-                })}*/}
                 {newOptions?.map((option) => {
                     return <Grid item xs={10} key={option.id}>
                         <FormControl className={classes.listItem} key={option.id} fullWidth>
@@ -125,14 +120,14 @@ const RegionOptionsEditor = (props) => {
                     </Grid>
                 })}
                 <Grid item xs={10} key="addButton">
-                <Button
-                variant="contained"
-                color="primary"
-                className={classes.listItem}
-                onClick={handleAddOption}
-                >
-                    <AddIcon></AddIcon>
-                </Button>
+                    <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.listItem}
+                    onClick={handleAddOption}
+                    >
+                        <AddIcon />
+                    </Button>
                 </Grid>
             </Grid>
             <Button variant="contained" color="primary" className={classes.submitButton} onClick={handleSubmit}>Submit changes</Button>

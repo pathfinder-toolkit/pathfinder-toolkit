@@ -120,6 +120,8 @@ const UpdateRegionOptions = (props) => {
         {selectedField && (
             <RegionOptionsEditor
             classes={classes}
+            identifier={selectedField.identifier}
+            areas={selectedArea.idArea}
             options={options}
             refresh={refreshOptions}
             />
