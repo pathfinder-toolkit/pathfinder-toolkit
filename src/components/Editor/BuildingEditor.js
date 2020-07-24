@@ -10,7 +10,6 @@ const BuildingEditor = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       background: "#eceef8",
-      //background: "#3F51B5",
       maxHeight: "100vh",
     },
     editorContainer: {

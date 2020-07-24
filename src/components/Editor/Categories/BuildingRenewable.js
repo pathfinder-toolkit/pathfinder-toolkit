@@ -37,7 +37,7 @@ const BuildingRenewable = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions?.ventilationTypes}
+                  data={buildingOptions?.heatPump}
                   label="Heat pump"
                   value={formData.heatPump.value}
                   handler={(e) => handleChange(e, "heatPump")}
@@ -48,7 +48,7 @@ const BuildingRenewable = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions?.ventilationTypes}
+                  data={buildingOptions?.solarHeat}
                   label="Solar energy heating"
                   value={formData.solarHeat.value}
                   handler={(e) => handleChange(e, "solarHeat")}
@@ -59,7 +59,7 @@ const BuildingRenewable = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions?.ventilationTypes}
+                  data={buildingOptions?.solarElectric}
                   label="Solar energy electricity"
                   value={formData.solarElectric.value}
                   handler={(e) => handleChange(e, "solarElectric")}
@@ -70,7 +70,7 @@ const BuildingRenewable = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions?.ventilationTypes}
+                  data={buildingOptions?.bioMass}
                   label="Biomass energy"
                   value={formData.bioMass.value}
                   handler={(e) => handleChange(e, "bioMass")}
@@ -81,7 +81,7 @@ const BuildingRenewable = (props) => {
               <Grid item sm={4}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions?.ventilationTypes}
+                  data={buildingOptions?.chp}
                   label="Combined heat and power"
                   value={formData.heatPump.value}
                   handler={(e) => handleChange(e, "chp")}

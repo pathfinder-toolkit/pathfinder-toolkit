@@ -55,7 +55,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.materials}
+                  data={buildingOptions.wallMaterial}
                   label="Wall Material"
                   value={formData.wallMaterial[0].value}
                   handler={(e) => handleChange(e, "wallMaterial")}
@@ -77,7 +77,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.materials}
+                  data={buildingOptions.windowType}
                   label="Window type"
                   value={formData.wallMaterial[0].value}
                   handler={(e) => handleChange(e, "windowType")}
@@ -98,7 +98,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.materials}
+                  data={buildingOptions.heatedWindowType}
                   label="Heated window type"
                   value={formData.wallMaterial[0].value}
                   handler={(e) => handleChange(e, "heatedWindowType")}
@@ -120,7 +120,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.materials}
+                  data={buildingOptions.doorMaterial}
                   label="Door material"
                   defaultValue="Wood"
                   value={formData.doorMaterial[0].value}
@@ -132,7 +132,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.roofTypes}
+                  data={buildingOptions.roofMaterial}
                   label="Roof type"
                   defaultValue="Roof 1"
                   value={formData.roofMaterial[0].value}
