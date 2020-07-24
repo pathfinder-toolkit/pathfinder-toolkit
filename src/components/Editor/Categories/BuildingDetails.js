@@ -24,6 +24,7 @@ const BuildingDetails = (props) => {
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
+    console.log(buildingOptions);
     setLoading(true);
     return () => {
       //setSavedCategory("details", formData);
@@ -77,7 +78,7 @@ const BuildingDetails = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.buildingTypes}
+                  data={buildingOptions?.buildingTypes}
                   label="Building type"
                   defaultValue="Building 1"
                   handler={(e) => handleChange(e, "buildingType")}

@@ -26,6 +26,8 @@ const AreaSelection = (props) => {
     const fetchData = async () => {
       const data = await requestAreas();
 
+      console.log(data);
+
       //Get areaNames from array
       let areaNames = [];
       data.forEach((item) => areaNames.push(item.areaName));
@@ -38,7 +40,7 @@ const AreaSelection = (props) => {
         JSON.parse(sessionStorage.getItem("SavedBuildingDataInStorage")) ||
           model
       );
-      setAllowedCountries(areaNames);
+      setAllowedCountries(data);
       setLoading(false);
     };
     fetchData();
@@ -51,8 +53,9 @@ const AreaSelection = (props) => {
   }, [loading]);
 
   useEffect(() => {
+    console.log(selectedArea);
     async function fetchData() {
-      const data = await requestAreaOptions(selectedArea);
+      const data = await requestAreaOptions(findAreaIdByName(selectedArea));
       setBuildingOptions(data);
       setNavigationEnabled(true);
     }
@@ -64,6 +67,16 @@ const AreaSelection = (props) => {
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
     setSavedProperty("details", "area", selectedCountry);
+  };
+
+  // Need to refine this solution later on.
+  const findAreaIdByName = (areaName) => {
+    let areaId = allowedCountries.filter((area) => {
+      return area.areaName === areaName;
+    });
+    areaId = areaId[0].idArea;
+
+    return areaId;
   };
 
   return (
