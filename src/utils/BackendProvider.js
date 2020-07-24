@@ -562,6 +562,29 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
+  const updateBuildingData = async (slug, requestBody) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/building/${slug}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+    try {
+      const response = await axios.put(address, requestBody, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -588,6 +611,7 @@ export const BackendProvider = ({ children }) => {
         adminDeleteSuggestion,
         getAdminSuggestions,
         updateAreaOptions,
+        updateBuildingData
       }}
     >
       {children}
