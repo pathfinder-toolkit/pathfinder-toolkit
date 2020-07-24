@@ -53,6 +53,7 @@ const DeleteSuggestions = (props) => {
     try {
       const response = await adminDeleteSuggestion(suggestion.idSuggestion);
       console.log(response.data);
+      fetchSuggestions(selectedSubject.identifier);
     } catch (error) {
       console.log(error);
     }
