@@ -1,17 +1,31 @@
-import React from "react";
-import mapData from "../../../json/mapdata.json"
-import { ComposableMap, Geographies, Geography, Annotation } from "react-simple-maps";
+import React, { useEffect, useState } from "react";
+import mapData from "../../../json/mapdata.json";
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Annotation,
+} from "react-simple-maps";
 
 const AreaMap = (props) => {
   const geoUrl = mapData;
 
   const allowedCountries = props.allowedCountries;
+  const [areaNames, setAreaNames] = useState();
+
+  useEffect(() => {
+    console.log(allowedCountries)
+    let areaNames = [];
+    allowedCountries.forEach((item) => areaNames.push(item.areaName));
+    setAreaNames(areaNames);
+  }, []);
+
   const selectedCountry = props.selectedCountry;
 
   const mapConfig = {
     rotate: [-20.0, -62.5, 0],
     scale: 850,
-  }
+  };
 
   const styles = {
     validCountry: {
@@ -77,7 +91,7 @@ const AreaMap = (props) => {
                   style={styles.selectedCountry}
                 />
               );
-            } else if (allowedCountries.includes(geo.properties.NAME)) {
+            } else if (areaNames?.includes(geo.properties.NAME)) {
               return (
                 <Geography
                   key={geo.rsmKey}
@@ -100,17 +114,21 @@ const AreaMap = (props) => {
           })
         }
       </Geographies>
-      {selectedCountry && (<Annotation
-        connectorProps={null}
-        subject={[-8, 46]}
-        dx={0}
-        dy={0}
-      >
-        <rect x="-115" y="-25" rx="15" width="230" height="44" fill="none" stroke="#000000" strokeWidth="2"></rect>
-         <text textAnchor="middle">
-          Selected area: {selectedCountry}
-        </text>
-      </Annotation>)}
+      {selectedCountry && (
+        <Annotation connectorProps={null} subject={[-8, 46]} dx={0} dy={0}>
+          <rect
+            x="-115"
+            y="-25"
+            rx="15"
+            width="230"
+            height="44"
+            fill="none"
+            stroke="#000000"
+            strokeWidth="2"
+          ></rect>
+          <text textAnchor="middle">Selected area: {selectedCountry}</text>
+        </Annotation>
+      )}
     </ComposableMap>
   );
 };

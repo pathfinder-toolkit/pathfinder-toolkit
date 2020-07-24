@@ -40,7 +40,7 @@ const DropdownSelect = (props) => {
       defaultValue={defaultValue}
       onChange={handleChange}
     >
-      {data.map((entry, index) => (
+      {data?.map((entry, index) => (
         <MenuItem key={index} value={entry}>
           {entry}
         </MenuItem>

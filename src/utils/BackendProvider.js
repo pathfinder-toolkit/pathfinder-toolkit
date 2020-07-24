@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import axios from "axios";
 import { useAuth0 } from "./react-auth0-spa";
@@ -487,18 +487,17 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return error.response;
     }
-  }
-
+  };
 
   const editSuggestion = async (request, id) => {
     const token = await getTokenSilently();
-  
+
     const address = encodeURI(
       process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
     );
-  
+
     console.log(request);
-  
+
     const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -514,7 +513,7 @@ export const BackendProvider = ({ children }) => {
       console.log(error);
       return error.response;
     }
-  }
+  };
 
   const adminDeleteSuggestion = async (id) => {
     const token = await getTokenSilently();
