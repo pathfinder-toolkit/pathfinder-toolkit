@@ -17,8 +17,6 @@ const AreaMap = (props) => {
     console.log(allowedCountries)
     let areaNames = [];
     allowedCountries.forEach((item) => areaNames.push(item.areaName));
-    console.log("area names");
-    console.log(areaNames);
     setAreaNames(areaNames);
   }, []);
 
