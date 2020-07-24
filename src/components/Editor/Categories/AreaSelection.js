@@ -23,16 +23,24 @@ const AreaSelection = (props) => {
   const [allowedCountries, setAllowedCountries] = useState();
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const data = await requestAreas();
+
+      //Get areaNames from array
+      let areaNames = [];
+      data.forEach((item) => areaNames.push(item.areaName));
+
+      console.log(areaNames);
+
+      console.log(data);
       const model = await requestBuildingModel();
       props.loadBuildingModel(
         JSON.parse(sessionStorage.getItem("SavedBuildingDataInStorage")) ||
           model
       );
-      setAllowedCountries(data);
+      setAllowedCountries(areaNames);
       setLoading(false);
-    }
+    };
     fetchData();
   }, []);
 
