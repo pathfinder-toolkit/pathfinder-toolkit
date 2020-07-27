@@ -1,6 +1,8 @@
 import React from "react";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Comment from "./Comment.js";
 
@@ -9,14 +11,16 @@ const Comments = (props) => {
     
     return <React.Fragment>
         <List>
-        {props.comments.map((comment, key) => {
+        {props.comments.map((comment) => {
             return (
-                <React.Fragment>
-                    <Comment comment={comment} key={key} classes={classes} />
+                <React.Fragment key={comment.idComment}>
+                    <Comment comment={comment} classes={classes} />
                     <Divider variant="inset" component="li" />
-                </React.Fragment>)
+                </React.Fragment>
+            )
         })}
         </List>
+        {props.children}
         </React.Fragment>
 }
 

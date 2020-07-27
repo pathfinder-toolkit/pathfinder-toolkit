@@ -7,7 +7,7 @@ export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
 export const BackendProvider = ({ children }) => {
-  const { getTokenSilently } = useAuth0();
+  const { getTokenSilently, loading } = useAuth0();
 
   const getStoredBuildings = async () => {
     const token = await getTokenSilently();
@@ -101,23 +101,18 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const requestComments = async (subject) => {
-    const amount = Math.floor(Math.random() * 5);
+  const requestComments = async (subject, page = 1, perPage = 3) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/" + amount
+      `${process.env.REACT_APP_API_ROOT}/comments/${subject}?page=${page}&perPage=${perPage}`
     );
-
-    /*const address = encodeURI(
-      "http://localhost:3300" + "/comments/" + subject
-    ); */
 
     try {
       const response = await axios.get(address);
-      console.log(response.data);
-      return response.data;
+      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
-      return null;
+      return error.response;
     }
   };
 
@@ -134,6 +129,7 @@ export const BackendProvider = ({ children }) => {
   };
 
   const getBuildingFromSlug = async (slug) => {
+    
     const token = await getTokenSilently();
 
     const address = encodeURI(
@@ -583,7 +579,7 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const deleteBuilding = async (slug) => {
     const token = await getTokenSilently();
@@ -606,7 +602,7 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   return (
     <BackendContext.Provider
@@ -635,7 +631,7 @@ export const BackendProvider = ({ children }) => {
         getAdminSuggestions,
         updateAreaOptions,
         updateBuildingData,
-        deleteBuilding
+        deleteBuilding,
       }}
     >
       {children}

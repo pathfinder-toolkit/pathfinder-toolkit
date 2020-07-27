@@ -21,6 +21,7 @@ const HeatingCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.heatingSystem}
                 classes={props.classes}
+                subject="heatingSystem"
                 />
             ) : (
                 <CategoryItem 
@@ -35,6 +36,7 @@ const HeatingCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.heatingSource}
                 classes={props.classes}
+                subject="heatingSource"
                 />
             ) : (
                 <CategoryItem 

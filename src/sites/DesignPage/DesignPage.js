@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +7,7 @@ import { EditorProvider } from "../../utils/EditorProvider";
 import EditorStepper from "../../components/Editor/EditorStepper";
 import BuildingEditor from "../../components/Editor/BuildingEditor";
 
-const DesignPage = () => {
+const DesignPage = (props) => {
   const useStyles = makeStyles((theme) => ({
     sidebar: {
       backgroundColor: "#FFFFFF",
@@ -15,6 +15,12 @@ const DesignPage = () => {
   }));
 
   const classes = useStyles();
+
+  useEffect(() => {
+    if (props.match.params.slug) {
+      console.log("slug: " + props.match.params.slug);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -25,7 +31,7 @@ const DesignPage = () => {
             <EditorStepper />
           </Grid>
           <Grid item sm={10} md={10} lg={10}>
-            <BuildingEditor />
+            <BuildingEditor slug={props.match.params.slug} />
           </Grid>
         </Grid>
       </EditorProvider>
