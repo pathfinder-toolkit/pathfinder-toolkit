@@ -6,7 +6,7 @@ import { useEditor } from "../../utils/EditorProvider";
 import EditorNavigationBar from "./EditorNavigationBar";
 import SuggestionContainer from "./Sidebar/SuggestionContainer";
 
-const BuildingEditor = () => {
+const BuildingEditor = (props) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       background: "#eceef8",
@@ -58,7 +58,7 @@ const BuildingEditor = () => {
       marginBottom: theme.spacing(1),
     },
     rowNoBorder: {
-      marginBottom: theme.spacing(1)
+      marginBottom: theme.spacing(1),
     },
     formComponent: {
       marginBottom: theme.spacing(0),
@@ -130,7 +130,7 @@ const BuildingEditor = () => {
             lg={12}
           >
             <Paper className={classes.editorComponent}>
-              {getStepComponent(styleComponent)}
+              {getStepComponent(styleComponent, props.slug)}
             </Paper>
           </Grid>
         </Grid>
@@ -145,7 +145,7 @@ const BuildingEditor = () => {
       <Grid className={classes.root} container sm={12} md={12} lg={12}>
         <Grid className={classes.editorContainer} item sm={9} md={9} lg={9}>
           <Paper className={classes.editorComponent}>
-            {getStepComponent(styleComponent)}
+            {getStepComponent(styleComponent, props.slug)}
           </Paper>
         </Grid>
         <Grid item sm={3} md={3} lg={3}>
