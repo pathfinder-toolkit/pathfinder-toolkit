@@ -8,6 +8,7 @@ const AreaSelection = (props) => {
   const {
     setSavedProperty,
     getSavedProperty,
+    buildingInformation,
     setNavigationEnabled,
     setBuildingOptions,
   } = useEditor();
@@ -47,6 +48,7 @@ const AreaSelection = (props) => {
       } else {
         // New building
         model = await requestBuildingModel();
+
         props.loadBuildingModel(
           JSON.parse(sessionStorage.getItem("SavedBuildingDataInStorage")) ||
             model
@@ -58,6 +60,26 @@ const AreaSelection = (props) => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // If we have data in local storage from previously edited building
+    // and we want to create a new building,
+    // the previous data needs to be cleared.
+    const resetBuildingData = async () => {
+      if (buildingInformation && !props.slug) {
+        console.log("Invalid building data in storage, removing");
+        console.log(Object.keys(buildingInformation));
+        if (Object.keys(buildingInformation).includes("slug")) {
+          const model = await requestBuildingModel();
+          props.loadBuildingModel(model);
+          setSelectedArea("");
+          setNavigationEnabled(false);
+        }
+      }
+    };
+
+    resetBuildingData();
+  }, [buildingInformation]);
 
   useEffect(() => {
     if (!loading) {
