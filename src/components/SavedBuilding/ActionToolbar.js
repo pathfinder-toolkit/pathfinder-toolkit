@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
+import DeletionConfirmation from "./DeletionConfirmation";
 
 const useStyles = makeStyles((theme) => ({
     actions: {
@@ -20,13 +21,41 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "75%",
         margin: "auto",
         marginBottom: theme.spacing(2),
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: "pointer"
+    },
+    confirmationRoot: {
+        minHeight: "40vh",
+        minWidth: "40vw",
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        cursor: "auto"
+    },
+    confirmationContent: {
+        minHeight: "40vh",
+        margin: theme.spacing(2)
+    },
+    contentItem: {
+        margin: theme.spacing(1)
     }
 }));
 
-// TODO add functionality to buttons
-
 const ActionToolbar = (props) => {
     const classes = useStyles();
+
+    const [ showDeletion, setShowDeletion ] = useState();
+
+    const showDeletionConfirmation = () => {
+        setShowDeletion(true);
+    }
+
+    const hideDeletionConfirmation = () => {
+        setShowDeletion(false);
+    }
 
     return <Paper className ={classes.actions}>
         <Typography className={classes.actionsText}>
@@ -42,6 +71,19 @@ const ActionToolbar = (props) => {
                 Edit Building
             </Typography>
         </Button>
+        <Button variant="contained" color="secondary" className={classes.actionsButton} onClick={showDeletionConfirmation}>
+            <Typography className={classes.text}>
+                Delete Building
+            </Typography>
+        </Button>
+        {showDeletionConfirmation && (
+            <DeletionConfirmation 
+            classes={classes}
+            show={showDeletion}
+            onHide={hideDeletionConfirmation}
+            slug={props.slug}
+            />
+        )}
     </Paper>
 }
 
