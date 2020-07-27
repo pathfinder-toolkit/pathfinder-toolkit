@@ -7,15 +7,13 @@ import { useBackend } from "../../utils/BackendProvider";
 
 import BuildingViewer from "../BuildingViewer/BuildingViewer";
 import SubmitModal from "./reusable/SubmitModal";
-import { SettingsSharp } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
 const Summary = () => {
-  const { buildingInformation } = useEditor();
-  const { postBuilding } = useEditor();
+  const { buildingInformation, postBuilding, updateBuilding } = useEditor();
 
   const classes = useStyles();
 
@@ -46,12 +44,31 @@ const Summary = () => {
     }
   };
 
+  const submitUpdateBuilding = async () => {
+    console.log("submitUpdateBuilding");
+    const message = await updateBuilding();
+    console.log(message);
+  };
+
   return (
     <React.Fragment>
       <Modal open={open} onClose={() => setOpen(false)}>
         <SubmitModal message={message} />
       </Modal>
-      <Button onClick={() => submitBuilding()}> submit</Button>
+      <Button
+        onClick={() => submitBuilding()}
+        variant="outlined"
+        color="primary"
+      >
+        submit
+      </Button>
+      <Button
+        onClick={()=> submitUpdateBuilding()}
+        variant="outlined"
+        color="primary"
+      >
+        Update test
+      </Button>
       <BuildingViewer building={buildingInformation} />
     </React.Fragment>
   );

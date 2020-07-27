@@ -7,7 +7,7 @@ export const BackendContext = React.createContext();
 export const useBackend = () => useContext(BackendContext);
 
 export const BackendProvider = ({ children }) => {
-  const { getTokenSilently } = useAuth0();
+  const { getTokenSilently, loading } = useAuth0();
 
   const getStoredBuildings = async () => {
     const token = await getTokenSilently();
@@ -583,7 +583,7 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const deleteBuilding = async (slug) => {
     const token = await getTokenSilently();
@@ -606,7 +606,7 @@ export const BackendProvider = ({ children }) => {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   return (
     <BackendContext.Provider
@@ -635,7 +635,7 @@ export const BackendProvider = ({ children }) => {
         getAdminSuggestions,
         updateAreaOptions,
         updateBuildingData,
-        deleteBuilding
+        deleteBuilding,
       }}
     >
       {children}

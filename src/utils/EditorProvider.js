@@ -14,7 +14,11 @@ export const EditorContext = React.createContext();
 export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
-  const { requestBuildingModel, submitNewBuilding } = useBackend();
+  const {
+    requestBuildingModel,
+    submitNewBuilding,
+    updateBuildingData,
+  } = useBackend();
   const [subjects, setSubjects] = useState();
 
   const useStateWithSessionStorage = (sessionStorageKey) => {
@@ -195,8 +199,18 @@ export const EditorProvider = ({ children }) => {
     setComments([]);
     setSuggestions([]);
   };
+
   const postBuilding = async () => {
     const response = submitNewBuilding(buildingInformation);
+    return response;
+  };
+
+  const updateBuilding = async () => {
+    console.log("updating: " + buildingInformation.slug);
+    const response = updateBuildingData(
+      buildingInformation.slug,
+      buildingInformation
+    );
     return response;
   };
 
@@ -226,6 +240,7 @@ export const EditorProvider = ({ children }) => {
         commentsLoading,
         subjects,
         postBuilding,
+        updateBuilding,
       }}
     >
       {children}
