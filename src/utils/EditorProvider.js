@@ -64,6 +64,7 @@ export const EditorProvider = ({ children }) => {
           <AreaSelection
             loadBuildingModel={setBuildingInformation}
             style={style}
+            slug="asd"
           />
         );
       case 1:

@@ -16,6 +16,7 @@ const AreaSelection = (props) => {
     requestBuildingModel,
     requestAreaOptions,
     requestAreas,
+    getBuildingFromSlug,
   } = useBackend();
 
   const [loading, setLoading] = useState(true);
@@ -25,11 +26,25 @@ const AreaSelection = (props) => {
   useEffect(() => {
     async function fetchData() {
       const data = await requestAreas();
-      const model = await requestBuildingModel();
-      props.loadBuildingModel(
+      let model;
+
+      if (props.slug) {
+        // If we are editing an existing building
+        console.log("Editing: " + props.slug);
+        model = await getBuildingFromSlug(props.slug);
+        props.loadBuildingModel(model);
+      } else {
+        model = await requestBuildingModel();
+        props.loadBuildingModel(
+          JSON.parse(sessionStorage.getItem("SavedBuildingDataInStorage")) ||
+            model
+        );
+      }
+
+      /*props.loadBuildingModel(
         JSON.parse(sessionStorage.getItem("SavedBuildingDataInStorage")) ||
           model
-      );
+      ); */
       setAllowedCountries(data);
       setLoading(false);
     }
@@ -44,6 +59,7 @@ const AreaSelection = (props) => {
 
   useEffect(() => {
     async function fetchData() {
+      console.log("here")
       const data = await requestAreaOptions(selectedArea);
       setBuildingOptions(data);
       setNavigationEnabled(true);
