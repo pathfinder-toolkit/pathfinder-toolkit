@@ -21,6 +21,7 @@ const ElectricCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.annualUse}
                 classes={props.classes}
+                subject="annualUse"
                 />
             ) : (
                 <CategoryItem 
@@ -35,6 +36,7 @@ const ElectricCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.annualElectricityUse}
                 classes={props.classes}
+                subject="annualElectricityUse"
                 />
             ) : (
                 <CategoryItem 
@@ -49,6 +51,7 @@ const ElectricCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.annualCost}
                 classes={props.classes}
+                subject="annualCost"
                 />
             ) : (
                 <CategoryItem 
@@ -63,6 +66,7 @@ const ElectricCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.annualElectricityCost}
                 classes={props.classes}
+                subject="annualElectricityCost"
                 />
             ) : (
                 <CategoryItem 

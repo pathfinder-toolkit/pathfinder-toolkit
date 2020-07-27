@@ -37,11 +37,9 @@ const CommentContainer = (props) => {
     const classes = useStyles();
 
     const [comments, setComments] = useState(null);
-
     const [switchState, setSwitchState] = useState(true);
-
     const [loading, setLoading] = useState(false);
-
+    const [pagination, setPagination] = useState({page: 0, perPage: 3});
     const { requestComments } = useBackend();
     
     const _handleSwitchChange = (event) => {
@@ -50,9 +48,27 @@ const CommentContainer = (props) => {
 
     const fetchComments = async () => {
         setLoading(true);
-        const data = await requestComments(props.subject);
-        console.log(data)
-        setComments(data);
+        const response = await requestComments(props.subject, pagination.page + 1, pagination.perPage);
+        console.log(response)
+        if (response.status === 200) {
+            setPagination((prev) => {
+                return {
+                    ...prev,
+                    page: response.data.page,
+                    maxPages: response.data.maxPages
+                }
+            });
+            if (comments) {
+                setComments((prev) => {
+                    return [
+                        ...prev,
+                        ...response.data.comments
+                    ]
+                });
+            } else {
+                setComments(response.data.comments);
+            }
+        }
         setLoading(false);
     }
 
@@ -66,7 +82,19 @@ const CommentContainer = (props) => {
                 inputProps={{ 'aria-label': 'show-comments-checkbox' }}
                 />
                 <Typography className={classes.displayText}>{switchState ? "Hide comments" : "Show comments"}</Typography>
-                {switchState && <Comments comments={comments} classes={classes} />}
+                {switchState && (
+                <Comments 
+                    comments={comments}
+                    classes={classes}
+                >
+                    {(pagination.page < pagination.maxPages) && (
+                        <Button onClick={fetchComments}>Show more comments</Button>
+                    )}
+                    {loading && (
+                        <CircularProgress />
+                    )}
+                </Comments>
+                )}
             </React.Fragment>
         )}
         {comments && (comments.length == 0) && (
@@ -82,7 +110,6 @@ const CommentContainer = (props) => {
                     <Button onClick={fetchComments}>Show comments</Button>
                 )}
             </React.Fragment>
-
         )}
     </Paper>
 }

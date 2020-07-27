@@ -21,6 +21,7 @@ const RenewableCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.heatPump}
                 classes={props.classes}
+                subject="heatPump"
                 />
             ) : (
                 <CategoryItem 
@@ -35,6 +36,7 @@ const RenewableCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.solarHeat}
                 classes={props.classes}
+                subject="solarHeat"
                 />
             ) : (
                 <CategoryItem 
@@ -49,6 +51,7 @@ const RenewableCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.solarElectric}
                 classes={props.classes}
+                subject="solarElectric"
                 />
             ) : (
                 <CategoryItem 
@@ -63,6 +66,7 @@ const RenewableCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.bioMass}
                 classes={props.classes}
+                subject="bioMass"
                 />
             ) : (
                 <CategoryItem 
@@ -77,6 +81,7 @@ const RenewableCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.chp}
                 classes={props.classes}
+                subject="chp"
                 />
             ) : (
                 <CategoryItem 

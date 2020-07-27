@@ -21,6 +21,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.wallMaterial}
                 classes={props.classes}
+                subject="wallMaterial"
                 />
             ) : (
                 <CategoryItem 
@@ -35,6 +36,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.wallThickness}
                 classes={props.classes}
+                subject="wallThickness"
                 />
             ) : (
                 <CategoryItem 
@@ -49,6 +51,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.windowType}
                 classes={props.classes}
+                subject="windowType"
                 />
             ) : (
                 <CategoryItem 
@@ -63,6 +66,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.windowAmount}
                 classes={props.classes}
+                subject="windowAmount"
                 />
             ) : (
                 <CategoryItem 
@@ -77,6 +81,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.heatedWindowType}
                 classes={props.classes}
+                subject="heatedWindowType"
                 />
             ) : (
                 <CategoryItem 
@@ -91,6 +96,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.heatedWindowAmount}
                 classes={props.classes}
+                subject="heatedWindowAmount"
                 />
             ) : (
                 <CategoryItem 
@@ -105,6 +111,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.doorMaterial}
                 classes={props.classes}
+                subject="doorMaterial"
                 />
             ) : (
                 <CategoryItem 
@@ -119,6 +126,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.doorAmount}
                 classes={props.classes}
+                subject="doorAmount"
                 />
             ) : (
                 <CategoryItem 
@@ -133,6 +141,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.roofMaterial}
                 classes={props.classes}
+                subject="roofMaterial"
                 />
             ) : (
                 <CategoryItem 
@@ -147,6 +156,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.roofInsulation}
                 classes={props.classes}
+                subject="roofInsulation"
                 />
             ) : (
                 <CategoryItem 
@@ -161,6 +171,7 @@ const StructureCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.roofInsulationThickness}
                 classes={props.classes}
+                subject="roofInsulationThickness"
                 />
             ) : (
                 <CategoryItem 

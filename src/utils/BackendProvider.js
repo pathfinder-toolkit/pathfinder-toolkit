@@ -101,23 +101,18 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const requestComments = async (subject) => {
-    const amount = Math.floor(Math.random() * 5);
+  const requestComments = async (subject, page = 1, perPage = 3) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/comments/" + subject + "/" + amount
+      `${process.env.REACT_APP_API_ROOT}/comments/${subject}?page=${page}&perPage=${perPage}`
     );
-
-    /*const address = encodeURI(
-      "http://localhost:3300" + "/comments/" + subject
-    ); */
 
     try {
       const response = await axios.get(address);
-      console.log(response.data);
-      return response.data;
+      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
-      return null;
+      return error.response;
     }
   };
 
