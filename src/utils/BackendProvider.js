@@ -134,6 +134,9 @@ export const BackendProvider = ({ children }) => {
   };
 
   const getBuildingFromSlug = async (slug) => {
+
+
+    
     const token = await getTokenSilently();
 
     const address = encodeURI(

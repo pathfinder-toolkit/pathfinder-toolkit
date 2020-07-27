@@ -61,13 +61,14 @@ export const EditorProvider = ({ children }) => {
   };
 
   //Editor components are added here
-  const getStepComponent = (style) => {
+  const getStepComponent = (style,slug) => {
     switch (activeStep) {
       case 0:
         return (
           <AreaSelection
             loadBuildingModel={setBuildingInformation}
             style={style}
+            slug={slug}
           />
         );
       case 1:

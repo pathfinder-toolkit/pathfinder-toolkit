@@ -4,6 +4,8 @@ import { useEditor } from "../../../utils/EditorProvider";
 import AreaMap from "./AreaMap";
 import { CircularProgress } from "@material-ui/core";
 
+import { useAuth0 } from "../../../utils/react-auth0-spa";
+
 const AreaSelection = (props) => {
   const {
     setSavedProperty,
@@ -20,7 +22,9 @@ const AreaSelection = (props) => {
     getBuildingFromSlug,
   } = useBackend();
 
-  const [loading, setLoading] = useState(true);
+  const { loading } = useAuth0();
+
+  const [mapLoading, setMapLoading] = useState(true);
   const [selectedArea, setSelectedArea] = useState("");
   const [allowedCountries, setAllowedCountries] = useState();
 
@@ -42,11 +46,12 @@ const AreaSelection = (props) => {
 
       if (props.slug) {
         // If we are editing an existing building
-        console.log("Editing: " + props.slug);
+        console.log("Editing existing building: " + props.slug);
         model = await getBuildingFromSlug(props.slug);
         props.loadBuildingModel(model);
       } else {
         // New building
+        console.log("New building");
         model = await requestBuildingModel();
 
         props.loadBuildingModel(
@@ -56,10 +61,12 @@ const AreaSelection = (props) => {
       }
 
       setAllowedCountries(data);
-      setLoading(false);
+      setMapLoading(false);
     };
-    fetchData();
-  }, []);
+    if (!loading) {
+      fetchData();
+    }
+  }, [loading]);
 
   useEffect(() => {
     // If we have data in local storage from previously edited building
@@ -67,9 +74,10 @@ const AreaSelection = (props) => {
     // the previous data needs to be cleared.
     const resetBuildingData = async () => {
       if (buildingInformation && !props.slug) {
-        console.log("Invalid building data in storage, removing");
         console.log(Object.keys(buildingInformation));
         if (Object.keys(buildingInformation).includes("slug")) {
+          console.log("Invalid building data in storage, removing");
+
           const model = await requestBuildingModel();
           props.loadBuildingModel(model);
           setSelectedArea("");
@@ -82,10 +90,10 @@ const AreaSelection = (props) => {
   }, [buildingInformation]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!mapLoading) {
       setSelectedArea(getSavedProperty("details", "area"));
     }
-  }, [loading]);
+  }, [mapLoading]);
 
   useEffect(() => {
     console.log(selectedArea);
@@ -116,8 +124,8 @@ const AreaSelection = (props) => {
 
   return (
     <React.Fragment>
-      {loading && <CircularProgress />}
-      {!loading && (
+      {mapLoading && <CircularProgress />}
+      {!mapLoading && (
         <AreaMap
           allowedCountries={allowedCountries}
           selectedCountry={selectedArea}
