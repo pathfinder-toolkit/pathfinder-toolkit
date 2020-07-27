@@ -19,7 +19,8 @@ function App() {
         <Switch>
           <Route path="/" exact component={FrontPage}></Route>
           <Route path="/login" exact component={LoginPage}></Route>
-          <Route path="/design" exact component={DesignPage}></Route>
+          <Route path="/design/:slug?" exact component={DesignPage}></Route>
+
           <PrivateRoute path="/register" exact component={RegisterPage}></PrivateRoute>
           <PrivateRoute path="/feedback" exact component={FeedbackPage}></PrivateRoute>
           <PrivateRoute path="/buildings" exact component={BuildingsPage}></PrivateRoute>
