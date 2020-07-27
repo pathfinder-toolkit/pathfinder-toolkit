@@ -8,25 +8,57 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from '@material-ui/icons/Close';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import { useBackend } from "../../utils/BackendProvider";
+import history from "../../utils/history";
 
 const DeletionConfirmation = (props) => {
     const classes = props.classes;
     const [confirmationText, setConfirmationText] = useState("");
 
-    const handleConfirmation = (e) => {
+    const [ status, setStatus ] = useState({
+        pending: false,
+        resolved: false,
+        success: false
+    })
+
+    const {
+        deleteBuilding
+    } = useBackend();
+    
+
+    const handleChange = (e) => {
         setConfirmationText(e.target.value);
     }
 
-    const test = () => {
-        console.log(confirmationText);
-        console.log(props.slug);
+    const handleClose = () => {
+        if (status.pending || status.resolved) {
+            history.push("/buildings");
+        }
+        props.onHide();
+    }
+
+    const handleConfirm = async () => {
+        console.log("Confirmed");
+        setStatus((prev) => {
+            return {...prev, pending: true}
+        });
+        const response = await deleteBuilding(props.slug);
+        const newStatus = { pending: false, resolved: true }
+        if (response.status === 200) {
+            newStatus.success = true;
+        }
+        setStatus((prev) => {
+            return {...prev, ...newStatus}
+        })
     }
 
     return (
     <Modal
     className={classes.modal}
     open={props.show}
-    onClose={props.onHide}
+    onClose={handleClose}
     >
             <Card outlined className={classes.confirmationRoot}>
                 <CardHeader
@@ -40,33 +72,84 @@ const DeletionConfirmation = (props) => {
                     </Grid>
                     }
                 action={
-                    <IconButton aria-label="settings" onClick={props.onHide}>
+                    <IconButton aria-label="settings" onClick={handleClose}>
                       <CloseIcon />
                     </IconButton>
                 }
                 />
 
-                <Grid container direction="column" alignItems="center" justify="flex-end" className={classes.confirmationContent}>
-                    <Grid item xs={12} className={classes.contentItem}>
-                        <Typography  variant="p">
-                            This action is <b>permanent</b>. Confirm building  deletion by typing <b>{props.slug}</b> below.
-                        </Typography>
+                {status.resolved && (
+                    <Grid container direction="column" alignItems="center" justify="flex-end" className={classes.confirmationContent}>
+                        {status.success ? (
+                            <React.Fragment>
+                                <Grid item xs={12} className={classes.contentItem}>
+                                    <Typography  variant="p">
+                                        Deletion confirmed. Press the button below to return to your other buildings.
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} className={classes.contentItem}>
+                                    <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleClose}
+                                    >
+                                        Return
+                                    </Button>
+                                </Grid>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <Grid item xs={12} className={classes.contentItem}>
+                                    <Typography  variant="p">
+                                        Unexpected error occurred. Try again later.
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} className={classes.contentItem}>
+                                    <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleClose}
+                                    >
+                                        Return
+                                    </Button>
+                                </Grid>
+                            </React.Fragment>
+                        )}
                     </Grid>
-                    <Grid item xs={12} className={classes.contentItem}>
-                        <Typography variant="p">
-                            <TextField id="slug-confirmation" variant="outlined" value={confirmationText} onChange={handleConfirmation}/>
-                        </Typography>
+                )}
+
+                {status.pending && (
+                    <Grid container direction="column" alignItems="center" justify="flex-end" className={classes.confirmationContent}>
+                        <Grid item xs={12} className={classes.contentItem}>
+                            <CircularProgress />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} className={classes.contentItem}>
-                        <Button
-                        variant="contained"
-                        color="secondary"
-                        disabled={confirmationText != props.slug}
-                        >
-                            Confirm deletion
-                        </Button>
+                )}
+
+                {!(status.pending || status.resolved) && (
+                    <Grid container direction="column" alignItems="center" justify="flex-end" className={classes.confirmationContent}>
+                        <Grid item xs={12} className={classes.contentItem}>
+                            <Typography  variant="p">
+                                This action is <b>permanent</b>. Confirm building  deletion by typing <b>{props.slug}</b> below.
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} className={classes.contentItem}>
+                            <Typography variant="p">
+                                <TextField id="slug-confirmation" variant="outlined" value={confirmationText} onChange={handleChange}/>
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} className={classes.contentItem}>
+                            <Button
+                            variant="contained"
+                            color="secondary"
+                            disabled={confirmationText != props.slug}
+                            onClick={handleConfirm}
+                            >
+                                Confirm deletion
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
+                )}
             </Card>
     </Modal>
     )
