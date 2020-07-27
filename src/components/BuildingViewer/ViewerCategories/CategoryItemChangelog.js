@@ -29,6 +29,7 @@ const CategoryItemChangelog = (props) => {
             <CategoryItem 
             item={props.itemList[0]}
             classes={props.classes}
+            subject={props.subject}
             />
         )}
     </React.Fragment>
