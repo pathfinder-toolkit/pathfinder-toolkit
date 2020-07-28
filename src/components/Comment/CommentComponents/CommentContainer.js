@@ -34,6 +34,28 @@ const useStyles = makeStyles((theme) => ({
     commentUserAction: {
         top: "20%",
         right: "1%"
+    },
+    modal: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+    },
+    formRoot: {
+        minHeight: "40vh",
+        minWidth: "40vw",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        cursor: "auto",
+    },
+    modalContent: {
+        minHeight: "40vh",
+        marginBottom: theme.spacing(2),
+        flexGrow: 1
+    },
+    modalItem: {
+        margin: theme.spacing(1),
+        width: "90%"
     }
   }));
 

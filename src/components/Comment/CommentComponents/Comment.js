@@ -15,6 +15,8 @@ import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissa
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { green } from '@material-ui/core/colors';
 
+import CommentUserActions from "./CommentUserActions";
+
 import { useAuth0 } from "../../../utils/react-auth0-spa"
 
 
@@ -22,11 +24,13 @@ import { useAuth0 } from "../../../utils/react-auth0-spa"
 const Comment = (props) => {
     const classes = props.classes;
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    
 
     const {
         user
     } = useAuth0();
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
@@ -59,24 +63,10 @@ const Comment = (props) => {
             }
         />
         {user && (
-            <ClickAwayListener onClickAway={handleClose}>
-                <ListItemSecondaryAction className={classes.commentUserAction} >
-                    <IconButton onClick={handleClick}>
-                        <MoreVertIcon />
-                    </IconButton>
-                    <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                    >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
-                    </Menu>
-                </ListItemSecondaryAction>
-            </ClickAwayListener>
+            <CommentUserActions
+            comment={props.comment}
+            classes={classes}
+            />
         )}
         </ListItem>
 }

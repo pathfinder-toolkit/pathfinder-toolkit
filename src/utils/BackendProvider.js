@@ -656,6 +656,7 @@ export const BackendProvider = ({ children }) => {
         updateAreaOptions,
         updateBuildingData,
         deleteBuilding,
+        submitReportOnComment
       }}
     >
       {children}
