@@ -628,6 +628,30 @@ export const BackendProvider = ({ children }) => {
     }
   }
 
+  const deleteCommentAsAdmin = async (idComment) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/comment/${idComment}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -656,7 +680,8 @@ export const BackendProvider = ({ children }) => {
         updateAreaOptions,
         updateBuildingData,
         deleteBuilding,
-        submitReportOnComment
+        submitReportOnComment,
+        deleteCommentAsAdmin
       }}
     >
       {children}

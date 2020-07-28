@@ -7,6 +7,11 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import CommentReportForm from "./CommentReportForm";
+import CommentDeletionConfirm from "./CommentDeletionConfirm";
+
+import { useAuth0 } from "../../../utils/react-auth0-spa"
+
+import { useBackend } from "../../../utils/BackendProvider";
 
 const CommentUserActions = (props) => {
     const classes = props.classes;
@@ -14,6 +19,11 @@ const CommentUserActions = (props) => {
     const [ anchorEl, setAnchorEl ] = useState(null);
 
     const [ showReportForm, setShowReportForm ] = useState(false);
+    const [ showDeletionConfirm, setShowDeletionConfirm ] = useState(false);
+
+    const {
+        isAdmin
+    } = useAuth0();
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
@@ -32,6 +42,15 @@ const CommentUserActions = (props) => {
         setShowReportForm(false);
     }
 
+    const handleDelete = () => {
+        setAnchorEl(null);
+        setShowDeletionConfirm(true);
+    }
+
+    const handleCloseDeleteConfirm = () => {
+        setShowDeletionConfirm(false);
+    }
+
     return <React.Fragment>
         <ClickAwayListener onClickAway={handleClose}>
             <ListItemSecondaryAction className={classes.commentUserAction} >
@@ -45,7 +64,11 @@ const CommentUserActions = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
                 >
-                    <MenuItem onClick={handleReport}>Report comment</MenuItem>
+                    {isAdmin ? (
+                        <MenuItem onClick={handleDelete}>Delete comment</MenuItem>
+                    ) : (
+                        <MenuItem onClick={handleReport}>Report comment</MenuItem>
+                    )}
                 </Menu>
                 
             </ListItemSecondaryAction>
@@ -54,6 +77,14 @@ const CommentUserActions = (props) => {
             <CommentReportForm
             show={showReportForm}
             onClose={handleCloseReportForm}
+            classes={classes}
+            comment={props.comment}
+            />
+        )}
+        {showDeletionConfirm && (
+            <CommentDeletionConfirm
+            show={showDeletionConfirm}
+            onClose={handleCloseDeleteConfirm}
             classes={classes}
             comment={props.comment}
             />

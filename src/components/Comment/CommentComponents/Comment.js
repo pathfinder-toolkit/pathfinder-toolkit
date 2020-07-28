@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,7 +24,7 @@ import { useAuth0 } from "../../../utils/react-auth0-spa"
 const Comment = (props) => {
     const classes = props.classes;
 
-    
+    const [ deleted, setDeleted ] = useState(false);
 
     const {
         user
@@ -38,6 +38,22 @@ const Comment = (props) => {
 
     const handleClose = () => {
         setAnchorEl(null);
+    }
+
+    const hideContent = () => {
+        setDeleted(true);
+    }
+
+    if (deleted) {
+        return <ListItem alignItems="flex-start">
+            <ListItemText
+            primary= {
+                <Typography className={classes.commentText}>
+                    Comment deleted
+                </Typography>
+                }
+            />
+        </ListItem>
     }
 
     return <ListItem alignItems="flex-start">
@@ -66,6 +82,7 @@ const Comment = (props) => {
             <CommentUserActions
             comment={props.comment}
             classes={classes}
+            onDelete={hideContent}
             />
         )}
         </ListItem>
