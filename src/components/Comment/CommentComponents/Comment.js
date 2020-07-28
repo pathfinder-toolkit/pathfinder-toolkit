@@ -3,16 +3,38 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { green } from '@material-ui/core/colors';
 
+import { useAuth0 } from "../../../utils/react-auth0-spa"
+
 
 
 const Comment = (props) => {
     const classes = props.classes;
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const {
+        user
+    } = useAuth0();
+
+    const handleClick = (e) => {
+        setAnchorEl(e.currentTarget);
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    }
 
     return <ListItem alignItems="flex-start">
         <ListItemIcon>
@@ -36,6 +58,26 @@ const Comment = (props) => {
             </React.Fragment>
             }
         />
+        {user && (
+            <ClickAwayListener onClickAway={handleClose}>
+                <ListItemSecondaryAction className={classes.commentUserAction} >
+                    <IconButton onClick={handleClick}>
+                        <MoreVertIcon />
+                    </IconButton>
+                    <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    </Menu>
+                </ListItemSecondaryAction>
+            </ClickAwayListener>
+        )}
         </ListItem>
 }
 

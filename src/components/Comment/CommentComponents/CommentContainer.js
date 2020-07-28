@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     },
     commentSubjectArrow: {
         fontSizeAdjust: 0.2,
+    },
+    commentUserAction: {
+        top: "20%",
+        right: "1%"
     }
   }));
 
