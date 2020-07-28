@@ -40,10 +40,12 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
+
   const [suggestions, setSuggestions] = useState();
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
-  const [commentsLoading, setCommentsLoading] = useState(true);
+  const [suggestionsAreaId, setSuggestionsAreaId] = useState();
 
+  const [commentsLoading, setCommentsLoading] = useState(true);
   const [comments, setComments] = useState([]);
 
   const { requestSuggestions, requestComments } = useBackend();
@@ -150,14 +152,14 @@ export const EditorProvider = ({ children }) => {
     }));
   };
 
-  const getSuggestions = async (subject, value) => {
+  const getSuggestions = async (subject, value, areaId) => {
     setSuggestionsLoading(true);
     if (subject === null || value === null) {
       return;
     }
 
     try {
-      const data = await requestSuggestions(subject, value);
+      const data = await requestSuggestions(subject, value, areaId);
       console.log(data);
 
       if (!suggestions.includes(subject)) {
@@ -235,6 +237,8 @@ export const EditorProvider = ({ children }) => {
         setBuildingOptions,
         getSuggestions,
         suggestions,
+        suggestionsAreaId,
+        setSuggestionsAreaId,
         suggestionsLoading,
         getComments,
         comments,

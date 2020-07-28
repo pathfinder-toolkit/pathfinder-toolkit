@@ -5,8 +5,6 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
-  Button,
-  Typography,
 } from "@material-ui/core";
 import { Clear } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";

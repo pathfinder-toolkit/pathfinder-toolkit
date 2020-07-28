@@ -79,9 +79,15 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const requestSuggestions = async (subject, value) => {
+  const requestSuggestions = async (subject, value, area) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + "1"
+      process.env.REACT_APP_API_ROOT +
+        "/suggestions/" +
+        subject +
+        "/" +
+        value +
+        "?area= " +
+        area
     );
     //value
 
@@ -134,7 +140,6 @@ export const BackendProvider = ({ children }) => {
   };
 
   const getBuildingFromSlug = async (slug) => {
-    
     const token = await getTokenSilently();
 
     const address = encodeURI(

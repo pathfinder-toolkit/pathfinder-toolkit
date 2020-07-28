@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Modal, CircularProgress, Grid } from "@material-ui/core";
+import React from "react";
+import { Typography, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const SubmitModal = (props) => {
@@ -21,12 +21,11 @@ const SubmitModal = (props) => {
 
   const classes = useStyles();
 
-  const [open, setOpen] = useState(false);
   return (
     <div className={classes.root}>
       <Typography align="center">Submitting building...</Typography>
       <Typography align="center">{props?.message}</Typography>
-      {!props?.message && <CircularProgress  />}
+      {!props?.message && <CircularProgress />}
     </div>
   );
 };

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Fade, Button, Modal, Typography } from "@material-ui/core";
+import { Button, Modal } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
-import { useBackend } from "../../utils/BackendProvider";
 
 import BuildingViewer from "../BuildingViewer/BuildingViewer";
 import SubmitModal from "./reusable/SubmitModal";
@@ -52,8 +51,6 @@ const Summary = (props) => {
     if (message.status == "200") {
       setMessage("Building updated");
     }
-    //console.log(message)
-    //setMessage(message);
   };
 
   return (
@@ -73,7 +70,7 @@ const Summary = (props) => {
         variant="outlined"
         color="primary"
       >
-        submit
+        Submit test
       </Button>
       <Button
         onClick={() => submitUpdateBuilding()}
@@ -82,7 +79,6 @@ const Summary = (props) => {
       >
         Update test
       </Button>
-      <Typography>Slug: {props?.slug}</Typography>
       <BuildingViewer building={buildingInformation} />
     </React.Fragment>
   );
