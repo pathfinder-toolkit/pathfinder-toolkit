@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   confirmationContent: {
     minHeight: "40vh",
-    margin: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   },
   contentItem: {
     margin: theme.spacing(1),
