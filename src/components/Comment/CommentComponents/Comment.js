@@ -3,16 +3,42 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { green } from '@material-ui/core/colors';
 
+import CommentUserActions from "./CommentUserActions";
+
+import { useAuth0 } from "../../../utils/react-auth0-spa"
+
 
 
 const Comment = (props) => {
     const classes = props.classes;
+
+    
+
+    const {
+        user
+    } = useAuth0();
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (e) => {
+        setAnchorEl(e.currentTarget);
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    }
 
     return <ListItem alignItems="flex-start">
         <ListItemIcon>
@@ -36,6 +62,12 @@ const Comment = (props) => {
             </React.Fragment>
             }
         />
+        {user && (
+            <CommentUserActions
+            comment={props.comment}
+            classes={classes}
+            />
+        )}
         </ListItem>
 }
 
