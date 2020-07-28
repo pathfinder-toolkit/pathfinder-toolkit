@@ -7,12 +7,13 @@ import { useBackend } from "../../utils/BackendProvider";
 
 import BuildingViewer from "../BuildingViewer/BuildingViewer";
 import SubmitModal from "./reusable/SubmitModal";
+import UpdateModal from "./reusable/UpdateModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const Summary = () => {
+const Summary = (props) => {
   const { buildingInformation, postBuilding, updateBuilding } = useEditor();
 
   const classes = useStyles();
@@ -45,16 +46,28 @@ const Summary = () => {
   };
 
   const submitUpdateBuilding = async () => {
+    setOpen(true);
     console.log("submitUpdateBuilding");
     const message = await updateBuilding();
-    console.log(message);
+    if (message.status == "200") {
+      setMessage("Building updated");
+    }
+    //console.log(message)
+    //setMessage(message);
   };
 
   return (
     <React.Fragment>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <SubmitModal message={message} />
-      </Modal>
+      {props.slug && (
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <UpdateModal message={message} slug={props.slug} />
+        </Modal>
+      )}
+      {!props.slug && (
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <SubmitModal message={message} />
+        </Modal>
+      )}
       <Button
         onClick={() => submitBuilding()}
         variant="outlined"
@@ -63,12 +76,13 @@ const Summary = () => {
         submit
       </Button>
       <Button
-        onClick={()=> submitUpdateBuilding()}
+        onClick={() => submitUpdateBuilding()}
         variant="outlined"
         color="primary"
       >
         Update test
       </Button>
+      <Typography>Slug: {props?.slug}</Typography>
       <BuildingViewer building={buildingInformation} />
     </React.Fragment>
   );

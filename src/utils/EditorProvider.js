@@ -61,7 +61,7 @@ export const EditorProvider = ({ children }) => {
   };
 
   //Editor components are added here
-  const getStepComponent = (style,slug) => {
+  const getStepComponent = (style, slug) => {
     switch (activeStep) {
       case 0:
         return (
@@ -82,7 +82,7 @@ export const EditorProvider = ({ children }) => {
       case 5:
         return <BuildingRenewable style={style} />;
       case 6:
-        return <Summary style={style} />;
+        return <Summary style={style} slug={slug} />;
       default:
         return <p>Unknow component</p>;
     }
