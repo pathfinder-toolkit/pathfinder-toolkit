@@ -85,6 +85,7 @@ const CommentUserActions = (props) => {
             <CommentDeletionConfirm
             show={showDeletionConfirm}
             onClose={handleCloseDeleteConfirm}
+            onDelete={props.onDelete}
             classes={classes}
             comment={props.comment}
             />

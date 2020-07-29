@@ -42,14 +42,14 @@ const useStyles = makeStyles((theme) => ({
         cursor: "pointer",
     },
     formRoot: {
-        minHeight: "40vh",
+        minHeight: "20vh",
         minWidth: "40vw",
         alignItems: "center",
         justifyContent: "flex-end",
         cursor: "auto",
     },
     modalContent: {
-        minHeight: "40vh",
+        minHeight: "20vh",
         marginBottom: theme.spacing(2),
         flexGrow: 1
     },
