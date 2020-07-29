@@ -72,7 +72,7 @@ const BuildingVentilation = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.ventilationTypes}
+                  data={buildingOptions.ventilationSystems}
                   label="Ventilation system"
                   value={formData?.ventilationSystem[0].value}
                   handler={(e) => addNewEntry(e, "ventilationSystem")}
@@ -103,7 +103,7 @@ const BuildingVentilation = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.ventilationTypes}
+                  data={buildingOptions.ventilationSystems}
                   label="Test property"
                   value={formData?.ventilationSystem[0].value}
                   handler={(e) => addNewEntry(e, "ventilationSystem")}

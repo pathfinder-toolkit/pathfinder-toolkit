@@ -79,16 +79,16 @@ export const BackendProvider = ({ children }) => {
     }
   };
 
-  const requestSuggestions = async (subject, value) => {
+  const requestSuggestions = async (subject, value, area) => {
     const address = encodeURI(
-      process.env.REACT_APP_API_ROOT + "/suggestions/" + subject + "/" + "1"
+      process.env.REACT_APP_API_ROOT +
+        "/suggestions/" +
+        subject +
+        "/" +
+        value +
+        "?area= " +
+        area
     );
-    //value
-
-    /*const address = encodeURI(
-      "http://localhost:3300" + "/suggestions/" + subject + "/" + value
-    );*/
-
     console.log("get suggestions about: " + subject + " | " + value);
 
     try {
@@ -129,7 +129,6 @@ export const BackendProvider = ({ children }) => {
   };
 
   const getBuildingFromSlug = async (slug) => {
-    
     const token = await getTokenSilently();
 
     const address = encodeURI(
@@ -628,6 +627,126 @@ export const BackendProvider = ({ children }) => {
     }
   }
 
+  const deleteCommentAsAdmin = async (idComment) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/comment/${idComment}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.delete(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
+  const getCommentReportsAmountForAdmin = async () => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/reports/amount`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
+  const getCommentReportsForAdmin = async (page = 1, perPage = 5) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/reports?page=${page}&perPage=${perPage}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.get(address, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
+  const rejectSelectedReportAsAdmin = async (idReport) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/report/reject/${idReport}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.patch(address, null, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
+  const approveSelectedReportAsAdmin = async (idReport) => {
+    const token = await getTokenSilently();
+
+    const address = encodeURI(
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/report/approve/${idReport}`
+    );
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    };
+
+    try {
+      const response = await axios.patch(address, null, axiosConfig);
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response;
+    }
+  }
+
   return (
     <BackendContext.Provider
       value={{
@@ -656,7 +775,12 @@ export const BackendProvider = ({ children }) => {
         updateAreaOptions,
         updateBuildingData,
         deleteBuilding,
-        submitReportOnComment
+        submitReportOnComment,
+        deleteCommentAsAdmin,
+        getCommentReportsAmountForAdmin,
+        getCommentReportsForAdmin,
+        rejectSelectedReportAsAdmin,
+        approveSelectedReportAsAdmin
       }}
     >
       {children}
