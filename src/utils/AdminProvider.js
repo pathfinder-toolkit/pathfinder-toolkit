@@ -6,6 +6,7 @@ import EditSuggestions from "../components/Admin/Suggestions/EditSuggestions";
 import DeleteSuggestions from "../components/Admin/Suggestions/DeleteSuggestions";
 import EmailSettings from "../components/Admin/Feedback/EmailSettings";
 import UpdateRegionOptions from "../components/Admin/Editor/UpdateRegionOptions";
+import ManageCommentReports from "../components/Admin/Comments/ManageCommentReports";
 
 export const AdminContext = React.createContext();
 export const useAdmin = () => useContext(AdminContext);
@@ -27,6 +28,8 @@ export const AdminProvider = ( { children } ) => {
                 return <EmailSettings style={style} />;
             case "regionOptions":
                 return <UpdateRegionOptions style={style} />;
+            case "commentReports":
+                return <ManageCommentReports style={style} />
             default:
                 return <p>No component</p>;
         }

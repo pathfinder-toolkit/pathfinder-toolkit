@@ -56,6 +56,10 @@ const AdminPageContainer = () => {
       marginLeft: theme.spacing(1),
       marginTop: theme.spacing(0.5),
       marginBottom: theme.spacing(0.5)
+    },
+    tableRoot: {
+      margin: theme.spacing(1),
+      maxWidth: "98%"
     }
   }));
   const styleClasses = useStyles();

@@ -679,7 +679,7 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      `${process.env.REACT_APP_API_ROOT}/comments/reports?page=${page}&perPage=${perPage}`
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/reports?page=${page}&perPage=${perPage}`
     );
 
     const axiosConfig = {
@@ -703,7 +703,7 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      `${process.env.REACT_APP_API_ROOT}/comments/report/reject/${idReport}`
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/report/reject/${idReport}`
     );
 
     const axiosConfig = {
@@ -727,7 +727,7 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(
-      `${process.env.REACT_APP_API_ROOT}/comments/report/approve/${idReport}`
+      `${process.env.REACT_APP_API_ROOT}/admin/comments/report/approve/${idReport}`
     );
 
     const axiosConfig = {
