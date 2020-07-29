@@ -10,6 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button'
 
+import Comment from "../../Comment/CommentComponents/Comment";
 import { useBackend } from "../../../utils/BackendProvider";
 
 const ManageCommentReports = ( {style} ) => {
@@ -23,7 +24,9 @@ const ManageCommentReports = ( {style} ) => {
     const [ reports, setReports ] = useState();
 
     const {
-        getCommentReportsForAdmin
+        getCommentReportsForAdmin,
+        rejectSelectedReportAsAdmin,
+        approveSelectedReportAsAdmin
     } = useBackend();
 
     const updateReports = async () => {
@@ -37,6 +40,28 @@ const ManageCommentReports = ( {style} ) => {
         setPending(false);
     }
 
+    const approveReport = async (idReport) => {
+        await approveSelectedReportAsAdmin(idReport);
+        await updateReports();
+    }
+
+    const rejectReport = async (idReport) => {
+        await rejectSelectedReportAsAdmin(idReport);
+        await updateReports();
+    }
+
+    const changePerPage = (e) => {
+        setPerPage(e.target.value);
+    }
+
+    const nextPage = () => {
+        setPage(current => current + 1);
+    }
+
+    const previousPage = () => {
+        setPage(current => current - 1);
+    }
+
     useEffect(() => {
         updateReports();
     }, [page, perPage]);
@@ -46,35 +71,77 @@ const ManageCommentReports = ( {style} ) => {
         <TableContainer component={Paper} className={classes.tableRoot} >
             <Table>
                 <TableBody>
-                    {reports?.map((report) => {
+                    <TableRow>
+                        <TableCell>
+                            <b>Reason for report</b>
+                        </TableCell>
+                        <TableCell align="center">
+                            <b>Comment</b>
+                        </TableCell>
+                        <TableCell align="right">
+                            <b>Delete comment and report</b>
+                        </TableCell>
+                        <TableCell align="right">
+                            <b>Dismiss report</b>
+                        </TableCell>
+                    </TableRow>
+                    {!pending && reports?.map((report) => {
                         return (
-                        <TableRow>
-                            <TableCell>
-                                {report.reason}
-                            </TableCell>
-                            <TableCell>
-                                {report.reportedBy}
-                            </TableCell>
-                            <TableCell align="right">
-                                <Button
-                                variant="contained"
-                                color="secondary"
-                                >
-                                    Delete comment
-                                </Button>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Button
-                                variant="contained"
-                                color="primary"
-                                >
-                                    Clear report
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        )
+                            <TableRow key={report.idReport}>
+                                <TableCell>
+                                    {report.reason}
+                                </TableCell>
+                                <TableCell>
+                                    <Paper>
+                                        <Comment 
+                                        comment={report.comment}
+                                        classes={classes}
+                                        actionsDisabled={true}
+                                        />
+                                    </Paper>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => {approveReport(report.idReport)}}
+                                    >
+                                        Delete comment
+                                    </Button>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => {rejectReport(report.idReport)}}
+                                    >
+                                        Dismiss report
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        );
                     })}
                 </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <TablePagination 
+                        rowsPerPageOptions={[5, 10]}
+                        onChangeRowsPerPage={changePerPage}
+                        rowsPerPage={perPage}
+                        count={-1}
+                        labelDisplayedRows={() => {return ""}}
+                        nextIconButtonProps={{
+                            disabled: (page === maxPages || page > maxPages),
+                            onClick: nextPage
+                        }}
+                        backIconButtonProps={{
+                            disabled: (page === 1 || page < 1),
+                            onClick: previousPage
+                        }}
+                        onChangePage={() => {}}
+                        />
+                    </TableRow>
+                </TableFooter>
             </Table>
         </TableContainer>
     </React.Fragment>

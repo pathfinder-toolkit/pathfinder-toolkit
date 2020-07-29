@@ -78,7 +78,7 @@ const Comment = (props) => {
             </React.Fragment>
             }
         />
-        {user && (
+        {user && !props.actionsDisabled && (
             <CommentUserActions
             comment={props.comment}
             classes={classes}
