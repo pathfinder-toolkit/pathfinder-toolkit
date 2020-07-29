@@ -40,10 +40,12 @@ export const EditorProvider = ({ children }) => {
   const [buildingOptions, setBuildingOptions] = useState();
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
+
   const [suggestions, setSuggestions] = useState();
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
-  const [commentsLoading, setCommentsLoading] = useState(true);
+  const [suggestionsAreaId, setSuggestionsAreaId] = useState();
 
+  const [commentsLoading, setCommentsLoading] = useState(true);
   const [comments, setComments] = useState([]);
 
   const { requestSuggestions, requestComments } = useBackend();
@@ -61,7 +63,7 @@ export const EditorProvider = ({ children }) => {
   };
 
   //Editor components are added here
-  const getStepComponent = (style,slug) => {
+  const getStepComponent = (style, slug) => {
     switch (activeStep) {
       case 0:
         return (
@@ -82,7 +84,7 @@ export const EditorProvider = ({ children }) => {
       case 5:
         return <BuildingRenewable style={style} />;
       case 6:
-        return <Summary style={style} />;
+        return <Summary style={style} slug={slug} />;
       default:
         return <p>Unknow component</p>;
     }
@@ -150,23 +152,26 @@ export const EditorProvider = ({ children }) => {
     }));
   };
 
-  const getSuggestions = async (subject, value) => {
+  const getSuggestions = async (subject, value, areaId) => {
     setSuggestionsLoading(true);
     if (subject === null || value === null) {
       return;
     }
 
     try {
-      const data = await requestSuggestions(subject, value);
+      const data = await requestSuggestions(subject, value, areaId);
+      console.log("Suggestions: " + subject);
       console.log(data);
 
-      if (!suggestions.includes(subject)) {
-        setSuggestions([...suggestions, data[0]]);
-        console.log(suggestions);
-      }
+      if (data.length > 0) {
+        if (!suggestions.includes(subject)) {
+          setSuggestions([...suggestions, data[0]]);
+          console.log(suggestions);
+        }
 
-      if (!subjects.includes(data[0].suggestionSubject)) {
-        setSubjects([...subjects, data[0].suggestionSubject]);
+        if (!subjects.includes(data[0].suggestionSubject)) {
+          setSubjects([...subjects, data[0].suggestionSubject]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -184,9 +189,12 @@ export const EditorProvider = ({ children }) => {
     try {
       const data = await requestComments(subject, 1);
 
+      console.log("Comments: " + subject);
       console.log(data);
-      if (!suggestions.includes(subject)) {
-        setComments([...comments, data[0]]);
+      if (data !== null) {
+        if (!suggestions.includes(subject)) {
+          setComments([...comments, data[0]]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -235,6 +243,8 @@ export const EditorProvider = ({ children }) => {
         setBuildingOptions,
         getSuggestions,
         suggestions,
+        suggestionsAreaId,
+        setSuggestionsAreaId,
         suggestionsLoading,
         getComments,
         comments,

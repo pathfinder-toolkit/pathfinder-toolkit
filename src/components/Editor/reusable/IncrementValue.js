@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 
@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 const IncrementValue = (props) => {
   const [value, setValue] = useState(props.value ? props.value : 0);
   const classes = useStyles();
-
 
   const _increase = () => {
     setValue(value + 1);

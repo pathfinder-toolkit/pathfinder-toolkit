@@ -7,6 +7,7 @@ const useFormData = (category) => {
     getSavedCategory,
     setSavedCategory,
     getSuggestions,
+    suggestionsAreaId,
     getComments,
   } = useEditor();
   //Get form data from local storage
@@ -29,7 +30,7 @@ const useFormData = (category) => {
     console.log(propertyName + " | object | " + event.target.value);
     if (formData[propertyName].hasSuggestions) {
       console.log("has suggestions.");
-      getSuggestions(propertyName, event.target.value);
+      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
       getComments(propertyName);
     } else {
       console.log("has no suggestions.");
@@ -52,7 +53,7 @@ const useFormData = (category) => {
 
     if (formData[propertyName][currentObjectIndex].hasSuggestions) {
       console.log("has suggestions");
-      getSuggestions(propertyName, event.target.value);
+      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
       getComments(propertyName);
     } else {
       console.log("has no suggestions.");
@@ -80,7 +81,7 @@ const useFormData = (category) => {
 
     if (formData[propertyName][currentObjectIndex].hasSuggestions) {
       console.log("has suggestions");
-      getSuggestions(propertyName, event.target.value);
+      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
       getComments(propertyName);
     } else {
       console.log("has no suggestions.");
@@ -145,18 +146,6 @@ const useFormData = (category) => {
     }));
   };
 
-  const validateNumber = (input) => {
-    if (isNaN(input)) {
-      return false;
-    }
-
-    if (input < 0) {
-      return false;
-    }
-
-    return true;
-  };
-
   const resetProperty = (propertyName) => {
     console.log("resetting: " + propertyName);
     setFormData((formData) => ({
@@ -186,9 +175,8 @@ const useFormData = (category) => {
     handleChange,
     addNewEntry,
     addOldEntry,
-    addImage,
     deleteEntry,
-    validateNumber,
+    addImage,
   };
 };
 
