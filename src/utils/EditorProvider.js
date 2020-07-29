@@ -160,15 +160,18 @@ export const EditorProvider = ({ children }) => {
 
     try {
       const data = await requestSuggestions(subject, value, areaId);
+      console.log("Suggestions: " + subject);
       console.log(data);
 
-      if (!suggestions.includes(subject)) {
-        setSuggestions([...suggestions, data[0]]);
-        console.log(suggestions);
-      }
+      if (data.length > 0) {
+        if (!suggestions.includes(subject)) {
+          setSuggestions([...suggestions, data[0]]);
+          console.log(suggestions);
+        }
 
-      if (!subjects.includes(data[0].suggestionSubject)) {
-        setSubjects([...subjects, data[0].suggestionSubject]);
+        if (!subjects.includes(data[0].suggestionSubject)) {
+          setSubjects([...subjects, data[0].suggestionSubject]);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -186,9 +189,12 @@ export const EditorProvider = ({ children }) => {
     try {
       const data = await requestComments(subject, 1);
 
+      console.log("Comments: " + subject);
       console.log(data);
-      if (!suggestions.includes(subject)) {
-        setComments([...comments, data[0]]);
+      if (data !== null) {
+        if (!suggestions.includes(subject)) {
+          setComments([...comments, data[0]]);
+        }
       }
     } catch (error) {
       console.log(error);

@@ -54,7 +54,7 @@ const Suggestions = (props) => {
       ) : (
         <React.Fragment>
           <List className={classes.suggestionList}>
-            {suggestions &&
+            {suggestions.length > 0 &&
               suggestions?.map((suggestion, key) => {
                 if (filteredSubjects.includes(suggestion?.suggestionSubject)) {
                   return;
@@ -65,6 +65,7 @@ const Suggestions = (props) => {
                     suggestion={suggestion}
                     classes={classes}
                     key={key}
+                    priority={100}
                   />
                 );
               })}

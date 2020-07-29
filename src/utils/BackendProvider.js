@@ -89,12 +89,6 @@ export const BackendProvider = ({ children }) => {
         "?area= " +
         area
     );
-    //value
-
-    /*const address = encodeURI(
-      "http://localhost:3300" + "/suggestions/" + subject + "/" + value
-    );*/
-
     console.log("get suggestions about: " + subject + " | " + value);
 
     try {
