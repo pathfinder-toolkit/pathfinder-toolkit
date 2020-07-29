@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress, List,} from "@material-ui/core";
+import { CircularProgress, List, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import SuggestionAlert from "../../reusable/SuggestionAlert";
@@ -46,7 +46,11 @@ const Suggestions = (props) => {
       {suggestionsLoading ? (
         showInfo ? (
           <div className={classes.infoBox}>
-            <InfoBox />
+            <InfoBox
+              text={
+                "Input information about your building to see suggestions and experiences of others with similar buildings."
+              }
+            />
           </div>
         ) : (
           <CircularProgress />
@@ -54,6 +58,11 @@ const Suggestions = (props) => {
       ) : (
         <React.Fragment>
           <List className={classes.suggestionList}>
+            {suggestions.length === 0 && (
+              <div className={classes.infoBox}>
+                <InfoBox text={"No suggestions found."}/>
+              </div>
+            )}
             {suggestions.length > 0 &&
               suggestions?.map((suggestion, key) => {
                 if (filteredSubjects.includes(suggestion?.suggestionSubject)) {
