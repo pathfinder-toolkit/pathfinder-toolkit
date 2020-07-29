@@ -73,8 +73,10 @@ const UserSuggestions = (props) => {
         <React.Fragment>
           <List className={classes.suggestionList}>
             <div className={classes.commentsRoot}>
-              {comments &&
-                comments.map((comment, key) => {
+              {comments.length > 0 &&
+                comments?.map((comment, key) => {
+                  console.log("comment: ");
+                  console.log(comment);
                   if (filteredSubjects.includes(comment.commentSubject)) {
                     return;
                   }

@@ -33,7 +33,7 @@ const BuildingStructure = (props) => {
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <Grid item alignItems="center" >
+        <Grid item alignItems="center">
           <div className={style.header}>
             <Typography variant="h5">Building structure</Typography>
           </div>
@@ -139,17 +139,16 @@ const BuildingStructure = (props) => {
                   handler={(e) => handleChange(e, "roofMaterial")}
                 />
               </Grid>
+            </Grid>
+            <Grid container className={style.row} spacing={2}>
               <Grid item sm={2}>
-                <FormControlLabel
+                <DropdownSelect
                   className={style.formComponent}
-                  control={
-                    <Switch
-                      onChange={(e) => handleChange(e, "roofInsulation")}
-                    />
-                  }
-                  label="Insulated"
-                  labelPlacement="top"
-                />
+                  data={buildingOptions.floorMaterial}
+                  label="Floor material"
+                  value={formData.floorMaterial[0].value}
+                  handler={(e) => handleChange(e, "floorMaterial")}
+                ></DropdownSelect>
               </Grid>
             </Grid>
           </div>
