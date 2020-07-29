@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Fade, Button, Modal, Typography } from "@material-ui/core";
+import { Button, Modal } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
-import { useBackend } from "../../utils/BackendProvider";
 
 import BuildingViewer from "../BuildingViewer/BuildingViewer";
 import SubmitModal from "./reusable/SubmitModal";
+import UpdateModal from "./reusable/UpdateModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-const Summary = () => {
+const Summary = (props) => {
   const { buildingInformation, postBuilding, updateBuilding } = useEditor();
 
   const classes = useStyles();
@@ -45,25 +45,35 @@ const Summary = () => {
   };
 
   const submitUpdateBuilding = async () => {
+    setOpen(true);
     console.log("submitUpdateBuilding");
     const message = await updateBuilding();
-    console.log(message);
+    if (message.status == "200") {
+      setMessage("Building updated");
+    }
   };
 
   return (
     <React.Fragment>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <SubmitModal message={message} />
-      </Modal>
+      {props.slug && (
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <UpdateModal message={message} slug={props.slug} />
+        </Modal>
+      )}
+      {!props.slug && (
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <SubmitModal message={message} />
+        </Modal>
+      )}
       <Button
         onClick={() => submitBuilding()}
         variant="outlined"
         color="primary"
       >
-        submit
+        Submit test
       </Button>
       <Button
-        onClick={()=> submitUpdateBuilding()}
+        onClick={() => submitUpdateBuilding()}
         variant="outlined"
         color="primary"
       >

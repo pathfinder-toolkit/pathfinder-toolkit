@@ -13,6 +13,8 @@ const AreaSelection = (props) => {
     buildingInformation,
     setNavigationEnabled,
     setBuildingOptions,
+    setSuggestionsAreaId,
+    suggestionsAreaId,
   } = useEditor();
 
   const {
@@ -92,6 +94,7 @@ const AreaSelection = (props) => {
   useEffect(() => {
     if (!mapLoading) {
       setSelectedArea(getSavedProperty("details", "area"));
+      setSuggestionsAreaId(sessionStorage.getItem("suggestionAreaId"));
     }
   }, [mapLoading]);
 
@@ -110,7 +113,16 @@ const AreaSelection = (props) => {
   const handleSelection = (selectedCountry) => {
     setSelectedArea(selectedCountry);
     setSavedProperty("details", "area", selectedCountry);
+    setSuggestionsAreaId(findAreaIdByName(selectedCountry));
+    sessionStorage.setItem(
+      "suggestionAreaId",
+      findAreaIdByName(selectedCountry)
+    );
   };
+
+  useEffect(() => {
+    console.log("AREA ID : " + suggestionsAreaId);
+  }, [suggestionsAreaId]);
 
   // Need to refine this solution later on.
   const findAreaIdByName = (areaName) => {

@@ -1,8 +1,9 @@
 import React from "react";
-import { Typography, CircularProgress } from "@material-ui/core";
+import { Typography, CircularProgress, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
-const SubmitModal = (props) => {
+const UpdateModal = (props) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       position: "absolute",
@@ -20,14 +21,26 @@ const SubmitModal = (props) => {
   }));
 
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <div className={classes.root}>
-      <Typography align="center">Submitting building...</Typography>
+      {!props.message && (
+        <Typography align="center">Updating building</Typography>
+      )}
       <Typography align="center">{props?.message}</Typography>
       {!props?.message && <CircularProgress />}
+      {props.message && (
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => history.push("/buildings/" + props.slug)}
+        >
+          Ok
+        </Button>
+      )}
     </div>
   );
 };
 
-export default SubmitModal;
+export default UpdateModal;
