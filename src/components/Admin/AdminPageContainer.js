@@ -56,7 +56,31 @@ const AdminPageContainer = () => {
       marginLeft: theme.spacing(1),
       marginTop: theme.spacing(0.5),
       marginBottom: theme.spacing(0.5)
-    }
+    },
+    tableRoot: {
+      margin: theme.spacing(1),
+      maxWidth: "98%"
+    },
+    commentHeader: {
+      fontSizeAdjust: 0.6,
+      lineHeight:'180%'
+      },
+      commentText: {
+          fontSizeAdjust: 0.5,
+          lineHeight: 1.2
+      },
+      displayText: {
+          display: "inline",
+          marginLeft: theme.spacing(1),
+          maxWidth: 320
+      },
+      commentSubjectArrow: {
+          fontSizeAdjust: 0.2,
+      },
+      commentUserAction: {
+          top: "20%",
+          right: "1%"
+      }
   }));
   const styleClasses = useStyles();
 
