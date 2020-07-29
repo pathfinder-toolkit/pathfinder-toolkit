@@ -200,7 +200,7 @@ export const EditorProvider = ({ children }) => {
       console.log(response.data.comments);
       if (data !== null) {
         if (!suggestions.includes(subject)) {
-          setComments([...comments, data[0]]);
+          setComments(data);
         }
       }
     } catch (error) {
