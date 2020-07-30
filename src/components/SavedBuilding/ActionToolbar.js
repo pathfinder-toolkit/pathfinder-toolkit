@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import DeletionConfirmation from "./DeletionConfirmation";
 
+import { useBackend } from "../../utils/BackendProvider";
+
 const useStyles = makeStyles((theme) => ({
   actions: {
     margin: theme.spacing(2),
@@ -62,6 +64,12 @@ const ActionToolbar = (props) => {
 
   const [ publicStatus, setPublicStatus ] = useState(props.public);
 
+  const [ pending, setPending ] = useState(false);
+
+  const {
+    updateBuildingPublicStatus
+  } = useBackend();
+
   const showDeletionConfirmation = () => {
     setShowDeletion(true);
   };
@@ -70,22 +78,26 @@ const ActionToolbar = (props) => {
     setShowDeletion(false);
   };
 
+  const togglePrivacy = async () => {
+    setPending(true);
+    const requestBody = {
+      publicStatus: !publicStatus
+    };
+    const response = await updateBuildingPublicStatus(props.slug, requestBody);
+    console.log(response);
+    if (response.status === 200) {
+      setPublicStatus(prev => !prev);
+    }
+    setPending(false);
+  }
+
   return (
     <Paper className={classes.actions}>
       <Typography className={classes.actionsText}>
-        This page is currently {publicStatus ? "public" : "private"}
+        This page is currently <b>{publicStatus ? "public" : "private"}</b>
       </Typography>
       {publicStatus && (
         <React.Fragment>
-          <Typography className={classes.actionsText} variant="p">
-            Anyone can view the contents of this page at the following address:
-          </Typography>
-          <TextField
-            disabled
-            className={classes.textField}
-            multiline
-            value={`${window.location.host}/public/building/${props.slug}`}
-          />
           <Button
             variant="contained"
             className={classes.actionsButton}
@@ -95,12 +107,22 @@ const ActionToolbar = (props) => {
               Go to public page
             </Typography>
           </Button>
+          <Typography className={classes.actionsText} variant="p">
+            Anyone can view the contents of this page at the following address:
+          </Typography>
+          <TextField
+            disabled
+            className={classes.textField}
+            multiline
+            value={`${window.location.host}/public/building/${props.slug}`}
+          />
         </React.Fragment>
       )}
       <Button
         variant="contained"
         color="primary"
         className={classes.actionsButton}
+        onClick={togglePrivacy}
       >
         <Typography className={classes.text}>
           Make {publicStatus ? "private" : "public"}

@@ -29,7 +29,7 @@ const SavedBuilding = (props) => {
                 <ActionToolbar public={props.public} slug={props.building.slug} />
 
             </Grid>
-            
+
         </Grid>
     </Paper>
 }
