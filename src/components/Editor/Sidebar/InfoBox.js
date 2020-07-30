@@ -11,15 +11,13 @@ const useStyles = makeStyles((theme) => ({
   infoText: {},
 }));
 
-const InfoBox = () => {
+const InfoBox = (props) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Typography variant="body1" className={classes.infoText}>
-        {" "}
-        Input information about your building to see suggestions and experiences
-        of others with similar buildings.
+        {props?.text}
       </Typography>
     </div>
   );

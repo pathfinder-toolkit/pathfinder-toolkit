@@ -37,10 +37,8 @@ const DeleteSuggestions = (props) => {
   };
 
   const fetchSuggestions = async (identifier) => {
-    console.log("fetching suggestions about :" + identifier);
     try {
       const response = await getAdminSuggestions(identifier);
-      console.log(response.data);
       setSuggestions(response.data);
     } catch (error) {
       console.log(error);
@@ -48,11 +46,8 @@ const DeleteSuggestions = (props) => {
   };
 
   const deleteSuggestion = async (suggestion) => {
-    console.log("deleting suggestion: ");
-    console.log(suggestion);
     try {
       const response = await adminDeleteSuggestion(suggestion.idSuggestion);
-      console.log(response.data);
       fetchSuggestions(selectedSubject.identifier);
     } catch (error) {
       console.log(error);
@@ -94,7 +89,6 @@ const DeleteSuggestions = (props) => {
             </MenuItem>
           ))}
         </TextField>
-
         <SuggestionList
           suggestions={suggestions}
           handleAction={(suggestion) => deleteSuggestion(suggestion)}
