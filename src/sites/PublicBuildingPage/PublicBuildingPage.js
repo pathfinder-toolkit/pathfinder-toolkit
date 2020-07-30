@@ -41,7 +41,8 @@ const PublicBuildingPage = (props) => {
         })
         const response = await getPublicBuildingFromSlug(props.match.params.slug);
         const newStatus = {
-            pending: false
+            pending: false,
+            resolved: true
         };
         if (response.status === 200) {
             setBuilding(response.data);
@@ -71,7 +72,9 @@ const PublicBuildingPage = (props) => {
                     </Paper>
                 )}
                 {!status.success && status.resolved && (
-                    <div>No building found</div>
+                    <Paper className={classes.paper}>
+                        No building found.
+                    </Paper>
                 )}
             </Container>
         </Container>
