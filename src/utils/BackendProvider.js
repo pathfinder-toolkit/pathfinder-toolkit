@@ -773,11 +773,13 @@ export const BackendProvider = ({ children }) => {
 
   const getPublicBuildingFromSlug = async (slug) => {
     const address = encodeURI(
-      `${process.env.REACT_APP_API_ROOT}/public/building/${slug}`
+      `${process.env.REACT_APP_API_ROOT}/building/public/${slug}`
     );
 
     try {
       const response = await axios.get(address);
+      console.log(response);
+      return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
