@@ -148,7 +148,7 @@ const BuildingStructure = (props) => {
                   className={style.formComponent}
                   data={buildingOptions.floorMaterial}
                   label="Floor material"
-                  value={formData.floorMaterial[0].value}
+                  value={formData?.floorMaterial[0]?.value}
                   handler={(e) => handleChange(e, "floorMaterial")}
                 ></DropdownSelect>
               </Grid>

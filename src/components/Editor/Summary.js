@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Modal } from "@material-ui/core";
+import { Button, Modal, Grid, Typography } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
 
@@ -65,20 +65,34 @@ const Summary = (props) => {
           <SubmitModal message={message} />
         </Modal>
       )}
-      <Button
-        onClick={() => submitBuilding()}
-        variant="outlined"
-        color="primary"
+      <Grid
+        style={{
+          padding: "5em",
+          margin: "1em",
+          backgroundColor: "#eceef8",
+          borderRadius: "4px",
+        }}
+        justify="center"
       >
-        Submit test
-      </Button>
-      <Button
-        onClick={() => submitUpdateBuilding()}
-        variant="outlined"
-        color="primary"
-      >
-        Update test
-      </Button>
+        <Grid item>
+          <Button
+            onClick={() => {
+              if (props.slug) {
+                submitUpdateBuilding();
+              } else {
+                submitBuilding();
+              }
+            }}
+            variant="contained"
+            color="primary"
+          >
+            {props.slug ? "Update building" : "Submit building"}
+          </Button>
+        </Grid>
+      </Grid>
+      <Typography style={{ paddingLeft: "1em" }} variant="h4">
+        Building preview
+      </Typography>
       <BuildingViewer building={buildingInformation} />
     </React.Fragment>
   );
