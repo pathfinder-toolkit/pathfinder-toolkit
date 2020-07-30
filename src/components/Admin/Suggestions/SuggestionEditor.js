@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  TextField,
-  Button,
-  MenuItem,
-} from "@material-ui/core";
+import { Grid, TextField, Button, MenuItem } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
 import EvaluateCondition from "./EvaluateCondition";
@@ -124,7 +119,7 @@ const SuggestionEditor = (props) => {
     let response;
 
     if (props.suggestion) {
-   // Edit existing suggestion
+      // Edit existing suggestion
       newSuggestion = {
         idSuggestion: props.suggestion.idSuggestion,
         suggestion: suggestionText,
@@ -139,7 +134,6 @@ const SuggestionEditor = (props) => {
         props.suggestion.idSuggestion
       );
     } else {
-
       newSuggestion = {
         suggestion: suggestionText,
         identifier: subject?.identifier,
