@@ -13,6 +13,8 @@ import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
 import DropdownSelect from "../reusable/DropdownSelect";
+import OldEntry from "../reusable/OldEntry";
+import PropertyList from "../reusable/PropertyList";
 
 const BuildingStructure = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
@@ -146,7 +148,7 @@ const BuildingStructure = (props) => {
                   className={style.formComponent}
                   data={buildingOptions.floorMaterial}
                   label="Floor material"
-                  value={formData.floorMaterial[0].value}
+                  value={formData?.floorMaterial[0]?.value}
                   handler={(e) => handleChange(e, "floorMaterial")}
                 ></DropdownSelect>
               </Grid>

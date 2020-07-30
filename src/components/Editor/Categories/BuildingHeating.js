@@ -57,7 +57,7 @@ const BuildingHeating = (props) => {
                 addOldEntry(value, year, "heatingSystem")
               }
               onEntry={setClose}
-              data={buildingOptions.ventilationTypes}
+              data={buildingOptions.heatingSystem}
             />
           </div>
         </Modal>
@@ -70,7 +70,7 @@ const BuildingHeating = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.heatingTypes}
+                  data={buildingOptions.heatingSystem}
                   label="Heating System"
                   value={formData.heatingSystem.value}
                   handler={(e) => handleChange(e, "heatingSystem")}
@@ -91,7 +91,7 @@ const BuildingHeating = (props) => {
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.heatingTypes}
+                  data={buildingOptions.heatingSource}
                   label="Heating source"
                   value={formData.heatingSource.value}
                   handler={(e) => handleChange(e, "heatingSource")}
