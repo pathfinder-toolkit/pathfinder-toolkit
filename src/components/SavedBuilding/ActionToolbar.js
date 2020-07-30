@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import DeletionConfirmation from "./DeletionConfirmation";
+
+import { useBackend } from "../../utils/BackendProvider";
 
 const useStyles = makeStyles((theme) => ({
   actions: {
@@ -13,16 +16,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#eceef8",
     display: "flex",
     flexDirection: "column",
+    paddingBottom: theme.spacing(1)
   },
   actionsText: {
     margin: "auto",
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    padding: theme.spacing(1)
   },
   actionsButton: {
     maxWidth: "75%",
     margin: "auto",
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   modal: {
     display: "flex",
@@ -44,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
   contentItem: {
     margin: theme.spacing(1),
   },
+  textField: {
+    fontSizeAdjust: 0.5,
+    margin: theme.spacing(1)
+  }
 }));
 
 const ActionToolbar = (props) => {
@@ -53,6 +61,12 @@ const ActionToolbar = (props) => {
 
   const [showDeletion, setShowDeletion] = useState();
 
+  const [ publicStatus, setPublicStatus ] = useState(props.public);
+
+  const {
+    updateBuildingPublicStatus
+  } = useBackend();
+
   const showDeletionConfirmation = () => {
     setShowDeletion(true);
   };
@@ -61,18 +75,52 @@ const ActionToolbar = (props) => {
     setShowDeletion(false);
   };
 
+  const togglePrivacy = async () => {
+    const requestBody = {
+      publicStatus: !publicStatus
+    };
+    const response = await updateBuildingPublicStatus(props.slug, requestBody);
+    console.log(response);
+    if (response.status === 200) {
+      setPublicStatus(prev => !prev);
+    }
+  }
+
   return (
     <Paper className={classes.actions}>
       <Typography className={classes.actionsText}>
-        This page is currently {props.privacyMode}
+        This page is currently <b>{publicStatus ? "public" : "private"}</b>
       </Typography>
+      {publicStatus && (
+        <React.Fragment>
+          <Button
+            variant="contained"
+            className={classes.actionsButton}
+            onClick={() => history.push(`/public/building/${props.slug}`)}
+          >
+            <Typography className={classes.text}>
+              Go to public page
+            </Typography>
+          </Button>
+          <Typography className={classes.actionsText} variant="p">
+            Anyone can view the contents of this page at the following address:
+          </Typography>
+          <TextField
+            disabled
+            className={classes.textField}
+            multiline
+            value={`${window.location.host}/public/building/${props.slug}`}
+          />
+        </React.Fragment>
+      )}
       <Button
         variant="contained"
         color="primary"
         className={classes.actionsButton}
+        onClick={togglePrivacy}
       >
         <Typography className={classes.text}>
-          Make {props.privacyMode === "private" ? "public" : "private"}
+          Make {publicStatus ? "private" : "public"}
         </Typography>
       </Button>
       <Button

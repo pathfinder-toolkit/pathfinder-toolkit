@@ -29,7 +29,7 @@ const SavedBuildingPage = (props) => {
     if (!loading) {
       fetchData();
     }
-  }, [loading]);
+  }, [loading, props]);
 
   return (
     <Container maxWidth={false} className={classes.root}>
@@ -39,7 +39,7 @@ const SavedBuildingPage = (props) => {
           <SavedBuilding
             slug={props.match.params.slug}
             building={building}
-            privacyMode="private"
+            public={building.publicStatus}
           />
         )}
       </Container>
