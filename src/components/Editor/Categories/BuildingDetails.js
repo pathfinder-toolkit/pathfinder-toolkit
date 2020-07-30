@@ -75,15 +75,6 @@ const BuildingDetails = (props) => {
                   onChange={(e) => handleChange(e, "year")}
                 />
               </Grid>
-              <Grid item sm={2}>
-                <DropdownSelect
-                  className={style.formComponent}
-                  data={buildingOptions?.buildingTypes}
-                  label="Building type"
-                  defaultValue="Building 1"
-                  handler={(e) => handleChange(e, "buildingType")}
-                />
-              </Grid>
             </Grid>
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={1}>
@@ -103,9 +94,6 @@ const BuildingDetails = (props) => {
                   className={style.formComponent}
                   value={formData.floorArea.value}
                   error={isNaN(formData.floorArea.value)}
-                  /*helperText={
-                      isNaN(formData.floorArea.value) ? "Incorrect entry" : ""
-                    }*/
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">m²</InputAdornment>
@@ -121,11 +109,6 @@ const BuildingDetails = (props) => {
                   className={style.formComponent}
                   value={formData.heatedFloorArea.value}
                   error={isNaN(formData.heatedFloorArea.value)}
-                  /*helperText={
-                      isNaN(formData.heatedFloorArea.value)
-                        ? "Incorrect entry"
-                        : ""
-                    }*/
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">m²</InputAdornment>

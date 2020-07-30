@@ -115,6 +115,13 @@ export const EditorProvider = ({ children }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const setStep = (step) => {
+    if (navigationEnabled) {
+      setActiveStep(step);
+      clearSuggestions();
+    }
+  };
+
   const setSavedProperty = (category, propertyName, newValue) => {
     setBuildingInformation((buildingInformation) => ({
       ...buildingInformation,
@@ -187,13 +194,15 @@ export const EditorProvider = ({ children }) => {
     }
 
     try {
-      const data = await requestComments(subject, 1);
-
+      const response = await requestComments(subject, 1, 10);
+      const data = response.data.comments;
       console.log("Comments: " + subject);
-      console.log(data);
+      console.log(response.data.comments);
       if (data !== null) {
         if (!suggestions.includes(subject)) {
-          setComments([...comments, data[0]]);
+          data.forEach((item) => setComments([...comments, item]));
+
+          //setComments(data);
         }
       }
     } catch (error) {
@@ -202,6 +211,16 @@ export const EditorProvider = ({ children }) => {
 
     setCommentsLoading(false);
   };
+
+  useEffect(() => {
+  //  console.log("Comments: ");
+   // console.log(comments);
+  }, [comments]);
+
+  useEffect(() => {
+  //  console.log("Suggestions: ");
+   // console.log(suggestions);
+  }, [suggestions]);
 
   const clearSuggestions = () => {
     setSubjects([]);
@@ -228,6 +247,7 @@ export const EditorProvider = ({ children }) => {
       value={{
         buildingInformation,
         activeStep,
+        setActiveStep,
         getSteps,
         getStepDescription,
         getStepComponent,
@@ -235,6 +255,7 @@ export const EditorProvider = ({ children }) => {
         setNavigationEnabled,
         nextStep,
         previousStep,
+        setStep,
         setSavedProperty,
         getSavedProperty,
         getSavedCategory,
