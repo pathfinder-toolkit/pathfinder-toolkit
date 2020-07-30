@@ -19,7 +19,7 @@ const EditorStepper = () => {
     },
   }));
 
-  const { activeStep, getSteps, getStepDescription } = useEditor();
+  const { activeStep, getSteps, getStepDescription, setStep } = useEditor();
 
   const classes = useStyles();
   const steps = getSteps();
@@ -28,7 +28,11 @@ const EditorStepper = () => {
     <div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
-          <Step key={label}>
+          <Step
+            style={{ cursor: "pointer" }}
+            key={label}
+            onClick={() => setStep(index)}
+          >
             <StepLabel>{label}</StepLabel>
             <StepContent>
               <Typography>{getStepDescription(index)}</Typography>

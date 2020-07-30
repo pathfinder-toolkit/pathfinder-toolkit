@@ -64,7 +64,11 @@ const UserSuggestions = (props) => {
       {commentsLoading ? (
         showInfo ? (
           <div className={classes.infoBox}>
-            <InfoBox />
+            <InfoBox
+              text={
+                "Input information about your building to see suggestions and experiences of others with similar buildings."
+              }
+            />
           </div>
         ) : (
           <CircularProgress />
@@ -72,9 +76,16 @@ const UserSuggestions = (props) => {
       ) : (
         <React.Fragment>
           <List className={classes.suggestionList}>
+            {comments.length === 0 && (
+              <div className={classes.infoBox}>
+                <InfoBox text={"No comments found."} />
+              </div>
+            )}
             <div className={classes.commentsRoot}>
-              {comments &&
-                comments.map((comment, key) => {
+              {comments.length > 0 &&
+                comments?.map((comment, key) => {
+                  console.log("comment: ");
+                  console.log(comment);
                   if (filteredSubjects.includes(comment.commentSubject)) {
                     return;
                   }
