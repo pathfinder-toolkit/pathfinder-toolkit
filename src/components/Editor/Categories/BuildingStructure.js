@@ -13,6 +13,8 @@ import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
 import DropdownSelect from "../reusable/DropdownSelect";
+import OldEntry from "../reusable/OldEntry";
+import PropertyList from "../reusable/PropertyList";
 
 const BuildingStructure = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();

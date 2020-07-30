@@ -16,9 +16,6 @@ import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
-import OldEntryTest from "../reusable/OldEntryTest";
-import PropertyListTest from "../reusable/PropertyListTest";
-
 const BuildingVentilation = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
 
@@ -53,12 +50,12 @@ const BuildingVentilation = (props) => {
       <div className={style.root}>
         <Modal open={open} onClose={setClose}>
           <div className={style.modal}>
-            <OldEntryTest
+            <OldEntry
               handler={(value, year, propertyName, description) =>
-                addOldEntry(value, year, "ventilationSystem", description)
+                addOldEntry(value, year, "ventilationSystem")
               }
               onEntry={setClose}
-              data={buildingOptions.ventilationTypes}
+              data={buildingOptions.ventilationSystem}
             />
           </div>
         </Modal>
@@ -72,7 +69,7 @@ const BuildingVentilation = (props) => {
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
-                  data={buildingOptions.ventilationSystems}
+                  data={buildingOptions.ventilationSystem}
                   label="Ventilation system"
                   value={formData?.ventilationSystem[0].value}
                   handler={(e) => addNewEntry(e, "ventilationSystem")}
@@ -92,37 +89,6 @@ const BuildingVentilation = (props) => {
               {formData?.ventilationSystem.length > 1 && (
                 <Grid item sm={4}>
                   <PropertyList
-                    handleDeletion={(propertyName, index) =>
-                      deleteEntry("ventilationSystem", index)
-                    }
-                    data={formData.ventilationSystem}
-                  />
-                </Grid>
-              )}
-
-              <Grid item sm={3}>
-                <DropdownSelect
-                  className={style.formComponent}
-                  data={buildingOptions.ventilationSystems}
-                  label="Test property"
-                  value={formData?.ventilationSystem[0].value}
-                  handler={(e) => addNewEntry(e, "ventilationSystem")}
-                />
-              </Grid>
-              <Grid item sm={3}>
-                <Button
-                  disabled={!formData?.ventilationSystem[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={setModal}
-                >
-                  Add with comment
-                </Button>
-              </Grid>
-              {formData?.ventilationSystem.length > 1 && (
-                <Grid item sm={4}>
-                  <PropertyListTest
                     handleDeletion={(propertyName, index) =>
                       deleteEntry("ventilationSystem", index)
                     }

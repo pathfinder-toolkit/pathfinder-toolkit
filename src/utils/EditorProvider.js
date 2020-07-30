@@ -200,7 +200,9 @@ export const EditorProvider = ({ children }) => {
       console.log(response.data.comments);
       if (data !== null) {
         if (!suggestions.includes(subject)) {
-          setComments(data);
+          data.forEach((item) => setComments([...comments, item]));
+
+          //setComments(data);
         }
       }
     } catch (error) {
@@ -209,6 +211,16 @@ export const EditorProvider = ({ children }) => {
 
     setCommentsLoading(false);
   };
+
+  useEffect(() => {
+  //  console.log("Comments: ");
+   // console.log(comments);
+  }, [comments]);
+
+  useEffect(() => {
+  //  console.log("Suggestions: ");
+   // console.log(suggestions);
+  }, [suggestions]);
 
   const clearSuggestions = () => {
     setSubjects([]);
