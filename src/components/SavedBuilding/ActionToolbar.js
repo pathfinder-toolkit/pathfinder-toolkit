@@ -16,12 +16,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#eceef8",
     display: "flex",
     flexDirection: "column",
+    paddingBottom: theme.spacing(1)
   },
   actionsText: {
     margin: "auto",
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
+    padding: theme.spacing(1)
   },
   actionsButton: {
     maxWidth: "75%",
@@ -64,8 +63,6 @@ const ActionToolbar = (props) => {
 
   const [ publicStatus, setPublicStatus ] = useState(props.public);
 
-  const [ pending, setPending ] = useState(false);
-
   const {
     updateBuildingPublicStatus
   } = useBackend();
@@ -79,7 +76,6 @@ const ActionToolbar = (props) => {
   };
 
   const togglePrivacy = async () => {
-    setPending(true);
     const requestBody = {
       publicStatus: !publicStatus
     };
@@ -88,7 +84,6 @@ const ActionToolbar = (props) => {
     if (response.status === 200) {
       setPublicStatus(prev => !prev);
     }
-    setPending(false);
   }
 
   return (
