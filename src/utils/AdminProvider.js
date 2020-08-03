@@ -1,12 +1,12 @@
 import React,  {useState, useContext } from "react";
 
-import AdminDashboard from "../components/Admin/AdminDashboard";
+import AdminDashboard from "../components/Admin/Dashboard/AdminDashboard";
 import CreateNewSuggestion from "../components/Admin/Suggestions/CreateNewSuggestion";
 import EditSuggestions from "../components/Admin/Suggestions/EditSuggestions";
 import DeleteSuggestions from "../components/Admin/Suggestions/DeleteSuggestions";
 import EmailSettings from "../components/Admin/Feedback/EmailSettings";
 import UpdateRegionOptions from "../components/Admin/Editor/UpdateRegionOptions";
-import ManageCommentReports from "../components/Admin/Comments/ManageCommentReports";
+import ReviewCommentReports from "../components/Admin/Comments/ReviewCommentReports";
 
 export const AdminContext = React.createContext();
 export const useAdmin = () => useContext(AdminContext);
@@ -29,7 +29,7 @@ export const AdminProvider = ( { children } ) => {
             case "regionOptions":
                 return <UpdateRegionOptions style={style} />;
             case "commentReports":
-                return <ManageCommentReports style={style} />
+                return <ReviewCommentReports style={style} />
             default:
                 return <p>No component</p>;
         }
