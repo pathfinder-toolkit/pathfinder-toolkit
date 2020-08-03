@@ -21,11 +21,13 @@ const VentilationCategory = (props) => {
                 <CategoryItemChangelog
                 itemList={props.category.ventilationSystem}
                 classes={props.classes}
+                subject="ventilationSystem"
                 />
             ) : (
                 <CategoryItem 
                 item={props.category.ventilationSystem}
                 classes={props.classes}
+                subject="ventilationSystem"
                 />
             )
         )}

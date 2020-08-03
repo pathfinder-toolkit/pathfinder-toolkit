@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     },
     commentHeader: {
         fontSizeAdjust: 0.6,
-        lineHeight:'180%'
+        lineHeight:'180%',
+        maxWidth: "92%"
     },
     commentText: {
         fontSizeAdjust: 0.5,

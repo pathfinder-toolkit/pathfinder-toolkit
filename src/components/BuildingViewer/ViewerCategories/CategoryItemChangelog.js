@@ -20,6 +20,7 @@ const CategoryItemChangelog = (props) => {
                         item={item}
                         classes={classes}
                         key={index}
+                        subject={props.subject}
                         />
                     )
                 })}
