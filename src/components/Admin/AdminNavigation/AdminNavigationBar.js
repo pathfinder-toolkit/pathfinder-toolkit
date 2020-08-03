@@ -90,7 +90,7 @@ const AdminNavigationBar = () => {
             <Collapse in={showComments} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                     <ListItem button className={classes.itemNested} onClick={() => {handleSelection("commentReports")}}>
-                        <ListItemText>Manage comment reports</ListItemText>
+                        <ListItemText>Review comment reports</ListItemText>
                     </ListItem>
                 </List>
             </Collapse>

@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     },
     commentHeader: {
         fontSizeAdjust: 0.6,
-        lineHeight:'180%'
+        lineHeight:'180%',
+        maxWidth: "92%"
     },
     commentText: {
         fontSizeAdjust: 0.5,
@@ -107,7 +108,7 @@ const CommentContainer = (props) => {
                 name="switch"
                 inputProps={{ 'aria-label': 'show-comments-checkbox' }}
                 />
-                <Typography className={classes.displayText}>{switchState ? "Hide comments" : "Show comments"}</Typography>
+                <Typography className={classes.displayText}>{switchState ? "Hide user comments" : "Show user comments"}</Typography>
                 {switchState && (
                 <Comments 
                     comments={comments}
@@ -133,7 +134,7 @@ const CommentContainer = (props) => {
                 {loading ? (
                     <CircularProgress />
                 ) : (
-                    <Button onClick={fetchComments}>Show comments</Button>
+                    <Button onClick={fetchComments}>Show user comments</Button>
                 )}
             </React.Fragment>
         )}

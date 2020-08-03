@@ -90,21 +90,6 @@ export const EditorProvider = ({ children }) => {
     }
   };
 
-  // Can be used later if we'd like to provide short description about steps.
-  const getStepDescription = (step) => {
-    return "";
-    switch (step) {
-      case 0:
-        return "Select area";
-      case 1:
-        return "Enter building details";
-      case 2:
-        return "Enter heating details";
-      default:
-        return "Unknown description";
-    }
-  };
-
   const nextStep = () => {
     clearSuggestions();
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -161,7 +146,11 @@ export const EditorProvider = ({ children }) => {
 
   const getSuggestions = async (subject, value, areaId) => {
     setSuggestionsLoading(true);
-    if (subject === null || value === null) {
+    console.log(
+      "subject: " + subject + "|value: " + value + "|area: " + areaId
+    );
+    if (subject === null || value === null || value.length === 0) {
+      setSuggestionsLoading(false);
       return;
     }
 
@@ -213,13 +202,13 @@ export const EditorProvider = ({ children }) => {
   };
 
   useEffect(() => {
-  //  console.log("Comments: ");
-   // console.log(comments);
+    //  console.log("Comments: ");
+    // console.log(comments);
   }, [comments]);
 
   useEffect(() => {
-  //  console.log("Suggestions: ");
-   // console.log(suggestions);
+    //  console.log("Suggestions: ");
+    // console.log(suggestions);
   }, [suggestions]);
 
   const clearSuggestions = () => {
@@ -249,7 +238,6 @@ export const EditorProvider = ({ children }) => {
         activeStep,
         setActiveStep,
         getSteps,
-        getStepDescription,
         getStepComponent,
         navigationEnabled,
         setNavigationEnabled,

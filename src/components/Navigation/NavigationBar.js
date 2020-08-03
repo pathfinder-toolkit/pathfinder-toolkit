@@ -47,12 +47,12 @@ const NavigationBar = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [logoutAlert, setLogoutAlert] = useState(false);
 
-  const handleProfileMenuClose = (event) => {
+  const handleMenuClose = (event) => {
     console.log(anchorEl);
     setAnchorEl(null);
   };
 
-  const handleProfileMenuOpen = (event) => {
+  const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -112,7 +112,7 @@ const NavigationBar = (props) => {
               aria-label="account of current user"
               aria-controls="primary-search-account-menu"
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={handleMenuOpen}
               color="inherit"
             >
               <AccountCircle />
@@ -122,9 +122,8 @@ const NavigationBar = (props) => {
               anchorEl={anchorEl}
               keepMounted
               open={Boolean(anchorEl)}
-              onClose={handleProfileMenuClose}
+              onClose={handleMenuClose}
             >
-              <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
               <MenuItem
                 onClick={() => {
                   redirectTo("/buildings");

@@ -78,14 +78,12 @@ const UserSuggestions = (props) => {
           <List className={classes.suggestionList}>
             {comments.length === 0 && (
               <div className={classes.infoBox}>
-                <InfoBox text={"No comments found."} />
+                <InfoBox text={"No user experiences found."} />
               </div>
             )}
             <div className={classes.commentsRoot}>
               {comments.length > 0 &&
                 comments?.map((comment, key) => {
-                  console.log("comment: ");
-                  console.log(comment);
                   if (filteredSubjects.includes(comment.commentSubject)) {
                     return;
                   }

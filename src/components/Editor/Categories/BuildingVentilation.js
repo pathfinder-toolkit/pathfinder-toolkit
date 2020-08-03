@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Fade,
-  Grid,
-  TextField,
-  InputAdornment,
-  Modal,
-  Button,
-} from "@material-ui/core";
+import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
@@ -17,7 +9,7 @@ import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
 const BuildingVentilation = (props) => {
-  const { setNavigationEnabled, buildingOptions } = useEditor();
+  const { buildingOptions } = useEditor();
 
   const style = props.style;
 
@@ -39,14 +31,14 @@ const BuildingVentilation = (props) => {
     deleteEntry,
   } = useFormData("ventilation");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={setClose}>
           <div className={style.modal}>
@@ -83,7 +75,7 @@ const BuildingVentilation = (props) => {
                   variant="outlined"
                   onClick={setModal}
                 >
-                  Add old system
+                  +
                 </Button>
               </Grid>
               {formData?.ventilationSystem.length > 1 && (

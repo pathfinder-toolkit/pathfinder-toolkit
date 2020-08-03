@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Fade,
-  TextField,
-  Grid,
-  InputAdornment,
-  Modal,
-  Button,
-} from "@material-ui/core";
+import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
@@ -17,19 +9,12 @@ import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
 const BuildingHeating = (props) => {
-  const { setNavigationEnabled, buildingOptions } = useEditor();
+  const { buildingOptions } = useEditor();
 
   const style = props.style;
 
   const [open, setOpen] = useState(false);
-
-  const setModal = () => {
-    setOpen(true);
-  };
-
-  const setClose = () => {
-    setOpen(false);
-  };
+  const [property, setProperty] = useState();
 
   const {
     formData,
@@ -39,25 +24,35 @@ const BuildingHeating = (props) => {
     deleteEntry,
   } = useFormData("heating");
 
-  // Save form data to local storage on unmount
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
-  //className={props.style.required}
+  useEffect(() => {
+    if (property) {
+      setOpen(true);
+    }
+  }, [property]);
+
+  const resetModal = () => {
+    setOpen(false);
+    setProperty();
+  };
+
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
-        <Modal open={open} onClose={setClose}>
+        <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>
             <OldEntry
+              property={property}
               handler={(value, year, propertyName) =>
-                addOldEntry(value, year, "heatingSystem")
+                addOldEntry(value, year, property)
               }
-              onEntry={setClose}
-              data={buildingOptions.heatingSystem}
+              onEntry={() => resetModal()}
+              data={buildingOptions[property]}
             />
           </div>
         </Modal>
@@ -66,13 +61,18 @@ const BuildingHeating = (props) => {
             <Typography variant="h5">Building heating</Typography>
           </div>
           <div className={style.category}>
-            <Grid className={style.row} container alignItems="center" spacing={2}>
+            <Grid
+              className={style.row}
+              container
+              alignItems="center"
+              spacing={2}
+            >
               <Grid item sm={3}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.heatingSystem}
                   label="Heating System"
-                  value={formData.heatingSystem.value}
+                  value={formData?.heatingSystem[0].value}
                   handler={(e) => handleChange(e, "heatingSystem")}
                 />
               </Grid>
@@ -81,10 +81,10 @@ const BuildingHeating = (props) => {
                   disabled={!formData?.heatingSystem[0].value}
                   className={style.formButton}
                   color="primary"
-                  variant="contained"
-                  onClick={setModal}
+                  variant="outlined"
+                  onClick={() => setProperty("heatingSystem")}
                 >
-                  Add old system
+                  +
                 </Button>
               </Grid>
 
@@ -93,9 +93,20 @@ const BuildingHeating = (props) => {
                   className={style.formComponent}
                   data={buildingOptions.heatingSource}
                   label="Heating source"
-                  value={formData.heatingSource.value}
+                  value={formData?.heatingSource[0].value}
                   handler={(e) => handleChange(e, "heatingSource")}
                 />
+              </Grid>
+              <Grid item sm={3}>
+                <Button
+                  disabled={!formData?.heatingSource[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("heatingSource")}
+                >
+                  +
+                </Button>
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}></Grid>

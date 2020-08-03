@@ -145,14 +145,10 @@ export const BackendProvider = ({ children }) => {
     try {
       const response = await axios.get(address, axiosConfig);
       console.log(response);
-      if (Object.keys(response).includes("data")) {
-        return response.data;
-      } else {
-        return null;
-      }
+      return response;
     } catch (error) {
       console.log(error);
-      return null;
+      return error.response
     }
   };
 
