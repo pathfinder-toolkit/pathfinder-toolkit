@@ -10,7 +10,12 @@ const useFormData = (category) => {
     suggestionsAreaId,
     getComments,
   } = useEditor();
-  //Get form data from local storage
+
+  /*TODO:: Add debounce to suggestion fetching,
+   to reduce lag on number inputs */
+
+  // Get form data from local storage
+  // Only get the items saved under a category, not the whole building data
   const [formData, setFormData] = useState(getSavedCategory(category));
 
   const handleChange = (event, propertyName) => {
@@ -30,8 +35,10 @@ const useFormData = (category) => {
     console.log(propertyName + " | object | " + event.target.value);
     if (formData[propertyName].hasSuggestions) {
       console.log("has suggestions.");
-      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-      getComments(propertyName);
+      if (event.target.value !== null) {
+        getSuggestions(propertyName, event.target.value, suggestionsAreaId);
+        getComments(propertyName);
+      }
     } else {
       console.log("has no suggestions.");
     }
@@ -53,8 +60,10 @@ const useFormData = (category) => {
 
     if (formData[propertyName][currentObjectIndex].hasSuggestions) {
       console.log("has suggestions");
-      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-      getComments(propertyName);
+      if (event.target.value != null) {
+        getSuggestions(propertyName, event.target.value, suggestionsAreaId);
+        getComments(propertyName);
+      }
     } else {
       console.log("has no suggestions.");
     }
@@ -144,6 +153,7 @@ const useFormData = (category) => {
     }));
   };
 
+  // Not currently used, but can be added as a feature later.
   const resetProperty = (propertyName) => {
     console.log("resetting: " + propertyName);
     setFormData((formData) => ({
@@ -156,7 +166,7 @@ const useFormData = (category) => {
     console.log(formData);
   };
 
-  //Save category to local storage with timer debounce
+  //Save category to local storage with debounce
   useTimer(
     () => {
       setSavedCategory(category, formData);

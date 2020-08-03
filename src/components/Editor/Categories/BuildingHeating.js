@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Fade,
-  TextField,
-  Grid,
-  InputAdornment,
-  Modal,
-  Button,
-} from "@material-ui/core";
+import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
@@ -17,7 +9,7 @@ import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
 const BuildingHeating = (props) => {
-  const { setNavigationEnabled, buildingOptions } = useEditor();
+  const { buildingOptions } = useEditor();
 
   const style = props.style;
 
@@ -32,15 +24,14 @@ const BuildingHeating = (props) => {
     deleteEntry,
   } = useFormData("heating");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
   useEffect(() => {
     if (property) {
-      console.log("Adding oldEntry to : " + property);
       setOpen(true);
     }
   }, [property]);
@@ -51,7 +42,7 @@ const BuildingHeating = (props) => {
   };
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>

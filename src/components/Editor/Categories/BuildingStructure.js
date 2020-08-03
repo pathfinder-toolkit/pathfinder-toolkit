@@ -26,16 +26,12 @@ const BuildingStructure = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
-    "structure"
-  );
+  const { formData, handleChange, addOldEntry } = useFormData("structure");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
-    return () => {
-      //setSavedCategory("structure", formData);
-    };
+    setAnimation(true);
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -51,7 +47,7 @@ const BuildingStructure = (props) => {
   };
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>

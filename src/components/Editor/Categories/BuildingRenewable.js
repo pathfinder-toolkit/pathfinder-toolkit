@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Fade,
-  Grid,
-  TextField,
-  InputAdornment,
-  Modal,
-  Button,
-} from "@material-ui/core";
+import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
@@ -16,7 +8,7 @@ import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 
 const BuildingRenewable = (props) => {
-  const { setNavigationEnabled, buildingOptions } = useEditor();
+  const { buildingOptions } = useEditor();
 
   const style = props.style;
 
@@ -25,15 +17,14 @@ const BuildingRenewable = (props) => {
 
   const { formData, handleChange, addOldEntry } = useFormData("renewable");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
   useEffect(() => {
     if (property) {
-      console.log("Adding oldEntry to : " + property);
       setOpen(true);
     }
   }, [property]);
@@ -44,7 +35,7 @@ const BuildingRenewable = (props) => {
   };
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>

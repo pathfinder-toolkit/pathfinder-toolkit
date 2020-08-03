@@ -14,7 +14,6 @@ const AreaMap = (props) => {
   const [areaNames, setAreaNames] = useState();
 
   useEffect(() => {
-    console.log(allowedCountries)
     let areaNames = [];
     allowedCountries.forEach((item) => areaNames.push(item.areaName));
     setAreaNames(areaNames);
