@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Modal, Grid, Typography } from "@material-ui/core";
+import { Button, Modal, Grid, Typography, Paper } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
 
@@ -9,7 +9,20 @@ import SubmitModal from "./reusable/SubmitModal";
 import UpdateModal from "./reusable/UpdateModal";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  submitRoot: {
+    padding: theme.spacing(2),
+    backgroundColor: "#eceef8",
+    borderRadius: "4px",
+  },
+  previewHeader: {
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+  submitButton: {
+    marginLeft: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const Summary = (props) => {
@@ -65,34 +78,32 @@ const Summary = (props) => {
           <SubmitModal message={message} />
         </Modal>
       )}
-      <Grid
-        style={{
-          padding: "5em",
-          margin: "1em",
-          backgroundColor: "#eceef8",
-          borderRadius: "4px",
-        }}
-        justify="center"
-      >
-        <Grid item>
-          <Button
-            onClick={() => {
-              if (props.slug) {
-                submitUpdateBuilding();
-              } else {
-                submitBuilding();
-              }
-            }}
-            variant="contained"
-            color="primary"
-          >
-            {props.slug ? "Update building" : "Submit building"}
-          </Button>
-        </Grid>
+      <Grid className={classes.submitRoot} container direction="column">
+        <Paper>
+          <Grid item>
+            <Typography className={classes.previewHeader} variant="h4">
+              Building summary
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Button
+              className={classes.submitButton}
+              onClick={() => {
+                if (props.slug) {
+                  submitUpdateBuilding();
+                } else {
+                  submitBuilding();
+                }
+              }}
+              variant="contained"
+              color="primary"
+            >
+              {props.slug ? "Update building" : "Submit building"}
+            </Button>
+          </Grid>
+        </Paper>
       </Grid>
-      <Typography style={{ paddingLeft: "1em" }} variant="h4">
-        Building preview
-      </Typography>
+
       <BuildingViewer building={buildingInformation} />
     </React.Fragment>
   );

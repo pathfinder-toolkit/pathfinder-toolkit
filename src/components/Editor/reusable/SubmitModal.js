@@ -13,6 +13,7 @@ const SubmitModal = (props) => {
       border: "2px solid black",
       textAlign: "center",
       transform: "translate(-50%,-50%)",
+      padding: theme.spacing(5),
     },
     center: {
       textAlign: "center",
@@ -24,7 +25,9 @@ const SubmitModal = (props) => {
   return (
     <div className={classes.root}>
       <Typography align="center">Submitting building...</Typography>
-      <Typography align="center">{props?.message}</Typography>
+      <Typography style={{ marginTop: "1em" }} align="center">
+        {props?.message}
+      </Typography>
       {!props?.message && <CircularProgress />}
     </div>
   );
