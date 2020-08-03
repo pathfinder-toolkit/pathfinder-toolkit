@@ -80,6 +80,14 @@ const AdminPageContainer = () => {
       commentUserAction: {
           top: "20%",
           right: "1%"
+      },
+      notificationRoot: {
+        marginBottom: theme.spacing(0.5),
+        backgroundColor: "#eceef8",
+      },
+      notificationButton: {
+        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(1)
       }
   }));
   const styleClasses = useStyles();
