@@ -24,15 +24,14 @@ const BuildingHeating = (props) => {
     deleteEntry,
   } = useFormData("heating");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
   useEffect(() => {
     if (property) {
-      console.log("Adding oldEntry to : " + property);
       setOpen(true);
     }
   }, [property]);
@@ -43,7 +42,7 @@ const BuildingHeating = (props) => {
   };
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>

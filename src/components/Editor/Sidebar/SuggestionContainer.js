@@ -71,7 +71,7 @@ const SuggestionContainer = (props) => {
         textColor="primary"
       >
         <Tab label="Suggestions" />
-        <Tab label="User comments" />
+        <Tab label="User experiences" />
       </Tabs>
       <SubjectFilter
         subjects={subjects}

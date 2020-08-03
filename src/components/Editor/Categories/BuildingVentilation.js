@@ -31,14 +31,14 @@ const BuildingVentilation = (props) => {
     deleteEntry,
   } = useFormData("ventilation");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={setClose}>
           <div className={style.modal}>

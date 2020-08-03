@@ -26,16 +26,16 @@ const BuildingDetails = (props) => {
 
   const { formData, handleChange, addImage } = useFormData("details");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
   const [open, setOpen] = useState(false);
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={() => setOpen(false)}>
           <div className={style.imageSelectModal}>

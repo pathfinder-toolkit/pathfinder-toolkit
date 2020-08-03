@@ -17,9 +17,9 @@ const BuildingRenewable = (props) => {
 
   const { formData, handleChange, addOldEntry } = useFormData("renewable");
 
-  const [loading, setLoading] = useState(false);
+  const [animation, setAnimation] = useState(false);
   useEffect(() => {
-    setLoading(true);
+    setAnimation(true);
     return () => {};
   }, []);
 
@@ -35,7 +35,7 @@ const BuildingRenewable = (props) => {
   };
 
   return (
-    <Fade in={loading}>
+    <Fade in={animation}>
       <div className={style.root}>
         <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>

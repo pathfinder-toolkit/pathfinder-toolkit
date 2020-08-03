@@ -34,16 +34,11 @@ const AreaSelection = (props) => {
     const fetchData = async () => {
       const data = await requestAreas();
 
-      console.log(data);
-
       //Get areaNames from array
       let areaNames = [];
       data.forEach((item) => areaNames.push(item.areaName));
 
-      console.log(areaNames);
-
-      console.log(data);
-
+      // new Building template, OR existing building
       let model;
 
       if (props.slug) {
@@ -120,11 +115,6 @@ const AreaSelection = (props) => {
     );
   };
 
-  useEffect(() => {
-    console.log("AREA ID : " + suggestionsAreaId);
-  }, [suggestionsAreaId]);
-
-  // Need to refine this solution later on.
   const findAreaIdByName = (areaName) => {
     let areaId = allowedCountries.filter((area) => {
       return area.areaName === areaName;
