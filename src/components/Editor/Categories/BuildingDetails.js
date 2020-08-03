@@ -7,20 +7,18 @@ import {
   InputAdornment,
   Modal,
   Button,
-  IconButton,
 } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
-import useFormData from "../useFormData";
-import UploadContainer from "../Upload/UploadContainer";
-import { Image } from "cloudinary-react";
 import { useAuth0 } from "../../../utils/react-auth0-spa";
+import useFormData from "../useFormData";
 
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import { Add } from "@material-ui/icons";
+import UploadContainer from "../Upload/UploadContainer";
+import { Image } from "cloudinary-react";
 
 const BuildingDetails = (props) => {
-  const { setNavigationEnabled, buildingOptions } = useEditor();
+  const { buildingOptions } = useEditor();
 
   const { isAuthenticated } = useAuth0();
 

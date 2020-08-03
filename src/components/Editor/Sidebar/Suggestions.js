@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CircularProgress, List, Typography } from "@material-ui/core";
+import { CircularProgress, List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import SuggestionAlert from "../../reusable/SuggestionAlert";
@@ -60,7 +60,7 @@ const Suggestions = (props) => {
           <List className={classes.suggestionList}>
             {suggestions.length === 0 && (
               <div className={classes.infoBox}>
-                <InfoBox text={"No suggestions found."}/>
+                <InfoBox text={"No suggestions found."} />
               </div>
             )}
             {suggestions.length > 0 &&

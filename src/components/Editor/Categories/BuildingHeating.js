@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Fade,
-  TextField,
-  Grid,
-  InputAdornment,
-  Modal,
-  Button,
-} from "@material-ui/core";
+import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
@@ -17,7 +9,7 @@ import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
 const BuildingHeating = (props) => {
-  const { setNavigationEnabled, buildingOptions } = useEditor();
+  const { buildingOptions } = useEditor();
 
   const style = props.style;
 
