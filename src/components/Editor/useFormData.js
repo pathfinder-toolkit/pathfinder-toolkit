@@ -35,8 +35,10 @@ const useFormData = (category) => {
     console.log(propertyName + " | object | " + event.target.value);
     if (formData[propertyName].hasSuggestions) {
       console.log("has suggestions.");
-      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-      getComments(propertyName);
+      if (event.target.value !== null) {
+        getSuggestions(propertyName, event.target.value, suggestionsAreaId);
+        getComments(propertyName);
+      }
     } else {
       console.log("has no suggestions.");
     }
@@ -58,8 +60,10 @@ const useFormData = (category) => {
 
     if (formData[propertyName][currentObjectIndex].hasSuggestions) {
       console.log("has suggestions");
-      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-      getComments(propertyName);
+      if (event.target.value != null) {
+        getSuggestions(propertyName, event.target.value, suggestionsAreaId);
+        getComments(propertyName);
+      }
     } else {
       console.log("has no suggestions.");
     }
