@@ -31,7 +31,7 @@ const NotifyReports = ( {classes, amount} ) => {
             }
             title="Reports"
             subheader= {<React.Fragment>
-                You have <b>{amount}</b> user experience reports to review.
+                You have <b>{amount}</b> user comment report{amount > 1 && "s"} to review.
             </React.Fragment>}
             />
             <Button variant="contained" color="primary" className={classes.notificationButton} onClick={handleRedirect}>

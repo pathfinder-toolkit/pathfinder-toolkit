@@ -6,6 +6,8 @@ import { useBackend } from "../../utils/BackendProvider";
 import Paper from "@material-ui/core/Paper";
 import BuildingViewer from "../../components/BuildingViewer/BuildingViewer";
 
+import MissingResource from "../../components/SavedBuilding/MissingResource";
+
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(0),
@@ -73,7 +75,7 @@ const PublicBuildingPage = (props) => {
                 )}
                 {!status.success && status.resolved && (
                     <Paper className={classes.paper}>
-                        No building found.
+                        <MissingResource resourceType="building" />
                     </Paper>
                 )}
             </Container>
