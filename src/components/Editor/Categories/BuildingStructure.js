@@ -169,6 +169,17 @@ const BuildingStructure = (props) => {
                   handler={(e) => handleChange(e, "doorMaterial")}
                 />
               </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.doorMaterial[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("doorMaterial")}
+                >
+                  +
+                </Button>
+              </Grid>
             </Grid>
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={2}>
@@ -181,6 +192,17 @@ const BuildingStructure = (props) => {
                   handler={(e) => handleChange(e, "roofMaterial")}
                 />
               </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.roofMaterial[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("roofMaterial")}
+                >
+                  +
+                </Button>
+              </Grid>
             </Grid>
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={2}>
@@ -191,6 +213,17 @@ const BuildingStructure = (props) => {
                   value={formData?.floorMaterial[0]?.value}
                   handler={(e) => handleChange(e, "floorMaterial")}
                 ></DropdownSelect>
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.floorMaterial[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("floorMaterial")}
+                >
+                  +
+                </Button>
               </Grid>
             </Grid>
           </div>

@@ -64,8 +64,9 @@ const BuildingDetails = (props) => {
               </Grid>
               <Grid item sm={1}>
                 <TextField
-                  className={style.formComponent}
                   label="Year"
+                  type="number"
+                  className={style.formComponent}
                   value={formData.year.value}
                   onChange={(e) => handleChange(e, "year")}
                 />
