@@ -67,7 +67,7 @@ const ManageCommentReports = ( {style} ) => {
     }, [page, perPage]);
 
     return <React.Fragment>
-        <Typography variant="h4" component="h4" className={classes.header}>Manage comment reports</Typography>
+        <Typography variant="h4" component="h4" className={classes.header}>Review comment reports</Typography>
         <TableContainer component={Paper} className={classes.tableRoot} >
             <Table>
                 <TableBody>
