@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Typography } from "@material-ui/core";
 import DropdownSelect from "./DropdownSelect";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -42,20 +42,23 @@ const OldEntry = (props) => {
   };
 
   useEffect(() => {
-    if (isNaN(year)) {
-      setError("Please enter a year.");
-    } else if (year < 0 || year > 3000) {
-      setError("Please enter a valid year.");
-    } else {
-      setError("");
+    if (year) {
+      if (isNaN(year)) {
+        setError("Please enter a year.");
+      } else if (year < 0 || year > 3000) {
+        setError("Please enter a valid year.");
+      } else {
+        setError("");
+      }
     }
   }, [year]);
 
   return (
     <div className={classes.entryRoot}>
+      <Typography>Property: {props.property}</Typography>
       <div className={classes.inputs}>
         <DropdownSelect
-          label="Old system"
+          label="Old value"
           data={props.data}
           handler={handleValueChange}
         />
@@ -63,8 +66,8 @@ const OldEntry = (props) => {
           onChange={handleYearChange}
           value={year}
           label="Year"
+          type="number"
           helperText={error}
-          error={isNaN(year) || year < 0 || year > 3000}
         ></TextField>
       </div>
       <Button

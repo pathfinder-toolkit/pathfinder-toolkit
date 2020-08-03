@@ -7,6 +7,8 @@ import {
   Grid,
   Switch,
   FormControlLabel,
+  Modal,
+  Button,
 } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
@@ -21,7 +23,12 @@ const BuildingStructure = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange, addNewEntry } = useFormData("structure");
+  const [open, setOpen] = useState(false);
+  const [property, setProperty] = useState();
+
+  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
+    "structure"
+  );
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -31,10 +38,34 @@ const BuildingStructure = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (property) {
+      console.log("Adding oldEntry to : " + property);
+      setOpen(true);
+    }
+  }, [property]);
+
+  const resetModal = () => {
+    setOpen(false);
+    setProperty();
+  };
+
   //Just a quick sketch, will be split into smaller components/remade later
   return (
     <Fade in={loading}>
       <div className={style.root}>
+        <Modal open={open} onClose={() => resetModal()}>
+          <div className={style.modal}>
+            <OldEntry
+              property={property}
+              handler={(value, year, propertyName) =>
+                addOldEntry(value, year, property)
+              }
+              onEntry={() => resetModal()}
+              data={buildingOptions[property]}
+            />
+          </div>
+        </Modal>
         <Grid item alignItems="center">
           <div className={style.header}>
             <Typography variant="h5">Building structure</Typography>
@@ -62,6 +93,17 @@ const BuildingStructure = (props) => {
                   value={formData.wallMaterial[0].value}
                   handler={(e) => handleChange(e, "wallMaterial")}
                 />
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.wallMaterial[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="contained"
+                  onClick={() => setProperty("wallMaterial")}
+                >
+                  +
+                </Button>
               </Grid>
             </Grid>
             <Grid container className={style.rowNoBorder} spacing={2}>
