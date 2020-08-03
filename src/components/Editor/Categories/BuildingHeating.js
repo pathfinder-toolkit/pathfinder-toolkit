@@ -90,7 +90,7 @@ const BuildingHeating = (props) => {
                   disabled={!formData?.heatingSystem[0].value}
                   className={style.formButton}
                   color="primary"
-                  variant="contained"
+                  variant="outlined"
                   onClick={() => setProperty("heatingSystem")}
                 >
                   +
@@ -111,7 +111,7 @@ const BuildingHeating = (props) => {
                   disabled={!formData?.heatingSource[0].value}
                   className={style.formButton}
                   color="primary"
-                  variant="contained"
+                  variant="outlined"
                   onClick={() => setProperty("heatingSource")}
                 >
                   +

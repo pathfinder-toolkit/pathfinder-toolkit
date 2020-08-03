@@ -5,19 +5,25 @@ import {
   Grid,
   TextField,
   InputAdornment,
+  Modal,
+  Button,
 } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
 import DropdownSelect from "../reusable/DropdownSelect";
+import OldEntry from "../reusable/OldEntry";
 
 const BuildingRenewable = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
 
   const style = props.style;
 
-  const { formData, handleChange } = useFormData("renewable");
+  const [open, setOpen] = useState(false);
+  const [property, setProperty] = useState();
+
+  const { formData, handleChange, addOldEntry } = useFormData("renewable");
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -25,9 +31,33 @@ const BuildingRenewable = (props) => {
     return () => {};
   }, []);
 
+  useEffect(() => {
+    if (property) {
+      console.log("Adding oldEntry to : " + property);
+      setOpen(true);
+    }
+  }, [property]);
+
+  const resetModal = () => {
+    setOpen(false);
+    setProperty();
+  };
+
   return (
     <Fade in={loading}>
       <div className={style.root}>
+        <Modal open={open} onClose={() => resetModal()}>
+          <div className={style.modal}>
+            <OldEntry
+              property={property}
+              handler={(value, year, propertyName) =>
+                addOldEntry(value, year, property)
+              }
+              onEntry={() => resetModal()}
+              data={buildingOptions[property]}
+            />
+          </div>
+        </Modal>
         <Grid item>
           <div className={style.header}>
             <Typography variant="h5">Renewable</Typography>

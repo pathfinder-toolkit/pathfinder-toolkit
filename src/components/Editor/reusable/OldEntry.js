@@ -55,7 +55,7 @@ const OldEntry = (props) => {
 
   return (
     <div className={classes.entryRoot}>
-      <Typography>Property: {props.property}</Typography>
+      <Typography>debug: {props.property}</Typography>
       <div className={classes.inputs}>
         <DropdownSelect
           label="Old value"

@@ -50,7 +50,6 @@ const BuildingStructure = (props) => {
     setProperty();
   };
 
-  //Just a quick sketch, will be split into smaller components/remade later
   return (
     <Fade in={loading}>
       <div className={style.root}>
@@ -99,7 +98,7 @@ const BuildingStructure = (props) => {
                   disabled={!formData?.wallMaterial[0].value}
                   className={style.formButton}
                   color="primary"
-                  variant="contained"
+                  variant="outlined"
                   onClick={() => setProperty("wallMaterial")}
                 >
                   +
@@ -107,27 +106,6 @@ const BuildingStructure = (props) => {
               </Grid>
             </Grid>
             <Grid container className={style.rowNoBorder} spacing={2}>
-              <Grid item sm={1}>
-                <TextField
-                  className={style.formComponent}
-                  defaultValue=""
-                  value={formData.windowAmount[0].value}
-                  label="Windows"
-                  type="number"
-                  error={isNaN(formData.windowAmount[0].value)}
-                  onChange={(e) => handleChange(e, "windowAmount")}
-                ></TextField>
-              </Grid>
-              <Grid item sm={2}>
-                <DropdownSelect
-                  className={style.formComponent}
-                  data={buildingOptions.windowType}
-                  label="Window type"
-                  value={formData.wallMaterial[0].value}
-                  handler={(e) => handleChange(e, "windowType")}
-                />
-              </Grid>
-
               <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
@@ -146,6 +124,26 @@ const BuildingStructure = (props) => {
                   label="Heated window type"
                   value={formData.wallMaterial[0].value}
                   handler={(e) => handleChange(e, "heatedWindowType")}
+                />
+              </Grid>
+              <Grid item sm={1}>
+                <TextField
+                  className={style.formComponent}
+                  defaultValue=""
+                  value={formData.windowAmount[0].value}
+                  label="Windows"
+                  type="number"
+                  error={isNaN(formData.windowAmount[0].value)}
+                  onChange={(e) => handleChange(e, "windowAmount")}
+                ></TextField>
+              </Grid>
+              <Grid item sm={2}>
+                <DropdownSelect
+                  className={style.formComponent}
+                  data={buildingOptions.windowType}
+                  label="Window type"
+                  value={formData.wallMaterial[0].value}
+                  handler={(e) => handleChange(e, "windowType")}
                 />
               </Grid>
             </Grid>
