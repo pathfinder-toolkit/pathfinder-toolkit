@@ -9,13 +9,16 @@ const AdminNotifications = ( {classes} ) => {
         getCommentReportsAmountForAdmin
     } = useBackend();
 
-    const [reportAmount, setReportAmount] = useState(0);
+    const [reportAmount, setReportAmount] = useState(false);
 
     const fetchAmountOfReports = async () => {
         const response = await getCommentReportsAmountForAdmin();
         console.log(response);
         if (response.status === 200) {
-            setReportAmount(response.data.amount);
+            if (response.data.amount > 0) {
+                setReportAmount(response.data.amount);
+            }
+            
         }
     }
 

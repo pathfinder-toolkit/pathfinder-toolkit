@@ -83,7 +83,7 @@ const AdminPageContainer = () => {
       },
       notificationRoot: {
         marginBottom: theme.spacing(0.5),
-        backgroundColor: "#eceef8",
+        backgroundColor: "#faf9c7"
       },
       notificationButton: {
         marginLeft: theme.spacing(2),
