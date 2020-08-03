@@ -14,6 +14,7 @@ const UpdateModal = (props) => {
       border: "2px solid black",
       textAlign: "center",
       transform: "translate(-50%,-50%)",
+      padding: theme.spacing(5),
     },
     center: {
       textAlign: "center",
@@ -34,6 +35,7 @@ const UpdateModal = (props) => {
         <Button
           variant="outlined"
           color="primary"
+          style={{marginTop: "1em"}}
           onClick={() => history.push("/buildings/" + props.slug)}
         >
           Ok
