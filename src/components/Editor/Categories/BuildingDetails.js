@@ -7,16 +7,22 @@ import {
   InputAdornment,
   Modal,
   Button,
+  IconButton,
 } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
-import DropdownSelect from "../reusable/DropdownSelect";
 import UploadContainer from "../Upload/UploadContainer";
 import { Image } from "cloudinary-react";
+import { useAuth0 } from "../../../utils/react-auth0-spa";
+
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import { Add } from "@material-ui/icons";
 
 const BuildingDetails = (props) => {
   const { setNavigationEnabled, buildingOptions } = useEditor();
+
+  const { isAuthenticated } = useAuth0();
 
   const style = props.style;
 
@@ -24,30 +30,19 @@ const BuildingDetails = (props) => {
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    console.log(buildingOptions);
     setLoading(true);
-    return () => {
-      //setSavedCategory("details", formData);
-    };
+    return () => {};
   }, []);
 
-  const [show, SetShow] = useState(false);
-
-  const handleShow = (event) => {
-    SetShow(true);
-  };
-
-  const setClose = () => {
-    SetShow(false);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
     <Fade in={loading}>
       <div className={style.root}>
-        <Modal open={show} onClose={setClose}>
+        <Modal open={open} onClose={() => setOpen(false)}>
           <div className={style.imageSelectModal}>
             <UploadContainer
-              handleClose={setClose}
+              handleClose={() => setOpen(false)}
               handleChange={(publicId) => addImage(publicId)}
             />
           </div>
@@ -69,8 +64,9 @@ const BuildingDetails = (props) => {
               </Grid>
               <Grid item sm={1}>
                 <TextField
-                  className={style.formComponent}
                   label="Year"
+                  type="number"
+                  className={style.formComponent}
                   value={formData.year.value}
                   onChange={(e) => handleChange(e, "year")}
                 />
@@ -79,10 +75,10 @@ const BuildingDetails = (props) => {
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={1}>
                 <TextField
+                  label="Floors"
                   className={style.formComponent}
                   defaultValue="1"
                   value={formData.floorsAmount.value}
-                  label="Floors"
                   type="number"
                   onChange={(e) => handleChange(e, "floorsAmount")}
                   error={isNaN(formData.floorsAmount.value)}
@@ -91,6 +87,7 @@ const BuildingDetails = (props) => {
               <Grid item sm={2}>
                 <TextField
                   label="Floor area"
+                  type="number"
                   className={style.formComponent}
                   value={formData.floorArea.value}
                   error={isNaN(formData.floorArea.value)}
@@ -104,7 +101,8 @@ const BuildingDetails = (props) => {
               </Grid>
               <Grid item sm={2}>
                 <TextField
-                  label="Heated"
+                  label="Heated floor area"
+                  type="number"
                   disabled={!formData.floorArea.value}
                   className={style.formComponent}
                   value={formData.heatedFloorArea.value}
@@ -132,18 +130,27 @@ const BuildingDetails = (props) => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item sm={2}>
-                <Button onClick={SetShow} color="primary" variant="outlined">
-                  Upload
-                </Button>
+              <Grid item container direction="column" sm={2}>
+                <Grid item>
+                  <Button
+                    onClick={() => setOpen(true)}
+                    color="primary"
+                    variant="outlined"
+                    disabled={!isAuthenticated}
+                  >
+                    <AddAPhotoIcon />
+                  </Button>
+                </Grid>
                 {formData.image.value && (
-                  <Image
-                    className={style.formImage}
-                    width="70"
-                    height="70"
-                    publicId={formData.image.value}
-                    cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-                  />
+                  <Grid item>
+                    <Image
+                      className={style.formImage}
+                      width="70"
+                      height="70"
+                      publicId={formData.image.value}
+                      cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
+                    />
+                  </Grid>
                 )}
               </Grid>
             </Grid>
@@ -153,10 +160,11 @@ const BuildingDetails = (props) => {
             <Grid container direction="row" spacing={2}>
               <Grid item sm={2}>
                 <TextField
+                  label="Annual use"
+                  type="number"
                   className={style.formComponent}
                   value={formData.annualConsumption.value}
                   onChange={(e) => handleChange(e, "annualConsumption")}
-                  label="Annual use"
                   error={isNaN(formData.annualConsumption.value)}
                   InputProps={{
                     endAdornment: (
@@ -167,10 +175,11 @@ const BuildingDetails = (props) => {
               </Grid>
               <Grid item sm={2}>
                 <TextField
+                  label="Annual cost"
+                  type="number"
                   className={style.formComponent}
                   value={formData.annualCost.value}
                   onChange={(e) => handleChange(e, "annualCost")}
-                  label="Annual cost"
                   error={isNaN(formData.annualCost.value)}
                   InputProps={{
                     endAdornment: (
@@ -186,10 +195,11 @@ const BuildingDetails = (props) => {
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={2}>
                 <TextField
+                  label="Annual use"
+                  type="number"
                   className={style.formComponent}
                   value={formData.annualHeatingConsumption.value}
                   onChange={(e) => handleChange(e, "annualHeatingConsumption")}
-                  label="Annual use"
                   error={isNaN(formData.annualHeatingConsumption.value)}
                   InputProps={{
                     endAdornment: (
@@ -200,10 +210,11 @@ const BuildingDetails = (props) => {
               </Grid>
               <Grid item sm={2}>
                 <TextField
+                  label="Annual cost"
+                  type="number"
                   className={style.formComponent}
                   value={formData.annualHeatingCost.value}
                   onChange={(e) => handleChange(e, "annualHeatingCost")}
-                  label="Annual cost"
                   error={isNaN(formData.annualHeatingCost.value)}
                   InputProps={{
                     endAdornment: (

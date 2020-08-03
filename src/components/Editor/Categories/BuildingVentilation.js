@@ -83,7 +83,7 @@ const BuildingVentilation = (props) => {
                   variant="outlined"
                   onClick={setModal}
                 >
-                  Add old system
+                  +
                 </Button>
               </Grid>
               {formData?.ventilationSystem.length > 1 && (
