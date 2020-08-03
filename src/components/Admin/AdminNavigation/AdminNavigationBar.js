@@ -36,10 +36,15 @@ const AdminNavigationBar = () => {
     const [ showSuggestions, setShowSuggestions ] = useState(false);
     const [ showEditor, setShowEditor ] = useState(false);
     const [ showFeedback, setShowFeedback ] = useState(false);
+    const [ showComments, setShowComments ] = useState(false);
 
     const handleSuggestionClick = () => {
         setShowSuggestions(!showSuggestions);
     };
+
+    const handleCommentClick = () => {
+        setShowComments(!showComments);
+    }
 
     const handleEditorClick = () => {
         setShowEditor(!showEditor);
@@ -74,6 +79,18 @@ const AdminNavigationBar = () => {
                     </ListItem>
                     <ListItem button className={classes.itemNested} onClick={() => {handleSelection("deleteSuggestions")}}>
                         <ListItemText>Delete suggestions</ListItemText>
+                    </ListItem>
+                </List>
+            </Collapse>
+            <Divider />
+            <ListItem button className={classes.listItem} onClick={handleCommentClick}>
+            <ListItemText><b>Comments</b></ListItemText>
+            {showComments ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={showComments} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem button className={classes.itemNested} onClick={() => {handleSelection("commentReports")}}>
+                        <ListItemText>Review comment reports</ListItemText>
                     </ListItem>
                 </List>
             </Collapse>
