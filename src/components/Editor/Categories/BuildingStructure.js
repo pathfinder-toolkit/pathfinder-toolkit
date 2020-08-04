@@ -80,6 +80,17 @@ const BuildingStructure = (props) => {
                   onChange={(e) => handleChange(e, "wallThickness")}
                 />
               </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.wallThickness[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("wallThickness")}
+                >
+                  +
+                </Button>
+              </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
@@ -105,13 +116,23 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
-                  defaultValue=""
                   value={formData.heatedWindowAmount[0].value}
                   label="In heated area"
                   type="number"
                   error={isNaN(formData.heatedWindowAmount[0].value)}
                   onChange={(e) => handleChange(e, "heatedWindowAmount")}
                 ></TextField>
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.heatedWindowAmount[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("heatedWindowAmount")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
@@ -123,15 +144,36 @@ const BuildingStructure = (props) => {
                 />
               </Grid>
               <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.heatedWindowType.value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("heatedWindowType")}
+                >
+                  +
+                </Button>
+              </Grid>
+              <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
-                  defaultValue=""
                   value={formData.windowAmount[0].value}
                   label="Windows"
                   type="number"
                   error={isNaN(formData.windowAmount[0].value)}
                   onChange={(e) => handleChange(e, "windowAmount")}
                 ></TextField>
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.windowAmount[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("windowAmount")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
@@ -142,12 +184,22 @@ const BuildingStructure = (props) => {
                   handler={(e) => handleChange(e, "windowType")}
                 />
               </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.windowType[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("windowType")}
+                >
+                  +
+                </Button>
+              </Grid>
             </Grid>
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
-                  defaultValue=""
                   value={formData.doorAmount[0].value}
                   label="Doors"
                   type="number"
@@ -155,12 +207,22 @@ const BuildingStructure = (props) => {
                   onChange={(e) => handleChange(e, "doorAmount")}
                 ></TextField>
               </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.doorAmount[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("doorAmount")}
+                >
+                  +
+                </Button>
+              </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.doorMaterial}
                   label="Door material"
-                  defaultValue="Wood"
                   value={formData.doorMaterial[0].value}
                   handler={(e) => handleChange(e, "doorMaterial")}
                 />
@@ -183,7 +245,6 @@ const BuildingStructure = (props) => {
                   className={style.formComponent}
                   data={buildingOptions.roofMaterial}
                   label="Roof type"
-                  defaultValue="Roof 1"
                   value={formData.roofMaterial[0].value}
                   handler={(e) => handleChange(e, "roofMaterial")}
                 />
