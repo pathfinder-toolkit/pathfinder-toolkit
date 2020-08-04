@@ -62,6 +62,15 @@ export const EditorProvider = ({ children }) => {
     ];
   };
 
+  // Utility function
+  const onlyObjsWithUniqueProperty = property =>
+    (value, index, self) => {
+        // Support both js object and immutable
+        const getProp = (item, prop) => typeof item.get === 'function' ? item.get(prop) : item[prop];
+        // Match only those items, which index is the first found item
+        return self.map(item => getProp(item, property)).indexOf(getProp(value, property)) === index;
+  }
+
   //Editor components are added here
   const getStepComponent = (style, slug) => {
     switch (activeStep) {
@@ -160,14 +169,14 @@ export const EditorProvider = ({ children }) => {
       console.log(data);
 
       if (data.length > 0) {
-        if (!suggestions.includes(subject)) {
-          setSuggestions([...suggestions, data[0]]);
-          console.log(suggestions);
-        }
+        const filteredSuggestions = suggestions.filter(suggestion => suggestion.suggestionSubject !== data[0].suggestionSubject);
+        const allSuggestions = [...filteredSuggestions, ...data];
+        const noDuplicateSuggestions = allSuggestions.filter(onlyObjsWithUniqueProperty('idSuggestion'));
+        setSuggestions(noDuplicateSuggestions);
+      }
 
-        if (!subjects.includes(data[0].suggestionSubject)) {
+      if (!subjects.includes(data[0].suggestionSubject)) {
           setSubjects([...subjects, data[0].suggestionSubject]);
-        }
       }
     } catch (error) {
       console.log(error);
@@ -183,16 +192,18 @@ export const EditorProvider = ({ children }) => {
     }
 
     try {
-      const response = await requestComments(subject, 1, 10);
+      const response = await requestComments(subject, 1, 3);
       const data = response.data.comments;
       console.log("Comments: " + subject);
       console.log(response.data.comments);
-      if (data !== null) {
-        if (!suggestions.includes(subject)) {
-          data.forEach((item) => setComments([...comments, item]));
-
-          //setComments(data);
-        }
+      if (data.length > 0) {
+        const allComments = [...comments, ...data];
+        const noDuplicateComments = allComments.filter(onlyObjsWithUniqueProperty('idComment'));
+        setComments(noDuplicateComments);
+        
+        if (!subjects.includes(data[0].commentSubject)) {
+          setSubjects([...subjects, data[0].commentSubject]);
+      }
       }
     } catch (error) {
       console.log(error);
