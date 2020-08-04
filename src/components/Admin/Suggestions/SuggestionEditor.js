@@ -4,6 +4,7 @@ import { Grid, TextField, Button, MenuItem } from "@material-ui/core";
 import { useBackend } from "../../../utils/BackendProvider";
 import EvaluateCondition from "./EvaluateCondition";
 import PreviewSuggestion from "./PreviewSuggestion";
+import { AssignmentReturnOutlined } from "@material-ui/icons";
 
 const SuggestionEditor = (props) => {
   const classes = props.style;
@@ -204,11 +205,13 @@ const SuggestionEditor = (props) => {
   };
 
   const handleAreaChange = (e) => {
-    setSelectedAreas((selectedAreas) => [
-      ...selectedAreas,
-      { areaName: e.target.value.areaName, idArea: e.target.value.idArea },
-    ]);
-  };
+    const filtered = selectedAreas.filter(area => area.idArea != e.target.value.idArea);
+    const areaList = [
+      ...filtered,
+      {areaName: e.target.value.areaName, idArea: e.target.value.idArea}
+    ].sort((a,b) => a.areaName > b.areaName);
+    setSelectedAreas(areaList);
+  }
 
   const removeSelectedArea = (area) => {
     setSelectedAreas(selectedAreas.filter((item) => item !== area));
