@@ -15,7 +15,9 @@ const BuildingRenewable = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, handleChange, addOldEntry } = useFormData("renewable");
+  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
+    "renewable"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -61,7 +63,7 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.heatPump}
                   label="Heat pump"
                   value={formData.heatPump.value}
-                  handler={(e) => handleChange(e, "heatPump")}
+                  handler={(e) => addNewEntry(e, "heatPump")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -83,7 +85,7 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.solarHeat}
                   label="Solar energy heating"
                   value={formData.solarHeat.value}
-                  handler={(e) => handleChange(e, "solarHeat")}
+                  handler={(e) => addNewEntry(e, "solarHeat")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -105,7 +107,7 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.solarElectric}
                   label="Solar energy electricity"
                   value={formData.solarElectric.value}
-                  handler={(e) => handleChange(e, "solarElectric")}
+                  handler={(e) => addNewEntry(e, "solarElectric")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -127,7 +129,7 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.bioMass}
                   label="Biomass energy"
                   value={formData.bioMass.value}
-                  handler={(e) => handleChange(e, "bioMass")}
+                  handler={(e) => addNewEntry(e, "bioMass")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -149,7 +151,7 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.chp}
                   label="Combined heat and power"
                   value={formData.heatPump.value}
-                  handler={(e) => handleChange(e, "chp")}
+                  handler={(e) => addNewEntry(e, "chp")}
                 />
               </Grid>
               <Grid item sm={1}>
