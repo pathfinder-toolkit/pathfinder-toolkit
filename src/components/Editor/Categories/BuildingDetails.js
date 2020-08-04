@@ -13,6 +13,7 @@ import { useEditor } from "../../../utils/EditorProvider";
 import { useAuth0 } from "../../../utils/react-auth0-spa";
 import useFormData from "../useFormData";
 
+import EditorHeader from "../reusable/EditorHeader";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import UploadContainer from "../Upload/UploadContainer";
 import { Image } from "cloudinary-react";
@@ -45,10 +46,8 @@ const BuildingDetails = (props) => {
             />
           </div>
         </Modal>
-        <Grid item alignItems="center">
-          <div className={style.header}>
-            <Typography variant="h5">Building details</Typography>
-          </div>
+        <Grid item>
+          <EditorHeader disableSwitch header="Building Details" />
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item>

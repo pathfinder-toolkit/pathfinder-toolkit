@@ -4,18 +4,21 @@ import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
+import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 
 const BuildingRenewable = (props) => {
-  const { buildingOptions } = useEditor();
+  const { buildingOptions, showOldEntryButtons } = useEditor();
 
   const style = props.style;
 
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, handleChange, addOldEntry } = useFormData("renewable");
+  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
+    "renewable"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -50,9 +53,7 @@ const BuildingRenewable = (props) => {
           </div>
         </Modal>
         <Grid item>
-          <div className={style.header}>
-            <Typography variant="h5">Renewable</Typography>
-          </div>
+          <EditorHeader header="Renewables" />
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item sm={3}>
@@ -61,19 +62,21 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.heatPump}
                   label="Heat pump"
                   value={formData.heatPump.value}
-                  handler={(e) => handleChange(e, "heatPump")}
+                  handler={(e) => addNewEntry(e, "heatPump")}
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.heatPump[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("heatPump")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.heatPump[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("heatPump")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -83,19 +86,21 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.solarHeat}
                   label="Solar energy heating"
                   value={formData.solarHeat.value}
-                  handler={(e) => handleChange(e, "solarHeat")}
+                  handler={(e) => addNewEntry(e, "solarHeat")}
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.solarHeat[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("solarHeat")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.solarHeat[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("solarHeat")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -105,19 +110,21 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.solarElectric}
                   label="Solar energy electricity"
                   value={formData.solarElectric.value}
-                  handler={(e) => handleChange(e, "solarElectric")}
+                  handler={(e) => addNewEntry(e, "solarElectric")}
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.solarElectric[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("solarElectric")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.solarElectric[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("solarElectric")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -127,19 +134,21 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.bioMass}
                   label="Biomass energy"
                   value={formData.bioMass.value}
-                  handler={(e) => handleChange(e, "bioMass")}
+                  handler={(e) => addNewEntry(e, "bioMass")}
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.bioMass[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("bioMass")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.bioMass[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("bioMass")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -149,19 +158,21 @@ const BuildingRenewable = (props) => {
                   data={buildingOptions?.chp}
                   label="Combined heat and power"
                   value={formData.heatPump.value}
-                  handler={(e) => handleChange(e, "chp")}
+                  handler={(e) => addNewEntry(e, "chp")}
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.chp[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("chp")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.chp[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("chp")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </div>

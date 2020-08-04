@@ -4,6 +4,7 @@ import { Grid, TextField, Button, MenuItem } from "@material-ui/core";
 import { useBackend } from "../../../utils/BackendProvider";
 import EvaluateCondition from "./EvaluateCondition";
 import PreviewSuggestion from "./PreviewSuggestion";
+import { AssignmentReturnOutlined } from "@material-ui/icons";
 
 const SuggestionEditor = (props) => {
   const classes = props.style;
@@ -61,6 +62,11 @@ const SuggestionEditor = (props) => {
       setConditions(props.suggestion.conditions);
       setPriority(props.suggestion.priority);
       setSuggestionText(props.suggestion.suggestion);
+      setSubject({
+        identifier: props.suggestion.identifier,
+        subject: props.suggestion.subject,
+        valueType: props.suggestion.valueType
+      });
     }
   }, []);
 
@@ -170,7 +176,31 @@ const SuggestionEditor = (props) => {
         setSubjectOptions();
       }
     }
+  }, [subject, selectedAreas]);
+
+  // -- Clear conditions when subject changes. Temporary fix for usability, since this functionality does not exist in backend yet.
+  // -- Remove the useEffect function below, when this functionality exists in the backend
+  useEffect(() => {
+    if (subject) {
+      const filteredConditions = conditions.filter(condition => condition.conditionedBy === subject.identifier);
+      setConditions(filteredConditions);
+    }
   }, [subject]);
+  // -- End of condition clear fix for usability
+
+
+  const validateSubmit = () => {
+    if (
+        conditions.length > 0
+        && priority > -1
+        && suggestionText
+        && selectedAreas.length > 0
+      ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const selectSubject = (e) => {
     setSubject(e.target.value);
@@ -185,11 +215,13 @@ const SuggestionEditor = (props) => {
   };
 
   const handleAreaChange = (e) => {
-    setSelectedAreas((selectedAreas) => [
-      ...selectedAreas,
-      { areaName: e.target.value.areaName, idArea: e.target.value.idArea },
-    ]);
-  };
+    const filtered = selectedAreas.filter(area => area.idArea != e.target.value.idArea);
+    const areaList = [
+      ...filtered,
+      {areaName: e.target.value.areaName, idArea: e.target.value.idArea}
+    ].sort((a,b) => a.areaName > b.areaName);
+    setSelectedAreas(areaList);
+  }
 
   const removeSelectedArea = (area) => {
     setSelectedAreas(selectedAreas.filter((item) => item !== area));
@@ -305,7 +337,7 @@ const SuggestionEditor = (props) => {
         color="primary"
         variant="contained"
         onClick={postSuggestion}
-        disabled={conditions.length < 1}
+        disabled={validateSubmit()}
       >
         {props.suggestion ? "Edit" : "Submit"}
       </Button>

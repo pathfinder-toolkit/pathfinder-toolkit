@@ -4,12 +4,13 @@ import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
+import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
 const BuildingVentilation = (props) => {
-  const { buildingOptions } = useEditor();
+  const { buildingOptions, showOldEntryButtons } = useEditor();
 
   const style = props.style;
 
@@ -51,11 +52,8 @@ const BuildingVentilation = (props) => {
             />
           </div>
         </Modal>
-        <Grid item alignItems="center">
-          <div className={style.header}>
-            <Typography variant="h5">Building ventilation</Typography>
-          </div>
-
+        <Grid item>
+          <EditorHeader header="Building ventilation" />
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item sm={3}>
@@ -67,16 +65,18 @@ const BuildingVentilation = (props) => {
                   handler={(e) => addNewEntry(e, "ventilationSystem")}
                 />
               </Grid>
-              <Grid item sm={3}>
-                <Button
-                  disabled={!formData?.ventilationSystem[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={setModal}
-                >
-                  +
-                </Button>
+              <Grid item sm={1}>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.ventilationSystem[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={setModal}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
               {formData?.ventilationSystem.length > 1 && (
                 <Grid item sm={4}>

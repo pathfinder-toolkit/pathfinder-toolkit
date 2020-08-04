@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   commentHeader: {
     fontSizeAdjust: 0.6,
     lineHeight: "180%",
+    maxWidth: "92%"
   },
   commentText: {
     fontSizeAdjust: 0.5,
@@ -42,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
     height: "75vh",
     padding: "5px",
   },
+  commentUserAction: {
+    top: "20%",
+    right: "1%"
+},
 }));
 
 const UserSuggestions = (props) => {
@@ -90,7 +95,7 @@ const UserSuggestions = (props) => {
 
                   return (
                     <Paper className={classes.comment}>
-                      <Comment comment={comment} classes={classes} key={key} />
+                      <Comment comment={comment} classes={classes} key={comment.idComment} />
                     </Paper>
                   );
                 })}
