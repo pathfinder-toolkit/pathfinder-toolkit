@@ -4,12 +4,13 @@ import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
+import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
 
 const BuildingHeating = (props) => {
-  const { buildingOptions } = useEditor();
+  const { buildingOptions, showOldEntryButtons } = useEditor();
 
   const style = props.style;
 
@@ -57,9 +58,7 @@ const BuildingHeating = (props) => {
           </div>
         </Modal>
         <Grid item>
-          <div className={style.header}>
-            <Typography variant="h5">Building heating</Typography>
-          </div>
+          <EditorHeader header="Building heating" />
           <div className={style.category}>
             <Grid
               className={style.row}
@@ -76,16 +75,18 @@ const BuildingHeating = (props) => {
                   handler={(e) => addNewEntry(e, "heatingSystem")}
                 />
               </Grid>
-              <Grid item sm={3}>
-                <Button
-                  disabled={!formData?.heatingSystem[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("heatingSystem")}
-                >
-                  +
-                </Button>
+              <Grid item sm={1}>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.heatingSystem[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("heatingSystem")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
 
               <Grid item sm={2}>
@@ -97,16 +98,18 @@ const BuildingHeating = (props) => {
                   handler={(e) => addNewEntry(e, "heatingSource")}
                 />
               </Grid>
-              <Grid item sm={3}>
-                <Button
-                  disabled={!formData?.heatingSource[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("heatingSource")}
-                >
-                  +
-                </Button>
+              <Grid item sm={1}>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.heatingSource[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("heatingSource")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}></Grid>

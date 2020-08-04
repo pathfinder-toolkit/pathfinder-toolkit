@@ -4,11 +4,12 @@ import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
 
+import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 
 const BuildingRenewable = (props) => {
-  const { buildingOptions } = useEditor();
+  const { buildingOptions, showOldEntryButtons } = useEditor();
 
   const style = props.style;
 
@@ -52,9 +53,7 @@ const BuildingRenewable = (props) => {
           </div>
         </Modal>
         <Grid item>
-          <div className={style.header}>
-            <Typography variant="h5">Renewable</Typography>
-          </div>
+          <EditorHeader header="Renewables" />
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item sm={3}>
@@ -67,15 +66,17 @@ const BuildingRenewable = (props) => {
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.heatPump[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("heatPump")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.heatPump[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("heatPump")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -89,15 +90,17 @@ const BuildingRenewable = (props) => {
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.solarHeat[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("solarHeat")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.solarHeat[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("solarHeat")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -111,15 +114,17 @@ const BuildingRenewable = (props) => {
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.solarElectric[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("solarElectric")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.solarElectric[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("solarElectric")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -133,15 +138,17 @@ const BuildingRenewable = (props) => {
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.bioMass[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("bioMass")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.bioMass[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("bioMass")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Grid className={style.row} container spacing={2}>
@@ -155,15 +162,17 @@ const BuildingRenewable = (props) => {
                 />
               </Grid>
               <Grid item sm={1}>
-                <Button
-                  disabled={!formData?.chp[0].value}
-                  className={style.formButton}
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => setProperty("chp")}
-                >
-                  +
-                </Button>
+                {showOldEntryButtons && (
+                  <Button
+                    disabled={!formData?.chp[0].value}
+                    className={style.formButton}
+                    color="primary"
+                    variant="outlined"
+                    onClick={() => setProperty("chp")}
+                  >
+                    +
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </div>
