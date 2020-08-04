@@ -73,7 +73,7 @@ const BuildingHeating = (props) => {
                   data={buildingOptions.heatingSystem}
                   label="Heating System"
                   value={formData?.heatingSystem[0].value}
-                  handler={(e) => handleChange(e, "heatingSystem")}
+                  handler={(e) => addNewEntry(e, "heatingSystem")}
                 />
               </Grid>
               <Grid item sm={3}>
@@ -94,7 +94,7 @@ const BuildingHeating = (props) => {
                   data={buildingOptions.heatingSource}
                   label="Heating source"
                   value={formData?.heatingSource[0].value}
-                  handler={(e) => handleChange(e, "heatingSource")}
+                  handler={(e) => addNewEntry(e, "heatingSource")}
                 />
               </Grid>
               <Grid item sm={3}>

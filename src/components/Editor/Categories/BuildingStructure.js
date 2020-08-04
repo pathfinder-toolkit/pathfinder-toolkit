@@ -26,7 +26,9 @@ const BuildingStructure = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, handleChange, addOldEntry } = useFormData("structure");
+  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
+    "structure"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -61,10 +63,15 @@ const BuildingStructure = (props) => {
             />
           </div>
         </Modal>
-        <Grid item alignItems="center">
-          <div className={style.header}>
-            <Typography variant="h5">Building structure</Typography>
-          </div>
+        <Grid item>
+          <Grid container className={style.header}>
+            <Grid item>
+              <Typography variant="h5">Building structure</Typography>
+            </Grid>
+            <Grid item>
+              <Switch />
+            </Grid>
+          </Grid>
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item sm={2}>
@@ -77,8 +84,19 @@ const BuildingStructure = (props) => {
                       <InputAdornment position="end">mm</InputAdornment>
                     ),
                   }}
-                  onChange={(e) => handleChange(e, "wallThickness")}
+                  onChange={(e) => addNewEntry(e, "wallThickness")}
                 />
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.wallThickness[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("wallThickness")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
@@ -86,7 +104,7 @@ const BuildingStructure = (props) => {
                   data={buildingOptions.wallMaterial}
                   label="Wall Material"
                   value={formData.wallMaterial[0].value}
-                  handler={(e) => handleChange(e, "wallMaterial")}
+                  handler={(e) => addNewEntry(e, "wallMaterial")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -105,13 +123,23 @@ const BuildingStructure = (props) => {
               <Grid item sm={2}>
                 <TextField
                   className={style.formComponent}
-                  defaultValue=""
                   value={formData.heatedWindowAmount[0].value}
                   label="In heated area"
                   type="number"
                   error={isNaN(formData.heatedWindowAmount[0].value)}
-                  onChange={(e) => handleChange(e, "heatedWindowAmount")}
+                  onChange={(e) => addNewEntry(e, "heatedWindowAmount")}
                 ></TextField>
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.heatedWindowAmount[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("heatedWindowAmount")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
@@ -119,19 +147,40 @@ const BuildingStructure = (props) => {
                   data={buildingOptions.heatedWindowType}
                   label="Heated window type"
                   value={formData.wallMaterial[0].value}
-                  handler={(e) => handleChange(e, "heatedWindowType")}
+                  handler={(e) => addNewEntry(e, "heatedWindowType")}
                 />
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.heatedWindowType.value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("heatedWindowType")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
-                  defaultValue=""
                   value={formData.windowAmount[0].value}
                   label="Windows"
                   type="number"
                   error={isNaN(formData.windowAmount[0].value)}
-                  onChange={(e) => handleChange(e, "windowAmount")}
+                  onChange={(e) => addNewEntry(e, "windowAmount")}
                 ></TextField>
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.windowAmount[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("windowAmount")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
@@ -139,30 +188,50 @@ const BuildingStructure = (props) => {
                   data={buildingOptions.windowType}
                   label="Window type"
                   value={formData.wallMaterial[0].value}
-                  handler={(e) => handleChange(e, "windowType")}
+                  handler={(e) => addNewEntry(e, "windowType")}
                 />
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.windowType[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("windowType")}
+                >
+                  +
+                </Button>
               </Grid>
             </Grid>
             <Grid container className={style.row} spacing={2}>
               <Grid item sm={1}>
                 <TextField
                   className={style.formComponent}
-                  defaultValue=""
                   value={formData.doorAmount[0].value}
                   label="Doors"
                   type="number"
                   error={isNaN(formData.doorAmount[0].value)}
-                  onChange={(e) => handleChange(e, "doorAmount")}
+                  onChange={(e) => addNewEntry(e, "doorAmount")}
                 ></TextField>
+              </Grid>
+              <Grid item sm={1}>
+                <Button
+                  disabled={!formData?.doorAmount[0].value}
+                  className={style.formButton}
+                  color="primary"
+                  variant="outlined"
+                  onClick={() => setProperty("doorAmount")}
+                >
+                  +
+                </Button>
               </Grid>
               <Grid item sm={2}>
                 <DropdownSelect
                   className={style.formComponent}
                   data={buildingOptions.doorMaterial}
                   label="Door material"
-                  defaultValue="Wood"
                   value={formData.doorMaterial[0].value}
-                  handler={(e) => handleChange(e, "doorMaterial")}
+                  handler={(e) => addNewEntry(e, "doorMaterial")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -183,9 +252,8 @@ const BuildingStructure = (props) => {
                   className={style.formComponent}
                   data={buildingOptions.roofMaterial}
                   label="Roof type"
-                  defaultValue="Roof 1"
                   value={formData.roofMaterial[0].value}
-                  handler={(e) => handleChange(e, "roofMaterial")}
+                  handler={(e) => addNewEntry(e, "roofMaterial")}
                 />
               </Grid>
               <Grid item sm={1}>
@@ -207,7 +275,7 @@ const BuildingStructure = (props) => {
                   data={buildingOptions.floorMaterial}
                   label="Floor material"
                   value={formData?.floorMaterial[0]?.value}
-                  handler={(e) => handleChange(e, "floorMaterial")}
+                  handler={(e) => addNewEntry(e, "floorMaterial")}
                 ></DropdownSelect>
               </Grid>
               <Grid item sm={1}>
@@ -222,6 +290,7 @@ const BuildingStructure = (props) => {
                 </Button>
               </Grid>
             </Grid>
+            <PropertyList data={formData.wallThickness} />
           </div>
         </Grid>
       </div>
