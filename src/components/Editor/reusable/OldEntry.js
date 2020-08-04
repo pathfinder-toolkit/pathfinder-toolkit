@@ -60,7 +60,6 @@ const OldEntry = (props) => {
 
   return (
     <div className={classes.entryRoot}>
-      <Typography>debug: {props.property}</Typography>
       <div className={classes.inputs}>
         {props.data === undefined && (
           <TextField

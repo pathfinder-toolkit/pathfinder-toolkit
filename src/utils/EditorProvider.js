@@ -48,6 +48,8 @@ export const EditorProvider = ({ children }) => {
   const [commentsLoading, setCommentsLoading] = useState(true);
   const [comments, setComments] = useState([]);
 
+  const [showOldEntryButtons, setShowOldEntryButtons] = useState(false);
+
   const { requestSuggestions, requestComments } = useBackend();
 
   const getSteps = () => {
@@ -255,6 +257,8 @@ export const EditorProvider = ({ children }) => {
         nextStep,
         previousStep,
         setStep,
+        showOldEntryButtons,
+        setShowOldEntryButtons,
         setSavedProperty,
         getSavedProperty,
         getSavedCategory,
