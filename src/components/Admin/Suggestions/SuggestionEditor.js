@@ -170,7 +170,26 @@ const SuggestionEditor = (props) => {
         setSubjectOptions();
       }
     }
+  }, [subject, selectedAreas]);
+
+  // Clear conditions when subject changes. Temporary fix for usability, since this functionality does not exist in backend yet.
+  useEffect(() => {
+    setConditions([]);
   }, [subject]);
+
+
+  const validateSubmit = () => {
+    if (
+        conditions.length > 0
+        && priority > -1
+        && suggestionText
+        && selectedAreas.length > 0
+      ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const selectSubject = (e) => {
     setSubject(e.target.value);
@@ -305,7 +324,7 @@ const SuggestionEditor = (props) => {
         color="primary"
         variant="contained"
         onClick={postSuggestion}
-        disabled={conditions.length < 1}
+        disabled={validateSubmit()}
       >
         {props.suggestion ? "Edit" : "Submit"}
       </Button>
