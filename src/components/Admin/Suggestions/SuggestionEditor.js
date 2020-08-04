@@ -62,6 +62,11 @@ const SuggestionEditor = (props) => {
       setConditions(props.suggestion.conditions);
       setPriority(props.suggestion.priority);
       setSuggestionText(props.suggestion.suggestion);
+      setSubject({
+        identifier: props.suggestion.identifier,
+        subject: props.suggestion.subject,
+        valueType: props.suggestion.valueType
+      });
     }
   }, []);
 
@@ -173,10 +178,15 @@ const SuggestionEditor = (props) => {
     }
   }, [subject, selectedAreas]);
 
-  // Clear conditions when subject changes. Temporary fix for usability, since this functionality does not exist in backend yet.
+  // -- Clear conditions when subject changes. Temporary fix for usability, since this functionality does not exist in backend yet.
+  // -- Remove the useEffect function below, when this functionality exists in the backend
   useEffect(() => {
-    setConditions([]);
+    if (subject) {
+      const filteredConditions = conditions.filter(condition => condition.conditionedBy === subject.identifier);
+      setConditions(filteredConditions);
+    }
   }, [subject]);
+  // -- End of condition clear fix for usability
 
 
   const validateSubmit = () => {
