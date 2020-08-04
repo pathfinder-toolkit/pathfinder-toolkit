@@ -170,16 +170,17 @@ export const EditorProvider = ({ children }) => {
       console.log("Suggestions: " + subject);
       console.log(data);
 
-      if (data.length > 0) {
-        const filteredSuggestions = suggestions.filter(suggestion => suggestion.suggestionSubject !== data[0].suggestionSubject);
-        const allSuggestions = [...filteredSuggestions, ...data];
-        const noDuplicateSuggestions = allSuggestions.filter(onlyObjsWithUniqueProperty('idSuggestion'));
-        setSuggestions(noDuplicateSuggestions);
-      }
+      const filteredSuggestions = suggestions.filter(suggestion => suggestion.identifier !== subject);
+      const allSuggestions = [...filteredSuggestions, ...data];
+      const noDuplicateSuggestions = allSuggestions.filter(onlyObjsWithUniqueProperty('idSuggestion'));
+      setSuggestions(noDuplicateSuggestions);
 
-      if (!subjects.includes(data[0].suggestionSubject)) {
+      if (data.length > 0) {
+        if (!subjects.includes(data[0].suggestionSubject)) {
           setSubjects([...subjects, data[0].suggestionSubject]);
+        }
       }
+      
     } catch (error) {
       console.log(error);
     }
