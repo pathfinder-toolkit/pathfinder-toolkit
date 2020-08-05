@@ -86,7 +86,7 @@ const EditorHeader = (props) => {
             ...
           </Button>
           <FormControlLabel
-            label="Old information"
+            label="Add old information"
             labelPlacement="start"
             control={
               <Switch
