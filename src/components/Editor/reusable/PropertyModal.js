@@ -72,6 +72,7 @@ const PropertyList = (props) => {
           </TextField>
         </ListItem>
         {selectedProperty &&
+          data[selectedProperty].length > 1 &&
           data[selectedProperty]
             .sort((a, b) => (a.year > b.year ? 1 : -1))
             .map((item, index) => {
@@ -94,6 +95,11 @@ const PropertyList = (props) => {
                 </ListItem>
               );
             })}
+        {selectedProperty && data[selectedProperty].length === 1 && (
+          <ListItem>
+            <ListItemText primary={"No history found."} />
+          </ListItem>
+        )}
       </List>
     </div>
   );
