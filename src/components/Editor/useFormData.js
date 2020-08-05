@@ -11,12 +11,26 @@ const useFormData = (category) => {
     getComments,
   } = useEditor();
 
-  /*TODO:: Add debounce to suggestion fetching,
-   to reduce lag on number inputs */
-
   // Get form data from local storage
   // Only get the items saved under a category, not the whole building data
   const [formData, setFormData] = useState(getSavedCategory(category));
+
+  // Fetch suggestions & comments with debounce
+  const [suggestionParams, setSuggestionParams] = useState();
+  useTimer(
+    () => {
+      if (suggestionParams) {
+        getSuggestions(
+          suggestionParams.subject,
+          suggestionParams.subjectValue,
+          suggestionsAreaId
+        );
+        getComments(suggestionParams.subject);
+      }
+    },
+    1000,
+    [suggestionParams]
+  );
 
   // Used for properties, that can't have change history. => (Only details component in editor currently.)
   const handleChange = (event, propertyName) => {
@@ -24,8 +38,10 @@ const useFormData = (category) => {
 
     if (formData[propertyName].hasSuggestions) {
       if (event.target.value !== null) {
-        getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-        getComments(propertyName);
+        setSuggestionParams({
+          subject: propertyName,
+          subjectValue: event.target.value,
+        });
       }
     }
 
@@ -48,8 +64,10 @@ const useFormData = (category) => {
     );
 
     if (formData[propertyName][currentObjectIndex].hasSuggestions) {
-      getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-      getComments(propertyName);
+      setSuggestionParams({
+        subject: propertyName,
+        subjectValue: event.target.value,
+      });
     }
 
     let objects = formData[propertyName];
