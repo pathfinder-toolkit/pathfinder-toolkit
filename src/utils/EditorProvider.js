@@ -225,16 +225,6 @@ export const EditorProvider = ({ children }) => {
     setCommentsLoading(false);
   };
 
-  useEffect(() => {
-    //  console.log("Comments: ");
-    // console.log(comments);
-  }, [comments]);
-
-  useEffect(() => {
-    //  console.log("Suggestions: ");
-    // console.log(suggestions);
-  }, [suggestions]);
-
   const clearSuggestions = () => {
     setSubjects([]);
     setComments([]);

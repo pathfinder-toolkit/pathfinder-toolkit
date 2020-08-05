@@ -1,20 +1,34 @@
 import React, {useState} from 'react';
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import { Typography, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
+import PanelImage from "./PanelImage";
+import PanelParagraph from "./PanelParagraph";
+
+import panel1a from "../../external/images/instructions/panel1a.JPG";
+import panel1b from "../../external/images/instructions/panel1b.JPG";
+import panel2a from "../../external/images/instructions/panel2a.JPG";
+import panel2b from "../../external/images/instructions/panel2b.JPG";
+import panel2c from "../../external/images/instructions/panel2c.JPG";
+
 const useStyles = makeStyles((theme) => ({
     panelContainer: {
-      marginTop:32,
+      marginTop: theme.spacing(2)
     },
     panelItem: {
-      marginBottom:16,
+      marginBottom: theme.spacing(1)
     },
-    panelHeading: {
-      fontSize: theme.typography.pxToRem(18),
-      flexBasis: '33.33%',
-      flexShrink: 0,
+    instructionText: {
+      paddingRight: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      fontSizeAdjust: 0.7,
+      display: "block"
+    },
+    image: {
+      paddingBottom: theme.spacing(1)
     }
   }));
 
@@ -28,7 +42,7 @@ const InstructionPanels = () => {
       setExpandedPanel( newExpanded ? panel : false );
     }
 
-    return <Grid container className={classes.panelContainer} justify="center" direction="column" alignItems="center" spacing={0}>
+    return <Grid container className={classes.panelContainer} justify="center" direction="column" alignItems="center" fullWidth spacing={0}>
     <Grid item className={classes.panelItem} xs={8}>
       <ExpansionPanel expanded={expandedPanel === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
@@ -36,14 +50,20 @@ const InstructionPanels = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.panelHeading}>Start designing</Typography>
+          <Typography variant="h6">Start designing</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Grid container direction="column">
+            <PanelParagraph classes={classes}>
+              Start using Pathfinder by clicking Design on the top navigation bar
+            </PanelParagraph>
+            <PanelImage image={panel1a} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              or click the Pen icon visible on the right side on the home page
+            </PanelParagraph>
+            <PanelImage image={panel1b} style={classes.image} />
+            <Button variant="contained" color="primary" onClick={() => {setExpandedPanel('panel2')}}>Next step</Button>
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
@@ -54,14 +74,24 @@ const InstructionPanels = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.panelHeading}>Area Selection, General information & Structure</Typography>
+          <Typography variant="h6">Area Selection</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Grid container direction="column">
+            <PanelParagraph classes={classes}>
+              Select the applicable area on the map by clicking on it
+            </PanelParagraph>
+            <PanelImage image={panel2a} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              You can then click the Next button on the bottom left
+            </PanelParagraph>
+            <PanelImage image={panel2b} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              or click on <b>2. General information</b> on the list on the left
+            </PanelParagraph>
+            <PanelImage image={panel2c} style={classes.image} />
+            <Button variant="contained" color="primary" onClick={() => {setExpandedPanel('panel3')}}>Next step</Button>
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
@@ -72,10 +102,10 @@ const InstructionPanels = () => {
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
-          <Typography className={classes.panelHeading}>Ventilation & Heating</Typography>
+          <Typography variant="h6">Ventilation & Heating</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
+          <Typography variant="p">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
             sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
@@ -90,10 +120,10 @@ const InstructionPanels = () => {
           aria-controls="panel4a-content"
           id="panel4a-header"
         >
-          <Typography className={classes.panelHeading}>Check out your results</Typography>
+          <Typography variant="h6">Check out your results</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
+          <Typography variant="p">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
             sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.

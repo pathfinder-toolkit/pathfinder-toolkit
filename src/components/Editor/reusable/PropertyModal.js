@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     backgroundColor: theme.palette.background.default,
   },
+  listHeader: {
+    marginBottom: theme.spacing(2),
+  },
   listRoot: {
     border: "1px solid #E0E0E0",
     borderRadius: "4px",
@@ -52,12 +55,15 @@ const PropertyList = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <Typography className={classes.listHeader} variant="h5" align="center">
+        Changelog
+      </Typography>
       <List dense className={classes.listRoot}>
         <ListItem className={classes.listItem}>
           <TextField
             onChange={(e) => setSelectedProperty(e.target.value)}
             select
-            label="Properties"
+            label="Property"
             defaultValue={Object.keys(data)[0]}
             fullWidth
           >
@@ -71,6 +77,7 @@ const PropertyList = (props) => {
           </TextField>
         </ListItem>
         {selectedProperty &&
+          data[selectedProperty].length > 1 &&
           data[selectedProperty]
             .sort((a, b) => (a.year > b.year ? 1 : -1))
             .map((item, index) => {
@@ -93,6 +100,11 @@ const PropertyList = (props) => {
                 </ListItem>
               );
             })}
+        {selectedProperty && data[selectedProperty].length === 1 && (
+          <ListItem>
+            <ListItemText primary={"No history found."} />
+          </ListItem>
+        )}
       </List>
     </div>
   );

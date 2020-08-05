@@ -14,7 +14,6 @@ const AreaSelection = (props) => {
     setNavigationEnabled,
     setBuildingOptions,
     setSuggestionsAreaId,
-    suggestionsAreaId,
   } = useEditor();
 
   const {
