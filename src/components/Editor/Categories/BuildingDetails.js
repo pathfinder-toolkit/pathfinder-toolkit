@@ -25,7 +25,9 @@ const BuildingDetails = (props) => {
 
   const style = props.style;
 
-  const { formData, handleChange, addImage } = useFormData("details");
+  const { formData, handleChange, addImage, addNewEntry } = useFormData(
+    "details"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
