@@ -8,6 +8,7 @@ import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
+import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingVentilation = (props) => {
   const { buildingOptions, showOldEntryButtons } = useEditor();
@@ -15,6 +16,7 @@ const BuildingVentilation = (props) => {
   const style = props.style;
 
   const [open, setOpen] = useState(false);
+  const [openPropertyModal, setOpenPropertyModal] = useState(false);
 
   const setModal = () => {
     setOpen(true);
@@ -49,6 +51,17 @@ const BuildingVentilation = (props) => {
               }
               onEntry={setClose}
               data={buildingOptions.ventilationSystem}
+            />
+          </div>
+        </Modal>
+        <Modal
+          open={openPropertyModal}
+          onClose={() => setOpenPropertyModal(false)}
+        >
+          <div className={style.modal}>
+            <PropertyModal
+              data={formData}
+              handleDeletion={(property, index) => deleteEntry(property, index)}
             />
           </div>
         </Modal>
