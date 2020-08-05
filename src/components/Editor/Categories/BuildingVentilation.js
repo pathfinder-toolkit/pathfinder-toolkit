@@ -11,12 +11,17 @@ import PropertyList from "../reusable/PropertyList";
 import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingVentilation = (props) => {
-  const { buildingOptions, showOldEntryButtons } = useEditor();
+  const {
+    buildingOptions,
+    showOldEntryButtons,
+    showPropertyModal,
+    setShowPropertyModal,
+  } = useEditor();
 
   const style = props.style;
 
   const [open, setOpen] = useState(false);
-  const [openPropertyModal, setOpenPropertyModal] = useState(false);
+  const [property, setProperty] = useState();
 
   const setModal = () => {
     setOpen(true);
@@ -40,23 +45,34 @@ const BuildingVentilation = (props) => {
     return () => {};
   }, []);
 
+  useEffect(() => {
+    if (property) {
+      setOpen(true);
+    }
+  }, [property]);
+
+  const resetModal = () => {
+    setOpen(false);
+    setProperty();
+  };
+
   return (
     <Fade in={animation}>
       <div className={style.root}>
-        <Modal open={open} onClose={setClose}>
+        <Modal open={open} onClose={() => resetModal()}>
           <div className={style.modal}>
             <OldEntry
               handler={(value, year, propertyName, description) =>
-                addOldEntry(value, year, "ventilationSystem")
+                addOldEntry(value, year, property)
               }
-              onEntry={setClose}
-              data={buildingOptions.ventilationSystem}
+              onEntry={() => resetModal()}
+              data={buildingOptions[property]}
             />
           </div>
         </Modal>
         <Modal
-          open={openPropertyModal}
-          onClose={() => setOpenPropertyModal(false)}
+          open={showPropertyModal}
+          onClose={() => setShowPropertyModal(false)}
         >
           <div className={style.modal}>
             <PropertyModal

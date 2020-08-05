@@ -23,14 +23,14 @@ const BuildingStructure = (props) => {
     setNavigationEnabled,
     buildingOptions,
     showOldEntryButtons,
+    showPropertyModal,
+    setShowPropertyModal,
   } = useEditor();
 
   const style = props.style;
 
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
-
-  const [openPropertyModal, setOpenPropertyModal] = useState(false);
 
   const { formData, addNewEntry, addOldEntry, deleteEntry } = useFormData(
     "structure"
@@ -69,8 +69,8 @@ const BuildingStructure = (props) => {
           </div>
         </Modal>
         <Modal
-          open={openPropertyModal}
-          onClose={() => setOpenPropertyModal(false)}
+          open={showPropertyModal}
+          onClose={() => setShowPropertyModal(false)}
         >
           <div className={style.modal}>
             <PropertyModal
