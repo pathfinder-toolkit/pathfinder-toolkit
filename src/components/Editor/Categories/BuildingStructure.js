@@ -16,12 +16,15 @@ import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
+import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingStructure = (props) => {
   const {
     setNavigationEnabled,
     buildingOptions,
     showOldEntryButtons,
+    showPropertyModal,
+    setShowPropertyModal,
   } = useEditor();
 
   const style = props.style;
@@ -29,7 +32,9 @@ const BuildingStructure = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, addNewEntry, addOldEntry } = useFormData("structure");
+  const { formData, addNewEntry, addOldEntry, deleteEntry } = useFormData(
+    "structure"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -60,6 +65,17 @@ const BuildingStructure = (props) => {
               }
               onEntry={() => resetModal()}
               data={buildingOptions[property]}
+            />
+          </div>
+        </Modal>
+        <Modal
+          open={showPropertyModal}
+          onClose={() => setShowPropertyModal(false)}
+        >
+          <div className={style.modal}>
+            <PropertyModal
+              data={formData}
+              handleDeletion={(property, index) => deleteEntry(property, index)}
             />
           </div>
         </Modal>
@@ -154,7 +170,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={1}>
                 {showOldEntryButtons && (
                   <Button
-                    disabled={!formData?.heatedWindowType.value}
+                    disabled={!formData?.heatedWindowType[0].value}
                     className={style.formButton}
                     color="primary"
                     variant="outlined"
@@ -305,7 +321,6 @@ const BuildingStructure = (props) => {
                 )}
               </Grid>
             </Grid>
-            <PropertyList data={formData.wallThickness} />
           </div>
         </Grid>
       </div>

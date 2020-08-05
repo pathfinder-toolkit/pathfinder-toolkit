@@ -29,6 +29,9 @@ const SuggestionEditor = (props) => {
   const [suggestionText, setSuggestionText] = useState();
   const [loading, setLoading] = useState(true);
 
+  // Value of current pending condition
+  const [expression, setExpression] = useState();
+
   const priorities = [
     {
       text: "High",
@@ -204,6 +207,7 @@ const SuggestionEditor = (props) => {
 
   const selectSubject = (e) => {
     setSubject(e.target.value);
+    setExpression();
   };
 
   const handlePriorityChange = (e) => {
@@ -304,6 +308,7 @@ const SuggestionEditor = (props) => {
               valueType={subject?.valueType}
               options={subjectOptions}
               handler={(newCondition) => addCondition(newCondition)}
+              expression={{expression, setExpression}}
             />
             <Grid item sm={6} md={6} lg={6}>
               <TextField
@@ -328,6 +333,7 @@ const SuggestionEditor = (props) => {
             conditions={conditions}
             handleArea={(area) => removeSelectedArea(area)}
             handleCondition={(condition) => removeSelectedCondition(condition)}
+            selectedOption={expression}
           />
         </Grid>
       </Grid>

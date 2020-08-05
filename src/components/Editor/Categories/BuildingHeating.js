@@ -7,10 +7,16 @@ import useFormData from "../useFormData";
 import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
-import PropertyList from "../reusable/PropertyList";
+
+import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingHeating = (props) => {
-  const { buildingOptions, showOldEntryButtons } = useEditor();
+  const {
+    buildingOptions,
+    showOldEntryButtons,
+    showPropertyModal,
+    setShowPropertyModal,
+  } = useEditor();
 
   const style = props.style;
 
@@ -54,6 +60,17 @@ const BuildingHeating = (props) => {
               }
               onEntry={() => resetModal()}
               data={buildingOptions[property]}
+            />
+          </div>
+        </Modal>
+        <Modal
+          open={showPropertyModal}
+          onClose={() => setShowPropertyModal(false)}
+        >
+          <div className={style.modal}>
+            <PropertyModal
+              data={formData}
+              handleDeletion={(property, index) => deleteEntry(property, index)}
             />
           </div>
         </Modal>

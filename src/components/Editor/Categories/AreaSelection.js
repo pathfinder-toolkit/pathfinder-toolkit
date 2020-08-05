@@ -44,7 +44,8 @@ const AreaSelection = (props) => {
       if (props.slug) {
         // If we are editing an existing building
         console.log("Editing existing building: " + props.slug);
-        model = await getBuildingFromSlug(props.slug);
+        const response = await getBuildingFromSlug(props.slug);
+        model = response.data;
         props.loadBuildingModel(model);
       } else {
         // New building
