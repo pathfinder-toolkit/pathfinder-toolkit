@@ -78,15 +78,17 @@ const EditorHeader = (props) => {
 
       {!disableSwitch && (
         <Grid item>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => setShowPropertyModal(true)}
-          >
-            ...
-          </Button>
+          {showOldEntryButtons && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setShowPropertyModal(true)}
+            >
+              View
+            </Button>
+          )}
           <FormControlLabel
-            label="Add old information"
+            label="Old information"
             labelPlacement="start"
             control={
               <Switch
