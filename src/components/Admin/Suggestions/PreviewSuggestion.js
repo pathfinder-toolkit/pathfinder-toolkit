@@ -32,7 +32,7 @@ const PreviewSuggestion = (props) => {
   const previewStyles = useStyles();
   const classes = props.classes;
 
-  const subject = props?.subject;
+  const subject = props?.subject?.subject;
   const areas = props?.areas;
   const suggestionText = props.suggestionText
     ? props.suggestionText
@@ -44,7 +44,7 @@ const PreviewSuggestion = (props) => {
     suggestionText: suggestionText,
     priority: priority,
     suggestionSubject: subject,
-    suggestionSecondarySubject: "temp",
+    suggestionSecondarySubject: ((props?.subject?.valueType === "string") && props.selectedOption),
   };
 
   const removeCondition = (condition) => {
