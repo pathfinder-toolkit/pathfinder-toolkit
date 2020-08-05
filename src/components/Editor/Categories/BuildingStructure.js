@@ -16,6 +16,7 @@ import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
 import PropertyList from "../reusable/PropertyList";
+import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingStructure = (props) => {
   const {
@@ -29,7 +30,11 @@ const BuildingStructure = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, addNewEntry, addOldEntry } = useFormData("structure");
+  const [openPropertyModal, setOpenPropertyModal] = useState(false);
+
+  const { formData, addNewEntry, addOldEntry, deleteEntry } = useFormData(
+    "structure"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -63,8 +68,26 @@ const BuildingStructure = (props) => {
             />
           </div>
         </Modal>
+        {
+          <Modal
+            open={openPropertyModal}
+            onClose={() => setOpenPropertyModal(false)}
+          >
+            <div className={style.modal}>
+              <PropertyModal
+                data={formData}
+                handleDeletion={(property, index) =>
+                  deleteEntry(property, index)
+                }
+              />
+            </div>
+          </Modal>
+        }
         <Grid item>
           <EditorHeader header="Building structure" />
+          <Button onClick={() => setOpenPropertyModal(true)}>
+            old properties
+          </Button>
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item sm={2}>
@@ -154,7 +177,7 @@ const BuildingStructure = (props) => {
               <Grid item sm={1}>
                 {showOldEntryButtons && (
                   <Button
-                    disabled={!formData?.heatedWindowType.value}
+                    disabled={!formData?.heatedWindowType[0].value}
                     className={style.formButton}
                     color="primary"
                     variant="outlined"
@@ -305,7 +328,10 @@ const BuildingStructure = (props) => {
                 )}
               </Grid>
             </Grid>
-            <PropertyList data={formData.wallThickness} />
+            <PropertyModal
+              data={formData}
+              handleDeletion={(property, index) => deleteEntry(property, index)}
+            />
           </div>
         </Grid>
       </div>
