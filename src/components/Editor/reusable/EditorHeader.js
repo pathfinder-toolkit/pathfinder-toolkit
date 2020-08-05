@@ -23,7 +23,7 @@ const EditorHeader = (props) => {
     setShowPropertyModal,
   } = useEditor();
 
-  const { isAuthenticated } = useAuth0();
+  const { loading, isAuthenticated, loginWithRedirect } = useAuth0();
 
   const useStyles = makeStyles((theme) => ({
     header: {
@@ -33,11 +33,17 @@ const EditorHeader = (props) => {
     },
     notification: {
       marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
       marginBottom: theme.spacing(1),
+      backgroundColor: "#faf9c7",
+      cursor: "pointer"
     },
     notificationText: {
       padding: theme.spacing(0.5),
     },
+    notificationIcon: {
+      padding: theme.spacing(0.5)
+    }
   }));
 
   const classes = useStyles();
@@ -56,20 +62,14 @@ const EditorHeader = (props) => {
         </Grid>
         {!isAuthenticated && (
           <Grid item>
-            <Paper className={classes.notification}>
-              <Typography
-                className={classes.notificationText}
-                variant="caption"
-              >{`Log in to store your information and give feedback.`}</Typography>
+            <Paper className={classes.notification} onClick={() => {!loading && loginWithRedirect()}}>
+              <Typography className={classes.notificationText} variant="caption">{`Log in to store your information and give feedback.`}</Typography>
               <br />
               <Box display="flex" justifyContent="center">
-                <Typography
-                  className={classes.notificationText}
-                  variant="caption"
-                >
-                  {`Your inputs will not be lost while you login.`}
+                <Typography className={classes.notificationText} variant="caption">
+                  {`Your information will not be lost while you login.`}
                 </Typography>
-                <LaunchIcon fontSize="small" />
+                <LaunchIcon className={classes.notificationIcon}/>
               </Box>
             </Paper>
           </Grid>

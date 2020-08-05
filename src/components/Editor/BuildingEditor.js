@@ -34,7 +34,7 @@ const BuildingEditor = (props) => {
 
   const useStylesForEditorComponent = makeStyles((theme) => ({
     root: {
-      
+      paddingLeft: "0.1rem"
     },
     button: {
       display: "block",
