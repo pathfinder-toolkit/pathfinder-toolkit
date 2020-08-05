@@ -69,18 +69,23 @@ const Summary = (props) => {
   const submitBuilding = async () => {
     setOpen(true);
     setBuildingLoading(true);
-    const message = await postBuilding();
-    if (message === null) {
+    const response = await postBuilding();
+    if (response.status === 201) {
       setBuildingLoading(false);
-      setOpen(false);
+      setMessage("Building information stored.");
+      const interval = setInterval(() => {
+        clearInterval(interval);
+        setOpen(false);
+        redirectTo(`/buildings/${response.data.slug}`);
+      }, 3000);
     } else {
       setBuildingLoading(false);
-      setMessage(message.toString());
+      setMessage(response.data);
       const interval = setInterval(() => {
         clearInterval(interval);
         setMessage();
         setOpen(false);
-      }, 2000);
+      }, 3000);
     }
   };
 
