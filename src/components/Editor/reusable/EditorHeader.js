@@ -36,14 +36,14 @@ const EditorHeader = (props) => {
       marginRight: theme.spacing(1),
       marginBottom: theme.spacing(1),
       backgroundColor: "#faf9c7",
-      cursor: "pointer"
+      cursor: "pointer",
     },
     notificationText: {
       padding: theme.spacing(0.5),
     },
     notificationIcon: {
-      padding: theme.spacing(0.5)
-    }
+      padding: theme.spacing(0.5),
+    },
   }));
 
   const classes = useStyles();
@@ -62,14 +62,25 @@ const EditorHeader = (props) => {
         </Grid>
         {!isAuthenticated && (
           <Grid item>
-            <Paper className={classes.notification} onClick={() => {!loading && loginWithRedirect()}}>
-              <Typography className={classes.notificationText} variant="caption">{`Log in to store your information and give feedback.`}</Typography>
+            <Paper
+              className={classes.notification}
+              onClick={() => {
+                !loading && loginWithRedirect();
+              }}
+            >
+              <Typography
+                className={classes.notificationText}
+                variant="caption"
+              >{`Log in to store your information and give feedback.`}</Typography>
               <br />
               <Box display="flex" justifyContent="center">
-                <Typography className={classes.notificationText} variant="caption">
+                <Typography
+                  className={classes.notificationText}
+                  variant="caption"
+                >
                   {`Your information will not be lost while you login.`}
                 </Typography>
-                <LaunchIcon className={classes.notificationIcon}/>
+                <LaunchIcon className={classes.notificationIcon} />
               </Box>
             </Paper>
           </Grid>
@@ -84,7 +95,7 @@ const EditorHeader = (props) => {
               color="primary"
               onClick={() => setShowPropertyModal(true)}
             >
-              View
+              Changelog
             </Button>
           )}
           <FormControlLabel
@@ -92,6 +103,7 @@ const EditorHeader = (props) => {
             labelPlacement="start"
             control={
               <Switch
+                color="primary"
                 checked={showOldEntryButtons}
                 onChange={() => setShowOldEntryButtons(!showOldEntryButtons)}
               />

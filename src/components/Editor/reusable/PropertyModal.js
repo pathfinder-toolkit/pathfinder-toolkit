@@ -52,12 +52,13 @@ const PropertyList = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+      <Typography>Changelog</Typography>
       <List dense className={classes.listRoot}>
         <ListItem className={classes.listItem}>
           <TextField
             onChange={(e) => setSelectedProperty(e.target.value)}
             select
-            label="Properties"
+            label="Property"
             defaultValue={Object.keys(data)[0]}
             fullWidth
           >
