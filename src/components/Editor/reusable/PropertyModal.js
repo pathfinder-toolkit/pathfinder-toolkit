@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     backgroundColor: theme.palette.background.default,
   },
+  listHeader: {
+    marginBottom: theme.spacing(2),
+  },
   listRoot: {
     border: "1px solid #E0E0E0",
     borderRadius: "4px",
@@ -52,7 +55,9 @@ const PropertyList = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Typography>Changelog</Typography>
+      <Typography className={classes.listHeader} variant="h5" align="center">
+        Changelog
+      </Typography>
       <List dense className={classes.listRoot}>
         <ListItem className={classes.listItem}>
           <TextField

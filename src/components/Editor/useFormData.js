@@ -18,29 +18,15 @@ const useFormData = (category) => {
   // Only get the items saved under a category, not the whole building data
   const [formData, setFormData] = useState(getSavedCategory(category));
 
+  // Used for properties, that can't have change history. => (Only details component in editor currently.)
   const handleChange = (event, propertyName) => {
     event.persist();
 
-    console.log(category + " | " + propertyName + " | " + event.target.value);
-
-    // If property is array, find current property
-    if (Array.isArray(formData[propertyName])) {
-      handleArrayChange(event, propertyName);
-    } else {
-      handleObjectChange(event, propertyName);
-    }
-  };
-
-  const handleObjectChange = (event, propertyName) => {
-    console.log(propertyName + " | object | " + event.target.value);
     if (formData[propertyName].hasSuggestions) {
-      console.log("has suggestions.");
       if (event.target.value !== null) {
         getSuggestions(propertyName, event.target.value, suggestionsAreaId);
         getComments(propertyName);
       }
-    } else {
-      console.log("has no suggestions.");
     }
 
     setFormData((formData) => ({
@@ -52,48 +38,18 @@ const useFormData = (category) => {
     }));
   };
 
-  const handleArrayChange = (event, propertyName) => {
-    console.log(propertyName + " | array | " + event.target.value);
-    let currentObjectIndex;
-
-    currentObjectIndex = formData[propertyName].findIndex((x) => x.isCurrent);
-
-    if (formData[propertyName][currentObjectIndex].hasSuggestions) {
-      console.log("has suggestions");
-      if (event.target.value != null) {
-        getSuggestions(propertyName, event.target.value, suggestionsAreaId);
-        getComments(propertyName);
-      }
-    } else {
-      console.log("has no suggestions.");
-    }
-
-    console.log(formData[propertyName][currentObjectIndex]);
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: [
-        {
-          ...formData[propertyName][currentObjectIndex],
-          value: event.target.value,
-        },
-      ],
-    }));
-  };
-
+  // Used for properties, that can have change history.
+  // Replaces the current object with new object.
   const addNewEntry = (event, propertyName) => {
     event.persist();
-    console.log("adding new entry to: " + propertyName);
 
     let currentObjectIndex = formData[propertyName].findIndex(
       (x) => x.isCurrent
     );
 
     if (formData[propertyName][currentObjectIndex].hasSuggestions) {
-      console.log("has suggestions");
       getSuggestions(propertyName, event.target.value, suggestionsAreaId);
       getComments(propertyName);
-    } else {
-      console.log("has no suggestions.");
     }
 
     let objects = formData[propertyName];
@@ -105,6 +61,8 @@ const useFormData = (category) => {
     }));
   };
 
+  // Used for properties, that can have change history
+  // Adds a new object to the change history.
   const addOldEntry = (value, year, propertyName) => {
     let newObject = {
       propertyName: "",
@@ -131,8 +89,6 @@ const useFormData = (category) => {
   };
 
   const deleteEntry = (propertyName, index) => {
-    console.log("deleting: " + propertyName + " | index " + index);
-
     let objects = formData[propertyName];
     objects.splice(index, 1);
 
@@ -143,7 +99,6 @@ const useFormData = (category) => {
   };
 
   const addImage = (publicId) => {
-    console.log("addImage: " + publicId);
     setFormData((formData) => ({
       ...formData,
       image: {
@@ -151,19 +106,6 @@ const useFormData = (category) => {
         value: publicId,
       },
     }));
-  };
-
-  // Not currently used, but can be added as a feature later.
-  const resetProperty = (propertyName) => {
-    console.log("resetting: " + propertyName);
-    setFormData((formData) => ({
-      ...formData,
-      [propertyName]: {
-        ...formData[propertyName],
-        value: "",
-      },
-    }));
-    console.log(formData);
   };
 
   //Save category to local storage with debounce
