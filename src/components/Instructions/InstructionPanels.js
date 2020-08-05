@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import { Typography, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary } from "@material-ui/core";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +10,9 @@ import PanelParagraph from "./PanelParagraph";
 
 import panel1a from "../../external/images/instructions/panel1a.JPG";
 import panel1b from "../../external/images/instructions/panel1b.JPG";
+import panel2a from "../../external/images/instructions/panel2a.JPG";
+import panel2b from "../../external/images/instructions/panel2b.JPG";
+import panel2c from "../../external/images/instructions/panel2c.JPG";
 
 const useStyles = makeStyles((theme) => ({
     panelContainer: {
@@ -58,6 +62,7 @@ const InstructionPanels = () => {
               or click the Pen icon visible on the right side on the home page
             </PanelParagraph>
             <PanelImage image={panel1b} style={classes.image} />
+            <Button variant="contained" color="primary" onClick={() => {setExpandedPanel('panel2')}}>Next step</Button>
           </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -72,11 +77,21 @@ const InstructionPanels = () => {
           <Typography variant="h6">Area Selection</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography variant="p">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Grid container direction="column">
+            <PanelParagraph classes={classes}>
+              Select the applicable area on the map by clicking on it
+            </PanelParagraph>
+            <PanelImage image={panel2a} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              You can then click the Next button on the bottom left
+            </PanelParagraph>
+            <PanelImage image={panel2b} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              or click on <b>2. General information</b> on the list on the left
+            </PanelParagraph>
+            <PanelImage image={panel2c} style={classes.image} />
+            <Button variant="contained" color="primary" onClick={() => {setExpandedPanel('panel3')}}>Next step</Button>
+          </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       </Grid>
