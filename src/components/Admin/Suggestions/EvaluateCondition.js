@@ -12,7 +12,10 @@ const EvaluateCondition = (props) => {
   const options = props?.options;
   const classes = props.classes;
 
-  const [expression, setExpression] = useState();
+  const {
+    expression,
+    setExpression
+  } = props.expression;
   const [operator, setOperator] = useState("=");
 
   useEffect(() => {
