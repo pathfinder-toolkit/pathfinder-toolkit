@@ -3,6 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -33,8 +34,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
-    flexGrow: 1,
+    cursor: "pointer"
   },
+  filler: {
+    flexGrow: 1,
+    padding: 0
+  }
 }));
 
 const NavigationBar = (props) => {
@@ -72,9 +77,10 @@ const NavigationBar = (props) => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navbar}>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" onClick={() => {redirectTo("")}} className={classes.title}>
           EnergyPathfinder
         </Typography>
+        <Box component="div" className={classes.filler} />
         {isAdmin && <IconButton
           onClick={() => {
             redirectTo("/admin");
