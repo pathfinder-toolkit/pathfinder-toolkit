@@ -7,6 +7,7 @@ import useFormData from "../useFormData";
 import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
+import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingRenewable = (props) => {
   const { buildingOptions, showOldEntryButtons } = useEditor();
@@ -16,9 +17,15 @@ const BuildingRenewable = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const { formData, handleChange, addNewEntry, addOldEntry } = useFormData(
-    "renewable"
-  );
+  const [openPropertyModal, setOpenPropertyModal] = useState(false);
+
+  const {
+    formData,
+    handleChange,
+    addNewEntry,
+    addOldEntry,
+    deleteEntry,
+  } = useFormData("renewable");
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -49,6 +56,17 @@ const BuildingRenewable = (props) => {
               }
               onEntry={() => resetModal()}
               data={buildingOptions[property]}
+            />
+          </div>
+        </Modal>
+        <Modal
+          open={openPropertyModal}
+          onClose={() => setOpenPropertyModal(false)}
+        >
+          <div className={style.modal}>
+            <PropertyModal
+              data={formData}
+              handleDeletion={(property, index) => deleteEntry(property, index)}
             />
           </div>
         </Modal>

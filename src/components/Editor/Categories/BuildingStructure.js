@@ -68,26 +68,19 @@ const BuildingStructure = (props) => {
             />
           </div>
         </Modal>
-        {
-          <Modal
-            open={openPropertyModal}
-            onClose={() => setOpenPropertyModal(false)}
-          >
-            <div className={style.modal}>
-              <PropertyModal
-                data={formData}
-                handleDeletion={(property, index) =>
-                  deleteEntry(property, index)
-                }
-              />
-            </div>
-          </Modal>
-        }
+        <Modal
+          open={openPropertyModal}
+          onClose={() => setOpenPropertyModal(false)}
+        >
+          <div className={style.modal}>
+            <PropertyModal
+              data={formData}
+              handleDeletion={(property, index) => deleteEntry(property, index)}
+            />
+          </div>
+        </Modal>
         <Grid item>
           <EditorHeader header="Building structure" />
-          <Button onClick={() => setOpenPropertyModal(true)}>
-            old properties
-          </Button>
           <div className={style.category}>
             <Grid className={style.row} container spacing={2}>
               <Grid item sm={2}>
@@ -328,10 +321,6 @@ const BuildingStructure = (props) => {
                 )}
               </Grid>
             </Grid>
-            <PropertyModal
-              data={formData}
-              handleDeletion={(property, index) => deleteEntry(property, index)}
-            />
           </div>
         </Grid>
       </div>
