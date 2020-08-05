@@ -10,14 +10,17 @@ import OldEntry from "../reusable/OldEntry";
 import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingRenewable = (props) => {
-  const { buildingOptions, showOldEntryButtons } = useEditor();
+  const {
+    buildingOptions,
+    showOldEntryButtons,
+    showPropertyModal,
+    setShowPropertyModal,
+  } = useEditor();
 
   const style = props.style;
 
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
-
-  const [openPropertyModal, setOpenPropertyModal] = useState(false);
 
   const {
     formData,
@@ -60,8 +63,8 @@ const BuildingRenewable = (props) => {
           </div>
         </Modal>
         <Modal
-          open={openPropertyModal}
-          onClose={() => setOpenPropertyModal(false)}
+          open={showPropertyModal}
+          onClose={() => setShowPropertyModal(false)}
         >
           <div className={style.modal}>
             <PropertyModal
