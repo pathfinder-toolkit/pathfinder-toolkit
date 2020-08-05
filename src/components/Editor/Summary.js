@@ -14,11 +14,18 @@ import SubmitModal from "./reusable/SubmitModal";
 import UpdateModal from "./reusable/UpdateModal";
 
 const useStyles = makeStyles((theme) => ({
-  submitRoot: {
-    padding: theme.spacing(2),
+  root: {
+    marginLeft:theme.spacing(2),
+    marginRight:theme.spacing(2),
+    marginBottom:theme.spacing(2),
+    padding:theme.spacing(1),
     backgroundColor: "#eceef8",
-    borderRadius: "4px",
   },
+  headerRoot: {
+    borderRadius: theme.borderRadius,
+    padding: theme.spacing(1),
+    margin: theme.spacing(2),
+},
   previewHeader: {
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(2),
@@ -36,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
   notificationText: {
-    padding: theme.spacing(0.5)
+    padding: theme.spacing(0.5),
   }
 }));
 
@@ -98,16 +105,13 @@ const Summary = (props) => {
           <SubmitModal message={message} />
         </Modal>
       )}
-      <Grid className={classes.submitRoot} container direction="column">
-        <Paper>
-          <Grid item>
+      <Paper className={classes.root}>
+        <Paper className={classes.headerRoot}>
             <Typography className={classes.previewHeader} variant="h4">
               Building summary
             </Typography>
-          </Grid>
           {isAuthenticated ? (
             <React.Fragment>
-              <Grid item>
                 <Button
                   className={classes.submitButton}
                   onClick={() => {
@@ -122,8 +126,6 @@ const Summary = (props) => {
                 >
                   {props.slug ? "Update building" : "Submit building"}
                 </Button>
-              </Grid>
-              <Grid item>
                 <Paper className={classes.notification} onClick={() => {redirectTo("/feedback")}}>
                   <Box display="flex" justifyContent="center">
                     <Typography className={classes.notificationText} variant="p">
@@ -137,10 +139,8 @@ const Summary = (props) => {
                     <LaunchIcon fontSize="small"/>
                   </Box>
                 </Paper>
-              </Grid>
             </React.Fragment>
           ) : (
-            <Grid item>
               <Paper className={classes.notification} onClick={() => {!loading && loginWithRedirect()}}>
                 <Box display="flex" justifyContent="center">
                   <Typography className={classes.notificationText} variant="p">
@@ -154,10 +154,9 @@ const Summary = (props) => {
                   <LaunchIcon fontSize="small"/>
                 </Box>
               </Paper>
-            </Grid>
           )}
         </Paper>
-      </Grid>
+      </Paper>
 
       <BuildingViewer building={buildingInformation} />
     </React.Fragment>
