@@ -15,7 +15,6 @@ export const useEditor = () => useContext(EditorContext);
 
 export const EditorProvider = ({ children }) => {
   const {
-    requestBuildingModel,
     submitNewBuilding,
     updateBuildingData,
   } = useBackend();

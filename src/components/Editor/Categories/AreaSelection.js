@@ -14,6 +14,7 @@ const AreaSelection = (props) => {
     setNavigationEnabled,
     setBuildingOptions,
     setSuggestionsAreaId,
+    setBuildingNameEntered,
   } = useEditor();
 
   const {
@@ -42,13 +43,13 @@ const AreaSelection = (props) => {
 
       if (props.slug) {
         // If we are editing an existing building
-        console.log("Editing existing building: " + props.slug);
+        setBuildingNameEntered(true);
+
         const response = await getBuildingFromSlug(props.slug);
         model = response.data;
         props.loadBuildingModel(model);
       } else {
         // New building
-        console.log("New building");
         model = await requestBuildingModel();
 
         props.loadBuildingModel(
@@ -66,25 +67,32 @@ const AreaSelection = (props) => {
   }, [loading]);
 
   useEffect(() => {
-    // If we have data in local storage from previously edited building
-    // and we want to create a new building,
-    // the previous data needs to be cleared.
-    const resetBuildingData = async () => {
-      if (buildingInformation && !props.slug) {
-        console.log(Object.keys(buildingInformation));
-        if (Object.keys(buildingInformation).includes("slug")) {
-          console.log("Invalid building data in storage, removing");
-
-          const model = await requestBuildingModel();
-          props.loadBuildingModel(model);
-          setSelectedArea("");
-          setNavigationEnabled(false);
-        }
+    // If building name is stored in local storage,
+    // allow user to navigate freely.
+    if (buildingInformation) {
+      if (buildingInformation.details.name.value.length > 0) {
+        setBuildingNameEntered(true);
       }
-    };
-
-    resetBuildingData();
+    }
+    if (buildingInformation && !props.slug) {
+      resetBuildingData();
+    }
   }, [buildingInformation]);
+
+  // If we have data in local storage from previously edited building
+  // and we want to create a new building,
+  // the previous data needs to be cleared.
+  const resetBuildingData = async () => {
+    console.log(Object.keys(buildingInformation));
+    if (Object.keys(buildingInformation).includes("slug")) {
+      console.log("Invalid building data in storage, removing");
+
+      const model = await requestBuildingModel();
+      props.loadBuildingModel(model);
+      setSelectedArea("");
+      setNavigationEnabled(false);
+    }
+  };
 
   useEffect(() => {
     if (!mapLoading) {
