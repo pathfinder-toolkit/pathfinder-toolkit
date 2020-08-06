@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Typography,
   Fade,
   TextField,
   InputAdornment,
@@ -15,12 +14,10 @@ import useFormData from "../useFormData";
 import EditorHeader from "../reusable/EditorHeader";
 import DropdownSelect from "../reusable/DropdownSelect";
 import OldEntry from "../reusable/OldEntry";
-import PropertyList from "../reusable/PropertyList";
 import PropertyModal from "../reusable/PropertyModal";
 
 const BuildingStructure = (props) => {
   const {
-    setNavigationEnabled,
     buildingOptions,
     showOldEntryButtons,
     showPropertyModal,
@@ -40,7 +37,7 @@ const BuildingStructure = (props) => {
   useEffect(() => {
     setAnimation(true);
     return () => {};
-  }, []);
+  },[]);
 
   useEffect(() => {
     if (property) {

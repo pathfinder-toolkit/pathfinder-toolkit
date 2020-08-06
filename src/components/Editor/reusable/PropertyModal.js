@@ -41,7 +41,7 @@ const PropertyList = (props) => {
 
   useEffect(() => {
     setSelectedProperty(Object.keys(data)[0]);
-  }, []);
+  }, [data]);
 
   const handleDeletion = (index) => {
     if (index === 0) {

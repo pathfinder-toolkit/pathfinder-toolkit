@@ -31,7 +31,7 @@ const EmailSettings = (props) => {
 
     useEffect(() => {
         refreshFeedbackRecipientList();
-    },[])
+    })
 
     const _handleChange = (e) => {
         setNewRecipient(e.target.value);
@@ -46,7 +46,7 @@ const EmailSettings = (props) => {
         setNewRecipient("");
         setRecipients(false);
         setPending(true);
-        const response = await updateFeedbackRecipients(request);
+        await updateFeedbackRecipients(request);
         refreshFeedbackRecipientList();
     }
 

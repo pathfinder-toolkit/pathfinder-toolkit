@@ -129,7 +129,6 @@ const UploadContainer = (props) => {
       </div>
       <div className={classes.controls}>
         <Button
-          variant="outlined"
           disabled={!image}
           onClick={
             !deleteWarning

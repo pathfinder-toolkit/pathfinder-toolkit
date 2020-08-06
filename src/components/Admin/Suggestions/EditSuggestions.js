@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Typography,
   Grid,
@@ -39,14 +39,17 @@ const EditSuggestions = (props) => {
     }
   };
 
-  const fetchSuggestions = async (identifier) => {
-    try {
-      const response = await getAdminSuggestions(identifier);
-      setSuggestions(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const fetchSuggestions = useCallback(
+    async (identifier) => {
+      try {
+        const response = await getAdminSuggestions(identifier);
+        setSuggestions(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getAdminSuggestions]
+  );
 
   useEffect(() => {
     getSubjects();

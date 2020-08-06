@@ -56,7 +56,6 @@ const Summary = (props) => {
 
   const [message, setMessage] = useState();
   const [open, setOpen] = useState(false);
-  const [buildingLoading, setBuildingLoading] = useState(false);
 
   const redirectTo = (addr) => {
     history.push(addr);
@@ -64,10 +63,8 @@ const Summary = (props) => {
 
   const submitBuilding = async () => {
     setOpen(true);
-    setBuildingLoading(true);
     const response = await postBuilding();
     if (response.status === 201) {
-      setBuildingLoading(false);
       setMessage("Building information stored.");
       const interval = setInterval(() => {
         clearInterval(interval);
@@ -75,7 +72,6 @@ const Summary = (props) => {
         redirectTo(`/buildings/${response.data.slug}`);
       }, 3000);
     } else {
-      setBuildingLoading(false);
       setMessage(response.data);
       const interval = setInterval(() => {
         clearInterval(interval);
@@ -88,7 +84,7 @@ const Summary = (props) => {
   const submitUpdateBuilding = async () => {
     setOpen(true);
     const message = await updateBuilding();
-    if (message.status == "200") {
+    if (message.status === "200") {
       setMessage("Building updated");
     }
   };

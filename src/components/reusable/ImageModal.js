@@ -46,7 +46,7 @@ const ImageModal = (props) => {
             <Image
               className={classes.image}
               cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-              publicId={props.image}
+              publicId={image}
             />
         </Fade>
       </Modal>

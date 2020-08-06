@@ -59,7 +59,7 @@ const CommentCreationForm = (props) => {
       };
       setSubmitted(true);
       setPending(true);
-      const response = await submitNewComment(comment);
+      await submitNewComment(comment);
       setPending(false);
     }
 

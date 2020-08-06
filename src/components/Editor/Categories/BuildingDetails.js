@@ -30,7 +30,7 @@ const BuildingDetails = (props) => {
   useEffect(() => {
     setAnimation(true);
     return () => {};
-  }, []);
+  },[]);
 
   // Require user to enter name, before the user can continue.
   // Name is the only required field, used for generating slug.
@@ -40,7 +40,7 @@ const BuildingDetails = (props) => {
     } else {
       setBuildingNameEntered(false);
     }
-  }, [formData.name.value]);
+  }, [formData.name.value, setBuildingNameEntered]);
 
   const [open, setOpen] = useState(false);
 
