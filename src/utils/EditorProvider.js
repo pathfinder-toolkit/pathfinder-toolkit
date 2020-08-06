@@ -38,9 +38,9 @@ export const EditorProvider = ({ children }) => {
     setBuildingInformation,
   ] = useStateWithSessionStorage("SavedBuildingDataInStorage");
   const [buildingOptions, setBuildingOptions] = useState();
+
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
-
   const [buildingNameEntered, setBuildingNameEntered] = useState(false);
 
   const [suggestions, setSuggestions] = useState();
@@ -130,6 +130,10 @@ export const EditorProvider = ({ children }) => {
       clearSuggestions();
     }
   };
+
+  useEffect(() => {
+    console.log("navigation: " + navigationEnabled);
+  }, [navigationEnabled]);
 
   useEffect(() => {
     if (!buildingNameEntered) {
@@ -295,6 +299,7 @@ export const EditorProvider = ({ children }) => {
         subjects,
         postBuilding,
         updateBuilding,
+        buildingNameEntered,
         setBuildingNameEntered,
       }}
     >

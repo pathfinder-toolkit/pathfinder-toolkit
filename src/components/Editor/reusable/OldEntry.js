@@ -58,7 +58,7 @@ const OldEntry = (props) => {
         ></TextField>
       </div>
       <Button
-        disabled={!year && !value}
+        disabled={!value || !year}
         color="primary"
         variant="contained"
         onClick={addNewValue}

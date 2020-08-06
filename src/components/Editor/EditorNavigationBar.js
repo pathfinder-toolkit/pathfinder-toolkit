@@ -46,7 +46,7 @@ const EditorNavigationBar = () => {
             disabled={
               !navigationEnabled ||
               activeStep === steps.length - 1 ||
-              (buildingNameEntered && activeStep === 1)
+              (!buildingNameEntered && activeStep === 1)
             }
             onClick={nextStep}
             className={classes.button}
