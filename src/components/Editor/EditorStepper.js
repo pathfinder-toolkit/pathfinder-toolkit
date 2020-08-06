@@ -6,7 +6,6 @@ import {
   Step,
   StepLabel,
   StepContent,
-  Typography,
 } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Grid, TextField, Button, MenuItem } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
 import EvaluateCondition from "./EvaluateCondition";
 import PreviewSuggestion from "./PreviewSuggestion";
-import { AssignmentReturnOutlined } from "@material-ui/icons";
 
 const SuggestionEditor = (props) => {
   const classes = props.style;
@@ -55,6 +54,49 @@ const SuggestionEditor = (props) => {
     },
   ];
 
+  const getAreas = useCallback(
+      async () => {
+      const areas = await requestAreas();
+      if (areas) {
+        setAreas(areas);
+      } 
+    },
+    [requestAreas]
+  );
+
+  const getSubjects = useCallback(
+    async () => {
+      setLoading(true);
+      try {
+        const response = await getSuggestionSubjectsForAdmin();
+        if (response.status === 200) {
+          console.log(response.data);
+          setSuggestionSubjects(response.data);
+          getAreas();
+          setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getSuggestionSubjectsForAdmin, getAreas]
+  );
+
+  /*const getSubjects = async () => {
+    setLoading(true);
+    try {
+      const response = await getSuggestionSubjectsForAdmin();
+      if (response.status === 200) {
+        console.log(response.data);
+        setSuggestionSubjects(response.data);
+        getAreas();
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };*/
+
   // Initalize
   useEffect(() => {
     getSubjects();
@@ -71,29 +113,11 @@ const SuggestionEditor = (props) => {
         valueType: props.suggestion.valueType
       });
     }
-  }, []);
+  }, [getSubjects, props.suggestion]);
 
-  const getSubjects = async () => {
-    setLoading(true);
-    try {
-      const response = await getSuggestionSubjectsForAdmin();
-      if (response.status === 200) {
-        console.log(response.data);
-        setSuggestionSubjects(response.data);
-        getAreas();
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
-  const getAreas = async () => {
-    const areas = await requestAreas();
-    if (areas) {
-      setAreas(areas);
-    }
-  };
+  
 
   const getSubjectOptions = async (identifier, areas) => {
     if (!selectedAreas) {

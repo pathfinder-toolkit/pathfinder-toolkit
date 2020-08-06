@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Paper } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
-import { useEffect } from "react";
 
 const EditorNavigationBar = () => {
   const useStyles = makeStyles((theme) => ({

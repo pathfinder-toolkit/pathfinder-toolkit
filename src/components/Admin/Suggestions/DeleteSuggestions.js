@@ -47,7 +47,7 @@ const DeleteSuggestions = (props) => {
 
   const deleteSuggestion = async (suggestion) => {
     try {
-      const response = await adminDeleteSuggestion(suggestion.idSuggestion);
+      await adminDeleteSuggestion(suggestion.idSuggestion);
       fetchSuggestions(selectedSubject.identifier);
     } catch (error) {
       console.log(error);
@@ -56,13 +56,13 @@ const DeleteSuggestions = (props) => {
 
   useEffect(() => {
     getSubjects();
-  }, []);
+  },);
 
   useEffect(() => {
     if (selectedSubject) {
       fetchSuggestions(selectedSubject.identifier);
     }
-  }, [selectedSubject]);
+  }, [selectedSubject, fetchSuggestions]);
 
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);
