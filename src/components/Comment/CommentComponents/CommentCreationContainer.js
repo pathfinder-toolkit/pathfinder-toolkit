@@ -63,7 +63,7 @@ const CommentCreationContainer = (props) => {
             variant="outlined"
             onClick = {_handleToggle}
             >
-                Create comment
+                Create experience
             </Button>
         )}
         {showForm && <CommentCreationForm subject={props.subject} classes={classes} onClose={_handleToggle}/>}

@@ -112,7 +112,7 @@ const BuildingViewer = (props) => {
 
     return <Paper className={classes.root}>
 
-        {topSuggestionDataset &&  (<TopSuggestions
+        {topSuggestionDataset?.length > 0 &&  (<TopSuggestions
             data={topSuggestionDataset}
             classes={classes}
         />)}

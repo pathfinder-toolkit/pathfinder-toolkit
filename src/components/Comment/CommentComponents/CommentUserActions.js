@@ -65,9 +65,9 @@ const CommentUserActions = (props) => {
                 onClose={handleClose}
                 >
                     {isAdmin ? (
-                        <MenuItem onClick={handleDelete}>Delete comment</MenuItem>
+                        <MenuItem onClick={handleDelete}>Delete this experience</MenuItem>
                     ) : (
-                        <MenuItem onClick={handleReport}>Report comment</MenuItem>
+                        <MenuItem onClick={handleReport}>Report this experience</MenuItem>
                     )}
                 </Menu>
                 
