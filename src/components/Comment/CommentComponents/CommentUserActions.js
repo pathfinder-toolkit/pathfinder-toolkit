@@ -11,8 +11,6 @@ import CommentDeletionConfirm from "./CommentDeletionConfirm";
 
 import { useAuth0 } from "../../../utils/react-auth0-spa"
 
-import { useBackend } from "../../../utils/BackendProvider";
-
 const CommentUserActions = (props) => {
     const classes = props.classes;
 

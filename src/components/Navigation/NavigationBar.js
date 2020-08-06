@@ -15,7 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import { useBackend } from "../../utils/BackendProvider";
 import history from "../../utils/history";
 
 import { useAuth0 } from "../../utils/react-auth0-spa";

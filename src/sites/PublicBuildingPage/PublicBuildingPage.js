@@ -34,33 +34,33 @@ const PublicBuildingPage = (props) => {
         success: false
     });
 
-    const fetchData = async () => {
-        setStatus((prev) => {
-            return {
-                ...prev,
-                pending: true
-            }
-        })
-        const response = await getPublicBuildingFromSlug(props.match.params.slug);
-        const newStatus = {
-            pending: false,
-            resolved: true
-        };
-        if (response.status === 200) {
-            setBuilding(response.data);
-            newStatus.success = true;
-        }
-        setStatus((prev) => {
-            return {
-                ...prev,
-                ...newStatus
-            }
-        });
-    }
-
     useEffect(() => {
+        const fetchData = async () => {
+            setStatus((prev) => {
+                return {
+                    ...prev,
+                    pending: true
+                }
+            })
+            const response = await getPublicBuildingFromSlug(props.match.params.slug);
+            const newStatus = {
+                pending: false,
+                resolved: true
+            };
+            if (response.status === 200) {
+                setBuilding(response.data);
+                newStatus.success = true;
+            }
+            setStatus((prev) => {
+                return {
+                    ...prev,
+                    ...newStatus
+                }
+            });
+        }
+    
         fetchData();
-    }, [props, fetchData]);
+    }, [props, getPublicBuildingFromSlug]);
 
     return (
         <Container maxWidth={false} className={classes.root}>

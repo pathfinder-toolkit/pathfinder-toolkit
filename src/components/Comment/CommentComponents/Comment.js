@@ -23,17 +23,7 @@ const Comment = (props) => {
     const {
         user
     } = useAuth0();
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    }
-
+    
     const hideContent = () => {
         setDeleted(true);
     }

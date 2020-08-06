@@ -42,7 +42,7 @@ const AdminPage = () => {
             setGranted(false);
             fetchData();
         }
-    },[loading]);
+    },[loading, requestAdminPrivileges]);
 
     return <React.Fragment>
         <NavigationBar />

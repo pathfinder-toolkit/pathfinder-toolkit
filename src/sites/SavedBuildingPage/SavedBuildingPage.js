@@ -44,7 +44,7 @@ const SavedBuildingPage = (props) => {
     if (!loading) {
       fetchData();
     }
-  }, [loading, props]);
+  }, [loading, props, getBuildingFromSlug]);
 
   return (
     <Container maxWidth={false} className={classes.root}>

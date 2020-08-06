@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from '@material-ui/core/Button'
 import Paper from "@material-ui/core/Paper";
 import Switch from "@material-ui/core/Switch";
@@ -123,7 +123,7 @@ const CommentContainer = (props) => {
                 )}
             </React.Fragment>
         )}
-        {comments && (comments.length == 0) && (
+        {comments && (comments.length === 0) && (
             <React.Fragment>
                 <Typography className={classes.displayText}>No experiences found, add one below</Typography>
             </React.Fragment>

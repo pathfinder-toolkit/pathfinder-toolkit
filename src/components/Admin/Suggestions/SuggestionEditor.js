@@ -82,21 +82,6 @@ const SuggestionEditor = (props) => {
     [getSuggestionSubjectsForAdmin, getAreas]
   );
 
-  /*const getSubjects = async () => {
-    setLoading(true);
-    try {
-      const response = await getSuggestionSubjectsForAdmin();
-      if (response.status === 200) {
-        console.log(response.data);
-        setSuggestionSubjects(response.data);
-        getAreas();
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };*/
-
   // Initalize
   useEffect(() => {
     getSubjects();
@@ -119,18 +104,22 @@ const SuggestionEditor = (props) => {
 
   
 
-  const getSubjectOptions = async (identifier, areas) => {
-    if (!selectedAreas) {
-      return;
-    }
-
-    try {
-      const response = await getSuggestionSubjectOptions(identifier, areas);
-      setSubjectOptions(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const getSubjectOptions = useCallback(
+    async (identifier, areas) => {
+      if (!selectedAreas) {
+        return;
+      }
+  
+      try {
+        const response = await getSuggestionSubjectOptions(identifier, areas);
+        setSubjectOptions(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getSuggestionSubjectOptions, selectedAreas]
+  );
+  
 
   const addCondition = (newCondition) => {
     setConditions((conditions) => [
@@ -144,7 +133,6 @@ const SuggestionEditor = (props) => {
     selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
 
     let newSuggestion;
-    let response;
 
     if (props.suggestion) {
       // Edit existing suggestion
@@ -157,7 +145,7 @@ const SuggestionEditor = (props) => {
         areas: areaIds,
       };
 
-      response = await editSuggestion(
+      await editSuggestion(
         newSuggestion,
         props.suggestion.idSuggestion
       );
@@ -170,7 +158,7 @@ const SuggestionEditor = (props) => {
         areas: areaIds,
       };
 
-      response = await submitNewSuggestion(newSuggestion);
+      await submitNewSuggestion(newSuggestion);
     }
 
     if (props.callback) {
@@ -194,7 +182,7 @@ const SuggestionEditor = (props) => {
         setSubjectOptions();
       }
     }
-  }, [subject, selectedAreas]);
+  }, [subject, selectedAreas, getSubjectOptions]);
 
   // -- Clear conditions when subject changes. Temporary fix for usability, since this functionality does not exist in backend yet.
   // -- Remove the useEffect function below, when this functionality exists in the backend
@@ -203,7 +191,7 @@ const SuggestionEditor = (props) => {
       const filteredConditions = conditions.filter(condition => condition.conditionedBy === subject.identifier);
       setConditions(filteredConditions);
     }
-  }, [subject]);
+  }, [subject, conditions]);
   // -- End of condition clear fix for usability
 
 
@@ -234,7 +222,7 @@ const SuggestionEditor = (props) => {
   };
 
   const handleAreaChange = (e) => {
-    const filtered = selectedAreas.filter(area => area.idArea != e.target.value.idArea);
+    const filtered = selectedAreas.filter(area => area.idArea !== e.target.value.idArea);
     const areaList = [
       ...filtered,
       {areaName: e.target.value.areaName, idArea: e.target.value.idArea}

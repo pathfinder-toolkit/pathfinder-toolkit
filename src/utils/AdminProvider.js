@@ -1,4 +1,4 @@
-import React,  {useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import AdminDashboard from "../components/Admin/Dashboard/AdminDashboard";
 import CreateNewSuggestion from "../components/Admin/Suggestions/CreateNewSuggestion";

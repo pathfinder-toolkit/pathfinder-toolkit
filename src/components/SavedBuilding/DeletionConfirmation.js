@@ -141,7 +141,7 @@ const DeletionConfirmation = (props) => {
                             <Button
                             variant="contained"
                             color="secondary"
-                            disabled={confirmationText != props.slug}
+                            disabled={confirmationText !== props.slug}
                             onClick={handleConfirm}
                             >
                                 Confirm deletion
