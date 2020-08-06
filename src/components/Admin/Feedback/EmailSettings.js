@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -16,23 +16,27 @@ const EmailSettings = (props) => {
     const [ error, setError ] = useState(false);
     const [ newRecipient, setNewRecipient ] = useState("")
 
-    const refreshFeedbackRecipientList = async () => {
-        setPending(true);
-        setError(false);
-        setRecipients(false);
-        const response = await getFeedbackRecipients();
-        if (response.status === 200) {
-            console.log(response.data);
-            setRecipients(response.data);
-        } else {
-            setError(response.data)
-        }
-        setPending(false);
-    }
+    const refreshFeedbackRecipientList = useCallback(
+        async () => {
+            setPending(true);
+            setError(false);
+            setRecipients(false);
+            const response = await getFeedbackRecipients();
+            if (response.status === 200) {
+                setRecipients(response.data);
+            } else {
+                setError(response.data)
+            }
+            setPending(false);
+        },
+        [getFeedbackRecipients]
+    );
+    
+    
 
     useEffect(() => {
         refreshFeedbackRecipientList();
-    },[])
+    }, [refreshFeedbackRecipientList]);
 
     const _handleChange = (e) => {
         setNewRecipient(e.target.value);
@@ -44,11 +48,10 @@ const EmailSettings = (props) => {
                 email: newRecipient
             }
         ]
-        console.log(request);
         setNewRecipient("");
         setRecipients(false);
         setPending(true);
-        const response = await updateFeedbackRecipients(request);
+        await updateFeedbackRecipients(request);
         refreshFeedbackRecipientList();
     }
 

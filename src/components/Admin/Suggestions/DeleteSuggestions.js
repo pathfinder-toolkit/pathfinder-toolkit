@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import {
   Typography,
   Grid,
@@ -36,18 +36,22 @@ const DeleteSuggestions = (props) => {
     }
   };
 
-  const fetchSuggestions = async (identifier) => {
-    try {
-      const response = await getAdminSuggestions(identifier);
-      setSuggestions(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const fetchSuggestions = useCallback(
+    async (identifier) => {
+      try {
+        const response = await getAdminSuggestions(identifier);
+        setSuggestions(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getAdminSuggestions]
+  );
+  
 
   const deleteSuggestion = async (suggestion) => {
     try {
-      const response = await adminDeleteSuggestion(suggestion.idSuggestion);
+      await adminDeleteSuggestion(suggestion.idSuggestion);
       fetchSuggestions(selectedSubject.identifier);
     } catch (error) {
       console.log(error);
@@ -56,13 +60,13 @@ const DeleteSuggestions = (props) => {
 
   useEffect(() => {
     getSubjects();
-  }, []);
+  },);
 
   useEffect(() => {
     if (selectedSubject) {
       fetchSuggestions(selectedSubject.identifier);
     }
-  }, [selectedSubject]);
+  }, [selectedSubject, fetchSuggestions]);
 
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);

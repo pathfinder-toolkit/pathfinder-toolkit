@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 
 import { Image } from 'cloudinary-react';
 
@@ -48,7 +46,7 @@ const ImageModal = (props) => {
             <Image
               className={classes.image}
               cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}
-              publicId={props.image}
+              publicId={image}
             />
         </Fade>
       </Modal>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -15,12 +15,6 @@ const DesignPage = (props) => {
   }));
 
   const classes = useStyles();
-
-  useEffect(() => {
-    if (props.match.params.slug) {
-      console.log("slug: " + props.match.params.slug);
-    }
-  }, []);
 
   return (
     <React.Fragment>

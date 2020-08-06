@@ -23,6 +23,7 @@ const EditorNavigationBar = () => {
     nextStep,
     previousStep,
     navigationEnabled,
+    buildingNameEntered,
   } = useEditor();
   const steps = getSteps();
 
@@ -41,11 +42,15 @@ const EditorNavigationBar = () => {
           <Button
             variant="contained"
             color="primary"
-            disabled={!navigationEnabled}
+            disabled={
+              !navigationEnabled ||
+              activeStep === steps.length - 1 ||
+              (!buildingNameEntered && activeStep === 1)
+            }
             onClick={nextStep}
             className={classes.button}
           >
-            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            Next
           </Button>
         </Paper>
       </Grid>

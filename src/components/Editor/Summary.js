@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Modal, Grid, Typography, Paper, Box } from "@material-ui/core";
-import LaunchIcon from '@material-ui/icons/Launch';
+import { Button, Modal, Typography, Paper, Box } from "@material-ui/core";
+import LaunchIcon from "@material-ui/icons/Launch";
 
 import { useEditor } from "../../utils/EditorProvider";
 
@@ -15,17 +15,17 @@ import UpdateModal from "./reusable/UpdateModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft:theme.spacing(2),
-    marginRight:theme.spacing(2),
-    marginBottom:theme.spacing(2),
-    padding:theme.spacing(1),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(1),
     backgroundColor: "#eceef8",
   },
   headerRoot: {
     borderRadius: theme.borderRadius,
     padding: theme.spacing(1),
     margin: theme.spacing(2),
-},
+  },
   previewHeader: {
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(2),
@@ -44,23 +44,18 @@ const useStyles = makeStyles((theme) => ({
   },
   notificationText: {
     padding: theme.spacing(0.5),
-  }
+  },
 }));
 
 const Summary = (props) => {
   const { buildingInformation, postBuilding, updateBuilding } = useEditor();
 
-  const {
-    isAuthenticated,
-    loading,
-    loginWithRedirect
-  } = useAuth0();
+  const { isAuthenticated, loading, loginWithRedirect } = useAuth0();
 
   const classes = useStyles();
 
   const [message, setMessage] = useState();
   const [open, setOpen] = useState(false);
-  const [buildingLoading, setBuildingLoading] = useState(false);
 
   const redirectTo = (addr) => {
     history.push(addr);
@@ -68,10 +63,8 @@ const Summary = (props) => {
 
   const submitBuilding = async () => {
     setOpen(true);
-    setBuildingLoading(true);
     const response = await postBuilding();
     if (response.status === 201) {
-      setBuildingLoading(false);
       setMessage("Building information stored.");
       const interval = setInterval(() => {
         clearInterval(interval);
@@ -79,7 +72,6 @@ const Summary = (props) => {
         redirectTo(`/buildings/${response.data.slug}`);
       }, 3000);
     } else {
-      setBuildingLoading(false);
       setMessage(response.data);
       const interval = setInterval(() => {
         clearInterval(interval);
@@ -91,9 +83,8 @@ const Summary = (props) => {
 
   const submitUpdateBuilding = async () => {
     setOpen(true);
-    console.log("submitUpdateBuilding");
     const message = await updateBuilding();
-    if (message.status == "200") {
+    if (message.status === 200) {
       setMessage("Building updated");
     }
   };
@@ -112,53 +103,63 @@ const Summary = (props) => {
       )}
       <Paper className={classes.root}>
         <Paper className={classes.headerRoot}>
-            <Typography className={classes.previewHeader} variant="h4">
-              Building summary
-            </Typography>
+          <Typography className={classes.previewHeader} variant="h4">
+            Building summary
+          </Typography>
           {isAuthenticated ? (
             <React.Fragment>
-                <Button
-                  className={classes.submitButton}
-                  onClick={() => {
-                    if (props.slug) {
-                      submitUpdateBuilding();
-                    } else {
-                      submitBuilding();
-                    }
-                  }}
-                  variant="contained"
-                  color="primary"
-                >
-                  {props.slug ? "Update building" : "Submit building"}
-                </Button>
-                <Paper className={classes.notification} onClick={() => {redirectTo("/feedback")}}>
-                  <Box display="flex" justifyContent="center">
-                    <Typography className={classes.notificationText} variant="p">
-                      {`Pathfinder is in development. Your feedback can help us make it better.`}
-                    </Typography>
-                  </Box>
-                  <Box display="flex" justifyContent="center">
-                    <Typography className={classes.notificationText} variant="p">
-                      {`Click here to submit your feedback.`}
-                    </Typography>
-                    <LaunchIcon fontSize="small"/>
-                  </Box>
-                </Paper>
-            </React.Fragment>
-          ) : (
-              <Paper className={classes.notification} onClick={() => {!loading && loginWithRedirect()}}>
+              <Button
+                className={classes.submitButton}
+                onClick={() => {
+                  if (props.slug) {
+                    submitUpdateBuilding();
+                  } else {
+                    submitBuilding();
+                  }
+                }}
+                variant="contained"
+                color="primary"
+              >
+                {props.slug ? "Update building" : "Submit building"}
+              </Button>
+              <Paper
+                className={classes.notification}
+                onClick={() => {
+                  redirectTo("/feedback");
+                }}
+              >
                 <Box display="flex" justifyContent="center">
                   <Typography className={classes.notificationText} variant="p">
-                  {`Log in to store your information and give feedback.`}
+                    {`Pathfinder is in development. Your feedback can help us make it better.`}
                   </Typography>
                 </Box>
                 <Box display="flex" justifyContent="center">
                   <Typography className={classes.notificationText} variant="p">
-                    {`Your information will not be lost while you login.`}
+                    {`Click here to submit your feedback.`}
                   </Typography>
-                  <LaunchIcon fontSize="small"/>
+                  <LaunchIcon fontSize="small" />
                 </Box>
               </Paper>
+            </React.Fragment>
+          ) : (
+            <Paper
+              className={classes.notification}
+              onClick={() => {
+                !loading && loginWithRedirect();
+              }}
+            >
+              <Box display="flex" justifyContent="center">
+                <Typography className={classes.notificationText} variant="p">
+                  {`Log in to store your information and give feedback.`}
+                </Typography>
+              </Box>
+              <Box display="flex" justifyContent="center">
+                <Typography className={classes.notificationText} variant="p">
+                  {`Your information will not be lost while you login.`}
+                </Typography>
+                <LaunchIcon fontSize="small" />
+              </Box>
+            </Paper>
           )}
         </Paper>
       </Paper>

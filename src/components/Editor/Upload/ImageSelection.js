@@ -43,7 +43,7 @@ const ImageSelection = (props) => {
   // Update elements on page switch
   useEffect(() => {
     setItems(images.slice(currentItem, currentItem + ITEMS_PER_PAGE));
-  }, [currentItem]);
+  }, [currentItem, images]);
 
   const selectImage = (publicId) => {
     if (props.handler) {

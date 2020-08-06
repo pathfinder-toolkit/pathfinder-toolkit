@@ -15,7 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-import { useBackend } from "../../utils/BackendProvider";
 import history from "../../utils/history";
 
 import { useAuth0 } from "../../utils/react-auth0-spa";
@@ -45,15 +44,12 @@ const useStyles = makeStyles((theme) => ({
 const NavigationBar = (props) => {
   const { loading, isAuthenticated, loginWithRedirect, logout, isAdmin } = useAuth0();
 
-  const {fakeLogout} = useBackend();
-
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [logoutAlert, setLogoutAlert] = useState(false);
 
   const handleMenuClose = (event) => {
-    console.log(anchorEl);
     setAnchorEl(null);
   };
 
@@ -63,11 +59,6 @@ const NavigationBar = (props) => {
 
   const redirectTo = (addr) => {
     history.push(addr);
-  };
-
-  const _logout = () => {
-    setLogoutAlert(true);
-    fakeLogout();
   };
 
   const _logoutAlertClose = () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import { Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -65,17 +65,21 @@ const UploadContainer = (props) => {
 
   const [deleteWarning, setDeleteWarning] = useState(false);
 
-  const fetchImages = async () => {
-    setUserImagesLoading(true);
-    const data = await requestUserImages();
-    setUserImages(data);
-    console.log(data);
-    setUserImagesLoading(false);
-  };
+  const fetchImages = useCallback(
+    async () => {
+      setUserImagesLoading(true);
+      const data = await requestUserImages();
+      setUserImages(data);
+      setUserImagesLoading(false);
+    },
+    [requestUserImages]
+  );
+  
+  
 
   useEffect(() => {
     fetchImages();
-  }, []);
+  },[fetchImages]);
 
   const classes = useStyles();
 
@@ -130,7 +134,6 @@ const UploadContainer = (props) => {
       </div>
       <div className={classes.controls}>
         <Button
-          variant="outlined"
           disabled={!image}
           onClick={
             !deleteWarning

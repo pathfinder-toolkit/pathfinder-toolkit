@@ -92,7 +92,6 @@ const FeedbackForm = () => {
     setPending(true);
     const result = await sendFeedbackWithRecaptcha(feedback);
     setPending(false);
-    console.log(result)
     if (result) {
       setMessage(result.data)
       if (result.status === 201) {

@@ -11,8 +11,6 @@ import CommentDeletionConfirm from "./CommentDeletionConfirm";
 
 import { useAuth0 } from "../../../utils/react-auth0-spa"
 
-import { useBackend } from "../../../utils/BackendProvider";
-
 const CommentUserActions = (props) => {
     const classes = props.classes;
 
@@ -65,9 +63,9 @@ const CommentUserActions = (props) => {
                 onClose={handleClose}
                 >
                     {isAdmin ? (
-                        <MenuItem onClick={handleDelete}>Delete comment</MenuItem>
+                        <MenuItem onClick={handleDelete}>Delete this experience</MenuItem>
                     ) : (
-                        <MenuItem onClick={handleReport}>Report comment</MenuItem>
+                        <MenuItem onClick={handleReport}>Report this experience</MenuItem>
                     )}
                 </Menu>
                 

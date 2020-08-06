@@ -20,15 +20,7 @@ const UpdateRegionOptions = (props) => {
         getSuggestionSubjectsForAdmin,
         getSuggestionSubjectOptions,
     } = useBackend();
-
-    const fetchAreas = async () => {
-        const fetchedAreas = await requestAreas();
-        if (fetchedAreas) {
-            fetchedAreas.push({areaName: "All regions", idArea: fetchedAreas.map(area => area.idArea).join(",")});
-            setAreas(fetchedAreas);
-        }
-    }
-
+    
     const fetchFields = async () => {
         const response = await getSuggestionSubjectsForAdmin();
         if (response.status === 200) {
@@ -45,8 +37,15 @@ const UpdateRegionOptions = (props) => {
     }
 
     useEffect(() => {
+        const fetchAreas = async () => {
+            const fetchedAreas = await requestAreas();
+            if (fetchedAreas) {
+                fetchedAreas.push({areaName: "All regions", idArea: fetchedAreas.map(area => area.idArea).join(",")});
+                setAreas(fetchedAreas);
+            }
+        }
         fetchAreas();
-    }, []);
+    }, [requestAreas]);
 
     const clearAreaSelection = () => {
         setSelectedField(null);

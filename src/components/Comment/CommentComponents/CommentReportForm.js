@@ -36,7 +36,6 @@ const CommentReportForm = (props) => {
     }
 
     const handleSubmit = async () => {
-        console.log("Report submitted");
         setStatus((prev) => {
             return {
                 ...prev,
@@ -48,7 +47,6 @@ const CommentReportForm = (props) => {
             reason: reportReason
         };
         const response = await submitReportOnComment(idComment, requestBody);
-        console.log(response);
         const newStatus = {
             pending: false,
             resolved: true
@@ -76,7 +74,7 @@ const CommentReportForm = (props) => {
                         <Grid container direction="column" alignItems="center" justify="center">
                             <Grid item xs={12}>
                                 <Typography variant="h6">
-                                    Submit comment report
+                                    Submit report
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -111,7 +109,7 @@ const CommentReportForm = (props) => {
                     <Grid container direction="column" alignItems="center" justify="flex-end" className={classes.modalContent} fullWidth>
                         <Grid item xs={12} className={classes.modalItem} fullWidth>
                             <Typography  variant="p">
-                                Reported comment:
+                                Reported user experience:
                             </Typography>
                         </Grid>
                         <Grid item xs={12} className={classes.modalItem} fullWidth>
@@ -125,7 +123,7 @@ const CommentReportForm = (props) => {
                         </Grid>
                         <Grid item xs={12} className={classes.modalItem} fullWidth>
                             <Typography  variant="p">
-                                Please explain the reason for reporting the comment above:
+                                Please explain the reason for reporting the experience above:
                             </Typography>
                         </Grid>
                         <Grid item xs={12} className={classes.modalItem} fullWidth>

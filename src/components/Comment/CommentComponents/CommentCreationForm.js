@@ -50,19 +50,17 @@ const CommentCreationForm = (props) => {
   };
 
   const _handleSubmit = async () => {
-      console.log("submitted");
       const comment = {
           commentText: commentTextValue,
           commentSubject: props.subject,
           commentSecondarySubject: null,
           anonymity: !switchState,
-          sentiment: (radioValue == "none" ? null : radioValue)
+          sentiment: (radioValue === "none" ? null : radioValue)
       };
       setSubmitted(true);
       setPending(true);
-      const response = await submitNewComment(comment);
+      await submitNewComment(comment);
       setPending(false);
-      console.log(response);
     }
 
     if (submitted) {
@@ -77,7 +75,7 @@ const CommentCreationForm = (props) => {
                         <CloseIcon />
                     </IconButton>
                     }
-                    title="Sending comment..."
+                    title="Sending experience..."
                     />
                     <CircularProgress 
                     className={classes.progressSpinner}
@@ -91,7 +89,7 @@ const CommentCreationForm = (props) => {
                         <CloseIcon />
                     </IconButton>
                     }
-                    title="Comment created."
+                    title="User experience created."
                 />
             )}
         </Card>
@@ -106,12 +104,12 @@ const CommentCreationForm = (props) => {
             <CloseIcon />
           </IconButton>
         }
-        title="Create your comment below"
+        title="Submit your experience below"
       />
       <Typography></Typography>
       <TextField
         id="comment-text-field"
-        label="Comment text"
+        label="Experience text"
         multiline
         fullWidth
         rows={4}
@@ -160,7 +158,7 @@ const CommentCreationForm = (props) => {
         inputProps={{ "aria-label": "display-username-checkbox" }}
       />
       <Typography className={classes.switchText}>
-        Display your username in your comment
+        Display your username in your experience
       </Typography>
       <Typography className={classes.explanationText}>
         Your username will be displayed as{" "}

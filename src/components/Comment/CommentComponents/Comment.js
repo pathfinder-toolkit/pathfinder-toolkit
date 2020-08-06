@@ -3,12 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAlt';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
@@ -29,17 +23,7 @@ const Comment = (props) => {
     const {
         user
     } = useAuth0();
-
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget);
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    }
-
+    
     const hideContent = () => {
         setDeleted(true);
     }
@@ -49,7 +33,7 @@ const Comment = (props) => {
             <ListItemText
             primary= {
                 <Typography className={classes.commentText}>
-                    Comment deleted
+                    User experience deleted
                 </Typography>
                 }
             />

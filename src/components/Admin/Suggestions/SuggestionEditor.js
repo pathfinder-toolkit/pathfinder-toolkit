@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Grid, TextField, Button, MenuItem } from "@material-ui/core";
 
 import { useBackend } from "../../../utils/BackendProvider";
 import EvaluateCondition from "./EvaluateCondition";
 import PreviewSuggestion from "./PreviewSuggestion";
-import { AssignmentReturnOutlined } from "@material-ui/icons";
 
 const SuggestionEditor = (props) => {
   const classes = props.style;
@@ -55,6 +54,34 @@ const SuggestionEditor = (props) => {
     },
   ];
 
+  const getAreas = useCallback(
+      async () => {
+      const areas = await requestAreas();
+      if (areas) {
+        setAreas(areas);
+      } 
+    },
+    [requestAreas]
+  );
+
+  const getSubjects = useCallback(
+    async () => {
+      setLoading(true);
+      try {
+        const response = await getSuggestionSubjectsForAdmin();
+        if (response.status === 200) {
+          console.log(response.data);
+          setSuggestionSubjects(response.data);
+          getAreas();
+          setLoading(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [getSuggestionSubjectsForAdmin, getAreas]
+  );
+  
   // Initalize
   useEffect(() => {
     getSubjects();
@@ -71,49 +98,26 @@ const SuggestionEditor = (props) => {
         valueType: props.suggestion.valueType
       });
     }
-  }, []);
+  }, [getSubjects, props.suggestion]);
 
-  const getSubjects = async () => {
-    setLoading(true);
-    try {
-      const response = await getSuggestionSubjectsForAdmin();
-      if (response.status === 200) {
-        console.log(response.data);
-        setSuggestionSubjects(response.data);
-        getAreas();
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  const getAreas = async () => {
-    const areas = await requestAreas();
-    if (areas) {
-      setAreas(areas);
-    }
-  };
+
+  
 
   const getSubjectOptions = async (identifier, areas) => {
     if (!selectedAreas) {
-      console.log("no area selected");
       return;
     }
 
-    console.log("fetching options about: " + identifier);
     try {
       const response = await getSuggestionSubjectOptions(identifier, areas);
       setSubjectOptions(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const addCondition = (newCondition) => {
-    console.log("adding new condition: ");
-    console.log(newCondition);
     setConditions((conditions) => [
       ...conditions,
       { condition: newCondition, conditionedBy: subject.identifier },
@@ -125,7 +129,6 @@ const SuggestionEditor = (props) => {
     selectedAreas.forEach((item) => areaIds.push({ id: item.idArea }));
 
     let newSuggestion;
-    let response;
 
     if (props.suggestion) {
       // Edit existing suggestion
@@ -138,7 +141,7 @@ const SuggestionEditor = (props) => {
         areas: areaIds,
       };
 
-      response = await editSuggestion(
+      await editSuggestion(
         newSuggestion,
         props.suggestion.idSuggestion
       );
@@ -151,8 +154,7 @@ const SuggestionEditor = (props) => {
         areas: areaIds,
       };
 
-      response = await submitNewSuggestion(newSuggestion);
-      console.log(response);
+      await submitNewSuggestion(newSuggestion);
     }
 
     if (props.callback) {
@@ -162,14 +164,11 @@ const SuggestionEditor = (props) => {
 
   useEffect(() => {
     if (!selectedAreas) {
-      console.log("no area selected");
       return;
     }
 
     if (subject) {
-      console.log("subject changed: " + subject.identifier);
       if (subject.valueType === "string") {
-        console.log("valueType is string, get options");
 
         let areaIds = [];
         selectedAreas.forEach((item) => areaIds.push(item.idArea));
@@ -219,7 +218,7 @@ const SuggestionEditor = (props) => {
   };
 
   const handleAreaChange = (e) => {
-    const filtered = selectedAreas.filter(area => area.idArea != e.target.value.idArea);
+    const filtered = selectedAreas.filter(area => area.idArea !== e.target.value.idArea);
     const areaList = [
       ...filtered,
       {areaName: e.target.value.areaName, idArea: e.target.value.idArea}

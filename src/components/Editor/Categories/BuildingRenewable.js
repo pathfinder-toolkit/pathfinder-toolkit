@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Fade, Grid, Modal, Button } from "@material-ui/core";
+import { Fade, Grid, Modal, Button } from "@material-ui/core";
 
 import { useEditor } from "../../../utils/EditorProvider";
 import useFormData from "../useFormData";
@@ -24,7 +24,6 @@ const BuildingRenewable = (props) => {
 
   const {
     formData,
-    handleChange,
     addNewEntry,
     addOldEntry,
     deleteEntry,

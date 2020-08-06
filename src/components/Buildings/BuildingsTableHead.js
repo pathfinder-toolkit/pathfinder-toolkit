@@ -10,7 +10,7 @@ const BuildingsTableHead = (props) => {
   const { order, orderBy, onRequestSort, classes, headers } = props;
   
   const createSortHandler = (property) => (event) => {
-    if (property != 'id') {
+    if (property !== 'id') {
         onRequestSort(event, property);
     }
   };

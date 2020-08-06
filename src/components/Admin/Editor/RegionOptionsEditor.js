@@ -18,7 +18,6 @@ const RegionOptionsEditor = (props) => {
     const classes = props.classes;
 
     const [newOptions, setNewOptions] = useState();
-    const [pending, setPending] = useState(false);
 
     const {
         updateAreaOptions
@@ -33,13 +32,12 @@ const RegionOptionsEditor = (props) => {
                 }
             })
         );
-        setPending(true);
     },[props.options])
 
     const handleOptionChange = (e) => {
         setNewOptions(newOptions.map(
             (option) => {
-                return option.id == e.target.id ? {...option, value: e.target.value} : option;
+                return option.id === e.target.id ? {...option, value: e.target.value} : option;
             })
         );
     }
@@ -51,7 +49,7 @@ const RegionOptionsEditor = (props) => {
         }
         setNewOptions(newOptions.filter(
             (option) => {
-                return !(option.id == currentId);
+                return !(option.id === currentId);
             }
         ));
     }
@@ -62,10 +60,8 @@ const RegionOptionsEditor = (props) => {
 
     const handleSubmit = async () => {
         const requestBody = newOptions.map((option) => {return {option: option.value}});
-        setPending(true);
         await updateAreaOptions(props.identifier, props.areas, requestBody);
         await props.refresh();
-        setPending(false);
     }
 
     return <React.Fragment>

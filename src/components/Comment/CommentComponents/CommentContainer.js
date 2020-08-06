@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from '@material-ui/core/Button'
 import Paper from "@material-ui/core/Paper";
 import Switch from "@material-ui/core/Switch";
@@ -76,7 +76,6 @@ const CommentContainer = (props) => {
     const fetchComments = async () => {
         setLoading(true);
         const response = await requestComments(props.subject, pagination.page + 1, pagination.perPage);
-        console.log(response)
         if (response.status === 200) {
             setPagination((prev) => {
                 return {
@@ -108,14 +107,14 @@ const CommentContainer = (props) => {
                 name="switch"
                 inputProps={{ 'aria-label': 'show-comments-checkbox' }}
                 />
-                <Typography className={classes.displayText}>{switchState ? "Hide user comments" : "Show user comments"}</Typography>
+                <Typography className={classes.displayText}>{switchState ? "Hide user experiences" : "Show user experiences"}</Typography>
                 {switchState && (
                 <Comments 
                     comments={comments}
                     classes={classes}
                 >
                     {(pagination.page < pagination.maxPages) && (
-                        <Button onClick={fetchComments}>Show more comments</Button>
+                        <Button onClick={fetchComments}>Show more user experiences</Button>
                     )}
                     {loading && (
                         <CircularProgress />
@@ -124,9 +123,9 @@ const CommentContainer = (props) => {
                 )}
             </React.Fragment>
         )}
-        {comments && (comments.length == 0) && (
+        {comments && (comments.length === 0) && (
             <React.Fragment>
-                <Typography className={classes.displayText}>No comments found, add one below</Typography>
+                <Typography className={classes.displayText}>No experiences found, add one below</Typography>
             </React.Fragment>
         )}
         {!comments && (
@@ -134,7 +133,7 @@ const CommentContainer = (props) => {
                 {loading ? (
                     <CircularProgress />
                 ) : (
-                    <Button onClick={fetchComments}>Show user comments</Button>
+                    <Button onClick={fetchComments}>Show user experiences</Button>
                 )}
             </React.Fragment>
         )}

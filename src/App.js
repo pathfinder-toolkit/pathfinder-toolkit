@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
 import FrontPage from "./sites/FrontPage/FrontPage";
-import LoginPage from "./sites/LoginPage/LoginPage";
 import DesignPage from "./sites/DesignPage/DesignPage";
-import RegisterPage from "./sites/RegisterPage/RegisterPage";
 import FeedbackPage from "./sites/FeedbackPage/FeedbackPage";
 import BuildingsPage from "./sites/BuildingsPage/BuildingsPage";
 import SavedBuildingPage from "./sites/SavedBuildingPage/SavedBuildingPage";
@@ -19,11 +17,8 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={FrontPage}></Route>
-          <Route path="/login" exact component={LoginPage}></Route>
           <Route path="/design/:slug?" exact component={DesignPage}></Route>
           <Route path="/public/building/:slug" exact component={PublicBuildingPage}></Route>
-
-          <PrivateRoute path="/register" exact component={RegisterPage}></PrivateRoute>
           <PrivateRoute path="/feedback" exact component={FeedbackPage}></PrivateRoute>
           <PrivateRoute path="/buildings" exact component={BuildingsPage}></PrivateRoute>
           <PrivateRoute

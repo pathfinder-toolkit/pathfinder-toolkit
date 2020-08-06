@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Typography from "@material-ui/core/Typography";
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
@@ -29,16 +29,19 @@ const ManageCommentReports = ( {style} ) => {
         approveSelectedReportAsAdmin
     } = useBackend();
 
-    const updateReports = async () => {
-        setPending(true);
-        const response = await getCommentReportsForAdmin(page, perPage);
-        console.log(response);
-        if (response.status === 200) {
-            setReports(response.data.reports);
-            setMaxPages(response.data.maxPages);
-        }
-        setPending(false);
-    }
+    const updateReports = useCallback(
+        async () => {
+            setPending(true);
+            const response = await getCommentReportsForAdmin(page, perPage);
+            if (response.status === 200) {
+                setReports(response.data.reports);
+                setMaxPages(response.data.maxPages);
+            }
+            setPending(false);
+        },
+        [getCommentReportsForAdmin, page, perPage]
+    );
+     
 
     const approveReport = async (idReport) => {
         await approveSelectedReportAsAdmin(idReport);
@@ -64,7 +67,7 @@ const ManageCommentReports = ( {style} ) => {
 
     useEffect(() => {
         updateReports();
-    }, [page, perPage]);
+    }, [page, perPage, updateReports]);
 
     return <React.Fragment>
         <Typography variant="h4" component="h4" className={classes.header}>Review comment reports</Typography>

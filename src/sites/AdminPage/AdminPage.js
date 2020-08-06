@@ -32,7 +32,6 @@ const AdminPage = () => {
     useEffect(() => {
         async function fetchData() {
             const data = await requestAdminPrivileges();
-            console.log(data);
             if (data === "Verified") {
                 setGranted(true);
             }
@@ -43,7 +42,7 @@ const AdminPage = () => {
             setGranted(false);
             fetchData();
         }
-    },[loading]);
+    },[loading, requestAdminPrivileges]);
 
     return <React.Fragment>
         <NavigationBar />

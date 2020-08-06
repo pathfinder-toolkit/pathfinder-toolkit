@@ -9,8 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Launch from "@material-ui/icons/Launch";
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import { useBackend } from "../../utils/BackendProvider";
 import history from "../../utils/history";
 
@@ -19,9 +17,6 @@ import BuildingsTableHead from "./BuildingsTableHead";
 import ImageWithModal from "../reusable/ImageWithModal";
 
 import { useAuth0 } from "../../utils/react-auth0-spa"
-
-
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -114,7 +109,7 @@ const BuildingsTable = () => {
     if (!loading) {
       fetchData();
     }
-  },[loading]);
+  },[loading, getStoredBuildings]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';

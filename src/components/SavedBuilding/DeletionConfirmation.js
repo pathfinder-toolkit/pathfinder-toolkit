@@ -40,7 +40,6 @@ const DeletionConfirmation = (props) => {
     }
 
     const handleConfirm = async () => {
-        console.log("Confirmed");
         setStatus((prev) => {
             return {...prev, pending: true}
         });
@@ -142,7 +141,7 @@ const DeletionConfirmation = (props) => {
                             <Button
                             variant="contained"
                             color="secondary"
-                            disabled={confirmationText != props.slug}
+                            disabled={confirmationText !== props.slug}
                             onClick={handleConfirm}
                             >
                                 Confirm deletion

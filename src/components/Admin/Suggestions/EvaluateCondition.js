@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   TextField,
@@ -18,12 +18,6 @@ const EvaluateCondition = (props) => {
   } = props.expression;
   const [operator, setOperator] = useState("=");
 
-  useEffect(() => {
-    if (expression) {
-      console.log("expression changed: " + expression);
-    }
-  }, [expression]);
-
   const handleStringExpression = (e) => {
     setExpression(e.target.value);
   };
@@ -35,7 +29,6 @@ const EvaluateCondition = (props) => {
   };
 
   const newCondition = () => {
-    console.log("newCondition" + expression + " " + valueType);
 
     let condition;
 
