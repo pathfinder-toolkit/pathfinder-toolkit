@@ -41,6 +41,8 @@ export const EditorProvider = ({ children }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [navigationEnabled, setNavigationEnabled] = useState(false);
 
+  const [buildingNameEntered, setBuildingNameEntered] = useState(false);
+
   const [suggestions, setSuggestions] = useState();
   const [suggestionsLoading, setSuggestionsLoading] = useState(true);
   const [suggestionsAreaId, setSuggestionsAreaId] = useState();
@@ -107,6 +109,9 @@ export const EditorProvider = ({ children }) => {
   };
 
   const nextStep = () => {
+    // if (!buildingNameEntered && activeStep + 1 > 1) {
+    //    return;
+    // }
     clearSuggestions();
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -117,11 +122,22 @@ export const EditorProvider = ({ children }) => {
   };
 
   const setStep = (step) => {
+    if (!buildingNameEntered && step > 1) {
+      return;
+    }
     if (navigationEnabled) {
       setActiveStep(step);
       clearSuggestions();
     }
   };
+
+  useEffect(() => {
+    if (!buildingNameEntered) {
+      setNavigationEnabled(false);
+    } else {
+      setNavigationEnabled(true);
+    }
+  }, [buildingNameEntered]);
 
   const setSavedProperty = (category, propertyName, newValue) => {
     setBuildingInformation((buildingInformation) => ({
@@ -279,6 +295,7 @@ export const EditorProvider = ({ children }) => {
         subjects,
         postBuilding,
         updateBuilding,
+        setBuildingNameEntered,
       }}
     >
       {children}

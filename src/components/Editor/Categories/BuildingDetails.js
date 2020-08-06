@@ -19,21 +19,29 @@ import UploadContainer from "../Upload/UploadContainer";
 import { Image } from "cloudinary-react";
 
 const BuildingDetails = (props) => {
-  const { buildingOptions } = useEditor();
-
+  const { setBuildingNameEntered } = useEditor();
   const { isAuthenticated } = useAuth0();
 
   const style = props.style;
 
-  const { formData, handleChange, addImage, addNewEntry } = useFormData(
-    "details"
-  );
+  const { formData, handleChange, addImage } = useFormData("details");
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
     setAnimation(true);
     return () => {};
   }, []);
+
+  // Require user to enter name, before the user can continue.
+  // Name is the only required field, used for generating slug.
+  useEffect(() => {
+    if (formData.name.value.length > 0) {
+      console.log("Building name entered");
+      setBuildingNameEntered(true);
+    } else {
+      setBuildingNameEntered(false);
+    }
+  }, [formData.name.value]);
 
   const [open, setOpen] = useState(false);
 
