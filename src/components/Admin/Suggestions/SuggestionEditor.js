@@ -81,7 +81,7 @@ const SuggestionEditor = (props) => {
     },
     [getSuggestionSubjectsForAdmin, getAreas]
   );
-
+  
   // Initalize
   useEffect(() => {
     getSubjects();
@@ -104,22 +104,18 @@ const SuggestionEditor = (props) => {
 
   
 
-  const getSubjectOptions = useCallback(
-    async (identifier, areas) => {
-      if (!selectedAreas) {
-        return;
-      }
-  
-      try {
-        const response = await getSuggestionSubjectOptions(identifier, areas);
-        setSubjectOptions(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    [getSuggestionSubjectOptions, selectedAreas]
-  );
-  
+  const getSubjectOptions = async (identifier, areas) => {
+    if (!selectedAreas) {
+      return;
+    }
+
+    try {
+      const response = await getSuggestionSubjectOptions(identifier, areas);
+      setSubjectOptions(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const addCondition = (newCondition) => {
     setConditions((conditions) => [
@@ -182,7 +178,7 @@ const SuggestionEditor = (props) => {
         setSubjectOptions();
       }
     }
-  }, [subject, selectedAreas, getSubjectOptions]);
+  }, [subject, selectedAreas]);
 
   // -- Clear conditions when subject changes. Temporary fix for usability, since this functionality does not exist in backend yet.
   // -- Remove the useEffect function below, when this functionality exists in the backend
@@ -191,7 +187,7 @@ const SuggestionEditor = (props) => {
       const filteredConditions = conditions.filter(condition => condition.conditionedBy === subject.identifier);
       setConditions(filteredConditions);
     }
-  }, [subject, conditions]);
+  }, [subject]);
   // -- End of condition clear fix for usability
 
 

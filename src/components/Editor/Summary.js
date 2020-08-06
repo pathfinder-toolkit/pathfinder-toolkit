@@ -84,7 +84,7 @@ const Summary = (props) => {
   const submitUpdateBuilding = async () => {
     setOpen(true);
     const message = await updateBuilding();
-    if (message.status === "200") {
+    if (message.status === 200) {
       setMessage("Building updated");
     }
   };
