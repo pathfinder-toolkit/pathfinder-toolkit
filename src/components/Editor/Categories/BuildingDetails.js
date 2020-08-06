@@ -36,7 +36,6 @@ const BuildingDetails = (props) => {
   // Name is the only required field, used for generating slug.
   useEffect(() => {
     if (formData.name.value.length > 0) {
-      console.log("Building name entered");
       setBuildingNameEntered(true);
     } else {
       setBuildingNameEntered(false);

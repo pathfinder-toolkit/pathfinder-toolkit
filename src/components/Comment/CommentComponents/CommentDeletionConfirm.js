@@ -41,7 +41,6 @@ const CommentDeletionConfirm = (props) => {
         });
         const idComment = props.comment.idComment;
         const response = await deleteCommentAsAdmin(idComment);
-        console.log(response);
         const newStatus = {
             pending: false,
             resolved: true

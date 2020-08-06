@@ -80,7 +80,6 @@ const ActionToolbar = (props) => {
       publicStatus: !publicStatus
     };
     const response = await updateBuildingPublicStatus(props.slug, requestBody);
-    console.log(response);
     if (response.status === 200) {
       setPublicStatus(prev => !prev);
     }

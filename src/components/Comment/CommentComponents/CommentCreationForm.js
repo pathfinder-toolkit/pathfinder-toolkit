@@ -50,7 +50,6 @@ const CommentCreationForm = (props) => {
   };
 
   const _handleSubmit = async () => {
-      console.log("submitted");
       const comment = {
           commentText: commentTextValue,
           commentSubject: props.subject,
@@ -62,7 +61,6 @@ const CommentCreationForm = (props) => {
       setPending(true);
       const response = await submitNewComment(comment);
       setPending(false);
-      console.log(response);
     }
 
     if (submitted) {

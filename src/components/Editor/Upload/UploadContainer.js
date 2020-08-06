@@ -69,7 +69,6 @@ const UploadContainer = (props) => {
     setUserImagesLoading(true);
     const data = await requestUserImages();
     setUserImages(data);
-    console.log(data);
     setUserImagesLoading(false);
   };
 

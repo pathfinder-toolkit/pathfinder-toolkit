@@ -76,7 +76,6 @@ const CommentContainer = (props) => {
     const fetchComments = async () => {
         setLoading(true);
         const response = await requestComments(props.subject, pagination.page + 1, pagination.perPage);
-        console.log(response)
         if (response.status === 200) {
             setPagination((prev) => {
                 return {

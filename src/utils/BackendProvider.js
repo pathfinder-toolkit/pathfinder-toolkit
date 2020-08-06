@@ -25,7 +25,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
       } else {
@@ -42,7 +41,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address);
-      console.log(response.data);
 
       //const areas = response.data.map((area) => {
       //  return [area.areaName, area.idArea];
@@ -70,7 +68,6 @@ export const BackendProvider = ({ children }) => {
       for (const component of response.data.components) {
         options[component.componentName] = component.options;
       }
-      console.log(options);
 
       return options;
     } catch (error) {
@@ -89,11 +86,9 @@ export const BackendProvider = ({ children }) => {
         "?area= " +
         area
     );
-    console.log("get suggestions about: " + subject + " | " + value);
 
     try {
       const response = await axios.get(address);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -108,7 +103,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -144,11 +138,10 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
-      return error.response
+      return error.response;
     }
   };
 
@@ -156,8 +149,6 @@ export const BackendProvider = ({ children }) => {
     const token = await getTokenSilently();
 
     const address = encodeURI(process.env.REACT_APP_API_ROOT + "/building");
-
-    console.log(requestBody);
 
     const axiosConfig = {
       headers: {
@@ -168,7 +159,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.post(address, requestBody, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response;
       } else {
@@ -185,8 +175,6 @@ export const BackendProvider = ({ children }) => {
 
     const address = encodeURI(process.env.REACT_APP_API_ROOT + "/comments");
 
-    console.log(requestBody);
-
     const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -196,7 +184,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.post(address, requestBody, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
       } else {
@@ -213,9 +200,6 @@ export const BackendProvider = ({ children }) => {
 
     const address = encodeURI(process.env.REACT_APP_API_ROOT + "/image");
 
-    console.log("File:");
-    console.log(file);
-
     const axiosConfig = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -228,7 +212,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.post(address, formData, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
       } else {
@@ -254,7 +237,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
       } else {
@@ -280,7 +262,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.delete(address, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
       } else {
@@ -306,13 +287,13 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response.data;
       } else {
         return null;
       }
     } catch (error) {
+      console.log(error);
       return null;
     }
   };
@@ -324,7 +305,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.post(address, requestBody);
-      console.log(response);
       if (Object.keys(response).includes("data")) {
         return response;
       } else {
@@ -352,7 +332,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -375,7 +354,6 @@ export const BackendProvider = ({ children }) => {
     };
     try {
       const response = await axios.put(address, request, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -398,7 +376,6 @@ export const BackendProvider = ({ children }) => {
     };
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -421,7 +398,6 @@ export const BackendProvider = ({ children }) => {
     };
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -436,8 +412,6 @@ export const BackendProvider = ({ children }) => {
       process.env.REACT_APP_API_ROOT + "/admin/suggestion"
     );
 
-    console.log(request);
-
     const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
@@ -447,7 +421,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.post(address, request, axiosConfig);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -461,7 +434,6 @@ export const BackendProvider = ({ children }) => {
     const address = encodeURI(
       `${process.env.REACT_APP_API_ROOT}/admin/options/${identifier}?areas=${areas}`
     );
-    console.log(request);
 
     const axiosConfig = {
       headers: {
@@ -472,7 +444,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.put(address, request, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -487,7 +458,6 @@ export const BackendProvider = ({ children }) => {
       process.env.REACT_APP_API_ROOT + `/admin/suggestion/${id}`
     );
 
-    console.log(request);
 
     const axiosConfig = {
       headers: {
@@ -498,7 +468,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.put(address, request, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -522,7 +491,6 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.delete(address, axiosConfig);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -545,7 +513,6 @@ export const BackendProvider = ({ children }) => {
     };
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -568,7 +535,6 @@ export const BackendProvider = ({ children }) => {
     };
     try {
       const response = await axios.put(address, requestBody, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -591,7 +557,6 @@ export const BackendProvider = ({ children }) => {
     };
     try {
       const response = await axios.delete(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
@@ -615,13 +580,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.post(address, requestBody, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const deleteCommentAsAdmin = async (idComment) => {
     const token = await getTokenSilently();
@@ -639,13 +603,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.delete(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const getCommentReportsAmountForAdmin = async () => {
     const token = await getTokenSilently();
@@ -663,13 +626,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const getCommentReportsForAdmin = async (page = 1, perPage = 5) => {
     const token = await getTokenSilently();
@@ -687,13 +649,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const rejectSelectedReportAsAdmin = async (idReport) => {
     const token = await getTokenSilently();
@@ -711,13 +672,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.patch(address, null, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const approveSelectedReportAsAdmin = async (idReport) => {
     const token = await getTokenSilently();
@@ -735,13 +695,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.patch(address, null, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const updateBuildingPublicStatus = async (slug, requestBody) => {
     const token = await getTokenSilently();
@@ -759,13 +718,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.patch(address, requestBody, axiosConfig);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   const getPublicBuildingFromSlug = async (slug) => {
     const address = encodeURI(
@@ -774,13 +732,12 @@ export const BackendProvider = ({ children }) => {
 
     try {
       const response = await axios.get(address);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error.response.data);
       return error.response;
     }
-  }
+  };
 
   return (
     <BackendContext.Provider
@@ -817,7 +774,7 @@ export const BackendProvider = ({ children }) => {
         rejectSelectedReportAsAdmin,
         approveSelectedReportAsAdmin,
         updateBuildingPublicStatus,
-        getPublicBuildingFromSlug
+        getPublicBuildingFromSlug,
       }}
     >
       {children}

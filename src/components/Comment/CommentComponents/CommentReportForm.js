@@ -36,7 +36,6 @@ const CommentReportForm = (props) => {
     }
 
     const handleSubmit = async () => {
-        console.log("Report submitted");
         setStatus((prev) => {
             return {
                 ...prev,
@@ -48,7 +47,6 @@ const CommentReportForm = (props) => {
             reason: reportReason
         };
         const response = await submitReportOnComment(idComment, requestBody);
-        console.log(response);
         const newStatus = {
             pending: false,
             resolved: true
