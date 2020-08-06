@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 const PropertyList = (props) => {
   const [selectedProperty, setSelectedProperty] = useState();
   const data = props.data;
-  //data.sort((a, b) => (a.year < b.year ? 1 : -1));
 
   useEffect(() => {
     setSelectedProperty(Object.keys(data)[0]);
@@ -79,7 +78,7 @@ const PropertyList = (props) => {
         {selectedProperty &&
           data[selectedProperty].length > 1 &&
           data[selectedProperty]
-            .sort((a, b) => (a.year > b.year ? 1 : -1))
+            .sort((a, b) => (a.usageStartYear < b.usageStartYear ? 1 : -1))
             .map((item, index) => {
               return (
                 <ListItem className={classes.listItem}>
