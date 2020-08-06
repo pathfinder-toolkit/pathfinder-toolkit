@@ -5,7 +5,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 const PanelImage = ({image, style}) => {
     return <Grid item>
         <CardMedia>
-        <img src={image} className={style}></img>
+        <img src={image} className={style} alt="instruction"></img>
         </CardMedia>
     </Grid>
 }

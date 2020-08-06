@@ -56,7 +56,7 @@ const CommentCreationForm = (props) => {
           commentSubject: props.subject,
           commentSecondarySubject: null,
           anonymity: !switchState,
-          sentiment: (radioValue == "none" ? null : radioValue)
+          sentiment: (radioValue === "none" ? null : radioValue)
       };
       setSubmitted(true);
       setPending(true);

@@ -53,13 +53,13 @@ const EditSuggestions = (props) => {
 
   useEffect(() => {
     getSubjects();
-  }, []);
+  });
 
   useEffect(() => {
     if (selectedSubject) {
       fetchSuggestions(selectedSubject.identifier);
     }
-  }, [selectedSubject]);
+  }, [selectedSubject, fetchSuggestions]);
 
   const handleSubjectChange = (e) => {
     setSelectedSubject(e.target.value);

@@ -60,7 +60,7 @@ const PublicBuildingPage = (props) => {
 
     useEffect(() => {
         fetchData();
-    }, [props]);
+    }, [props, fetchData]);
 
     return (
         <Container maxWidth={false} className={classes.root}>
