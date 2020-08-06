@@ -6,7 +6,6 @@ import CategoryItem from "./CategoryItem.js";
 import CategoryItemChangelog from "./CategoryItemChangelog";
 
 import GeneralBuildingDetails from "./GeneralBuildingDetails.js";
-import ImageWithModal from "../../reusable/ImageWithModal";
 
 
 const DetailsCategory = (props) => {

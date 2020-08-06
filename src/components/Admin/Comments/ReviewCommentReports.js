@@ -63,7 +63,7 @@ const ManageCommentReports = ( {style} ) => {
 
     useEffect(() => {
         updateReports();
-    }, [page, perPage]);
+    }, [page, perPage, updateReports]);
 
     return <React.Fragment>
         <Typography variant="h4" component="h4" className={classes.header}>Review comment reports</Typography>

@@ -45,8 +45,6 @@ const useStyles = makeStyles((theme) => ({
 const NavigationBar = (props) => {
   const { loading, isAuthenticated, loginWithRedirect, logout, isAdmin } = useAuth0();
 
-  const {fakeLogout} = useBackend();
-
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -62,11 +60,6 @@ const NavigationBar = (props) => {
 
   const redirectTo = (addr) => {
     history.push(addr);
-  };
-
-  const _logout = () => {
-    setLogoutAlert(true);
-    fakeLogout();
   };
 
   const _logoutAlertClose = () => {
