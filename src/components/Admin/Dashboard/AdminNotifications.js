@@ -13,7 +13,6 @@ const AdminNotifications = ( {classes} ) => {
 
     const fetchAmountOfReports = async () => {
         const response = await getCommentReportsAmountForAdmin();
-        console.log(response);
         if (response.status === 200) {
             if (response.data.amount > 0) {
                 setReportAmount(response.data.amount);

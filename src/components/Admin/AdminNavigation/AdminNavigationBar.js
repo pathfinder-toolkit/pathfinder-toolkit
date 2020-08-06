@@ -55,7 +55,6 @@ const AdminNavigationBar = () => {
     };
 
     const handleSelection = (selection) => {
-        console.log(selection);
         setSelectedComponent(selection);
     }
 

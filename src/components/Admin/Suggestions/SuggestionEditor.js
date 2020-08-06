@@ -78,7 +78,6 @@ const SuggestionEditor = (props) => {
     try {
       const response = await getSuggestionSubjectsForAdmin();
       if (response.status === 200) {
-        console.log(response.data);
         setSuggestionSubjects(response.data);
         getAreas();
         setLoading(false);
@@ -97,23 +96,18 @@ const SuggestionEditor = (props) => {
 
   const getSubjectOptions = async (identifier, areas) => {
     if (!selectedAreas) {
-      console.log("no area selected");
       return;
     }
 
-    console.log("fetching options about: " + identifier);
     try {
       const response = await getSuggestionSubjectOptions(identifier, areas);
       setSubjectOptions(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const addCondition = (newCondition) => {
-    console.log("adding new condition: ");
-    console.log(newCondition);
     setConditions((conditions) => [
       ...conditions,
       { condition: newCondition, conditionedBy: subject.identifier },
@@ -152,7 +146,6 @@ const SuggestionEditor = (props) => {
       };
 
       response = await submitNewSuggestion(newSuggestion);
-      console.log(response);
     }
 
     if (props.callback) {
@@ -162,14 +155,11 @@ const SuggestionEditor = (props) => {
 
   useEffect(() => {
     if (!selectedAreas) {
-      console.log("no area selected");
       return;
     }
 
     if (subject) {
-      console.log("subject changed: " + subject.identifier);
       if (subject.valueType === "string") {
-        console.log("valueType is string, get options");
 
         let areaIds = [];
         selectedAreas.forEach((item) => areaIds.push(item.idArea));

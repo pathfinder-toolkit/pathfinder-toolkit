@@ -53,7 +53,6 @@ const NavigationBar = (props) => {
   const [logoutAlert, setLogoutAlert] = useState(false);
 
   const handleMenuClose = (event) => {
-    console.log(anchorEl);
     setAnchorEl(null);
   };
 

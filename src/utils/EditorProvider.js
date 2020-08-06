@@ -131,10 +131,6 @@ export const EditorProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("navigation: " + navigationEnabled);
-  }, [navigationEnabled]);
-
-  useEffect(() => {
     if (!buildingNameEntered) {
       setNavigationEnabled(false);
     } else {
@@ -181,9 +177,7 @@ export const EditorProvider = ({ children }) => {
 
   const getSuggestions = async (subject, value, areaId) => {
     setSuggestionsLoading(true);
-    console.log(
-      "subject: " + subject + "|value: " + value + "|area: " + areaId
-    );
+
     if (subject === null || value === null || value.length === 0) {
       setSuggestionsLoading(false);
       return;
@@ -191,8 +185,6 @@ export const EditorProvider = ({ children }) => {
 
     try {
       const data = await requestSuggestions(subject, value, areaId);
-      console.log("Suggestions: " + subject);
-      console.log(data);
 
       const filteredSuggestions = suggestions.filter(
         (suggestion) => suggestion.identifier !== subject
@@ -224,8 +216,6 @@ export const EditorProvider = ({ children }) => {
     try {
       const response = await requestComments(subject, 1, 3);
       const data = response.data.comments;
-      console.log("Comments: " + subject);
-      console.log(response.data.comments);
       if (data.length > 0) {
         const allComments = [...comments, ...data];
         const noDuplicateComments = allComments.filter(
@@ -256,7 +246,6 @@ export const EditorProvider = ({ children }) => {
   };
 
   const updateBuilding = async () => {
-    console.log("updating: " + buildingInformation.slug);
     const response = updateBuildingData(
       buildingInformation.slug,
       buildingInformation

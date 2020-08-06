@@ -32,7 +32,6 @@ const ManageCommentReports = ( {style} ) => {
     const updateReports = async () => {
         setPending(true);
         const response = await getCommentReportsForAdmin(page, perPage);
-        console.log(response);
         if (response.status === 200) {
             setReports(response.data.reports);
             setMaxPages(response.data.maxPages);

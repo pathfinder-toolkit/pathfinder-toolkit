@@ -83,10 +83,7 @@ const AreaSelection = (props) => {
   // and we want to create a new building,
   // the previous data needs to be cleared.
   const resetBuildingData = async () => {
-    console.log(Object.keys(buildingInformation));
     if (Object.keys(buildingInformation).includes("slug")) {
-      console.log("Invalid building data in storage, removing");
-
       const model = await requestBuildingModel();
       props.loadBuildingModel(model);
       setSelectedArea("");
@@ -102,7 +99,6 @@ const AreaSelection = (props) => {
   }, [mapLoading]);
 
   useEffect(() => {
-    console.log(selectedArea);
     async function fetchData() {
       const data = await requestAreaOptions(findAreaIdByName(selectedArea));
       setBuildingOptions(data);

@@ -40,7 +40,6 @@ const DeletionConfirmation = (props) => {
     }
 
     const handleConfirm = async () => {
-        console.log("Confirmed");
         setStatus((prev) => {
             return {...prev, pending: true}
         });

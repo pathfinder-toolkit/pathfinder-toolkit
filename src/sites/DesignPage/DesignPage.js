@@ -16,12 +16,6 @@ const DesignPage = (props) => {
 
   const classes = useStyles();
 
-  useEffect(() => {
-    if (props.match.params.slug) {
-      console.log("slug: " + props.match.params.slug);
-    }
-  }, []);
-
   return (
     <React.Fragment>
       <NavigationBar />

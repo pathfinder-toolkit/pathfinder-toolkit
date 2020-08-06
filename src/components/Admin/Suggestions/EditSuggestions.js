@@ -32,7 +32,6 @@ const EditSuggestions = (props) => {
     try {
       const response = await getSuggestionSubjectsForAdmin();
       if (response.status === 200) {
-        console.log(response.data);
         setSuggestionSubjects(response.data);
       }
     } catch (error) {
@@ -41,10 +40,8 @@ const EditSuggestions = (props) => {
   };
 
   const fetchSuggestions = async (identifier) => {
-    console.log("fetching suggestions about :" + identifier);
     try {
       const response = await getAdminSuggestions(identifier);
-      console.log(response.data);
       setSuggestions(response.data);
     } catch (error) {
       console.log(error);

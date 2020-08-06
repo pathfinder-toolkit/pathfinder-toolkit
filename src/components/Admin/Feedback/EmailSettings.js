@@ -22,7 +22,6 @@ const EmailSettings = (props) => {
         setRecipients(false);
         const response = await getFeedbackRecipients();
         if (response.status === 200) {
-            console.log(response.data);
             setRecipients(response.data);
         } else {
             setError(response.data)
@@ -44,7 +43,6 @@ const EmailSettings = (props) => {
                 email: newRecipient
             }
         ]
-        console.log(request);
         setNewRecipient("");
         setRecipients(false);
         setPending(true);
