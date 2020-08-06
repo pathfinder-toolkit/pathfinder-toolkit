@@ -85,7 +85,7 @@ const CommentDeletionConfirm = (props) => {
                         <Grid item xs={12} className={classes.modalItem} fullWidth>
                             <Typography  variant="p">
                                 {status.success ? (
-                                    "Comment deleted"
+                                    "Experience deleted"
                                 ) : (
                                     "Deletion failed to process, try again later"
                                 )}
@@ -104,7 +104,7 @@ const CommentDeletionConfirm = (props) => {
                     <Grid container direction="column" alignItems="center" justify="flex-end" className={classes.modalContent} fullWidth>
                         <Grid item xs={12} className={classes.modalItem} fullWidth>
                             <Typography  variant="p">
-                                Selected comment:
+                                Selected experience:
                             </Typography>
                         </Grid>
                         <Grid item xs={12} className={classes.modalItem} fullWidth>

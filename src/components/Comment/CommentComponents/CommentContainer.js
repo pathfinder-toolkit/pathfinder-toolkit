@@ -108,14 +108,14 @@ const CommentContainer = (props) => {
                 name="switch"
                 inputProps={{ 'aria-label': 'show-comments-checkbox' }}
                 />
-                <Typography className={classes.displayText}>{switchState ? "Hide user comments" : "Show user comments"}</Typography>
+                <Typography className={classes.displayText}>{switchState ? "Hide user experiences" : "Show user experiences"}</Typography>
                 {switchState && (
                 <Comments 
                     comments={comments}
                     classes={classes}
                 >
                     {(pagination.page < pagination.maxPages) && (
-                        <Button onClick={fetchComments}>Show more comments</Button>
+                        <Button onClick={fetchComments}>Show more user experiences</Button>
                     )}
                     {loading && (
                         <CircularProgress />
@@ -126,7 +126,7 @@ const CommentContainer = (props) => {
         )}
         {comments && (comments.length == 0) && (
             <React.Fragment>
-                <Typography className={classes.displayText}>No comments found, add one below</Typography>
+                <Typography className={classes.displayText}>No experiences found, add one below</Typography>
             </React.Fragment>
         )}
         {!comments && (
@@ -134,7 +134,7 @@ const CommentContainer = (props) => {
                 {loading ? (
                     <CircularProgress />
                 ) : (
-                    <Button onClick={fetchComments}>Show user comments</Button>
+                    <Button onClick={fetchComments}>Show user experiences</Button>
                 )}
             </React.Fragment>
         )}

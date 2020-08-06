@@ -49,7 +49,7 @@ const Comment = (props) => {
             <ListItemText
             primary= {
                 <Typography className={classes.commentText}>
-                    Comment deleted
+                    User experience deleted
                 </Typography>
                 }
             />
