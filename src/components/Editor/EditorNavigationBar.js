@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Paper } from "@material-ui/core";
 
 import { useEditor } from "../../utils/EditorProvider";
+import { useEffect } from "react";
 
 const EditorNavigationBar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,7 @@ const EditorNavigationBar = () => {
     nextStep,
     previousStep,
     navigationEnabled,
+    buildingNameEntered,
   } = useEditor();
   const steps = getSteps();
 
@@ -41,11 +43,15 @@ const EditorNavigationBar = () => {
           <Button
             variant="contained"
             color="primary"
-            disabled={!navigationEnabled}
+            disabled={
+              !navigationEnabled ||
+              activeStep === steps.length - 1 ||
+              (!buildingNameEntered && activeStep === 1)
+            }
             onClick={nextStep}
             className={classes.button}
           >
-            {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            Next
           </Button>
         </Paper>
       </Grid>
