@@ -56,8 +56,9 @@ const BuildingDetails = (props) => {
                 <TextField
                   autoFocus
                   className={style.formComponent}
-                  label="Building name *"
+                  label="Building name"
                   value={formData.name.value}
+                  required
                   onChange={(e) => handleChange(e, "name", false)}
                 />
               </Grid>
