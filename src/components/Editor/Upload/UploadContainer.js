@@ -74,7 +74,7 @@ const UploadContainer = (props) => {
 
   useEffect(() => {
     fetchImages();
-  }, []);
+  });
 
   const classes = useStyles();
 

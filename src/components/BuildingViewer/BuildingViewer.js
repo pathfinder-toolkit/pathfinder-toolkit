@@ -90,7 +90,9 @@ const BuildingViewer = (props) => {
                                     newItem.subject = categoryItem;
                                     categoryItemsWithSuggestions = categoryItemsWithSuggestions.concat(categoryItemInArray);
                                 }
+                                
                             }
+                            return null;
                         })
                     }
                 }

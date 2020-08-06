@@ -5,7 +5,6 @@ const DropdownSelect = (props) => {
   const value = props.value ? props.value : "";
   const data = props.data;
   const label = props.label;
-  const id = props.id ? props.id : "empty";
   const className = props.className ? props.className : "";
   const defaultValue = props.defaultValue ? props.defaultValue : "";
 

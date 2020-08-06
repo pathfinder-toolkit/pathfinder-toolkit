@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block"
   },
   image: {
+    maxWidth: "60vw",
     paddingBottom: theme.spacing(1)
   },
   gap: {
