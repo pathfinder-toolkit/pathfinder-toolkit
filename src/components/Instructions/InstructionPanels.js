@@ -25,6 +25,11 @@ import panel6b from "../../external/images/instructions/panel6b.JPG";
 import panel6c from "../../external/images/instructions/panel6c.JPG";
 import panel6d from "../../external/images/instructions/panel6d.JPG";
 import panel6e from "../../external/images/instructions/panel6e.JPG";
+import panel7a from "../../external/images/instructions/panel7a.JPG";
+import panel7b from "../../external/images/instructions/panel7b.JPG";
+import panel7c from "../../external/images/instructions/panel7c.JPG";
+import panel7d from "../../external/images/instructions/panel7d.JPG";
+import panel7e from "../../external/images/instructions/panel7e.JPG";
 
 const useStyles = makeStyles((theme) => ({
   panelContainer: {
@@ -167,6 +172,10 @@ const InstructionPanels = () => {
             </PanelParagraph>
             <PanelImage image={panel4b} style={classes.image} />
             <PanelParagraph classes={classes}>
+              At a later step, you are able to submit your own experiences as well.
+            </PanelParagraph>
+            <PanelGap style={classes.gap} />
+            <PanelParagraph classes={classes}>
               By clicking on the blue tags, you can select which components you want to see our suggestions or other users' experiences about.
             </PanelParagraph>
             <PanelGap style={classes.gap} />
@@ -233,11 +242,14 @@ const InstructionPanels = () => {
         <ExpansionPanelDetails>
           <Grid container direction="column">
             <PanelParagraph classes={classes}>
-              In the Summary page, you will see the full building preview with all the data you input. You can go back to the previous pages and edit them, if you wish to add more information.
+              In the Summary page, you will see the full building preview with all the data you input.
+              You can go back to the previous pages and edit them, if you wish to add more information.
             </PanelParagraph>
             <PanelImage image={panel6a} style={classes.image} />
             <PanelParagraph classes={classes}>
-              If you haven't already created an account, now would be a good time to register, so you can store your input information for later. The information you input into Pathfinder will be saved while you create an account.
+              If you haven't already created an account, now would be a good time to register,
+              so you can store your input information for later. The information you input into Pathfinder will be 
+              saved while you create an account.
             </PanelParagraph>
             <PanelParagraph classes={classes}>
               Start by clicking on the notification that appears on top of Summary page
@@ -274,7 +286,37 @@ const InstructionPanels = () => {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Grid container direction="column">
-            
+            <PanelParagraph classes={classes}>
+              The viewer page has a selection of the most important suggestions we have for you at the top,
+              followed by a list of all the information you provided as well as all the suggestions we have for each
+              part, and you can view other users' experiences about each individual part as well.
+            </PanelParagraph>
+            <PanelImage image={panel7a} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              You can get back to this page later logging in and clicking on the profile button on the top right of the navigation bar,
+              then selecting Designed buildings
+            </PanelParagraph>
+            <PanelImage image={panel7b} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              and then selecting the building you want to access from the list
+            </PanelParagraph>
+            <PanelImage image={panel7c} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              You can use the user actions on the right to make the building public, delete it or go back to the editor and update its details.
+            </PanelParagraph>
+            <PanelImage image={panel7d} style={classes.image} />
+            <PanelParagraph classes={classes}>
+              If you choose to make the building public, you will get another link to access the public page of your building.
+              You can then pass this link on to other people, and they can see the same page you are seeing as well. Otherwise, only you will be
+              able to see your building, while you're logged in.
+            </PanelParagraph>
+            <PanelGap style={classes.gap} />
+            <PanelParagraph classes={classes}>
+              Feel free to experiment with other features, such as creating user experiences. Your feedback is appreciated, and will be taken
+              into consideration when further developing Pathfinder. You can submit your feedback by clicking on the account icon while logged in
+              at the top navigation bar.
+            </PanelParagraph>
+            <PanelImage image={panel7e} style={classes.image} />
           </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
