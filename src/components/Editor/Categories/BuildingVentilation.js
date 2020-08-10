@@ -96,7 +96,7 @@ const BuildingVentilation = (props) => {
                     className={style.formButton}
                     color="primary"
                     variant="outlined"
-                    onClick={setModal}
+                    onClick={() => setProperty("ventilationSystem")}
                   >
                     +
                   </Button>
