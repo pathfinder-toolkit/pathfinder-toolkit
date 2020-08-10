@@ -23,16 +23,9 @@ const BuildingVentilation = (props) => {
   const [open, setOpen] = useState(false);
   const [property, setProperty] = useState();
 
-  const setModal = () => {
-    setOpen(true);
-  };
-
-  const {
-    formData,
-    addNewEntry,
-    addOldEntry,
-    deleteEntry,
-  } = useFormData("ventilation");
+  const { formData, addNewEntry, addOldEntry, deleteEntry } = useFormData(
+    "ventilation"
+  );
 
   const [animation, setAnimation] = useState(false);
   useEffect(() => {
@@ -102,16 +95,6 @@ const BuildingVentilation = (props) => {
                   </Button>
                 )}
               </Grid>
-              {formData?.ventilationSystem.length > 1 && (
-                <Grid item sm={4}>
-                  <PropertyList
-                    handleDeletion={(propertyName, index) =>
-                      deleteEntry("ventilationSystem", index)
-                    }
-                    data={formData.ventilationSystem}
-                  />
-                </Grid>
-              )}
             </Grid>
           </div>
         </Grid>
