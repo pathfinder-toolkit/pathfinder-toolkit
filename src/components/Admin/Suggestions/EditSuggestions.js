@@ -99,7 +99,13 @@ const EditSuggestions = (props) => {
                 }
               />
               <ListItemSecondaryAction>
-                <Button onClick={() => setSelectedSuggestion()}>x</Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => setSelectedSuggestion()}
+                >
+                  x
+                </Button>
               </ListItemSecondaryAction>
             </ListItem>
           </List>

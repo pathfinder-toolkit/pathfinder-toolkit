@@ -39,7 +39,7 @@ const AdminPageContainer = () => {
       marginLeft: theme.spacing(1),
     },
     row: {
-      marginBottom: theme.spacing(1),  
+      marginBottom: theme.spacing(1),
     },
     targetSelect: {
       marginBottom: theme.spacing(0),
@@ -55,40 +55,40 @@ const AdminPageContainer = () => {
     listItem: {
       marginLeft: theme.spacing(1),
       marginTop: theme.spacing(0.5),
-      marginBottom: theme.spacing(0.5)
+      marginBottom: theme.spacing(0.5),
     },
     tableRoot: {
       margin: theme.spacing(1),
-      maxWidth: "98%"
+      maxWidth: "98%",
     },
     commentHeader: {
       fontSizeAdjust: 0.6,
-      lineHeight:'180%'
-      },
-      commentText: {
-          fontSizeAdjust: 0.5,
-          lineHeight: 1.2
-      },
-      displayText: {
-          display: "inline",
-          marginLeft: theme.spacing(1),
-          maxWidth: 320
-      },
-      commentSubjectArrow: {
-          fontSizeAdjust: 0.2,
-      },
-      commentUserAction: {
-          top: "20%",
-          right: "1%"
-      },
-      notificationRoot: {
-        marginBottom: theme.spacing(0.5),
-        backgroundColor: "#faf9c7"
-      },
-      notificationButton: {
-        marginLeft: theme.spacing(2),
-        marginBottom: theme.spacing(1)
-      }
+      lineHeight: "180%",
+    },
+    commentText: {
+      fontSizeAdjust: 0.5,
+      lineHeight: 1.2,
+    },
+    displayText: {
+      display: "inline",
+      marginLeft: theme.spacing(1),
+      maxWidth: 320,
+    },
+    commentSubjectArrow: {
+      fontSizeAdjust: 0.2,
+    },
+    commentUserAction: {
+      top: "20%",
+      right: "1%",
+    },
+    notificationRoot: {
+      marginBottom: theme.spacing(0.5),
+      backgroundColor: "#faf9c7",
+    },
+    notificationButton: {
+      marginLeft: theme.spacing(2),
+      marginBottom: theme.spacing(1),
+    },
   }));
   const styleClasses = useStyles();
 
