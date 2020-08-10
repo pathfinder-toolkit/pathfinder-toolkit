@@ -14,7 +14,7 @@ const CategoryItemChangelog = (props) => {
                     {props.itemList[0].componentDescription} changelog:
                 </Typography>
                 <Timeline className={classes.timeline}>
-                {props.itemList.map((item, index) => {
+                {props.itemList.sort((a, b) => b.usageStartYear > a.usageStartYear).map((item, index) => {
                     return (
                         <CategoryItemWithTimeline
                         item={item}
