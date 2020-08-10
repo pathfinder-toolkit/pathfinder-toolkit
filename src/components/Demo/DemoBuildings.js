@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Paper,
+  Button,
+} from "@material-ui/core/";
+
 import Launch from "@material-ui/icons/Launch";
-import { useBackend } from "../../utils/BackendProvider";
 import history from "../../utils/history";
 
-import BuildingsTableHead from "./BuildingsTableHead";
+import BuildingsTableHead from "../Buildings/BuildingsTableHead";
 import ImageWithModal from "../reusable/ImageWithModal";
 
-import { useAuth0 } from "../../utils/react-auth0-spa";
 import DemoTableToolbar from "./DemoTableToolbar";
 
 function descendingComparator(a, b, orderBy) {
@@ -92,10 +93,7 @@ const DemoBuildings = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const { getStoredBuildings } = useBackend();
   const [rows, setRows] = useState([]);
-
-  const { loading } = useAuth0();
 
   const demoBuildings = props?.demoBuildings;
 
@@ -129,12 +127,6 @@ const DemoBuildings = (props) => {
       label: "Building name",
     },
     { id: "image", numeric: false, disablePadding: false, label: "Image" },
-    {
-      id: "creationDate",
-      numeric: true,
-      disablePadding: false,
-      label: "Creation date",
-    },
     {
       id: "slug",
       numeric: true,
@@ -197,14 +189,6 @@ const DemoBuildings = (props) => {
                             height={"10vh"}
                           />
                         )}
-                      </TableCell>
-                      <TableCell align="right">
-                        {new Date(
-                          Date.parse(row["creationDate"])
-                        ).toLocaleDateString()}{" "}
-                        {new Date(
-                          Date.parse(row["creationDate"])
-                        ).toLocaleTimeString()}
                       </TableCell>
                       <TableCell align="right">
                         <Button
