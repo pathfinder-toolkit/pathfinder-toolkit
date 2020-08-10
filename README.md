@@ -4,7 +4,7 @@
 
 ### Setup
 
-Copy and rename env.example. Insert the following required environmental values:
+Copy and rename env.example to .env . Insert the following required environmental values:
 
 - REACT_APP_AUTH_DOMAIN, REACT_APP_AUTH_CLIENT, REACT_APP_AUTH_AUDIENCE - Your Auth0 Domain, Client and Audience.
 - REACT_APP_API_ROOT: Root domain of your server API (implement separately: code found in https://github.com/pathfinder-toolkit/pathfinder-server)
