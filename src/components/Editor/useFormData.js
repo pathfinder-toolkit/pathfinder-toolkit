@@ -85,7 +85,7 @@ const useFormData = (category) => {
     let newObject = {
       propertyName: "",
       value: "",
-      usageStartYear: "",
+      usageStartYear: parseInt(year),
       hasSuggestions: false,
       isCurrent: false,
     };
@@ -96,8 +96,6 @@ const useFormData = (category) => {
     newObject.hasSuggestions = objects[0].hasSuggestions;
     newObject.isCurrent = false;
     newObject.value = value;
-    newObject.usageStartYear = year;
-
     objects.push(newObject);
 
     setFormData((formData) => ({
