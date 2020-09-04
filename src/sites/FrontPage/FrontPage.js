@@ -12,7 +12,6 @@ import Create from "@material-ui/icons/Create";
 import Button from "@material-ui/core/Button";
 
 import history from "../../utils/history";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,14 +101,20 @@ const FrontPage = () => {
         className={classes.infoGrid}
       >
         <Grid item xs={4}>
-          <Paper className={classes.infoPaper}>
+          <Paper
+            className={classes.infoPaper}
+            //style={{ backgroundColor: "#FAF9C7" }}
+          >
             <Typography className={classes.infoMessage}>
               Start by inputting your building details
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.infoPaper}>
+          <Paper
+            className={classes.infoPaper}
+            style={{ backgroundColor: "#E8F4FD" }}
+          >
             <Grid container justify="center">
               <Button
                 style={{ marginTop: "30px" }}
@@ -117,6 +122,7 @@ const FrontPage = () => {
                 fullWidth
                 color="primary"
                 variant="contained"
+                onClick={() => history.push("/co-design")}
               >
                 Co-Design
               </Button>
@@ -124,7 +130,10 @@ const FrontPage = () => {
           </Paper>
         </Grid>
         <Grid item xs={4}>
-          <Paper className={classes.infoPaper}>
+          <Paper
+            className={classes.infoPaper}
+            //style={{ backgroundColor: "#EDF7ED" }}
+          >
             <Typography className={classes.infoMessage}>
               Check out our suggestion for improvements
             </Typography>
