@@ -93,6 +93,15 @@ const NavigationBar = (props) => {
         </IconButton>
         <Button
           onClick={() => {
+            redirectTo("/instructions");
+          }}
+          color="inherit"
+          className={classes.navButton}
+        >
+          Instructions
+        </Button>
+        <Button
+          onClick={() => {
             redirectTo("/design");
           }}
           color="inherit"
