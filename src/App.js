@@ -10,6 +10,7 @@ import PublicBuildingPage from "./sites/PublicBuildingPage/PublicBuildingPage";
 import DemoPage from "./sites/DemoPage/DemoPage";
 import CoDesignPage from "./sites/CoDesignPage/CoDesignPage";
 import AdminPage from "./sites/AdminPage/AdminPage";
+import InstructionsPage from "./sites/InstructionsPage/InstructionsPage";
 import { CssBaseline } from "@material-ui/core";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/public/building/:slug" exact component={PublicBuildingPage}></Route>
           <Route path="/demo" exact component={DemoPage}></Route>
           <Route path="/co-design" exact component={CoDesignPage}></Route>
+          <Route path="/instructions" exact component={InstructionsPage}></Route>
           <PrivateRoute path="/feedback" exact component={FeedbackPage}></PrivateRoute>
           <PrivateRoute path="/buildings" exact component={BuildingsPage}></PrivateRoute>
           <PrivateRoute
