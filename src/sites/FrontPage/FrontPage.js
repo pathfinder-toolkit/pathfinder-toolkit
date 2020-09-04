@@ -7,7 +7,6 @@ import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import frontPageImage from "../../external/images/frontpage_house.jpg"
-import InstructionPanels from "../../components/Instructions/InstructionPanels"
 import Create from "@material-ui/icons/Create";
 import Button from "@material-ui/core/Button"
 
@@ -84,7 +83,7 @@ const FrontPage = () => {
       <Grid item xs={12} className={classes.banner}>
         <Typography align="center" className={classes.bannerHeader} variant="h1">
           EnergyPathfinder
-            </Typography>
+        </Typography>
       </Grid>
     </Grid>
 
@@ -120,7 +119,6 @@ const FrontPage = () => {
         </Paper>
       </Grid>
     </Grid>
-    <InstructionPanels />
 
     <Fab className={classes.designButton} onClick={() => { redirectTo('design') }}>
       <Create fontSize="large" />
