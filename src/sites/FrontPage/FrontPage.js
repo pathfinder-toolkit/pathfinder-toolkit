@@ -24,24 +24,25 @@ const useStyles = makeStyles((theme) => ({
   },
   banner: {
     height: 660,
-    backgroundImage: 'url(' + frontPageImage + ')',
-    backgroundPosition: 'center bottom',
+    backgroundImage: "url(" + frontPageImage + ")",
+    backgroundPosition: "center bottom",
     backgroundSize: "cover",
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   bannerHeader: {
     marginTop: "auto",
     marginBottom: 80,
     fontSize: "4.5em",
-    textShadow: "-0.03em 0 black, 0 0.03em black, 0.03em 0 black, 0 -0.03em black",
-    color: "white"
+    textShadow:
+      "-0.03em 0 black, 0 0.03em black, 0.03em 0 black, 0 -0.03em black",
+    color: "white",
   },
   infoGrid: {
     display: "flex",
     padding: 0,
     margin: 0,
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
   },
   infoPaper: {
     marginLeft: 10,
@@ -49,12 +50,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     height: 100,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   infoMessage: {
     margin: "auto",
     fontSize: theme.typography.pxToRem(18),
-    flexBasis: '33.33%',
+    flexBasis: "33.33%",
     flexShrink: 0,
   },
   designButton: {
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#283371",
       color: "#efe0b3",
-    }
+    },
   },
   demoButton: {
     margin: theme.spacing(1)
@@ -84,16 +85,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FrontPage = () => {
-
   const classes = useStyles();
 
   const redirectTo = (addr) => {
     history.push(addr);
-  }
+  };
 
   const [ hideInstructions, setHideInstructions ] = useState(false);
 
-  return <Container maxWidth={false} className={classes.root}>
+  return (<Container maxWidth={false} className={classes.root}>
     <NavigationBar />
 
     <Grid container justify="center">
@@ -120,25 +120,54 @@ const FrontPage = () => {
           EnergyPathfinder
         </Typography>
       </Grid>
-    </Grid>
 
-    <Grid container direction="row" alignItems="center" spacing={0} className={classes.infoGrid} >
-      <Grid item xs={4}>
-        <Paper className={classes.infoPaper}>
-          <Typography className={classes.infoMessage} >Start by inputting your building details</Typography>
-        </Paper>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        spacing={0}
+        className={classes.infoGrid}
+      >
+        <Grid item xs={4}>
+          <Paper
+            className={classes.infoPaper}
+            //style={{ backgroundColor: "#FAF9C7" }}
+          >
+            <Typography className={classes.infoMessage}>
+              Start by inputting your building details
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper
+            className={classes.infoPaper}
+            style={{ backgroundColor: "#E8F4FD" }}
+          >
+            <Grid container justify="center">
+              <Button
+                style={{ marginTop: "30px" }}
+                className={classes.demoButton}
+                fullWidth
+                color="primary"
+                variant="contained"
+                onClick={() => history.push("/co-design")}
+              >
+                Co-Design
+              </Button>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper
+            className={classes.infoPaper}
+            //style={{ backgroundColor: "#EDF7ED" }}
+          >
+            <Typography className={classes.infoMessage}>
+              Check out our suggestion for improvements
+            </Typography>
+          </Paper>
+        </Grid>
       </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.infoPaper}>
-          <Typography className={classes.infoMessage} >Pathfinder estimates your energy efficiency</Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={4} >
-        <Paper className={classes.infoPaper}>
-          <Typography className={classes.infoMessage} >Check out our suggestion for improvements</Typography>
-        </Paper>
-      </Grid>
-    </Grid>
 
     <Grid container direction="row" alignItems="center" justify="center" className={classes.infoGrid} >
       <Grid item xs={4}>
@@ -159,7 +188,17 @@ const FrontPage = () => {
       <Create fontSize="large" />
     </Fab>
 
-  </Container>
-}
+      <Fab
+        className={classes.designButton}
+        onClick={() => {
+          redirectTo("design");
+        }}
+      >
+        <Create fontSize="large" />
+      </Fab>
+      </Grid>
+    </Container>
+  );
+};
 
 export default FrontPage;
