@@ -10,14 +10,21 @@ import MenuItem from "@material-ui/core/MenuItem";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Home from "@material-ui/icons/Home";
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-import { makeStyles } from "@material-ui/core/styles";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+
+import { makeStyles } from "@material-ui/core/styles";
 
 import history from "../../utils/history";
 
 import { useAuth0 } from "../../utils/react-auth0-spa";
+
+import PathfinderLogo from "../../external/images/logos/energypathfinder.jpg";
+import NorthernPeriferyLogo from "../../external/images/logos/northernperiphery.jpg";
+import EuropeanUnionLogo from "../../external/images/logos/europeanunion.jpg";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -38,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
   filler: {
     flexGrow: 1,
     padding: 0
+  },
+  logo: {
+    margin: theme.spacing(1),
+    padding: theme.spacing(0.5),
+    maxHeight: "7vh"
+  },
+  image: {
+    height: "6.5vh"
   }
 }));
 
@@ -71,6 +86,21 @@ const NavigationBar = (props) => {
         <Typography variant="h6" onClick={() => {redirectTo("")}} className={classes.title}>
           EnergyPathfinder
         </Typography>
+        <Card className={classes.logo}>
+          <CardMedia>
+            <img src={EuropeanUnionLogo} className={classes.image} />
+          </CardMedia>
+        </Card>
+        <Card className={classes.logo}>
+          <CardMedia>
+            <img src={NorthernPeriferyLogo} className={classes.image} />
+          </CardMedia>
+        </Card>
+        <Card className={classes.logo}>
+          <CardMedia>
+            <img src={PathfinderLogo} className={classes.image} />
+          </CardMedia>
+        </Card>
         <Box component="div" className={classes.filler} />
         {isAdmin && <IconButton
           onClick={() => {
@@ -91,6 +121,15 @@ const NavigationBar = (props) => {
         >
           <Home />
         </IconButton>
+        <Button
+          onClick={() => {
+            redirectTo("/about");
+          }}
+          color="inherit"
+          className={classes.navButton}
+        >
+          About
+        </Button>
         <Button
           onClick={() => {
             redirectTo("/instructions");
