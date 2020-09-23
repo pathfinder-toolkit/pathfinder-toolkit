@@ -2,7 +2,6 @@ import React from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
@@ -82,13 +81,13 @@ const About = () => {
           <Grid container spacing={1}>
             <Grid item md={6}>
               <Card className={classes.root}>
-                <CardActionArea>
+                <CardActionArea disableRipple>
                   <CardMedia
                     component="img"
-                    alt="Partner"
+                    alt="Cork Centre for Architectural Education"
                     height="140"
                     image="external/images/instructions/panel1a.JPG"
-                    title="Contemplative Reptile"
+                    title="Cork Centre for Architectural Education"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -107,13 +106,13 @@ const About = () => {
             </Grid>
             <Grid item md={6}>
               <Card className={classes.root}>
-                <CardActionArea>
+                <CardActionArea disableRipple>
                   <CardMedia
                     component="img"
-                    alt="Partner"
+                    alt="NCE Insulation - Energy Hub"
                     height="140"
                     image="external/images/instructions/panel1a.JPG"
-                    title="Contemplative Reptile"
+                    title="NCE Insulation - Energy Hub"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -132,13 +131,13 @@ const About = () => {
             </Grid>
             <Grid item md={6}>
               <Card className={classes.root}>
-                <CardActionArea>
+                <CardActionArea disableRipple>
                   <CardMedia
                     component="img"
-                    alt="Partner"
+                    alt="Historic Environment Scotland"
                     height="140"
                     image="external/images/instructions/panel1a.JPG"
-                    title="Contemplative Reptile"
+                    title="Historic Environment Scotland"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -157,13 +156,13 @@ const About = () => {
             </Grid>
             <Grid item md={6}>
               <Card className={classes.root}>
-                <CardActionArea>
+                <CardActionArea disableRipple>
                   <CardMedia
                     component="img"
-                    alt="Partner"
+                    alt="Landsverk"
                     height="140"
                     image="external/images/instructions/panel1a.JPG"
-                    title="Contemplative Reptile"
+                    title="Landsverk"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -182,13 +181,13 @@ const About = () => {
             </Grid>
             <Grid item md={6}>
               <Card className={classes.root}>
-                <CardActionArea>
+                <CardActionArea disableRipple>
                   <CardMedia
                     component="img"
-                    alt="Partner"
+                    alt="Oulu University of Applied Sciences"
                     height="140"
                     image="external/images/instructions/panel1a.JPG"
-                    title="Contemplative Reptile"
+                    title="Oulu University of Applied Sciences"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -207,13 +206,13 @@ const About = () => {
             </Grid>
             <Grid item md={6}>
               <Card className={classes.root}>
-                <CardActionArea>
+                <CardActionArea disableRipple>
                   <CardMedia
                     component="img"
-                    alt="Partner"
+                    alt="Umeå University"
                     height="140"
                     image="external/images/instructions/panel1a.JPG"
-                    title="Contemplative Reptile"
+                    title="Umeå University"
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
