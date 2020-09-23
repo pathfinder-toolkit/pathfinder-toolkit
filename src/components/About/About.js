@@ -8,6 +8,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
 import history from "../../utils/history";
 
+import landsverk from "../../external/images/logos/landsverk.png";
+import oamk from "../../external/images/logos/oamk.png";
+import historicenvironmentscotland from "../../external/images/logos/historicenvironmentscotland.jpg";
+import nceinsulation from "../../external/images/logos/nceinsulation.jpg";
+import umeauniversity from "../../external/images/logos/umeauniversity.png";
+import corkcentreforarchitecturaleducation from "../../external/images/logos/corkcentreforarchitecturaleducation.svg";
+
 const useStyles = makeStyles((theme) => ({
   infoBox: {
     marginTop: "4em",
@@ -24,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
   credits: {
     marginTop: "50px",
     borderTop: "1px solid black",
+  },
+  media: {
+
   },
 }));
 
@@ -83,12 +93,13 @@ const About = () => {
               <Card className={classes.root}>
                 <CardActionArea disableRipple>
                   <CardMedia
+                    className={classes.media}
                     component="img"
                     alt="Cork Centre for Architectural Education"
-                    height="140"
-                    image="external/images/instructions/panel1a.JPG"
+                    image={corkcentreforarchitecturaleducation}
                     title="Cork Centre for Architectural Education"
                   />
+
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
                       Cork Centre for Architectural Education
@@ -110,8 +121,7 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="NCE Insulation - Energy Hub"
-                    height="140"
-                    image="external/images/instructions/panel1a.JPG"
+                    image={nceinsulation}
                     title="NCE Insulation - Energy Hub"
                   />
                   <CardContent>
@@ -135,8 +145,7 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Historic Environment Scotland"
-                    height="140"
-                    image="external/images/instructions/panel1a.JPG"
+                    image={historicenvironmentscotland}
                     title="Historic Environment Scotland"
                   />
                   <CardContent>
@@ -160,8 +169,8 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Landsverk"
-                    height="140"
-                    image="external/images/instructions/panel1a.JPG"
+                    height="160"
+                    image={landsverk}
                     title="Landsverk"
                   />
                   <CardContent>
@@ -185,8 +194,8 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Oulu University of Applied Sciences"
-                    height="140"
-                    image="external/images/instructions/panel1a.JPG"
+                    height="160"
+                    image={oamk}
                     title="Oulu University of Applied Sciences"
                   />
                   <CardContent>
@@ -210,8 +219,8 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Umeå University"
-                    height="140"
-                    image="external/images/instructions/panel1a.JPG"
+                    height="160"
+                    image={umeauniversity}
                     title="Umeå University"
                   />
                   <CardContent>
