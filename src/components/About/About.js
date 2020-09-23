@@ -10,10 +10,10 @@ import history from "../../utils/history";
 
 import landsverk from "../../external/images/logos/landsverk.png";
 import oamk from "../../external/images/logos/oamk.png";
-import historicenvironmentscotland from "../../external/images/logos/historicenvironmentscotland.jpg";
-import nceinsulation from "../../external/images/logos/nceinsulation.jpg";
-import umeauniversity from "../../external/images/logos/umeauniversity.png";
-import corkcentreforarchitecturaleducation from "../../external/images/logos/corkcentreforarchitecturaleducation.svg";
+import historic from "../../external/images/logos/historic.png";
+import nce from "../../external/images/logos/nce.jpg";
+import umea from "../../external/images/logos/umea.png";
+import ucc from "../../external/images/logos/ucc.png";
 
 const useStyles = makeStyles((theme) => ({
   infoBox: {
@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
     borderTop: "1px solid black",
   },
   media: {
-
   },
+  root: {
+    padding: "1em",
+  }
 }));
 
 const About = () => {
@@ -42,7 +44,7 @@ const About = () => {
 
   return (
     <Grid container justify="center">
-      <Grid item md={6} className={classes.infoBox}>
+      <Grid item md={7} className={classes.infoBox}>
         <Typography align="" variant="h2" className={classes.infoHeader}>
           Energy Pathfinder
         </Typography>
@@ -96,7 +98,8 @@ const About = () => {
                     className={classes.media}
                     component="img"
                     alt="Cork Centre for Architectural Education"
-                    image={corkcentreforarchitecturaleducation}
+     
+                    image={ucc}
                     title="Cork Centre for Architectural Education"
                   />
 
@@ -121,7 +124,8 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="NCE Insulation - Energy Hub"
-                    image={nceinsulation}
+                    image={nce}
+        
                     title="NCE Insulation - Energy Hub"
                   />
                   <CardContent>
@@ -145,7 +149,8 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Historic Environment Scotland"
-                    image={historicenvironmentscotland}
+             
+                    image={historic}
                     title="Historic Environment Scotland"
                   />
                   <CardContent>
@@ -169,7 +174,7 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Landsverk"
-                    height="160"
+             
                     image={landsverk}
                     title="Landsverk"
                   />
@@ -194,7 +199,6 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Oulu University of Applied Sciences"
-                    height="160"
                     image={oamk}
                     title="Oulu University of Applied Sciences"
                   />
@@ -219,8 +223,7 @@ const About = () => {
                   <CardMedia
                     component="img"
                     alt="Umeå University"
-                    height="160"
-                    image={umeauniversity}
+                    image={umea}
                     title="Umeå University"
                   />
                   <CardContent>
