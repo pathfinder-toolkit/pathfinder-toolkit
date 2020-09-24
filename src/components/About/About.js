@@ -1,7 +1,6 @@
 import React from "react";
 import { Typography, Grid, Button } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
@@ -17,26 +16,25 @@ import ucc from "../../external/images/logos/ucc.png";
 
 const useStyles = makeStyles((theme) => ({
   infoBox: {
-    marginTop: "4em",
+    marginTop: "0.2em",
     backgroundColor: "#eceef8",
-    padding: "2em",
+    paddingTop: "0em",
+    paddingRight: "2em",
+    paddingLeft: "2em",
     borderRadius: "4px",
   },
   infoHeader: {
-    marginBottom: "20px",
+    marginBottom: "10px",
   },
   infoButton: {
     marginTop: "20px",
   },
   credits: {
-    marginTop: "50px",
+    marginTop: "10px",
     borderTop: "1px solid black",
   },
-  media: {
-  },
-  root: {
-    padding: "1em",
-  }
+  media: {},
+  root: {},
 }));
 
 const About = () => {
@@ -44,7 +42,7 @@ const About = () => {
 
   return (
     <Grid container justify="center">
-      <Grid item md={7} className={classes.infoBox}>
+      <Grid item md={10} className={classes.infoBox}>
         <Typography align="" variant="h2" className={classes.infoHeader}>
           Energy Pathfinder
         </Typography>
@@ -66,7 +64,6 @@ const About = () => {
           Region.
         </Typography>
         <br />
-        <br />
         <Typography align="" variant="h3" className={classes.infoHeader}>
           Energy Pathfinder Toolkit
         </Typography>
@@ -86,169 +83,148 @@ const About = () => {
           help their building reach Near Zero Energy Building standards.
         </Typography>
         <Grid className={classes.credits}>
-          <Typography style={{ marginTop: "20px" }} align="center" variant="h4">
+          <Typography
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+            align="center"
+            variant="h5"
+          >
             Partners
           </Typography>
-          <br />
           <Grid container spacing={1}>
-            <Grid item md={6}>
+            <Grid item md={2}>
               <Card className={classes.root}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    className={classes.media}
-                    component="img"
-                    alt="Cork Centre for Architectural Education"
-     
-                    image={ucc}
-                    title="Cork Centre for Architectural Education"
-                  />
+                <CardMedia
+                  className={classes.media}
+                  component="img"
+                  alt="Cork Centre for Architectural Education"
+                  image={ucc}
+                  title="Cork Centre for Architectural Education"
+                />
 
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      Cork Centre for Architectural Education
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      <b>Lead partner</b> Ireland
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="h2">
+                    Cork Centre for Architectural Education
+                  </Typography>
+                  <Typography variant="body2" color="textPrimary" component="p">
+                    <b>Lead partner</b> Ireland
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={2}>
               <Card className={classes.root}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    component="img"
-                    alt="NCE Insulation - Energy Hub"
-                    image={nce}
-        
-                    title="NCE Insulation - Energy Hub"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      NCE Insulation - Energy Hub
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      Ireland
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="NCE Insulation - Energy Hub"
+                  image={nce}
+                  title="NCE Insulation - Energy Hub"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="h2">
+                    NCE Insulation - Energy Hub
+                  </Typography>
+                  <Typography variant="body2" color="textPrimary" component="p">
+                    Ireland
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={2}>
               <Card className={classes.root}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    component="img"
-                    alt="Historic Environment Scotland"
-             
-                    image={historic}
-                    title="Historic Environment Scotland"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      Historic Environment Scotland
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      United Kingdom
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="Historic Environment Scotland"
+                  image={historic}
+                  title="Historic Environment Scotland"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="h2">
+                    Historic Environment Scotland
+                  </Typography>
+                  <Typography variant="body2" color="textPrimary" component="p">
+                    United Kingdom
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={2}>
               <Card className={classes.root}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    component="img"
-                    alt="Landsverk"
-             
-                    image={landsverk}
-                    title="Landsverk"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      Landsverk
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      Faroe Islands
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="Landsverk"
+                  image={landsverk}
+                  title="Landsverk"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="h2">
+                    Landsverk
+                  </Typography>
+                  <br />
+                  <Typography variant="body2" color="textPrimary" component="p">
+                    Faroe Islands
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={2}>
               <Card className={classes.root}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    component="img"
-                    alt="Oulu University of Applied Sciences"
-                    image={oamk}
-                    title="Oulu University of Applied Sciences"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      Oulu University of Applied Sciences
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      Finland
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="Oulu University of Applied Sciences"
+                  image={oamk}
+                  title="Oulu University of Applied Sciences"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="h2">
+                    Oulu University of Applied Sciences
+                  </Typography>
+                  <Typography variant="body2" color="textPrimary" component="p">
+                    Finland
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={2}>
               <Card className={classes.root}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    component="img"
-                    alt="Umeå University"
-                    image={umea}
-                    title="Umeå University"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      Umeå University
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      Sweden
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt="Umeå University"
+                  image={umea}
+                  title="Umeå University"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="subtitle2" component="h2">
+                    Umeå University
+                  </Typography>
+                  <br />
+                  <Typography variant="body2" color="textPrimary" component="p">
+                    Sweden
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
           </Grid>
         </Grid>
-        <Grid className={classes.credits}>
-          <Typography style={{ marginTop: "20px" }} align="center" variant="h4">
-            Credits
+        <Grid
+          align="center"
+          className={classes.credits}
+          style={{ borderBottom: "1px solid black", paddingBottom: "10px" }}
+        >
+          <Typography
+            style={{ marginTop: "5px", marginBottom: "5px" }}
+            align="center"
+            variant="h5"
+          >
+            Authors
           </Typography>
-          <br />
-          <Typography align="center">Placeholder text for credits.</Typography>
+          <Grid>
+            <Typography align="">- Pekka Alaluukas</Typography>
+            <Typography align="">- Tommi Riippa</Typography>
+            <Typography align="">- Sami Jouppila</Typography>
+            <Typography align="">- Miikka Kortelainen</Typography>
+            <Typography align="">- Seppo Perälä</Typography>
+            <Typography align="">- Arman Kouch</Typography>
+          </Grid>
         </Grid>
 
         <Grid item align="center">
